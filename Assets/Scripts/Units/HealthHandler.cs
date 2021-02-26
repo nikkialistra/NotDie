@@ -12,14 +12,14 @@ namespace Units
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var waveStats = other.GetComponent<WaveStats>();
-            if (waveStats == null) return;
-            
-            Destroy(waveStats.gameObject);
-            TakeDamage(waveStats.DamageValue);
+            var wave = other.GetComponent<WaveFacade>();
+            if (wave == null) return;
+
+            wave.Disable();
+            TakeDamage(wave.DamageValue);
         }
 
-        public void TakeDamage(int damage)
+        private void TakeDamage(int damage)
         {
             _value -= damage;
             

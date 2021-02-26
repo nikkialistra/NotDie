@@ -8,7 +8,8 @@ namespace Wave
         [SerializeField] private Transform _placePoint;
 
         [SerializeField] private WavePool _wavePool;
-        [SerializeField] private float _timeToDestroy;
+
+        [SerializeField] private WaveStats _waveStats;
 
         private bool _placerIsVisible;
         private Renderer _placerRenderer;
@@ -36,13 +37,7 @@ namespace Wave
             var direction = (_placePoint.position - transformPosition).normalized;
 
             var wave = _wavePool.Get();
-            wave.transform.position = _placePoint.transform.position;
-            wave.transform.rotation = Quaternion.identity;
-            
-            wave.gameObject.SetActive(true);
-            
-            wave.SetDirection(direction);
-            wave.SetTimeToDestroy(_timeToDestroy);
+            wave.Initialize(_placePoint.transform.position, Quaternion.identity, direction, _waveStats);
         }
     }
 }
