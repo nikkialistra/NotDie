@@ -22,7 +22,7 @@ namespace Wave
         {
             _placerRenderer.enabled = _placerIsVisible;
         
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.Space))
                 SpawnWave();
 
             if (Input.GetKeyDown(KeyCode.R))
