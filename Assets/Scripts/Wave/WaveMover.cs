@@ -1,47 +1,40 @@
-﻿using Pools.Contracts;
+﻿using System;
+using Pools.Contracts;
 using UnityEngine;
 
 namespace Wave
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class WaveMover : MonoBehaviour, IGameObjectPooled<WaveMover>
+    public class WaveMover : MonoBehaviour
     {
-        [SerializeField] private float _velocity;
+        private float _velocity;
+        private Vector2 _direction;
 
         private Rigidbody2D _rigidBody;
-
-        private float _timeToDestroy;
-
-        public IPool<WaveMover> Pool { get; set; }
 
         private void Awake()
         {
             _rigidBody = GetComponent<Rigidbody2D>();
         }
 
-        private void Update()
+        public void SetVelocity(float velocity)
         {
-            if (_timeToDestroy <= 0)
-                return;
-            
-            _timeToDestroy -= Time.deltaTime;
-            if (_timeToDestroy <= 0)
-                Pool.ReturnToPool(this);
+            _velocity = velocity;
+        }
+
+        private void FixedUpdate()
+        {
+            _rigidBody.velocity = _direction * (_velocity * Time.fixedDeltaTime);
         }
 
         public void SetDirection(Vector2 direction)
         {
-            _rigidBody.velocity = direction * (_velocity * Time.fixedDeltaTime);
-
             if (direction == Vector2.zero) return;
+            
+            _direction = direction;
             
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
-
-        public void SetTimeToDestroy(float timeToDestroy)
-        {
-            _timeToDestroy = timeToDestroy;
         }
     }
 }
