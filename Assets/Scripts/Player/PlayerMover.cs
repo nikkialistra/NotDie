@@ -59,7 +59,7 @@ namespace Player
 
         private void MovePlayer()
         {
-            _rigidbody.velocity += (Vector2)_moveDirection * (_speed * Time.fixedDeltaTime);
+            _rigidbody.velocity += (Vector2) _moveDirection * (_speed * Time.fixedDeltaTime);
 
             _lastVelocity = _rigidbody.velocity;
         }

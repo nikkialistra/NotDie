@@ -1,10 +1,8 @@
-﻿using System;
-using Pools.Contracts;
+﻿using Pools.Contracts;
 using UnityEngine;
 
 namespace Wave
 {
-    
     [RequireComponent(typeof(WaveMover))]
     public class WaveFacade : MonoBehaviour, IGameObjectPooled<WaveFacade>
     {
@@ -14,6 +12,8 @@ namespace Wave
         private int _damageValue;
 
         public int DamageValue => _damageValue;
+
+        public IPool<WaveFacade> Pool { get; set; }
 
         private void Awake()
         {
@@ -29,8 +29,6 @@ namespace Wave
             if (_timeToDestroy <= 0)
                 Disable();
         }
-        
-        public IPool<WaveFacade> Pool { get; set; }
 
         public void Initialize(Vector3 position, Quaternion rotation, Vector2 direction, WaveStats waveStats)
         {

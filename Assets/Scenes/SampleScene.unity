@@ -278,6 +278,25 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1010360058035573378, guid: 94ff85432863cee48b83860753576ba7, type: 3}
   m_PrefabInstance: {fileID: 1010360057819737126}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1094103416 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1010360058035573378, guid: 0947e4218a84c6a45a3db73d03f115d5, type: 3}
+  m_PrefabInstance: {fileID: 1560596575}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1094103425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094103416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4411b89a0e8146d7b68696ff6f82e2a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 3
+  _timeToStay: 2
 --- !u!1 &1298433783
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +308,6 @@ GameObject:
   - component: {fileID: 1298433785}
   - component: {fileID: 1298433784}
   - component: {fileID: 1298433787}
-  - component: {fileID: 1298433786}
   m_Layer: 0
   m_Name: RoomConfigurator
   m_TagString: Untagged
@@ -334,18 +352,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1298433786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1298433783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7a33d037d014c2b92b1fada0bf96d33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!68 &1298433787
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -412,7 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 6930319871534074631, guid: 51a26e3dd016939489dda59768fd6be8, type: 3}
-  _numberToSpawnAtStart: 5
+  _numberToSpawnAtStart: 10
 --- !u!1001 &1560596575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -534,6 +540,10 @@ PrefabInstance:
     - target: {fileID: 1010360058035573378, guid: 94ff85432863cee48b83860753576ba7, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010360058035573379, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+      propertyPath: _rayLength
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 1010360058035573388, guid: 94ff85432863cee48b83860753576ba7, type: 3}
       propertyPath: _wavePool
