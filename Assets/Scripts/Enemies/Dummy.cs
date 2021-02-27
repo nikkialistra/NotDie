@@ -9,8 +9,7 @@ namespace Enemies
     {
         [SerializeField] private float _speed;
         [SerializeField] private float _timeToStay;
-        
-        
+
         private StateMachine _stateMachine;
 
         private void Awake()
