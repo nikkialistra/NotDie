@@ -19,6 +19,9 @@ namespace Wave
 
         public void SetVelocity(float velocity)
         {
+            if (velocity < 0)
+                throw new ArgumentException("Velocity should be positive");
+            
             _velocity = velocity;
         }
 

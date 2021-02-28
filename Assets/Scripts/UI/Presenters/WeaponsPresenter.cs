@@ -64,9 +64,9 @@ namespace UI.Presenters
         private void OnRightWeaponChanged()
         {
             if (_leftIsActive)
-                _view.SetRightWeaponSprite(_weapons.LeftWeapon.NotActive);
+                _view.SetRightWeaponSprite(_weapons.RightWeapon.NotActive);
             else
-                _view.SetRightWeaponSprite(_weapons.LeftWeapon.Active);
+                _view.SetRightWeaponSprite(_weapons.RightWeapon.Active);
         }
     }
 }

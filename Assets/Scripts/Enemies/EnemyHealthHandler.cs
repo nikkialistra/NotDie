@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Wave;
 
-namespace Units
+namespace Enemies
 {
-    public class HealthHandler : MonoBehaviour
+    public class EnemyHealthHandler : MonoBehaviour
     {
         [SerializeField] private int _value;
 
@@ -12,7 +13,8 @@ namespace Units
         private void OnTriggerEnter2D(Collider2D other)
         {
             var wave = other.GetComponent<WaveFacade>();
-            if (wave == null) return;
+            if (wave == null) 
+                return;
 
             wave.Disable();
             TakeDamage(wave.DamageValue);
@@ -20,6 +22,9 @@ namespace Units
 
         private void TakeDamage(int damage)
         {
+            if (damage <= 0)
+                throw new ArgumentException("Damage must be more than zero");
+            
             _value -= damage;
             
             if (!isAlive)

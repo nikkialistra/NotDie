@@ -16,8 +16,9 @@ namespace Player
 
         [Range(0, 10)]
         [SerializeField] private float _rayLength;
-    
-    
+
+        public Transform Placer => _placer;
+
         private Rigidbody2D _rigidbody;
         private Vector3 _moveDirection;
         private Vector3 _lastVelocity;
