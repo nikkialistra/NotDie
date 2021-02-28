@@ -31,6 +31,9 @@ namespace Player
 
         public void TakeDamage(int damage)
         {
+            if (damage <= 0)
+                throw new ArgumentException("Damage must be more than zero");
+            
             _healthValue -= damage;
             HealthChanged?.Invoke(_healthValue);
 

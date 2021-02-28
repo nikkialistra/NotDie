@@ -36,18 +36,11 @@ namespace Player
                 SwapActive();
         }
 
-        public void SwapActive()
-        {
-            _leftIsActive = !_leftIsActive;
-            
-            if (_leftIsActive)
-                LeftWeaponIsActive?.Invoke();
-            else
-                RightWeaponIsActive?.Invoke();
-        }
-
         public Weapon TakeWeapon(Weapon weapon)
         {
+            if (weapon == null)
+                throw new ArgumentNullException(nameof(weapon));
+            
             var activeWeapon = _leftIsActive ? _leftWeapon : _rightWeapon;
             var notActiveWeapon = _leftIsActive ? _rightWeapon : _leftWeapon;
 
@@ -55,6 +48,45 @@ namespace Player
                 return null;
 
             return SwapWeapon(weapon, activeWeapon);
+        }
+
+        public Weapon DropWeapon()
+        {
+            Weapon droppedWeapon;
+            if (_leftIsActive)
+            {
+                droppedWeapon = _leftWeapon;
+                if (droppedWeapon != _hand)
+                {
+                    _leftWeapon = _hand;
+                    LeftWeaponChanged?.Invoke();
+                    
+                    return droppedWeapon;
+                }
+            }
+            else
+            {
+                droppedWeapon = _rightWeapon;
+                if (droppedWeapon != _hand)
+                {
+                    _rightWeapon = _hand;
+                    RightWeaponChanged?.Invoke();
+                    
+                    return droppedWeapon;
+                }
+            }
+            
+            return null;
+        }
+
+        private void SwapActive()
+        {
+            _leftIsActive = !_leftIsActive;
+            
+            if (_leftIsActive)
+                LeftWeaponIsActive?.Invoke();
+            else
+                RightWeaponIsActive?.Invoke();
         }
 
         private bool TryTakeInsteadOfHands(Weapon weapon, Weapon activeWeapon, Weapon notActiveWeapon)
@@ -70,7 +102,7 @@ namespace Player
                 ChangeNotActiveWeapon(weapon);
                 return true;
             }
-
+            
             return false;
         }
 
