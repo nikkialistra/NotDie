@@ -30,17 +30,17 @@ namespace Wave
                 Disable();
         }
 
-        public void Initialize(Vector3 position, Quaternion rotation, Vector2 direction, WaveStats waveStats)
+        public void Initialize(Vector3 position, Quaternion rotation, Vector2 direction, Wave wave)
         {
             transform.position = position;
             transform.rotation = rotation;
 
-            _waveMover.SetVelocity(waveStats.Velocity);
+            _waveMover.SetVelocity(wave.Velocity);
             _waveMover.SetDirection(direction);
             
-            _timeToDestroy = waveStats.TimeToDestroy;
+            _timeToDestroy = wave.TimeToDestroy;
 
-            _damageValue = waveStats.DamageValue;
+            _damageValue = wave.DamageValue;
             
             gameObject.SetActive(true);
         }

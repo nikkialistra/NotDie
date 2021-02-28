@@ -1,6 +1,4 @@
-﻿using System;
-using UI;
-using UnityEngine;
+﻿using UnityEngine;
 using Wave;
 
 namespace Units

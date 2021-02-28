@@ -2,8 +2,8 @@
 
 namespace Wave
 {
-    [CreateAssetMenu(fileName = "Wave", menuName = "ScriptableObjects/Wave", order = 0)]
-    public class WaveStats : ScriptableObject
+    [CreateAssetMenu(fileName = "Wave", menuName = "Data/Wave", order = 0)]
+    public class Wave : ScriptableObject
     {
         public int DamageValue;
         public float Velocity;

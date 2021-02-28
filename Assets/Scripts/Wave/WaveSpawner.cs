@@ -9,7 +9,7 @@ namespace Wave
 
         [SerializeField] private WavePool _wavePool;
 
-        [SerializeField] private WaveStats _waveStats;
+        [SerializeField] private Wave _wave;
 
         private bool _placerIsVisible;
         private Renderer _placerRenderer;
@@ -37,7 +37,7 @@ namespace Wave
             var direction = (_placePoint.position - transformPosition).normalized;
 
             var wave = _wavePool.Get();
-            wave.Initialize(_placePoint.transform.position, Quaternion.identity, direction, _waveStats);
+            wave.Initialize(_placePoint.transform.position, Quaternion.identity, direction, _wave);
         }
     }
 }
