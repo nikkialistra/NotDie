@@ -1,9 +1,11 @@
 ﻿using Data;
-using Items;
+using Room.Items;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
+    [RequireComponent(typeof(PlayerInput))]
     public class WeaponHandler : MonoBehaviour
     {
         [SerializeField] private Weapons _weapons;
@@ -12,15 +14,25 @@ namespace Player
 
         [SerializeField] private float _distanceForTaking;
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                if (TryTakeWeapon()) 
-                    return;
+        private PlayerInput _input;
+        private InputAction _takeDropWeaponAction;
 
-                DropWeapon();
-            }
+        private void Awake()
+        {
+            _input = GetComponent<PlayerInput>();
+            _takeDropWeaponAction = _input.actions.FindAction("TakeDropWeapon");
+        }
+
+        private void OnEnable() => _takeDropWeaponAction.started += OnTakeDropWeapon;
+
+        private void OnDisable() => _takeDropWeaponAction.started -= OnTakeDropWeapon;
+
+        private void OnTakeDropWeapon(InputAction.CallbackContext context)
+        {
+            if (TryTakeWeapon()) 
+                return;
+
+            DropWeapon();
         }
 
         private bool TryTakeWeapon()

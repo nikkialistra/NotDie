@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(PlayerInput))]
     public class PlayerMover : MonoBehaviour
     {
         [Header("Movement settings")]
@@ -11,45 +13,46 @@ namespace Player
         [Range(0, 100)]
         [SerializeField] private float _damping;
     
-        [Header("Placing Settings")]
-        [SerializeField] private Transform _placer;
+        [Header("Direction Settings")]
+        [SerializeField] private Transform _attackDirection;
 
         [Range(0, 10)]
-        [SerializeField] private float _rayLength;
-
-        public Transform Placer => _placer;
+        [SerializeField] private float _attackDirectionLength;
 
         private Rigidbody2D _rigidbody;
-        private Vector3 _moveDirection;
-        private Vector3 _lastVelocity;
+        private Vector2 _moveDirection;
+        private Vector2 _lastVelocity;
+        
+        private PlayerInput _input;
+        private InputAction _moveAction;
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
+            
+            _input = GetComponent<PlayerInput>();
+            _moveAction = _input.actions.FindAction("Move");
         }
 
-        private void Start()
-        {
-            SetPlacerToDefaultPosition();
-        }
+        private void Start() => SetAttackDirectionToDefaultPosition();
 
         private void Update()
         {
-            _moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            _moveDirection = _moveAction.ReadValue<Vector2>();
             SetDamping();
         }
 
         private void FixedUpdate()
         {
-            if (_moveDirection != Vector3.zero)
+            if (_moveDirection != Vector2.zero)
                 MovePlayer();
-            if (_lastVelocity != Vector3.zero)
-                MovePlacer();
+            if (_lastVelocity != Vector2.zero)
+                MoveAttackDirection();
         }
 
-        private void SetPlacerToDefaultPosition()
+        private void SetAttackDirectionToDefaultPosition()
         {
-            _placer.position = transform.position + new Vector3(_rayLength, 0);
+            _attackDirection.position = transform.position + new Vector3(_attackDirectionLength, 0);
         }
 
         private void SetDamping()
@@ -60,17 +63,17 @@ namespace Player
 
         private void MovePlayer()
         {
-            _rigidbody.velocity += (Vector2) _moveDirection * (_speed * Time.fixedDeltaTime);
+            _rigidbody.velocity += _moveDirection * (_speed * Time.fixedDeltaTime);
 
             _lastVelocity = _rigidbody.velocity;
         }
     
-        private void MovePlacer()
+        private void MoveAttackDirection()
         {
-            var lengthMultiplier = _rayLength / _lastVelocity.magnitude;
+            var lengthMultiplier = _attackDirectionLength / _lastVelocity.magnitude;
         
-            _placer.position = transform.position;
-            _placer.position += _lastVelocity * lengthMultiplier;
+            _attackDirection.position = transform.position;
+            _attackDirection.position += (Vector3) _lastVelocity * lengthMultiplier;
         }
     }
 }

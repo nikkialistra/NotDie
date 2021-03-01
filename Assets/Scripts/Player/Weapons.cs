@@ -1,9 +1,11 @@
 ﻿using System;
 using Data;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
+    [RequireComponent(typeof(PlayerInput))]
     public class Weapons : MonoBehaviour
     {
         public event Action LeftWeaponChanged; 
@@ -23,17 +25,24 @@ namespace Player
         private Weapon _rightWeapon;
         
         private bool _leftIsActive;
+        
+        private PlayerInput _input;
+        private InputAction _swapWeaponsAction;
+        
+        private void Awake()
+        {
+            _input = GetComponent<PlayerInput>();
+            _swapWeaponsAction = _input.actions.FindAction("SwapWeapons");
+        }
+
+        private void OnEnable() => _swapWeaponsAction.started += OnSwapWeapons;
+
+        private void OnDisable() => _swapWeaponsAction.started -= OnSwapWeapons;
 
         private void Start()
         {
             _leftWeapon = _hand;
             _rightWeapon = _hand;
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-                SwapActive();
         }
 
         public Weapon TakeWeapon(Weapon weapon)
@@ -79,7 +88,7 @@ namespace Player
             return null;
         }
 
-        private void SwapActive()
+        private void OnSwapWeapons(InputAction.CallbackContext context)
         {
             _leftIsActive = !_leftIsActive;
             

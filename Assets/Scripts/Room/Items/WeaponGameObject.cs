@@ -2,7 +2,7 @@
 using Data;
 using UnityEngine;
 
-namespace Items
+namespace Room.Items
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class WeaponGameObject : MonoBehaviour

@@ -1,4 +1,4 @@
-﻿namespace StateSystem
+﻿namespace Services.StateSystem
 {
     public abstract class State
     {
