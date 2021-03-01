@@ -1,7 +1,7 @@
-﻿using Pools.Contracts;
+﻿using Services.Pools.Contracts;
 using Wave;
 
-namespace Pools
+namespace Services.Pools
 {
     public class WavePool : ObjectPool<WaveFacade>
     {

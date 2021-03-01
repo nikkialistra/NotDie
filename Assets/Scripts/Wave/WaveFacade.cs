@@ -1,4 +1,4 @@
-﻿using Pools.Contracts;
+﻿using Services.Pools.Contracts;
 using UnityEngine;
 
 namespace Wave
@@ -30,7 +30,7 @@ namespace Wave
                 Disable();
         }
 
-        public void Initialize(Vector3 position, Quaternion rotation, Vector2 direction, Wave wave)
+        public void Initialize(Vector3 position, Quaternion rotation, Vector2 direction, Data.Wave wave)
         {
             transform.position = position;
             transform.rotation = rotation;

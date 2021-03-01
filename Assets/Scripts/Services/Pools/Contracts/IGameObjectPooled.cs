@@ -1,4 +1,4 @@
-﻿namespace Pools.Contracts
+﻿namespace Services.Pools.Contracts
 {
     public interface IGameObjectPooled<T>
     { 

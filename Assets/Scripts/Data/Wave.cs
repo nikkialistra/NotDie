@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Wave
+namespace Data
 {
     [CreateAssetMenu(fileName = "Wave", menuName = "Data/Wave", order = 0)]
     public class Wave : ScriptableObject

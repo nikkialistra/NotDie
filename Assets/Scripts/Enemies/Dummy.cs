@@ -1,7 +1,7 @@
 ﻿using System;
 using Enemies.States;
+using Services.StateSystem;
 using UnityEngine;
-using StateSystem;
 
 namespace Enemies
 {
