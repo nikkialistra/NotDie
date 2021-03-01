@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7f79e98a85fc0164ba59b9031b5470f3
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - HPNumbersMonospace
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f866d577f71f6434dafe5b7e04a09b52, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
