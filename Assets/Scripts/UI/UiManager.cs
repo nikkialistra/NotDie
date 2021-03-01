@@ -1,4 +1,4 @@
-﻿using Player;
+﻿using Entities.Player;
 using UI.Presenters;
 using UI.Views;
 using UnityEngine;
