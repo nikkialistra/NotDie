@@ -1,16 +1,23 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.Views
 {
     public class HpView : MonoBehaviour
     {
-        [SerializeField] private Image _fillIndicator;
+        [SerializeField] private Settings _settings;
+
+        [Serializable]
+        public class Settings
+        {
+            public Image FillIndicator;
         
-        [SerializeField] private Text _lives;
+            public Text Lives;
         
-        [SerializeField] private Text _health;
-        [SerializeField] private Text _healthShadow;
+            public Text Health;
+            public Text HealthShadow;
+        }
 
         private float _fullHealthValue;
 
@@ -18,15 +25,14 @@ namespace UI.Views
 
         public void SetHealth(int value)
         {
-            _fillIndicator.fillAmount = value / _fullHealthValue;
+            _settings.FillIndicator.fillAmount = value / _fullHealthValue;
             
-            _health.text = value.ToString();
-        }
-        
-        public void SetLives(int value)
-        {
-            _lives.text = value.ToString();
+            _settings.Health.text = value.ToString();
         }
 
+        public void SetLives(int value)
+        {
+            _settings.Lives.text = value.ToString();
+        }
     }
 }

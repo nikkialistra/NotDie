@@ -4,36 +4,48 @@ using Entities.Data;
 using Entities.Items;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 namespace Entities.Player
 {
     [RequireComponent(typeof(PlayerInput))]
     public class WeaponHandler : MonoBehaviour
     {
-        [SerializeField] private Weapon _hand;
+        [Serializable]
+        public class Settings
+        {
+            public Weapon Hand;
         
-        [SerializeField] private GameObject _weaponPrefab;
+            public GameObject WeaponPrefab;
 
-        [SerializeField] private float _distanceForTaking;
+            public float DistanceForTaking;
 
-        [Header("Audio")]
-        [SerializeField] private Sound _takingWeapon;
-        [SerializeField] private Sound _droppingWeapon;
-        [SerializeField] private Sound _swappingWeapons;
-        
+            [Header("Audio")]
+            public Sound TakingWeapon;
+            public Sound DroppingWeapon;
+            public Sound SwappingWeapons;
+        }
+
+        private Settings _settings;
+
         public Weapons Weapons { get; private set; }
 
         private PlayerInput _input;
+
         private InputAction _takeDropWeaponAction;
+
         private InputAction _swapWeaponsAction;
+        
+        [Inject]
+        public void Construct(Settings settings) => _settings = settings;
 
         private void Awake()
         {
-            Weapons = new Weapons(_hand);
+            Weapons = new Weapons(_settings.Hand);
             
-            _takingWeapon.CreateAudioSource(gameObject);
-            _droppingWeapon.CreateAudioSource(gameObject);
-            _swappingWeapons.CreateAudioSource(gameObject);
+            _settings.TakingWeapon.CreateAudioSource(gameObject);
+            _settings.DroppingWeapon.CreateAudioSource(gameObject);
+            _settings.SwappingWeapons.CreateAudioSource(gameObject);
             
             _input = GetComponent<PlayerInput>();
             _takeDropWeaponAction = _input.actions.FindAction("TakeDropWeapon");
@@ -63,7 +75,7 @@ namespace Entities.Player
         private void OnSwapWeapons(InputAction.CallbackContext context)
         {
             Weapons.SwapWeapons();
-            _swappingWeapons.MultiplePlay();
+            _settings.SwappingWeapons.PlayOneShot();
         }
 
         private bool TryTakeWeapon()
@@ -71,7 +83,7 @@ namespace Entities.Player
             var weapons = FindObjectsOfType<WeaponGameObject>();
             foreach (var weapon in weapons)
             {
-                if (Vector3.Distance(transform.position, weapon.transform.position) < _distanceForTaking)
+                if (Vector3.Distance(transform.position, weapon.transform.position) < _settings.DistanceForTaking)
                 {
                     TakeWeapon(weapon);
                     return true;
@@ -87,7 +99,7 @@ namespace Entities.Player
             if (weapon != null)
             {
                 InstantiateWeapon(weapon);
-                _droppingWeapon.Play();
+                _settings.DroppingWeapon.PlayOneShot();
             }
         }
 
@@ -95,18 +107,18 @@ namespace Entities.Player
         {
             var discardedWeapon = Weapons.TakeWeapon(weaponGameObject.Weapon);
             Destroy(weaponGameObject.gameObject);
-            _takingWeapon.Play();
+            _settings.TakingWeapon.PlayOneShot();
 
             if (discardedWeapon != null)
             {
                 InstantiateWeapon(discardedWeapon);
-                _droppingWeapon.Play();
+                _settings.DroppingWeapon.PlayOneShot();
             }
         }
 
         private void InstantiateWeapon(Weapon weaponToCreate)
         {
-            var weapon = Instantiate(_weaponPrefab, transform.position, Quaternion.identity);
+            var weapon = Instantiate(_settings.WeaponPrefab, transform.position, Quaternion.identity);
 
             var weaponGameObject = weapon.GetComponent<WeaponGameObject>();
             weaponGameObject.SetWeapon(weaponToCreate);

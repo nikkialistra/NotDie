@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Core.Animators
 {
@@ -6,10 +7,16 @@ namespace Core.Animators
     [RequireComponent(typeof(Rigidbody2D))]
     public class UnitAnimator : MonoBehaviour
     {
-        [SerializeField] private float _idleSpeed;
-    
-    
+        [Serializable]
+        public class Settings
+        {
+            public float IdleSpeed;
+        }
+
+        [SerializeField] private Settings _settings;
+
         private Animator _animator;
+
         private Rigidbody2D _rigidbody;
 
         private readonly int _isMoving = Animator.StringToHash("isMoving");
@@ -28,9 +35,9 @@ namespace Core.Animators
 
         private void SetMovingAnimation()
         {
-            _animator.SetBool(_isMoving, _rigidbody.velocity.magnitude > _idleSpeed);
+            _animator.SetBool(_isMoving, _rigidbody.velocity.magnitude > _settings.IdleSpeed);
         }
-    
+
         private void Flip()
         {
             if (_rigidbody.velocity.x == 0)

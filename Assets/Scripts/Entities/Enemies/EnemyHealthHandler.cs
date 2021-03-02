@@ -6,9 +6,15 @@ namespace Entities.Enemies
 {
     public class EnemyHealthHandler : MonoBehaviour
     {
-        [SerializeField] private int _value;
+        [Serializable]
+        public class Settings
+        {
+            public int Value;
+        }
 
-        private bool isAlive => _value > 0;
+        [SerializeField] private Settings _settings;
+
+        private bool isAlive => _settings.Value > 0;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -24,9 +30,9 @@ namespace Entities.Enemies
         {
             if (damage <= 0)
                 throw new ArgumentException("Damage must be more than zero");
-            
-            _value -= damage;
-            
+            _settings.Value -= damage;
+
+
             if (!isAlive)
                 Destroy(gameObject);
         }
