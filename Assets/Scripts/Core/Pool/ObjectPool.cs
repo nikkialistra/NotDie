@@ -8,7 +8,7 @@ namespace Core.Pool
         [SerializeField] private T _prefab;
         [SerializeField] private float _numberToSpawnAtStart;
 
-        private Queue<T> _objects = new Queue<T>();
+        private readonly Queue<T> _objects = new Queue<T>();
 
         private void Start()
         {
@@ -18,7 +18,7 @@ namespace Core.Pool
             }
         }
 
-        public T Get()
+        protected T Get()
         {
             if (_objects.Count == 0)
                 AddObject();

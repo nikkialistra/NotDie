@@ -1,15 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.Views
 { 
     public class WeaponsView : MonoBehaviour
     {
-        [SerializeField] private Image _leftWeapon;
-        [SerializeField] private Image _rightWeapon;
+        [SerializeField] private Settings _settings;
 
-        public void SetLeftWeaponSprite(Sprite weapon) => _leftWeapon.sprite = weapon;
-        
-        public void SetRightWeaponSprite(Sprite weapon) => _rightWeapon.sprite = weapon;
+        [Serializable]
+        public class Settings
+        {
+            public Image LeftWeapon;
+            public Image RightWeapon;
+        }
+
+        public void SetLeftWeaponSprite(Sprite weapon) => _settings.LeftWeapon.sprite = weapon;
+
+        public void SetRightWeaponSprite(Sprite weapon) => _settings.RightWeapon.sprite = weapon;
     }
 }

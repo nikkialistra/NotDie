@@ -7,8 +7,14 @@ namespace Entities.Enemies
 {
     public class Dummy : MonoBehaviour
     {
-        [SerializeField] private float _speed;
-        [SerializeField] private float _timeToStay;
+        [Serializable]
+        public class Settings
+        {
+            public float Speed;
+            public float TimeToStay;
+        }
+
+        [SerializeField] private Settings _settings;
 
         private StateMachine _stateMachine;
 
@@ -24,7 +30,7 @@ namespace Entities.Enemies
         private void SetupStateMachine()
         {
             var stay = new Stay();
-            var moveToPlayer = new MoveToPlayer(this, _speed);
+            var moveToPlayer = new MoveToPlayer(this, _settings.Speed);
 
             At(moveToPlayer, stay, StayedEnoughTime());
 
@@ -32,7 +38,7 @@ namespace Entities.Enemies
 
             void At(State to, State from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
 
-            Func<bool> StayedEnoughTime() => () => stay.TimeStayed > _timeToStay;
+            Func<bool> StayedEnoughTime() => () => stay.TimeStayed > _settings.TimeToStay;
         }
     }
 }

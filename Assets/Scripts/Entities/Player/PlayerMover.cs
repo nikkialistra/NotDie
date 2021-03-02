@@ -1,6 +1,8 @@
+using System;
 using Entities.Data;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 namespace Entities.Player
 {
@@ -8,33 +10,48 @@ namespace Entities.Player
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerMover : MonoBehaviour
     {
-        [Header("Movement settings")]
-        [Range(0, 100)]
-        [SerializeField] private float _speed;
-        [Range(0, 100)]
-        [SerializeField] private float _damping;
+        [Serializable]
+        public class Settings
+        {
+            [Header("Movement settings")]
+            [Range(0, 100)]
+            public float Speed;
+            [Range(0, 100)]
+            public float Damping;
     
-        [Header("Direction Settings")]
-        [SerializeField] private Transform _attackDirection;
+            [Header("Direction Settings")]
+            [Range(0, 10)]
+            public float AttackDirectionLength;
 
-        [Range(0, 10)]
-        [SerializeField] private float _attackDirectionLength;
+            [Header("Audio")]
+            public Sound PlayerMoving;
+        }
 
-        [Header("Audio")]
-        [SerializeField] private Sound _playerMoving;
+        private Settings _settings;
+        private Transform _attackDirection;
 
         private Rigidbody2D _rigidbody;
+
         private Vector2 _moveDirection;
+
         private Vector2 _lastVelocity;
-        
+
         private PlayerInput _input;
+
         private InputAction _moveAction;
+        
+        [Inject]
+        public void Construct(Settings settings, Transform attackDirection)
+        {
+            _settings = settings;
+            _attackDirection = attackDirection;
+        }
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             
-            _playerMoving.CreateAudioSource(gameObject);
+            _settings.PlayerMoving.CreateAudioSource(gameObject);
             
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions.FindAction("Move");
@@ -52,36 +69,36 @@ namespace Entities.Player
         {
             if (_moveDirection != Vector2.zero)
             {
-                _playerMoving.Play();
+                _settings.PlayerMoving.Play();
                 MovePlayer();
             }
             else
             {
-                _playerMoving.Stop();
+                _settings.PlayerMoving.Stop();
             }
 
             if (_lastVelocity != Vector2.zero)
                 MoveAttackDirection();
         }
 
-        private void SetAttackDirectionToDefaultPosition() => _attackDirection.position = transform.position + new Vector3(_attackDirectionLength, 0);
+        private void SetAttackDirectionToDefaultPosition() => _attackDirection.position = transform.position + new Vector3(_settings.AttackDirectionLength, 0);
 
         private void SetDamping()
         {
-            if (_rigidbody.drag != _damping)
-                _rigidbody.drag = _damping;
+            if (_rigidbody.drag != _settings.Damping)
+                _rigidbody.drag = _settings.Damping;
         }
 
         private void MovePlayer()
         {
-            _rigidbody.velocity += _moveDirection * (_speed * Time.fixedDeltaTime);
+            _rigidbody.velocity += _moveDirection * (_settings.Speed * Time.fixedDeltaTime);
 
             _lastVelocity = _rigidbody.velocity;
         }
-    
+
         private void MoveAttackDirection()
         {
-            var lengthMultiplier = _attackDirectionLength / _lastVelocity.magnitude;
+            var lengthMultiplier = _settings.AttackDirectionLength / _lastVelocity.magnitude;
         
             _attackDirection.position = transform.position;
             _attackDirection.position += (Vector3) _lastVelocity * lengthMultiplier;

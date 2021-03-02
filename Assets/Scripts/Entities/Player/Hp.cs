@@ -1,35 +1,49 @@
 ﻿using System;
 using Entities.Data;
 using UnityEngine;
+using Zenject;
 
 namespace Entities.Player
 {
     public class Hp : MonoBehaviour
     {
         public event Action<int> HealthChanged;
+
         public event Action<int> LivesChanged;
+
         public event Action GameOver;
-
-        [SerializeField] private int _healthFullValue;
-        [SerializeField] private int _lives;
-
-        [SerializeField] private Sound _liveTakenAway;
-        [SerializeField] private Sound _gameOver;
         
+        [Serializable]
+        public class Settings
+        {
+            public int HealthFullValue;
+            public int Lives;
 
-        public int HealthFullValue => _healthFullValue;
-        public int Lives => _lives;
+            [Header("Audio")]
+            public Sound LiveTakenAway;
+            public Sound GameOver;
+        }
+
+        private Settings _settings;
+
+        public int HealthFullValue => _settings.HealthFullValue;
+
+        public int Lives => _settings.Lives;
 
         private int _healthValue;
-        private bool IsAlive => _lives > 0;
+
+        private bool IsAlive => _settings.Lives > 0;
+        
+        [Inject]
+        public void Construct(Settings settings) => _settings = settings;
 
         private void Awake()
         {
-            _liveTakenAway.CreateAudioSource(gameObject);
-            _gameOver.CreateAudioSource(gameObject);
+            _settings.LiveTakenAway.CreateAudioSource(gameObject);
+            _settings.GameOver.CreateAudioSource(gameObject);
         }
-        
-        private void Start() => _healthValue = _healthFullValue;
+
+        private void Start() => _healthValue = _settings.HealthFullValue;
 
         [ContextMenu("Take damage")]
         private void TakeDamageContextMenu() => TakeDamage(50);
@@ -38,6 +52,9 @@ namespace Entities.Player
         {
             if (damage <= 0)
                 throw new ArgumentException("Damage must be more than zero");
+            
+            if (_healthValue <= 0)
+                throw new InvalidOperationException("Health should not be 0 or less");
             
             _healthValue -= damage;
             HealthChanged?.Invoke(_healthValue);
@@ -48,18 +65,21 @@ namespace Entities.Player
 
         private void TakeAwayLive()
         {
-            _lives -= 1;
-            _liveTakenAway.Play();
-            LivesChanged?.Invoke(_lives);
+            if (_settings.Lives <= 0)
+                throw new InvalidOperationException("It should not be invoked when lives not greater than 0");
+            
+            _settings.Lives -= 1;
+            _settings.LiveTakenAway.Play();
+            LivesChanged?.Invoke(_settings.Lives);
 
             if (IsAlive)
             {
-                _healthValue = _healthFullValue;
+                _healthValue = _settings.HealthFullValue;
                 HealthChanged?.Invoke(_healthValue);
             }
             else
             {
-                _gameOver.Play();
+                _settings.GameOver.Play();
                 GameOver?.Invoke();
             }
         }
