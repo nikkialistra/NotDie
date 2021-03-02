@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 937606821}
   - component: {fileID: 937606830}
   - component: {fileID: 937606831}
-  - component: {fileID: 937606832}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -214,7 +213,8 @@ MonoBehaviour:
   _speed: 15
   _damping: 10
   _attackDirection: {fileID: 1010360058122808595}
-  _attackDirectionLength: 0
+  _attackDirectionLength: 0.63
+  _playerMoving: {fileID: 11400000, guid: ad00f16de0bcb4140b265aebc3fbaad1, type: 2}
 --- !u!114 &1010360058035573388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,12 +224,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1010360058035573378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af8d2fb7d7264b88a5f0d833c8b856f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 575a31bf934b46ccabef6cef91982303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _placePoint: {fileID: 1010360058122808595}
-  _wavePool: {fileID: 0}
-  _wave: {fileID: 11400000, guid: d3c7f09608d26904aa590196c8e92d1e, type: 2}
+  _attackDirection: {fileID: 1010360058122808595}
+  _waveSpawner: {fileID: 0}
 --- !u!114 &937606821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,9 +303,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d011c80f9d384ff3ba081486e52f6342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapons: {fileID: 937606832}
+  _hand: {fileID: 11400000, guid: b945b6d6c3b8a7a4e9e8b8f9f28f6ca1, type: 2}
   _weaponPrefab: {fileID: 2817982706502842857, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
   _distanceForTaking: 0.8
+  _takingWeapon: {fileID: 11400000, guid: ddbc187f205192546aae2046521e42e4, type: 2}
+  _droppingWeapon: {fileID: 11400000, guid: c5725afb34d6fd24cb035face72dde28, type: 2}
+  _swappingWeapons: {fileID: 11400000, guid: 6924b3cb08a0cb04e9fbbb27cb2366b1, type: 2}
 --- !u!114 &937606831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,19 +323,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthFullValue: 100
   _lives: 9
---- !u!114 &937606832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1010360058035573378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 782c6c3bfa9d4c9b850433b061493459, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hand: {fileID: 11400000, guid: b945b6d6c3b8a7a4e9e8b8f9f28f6ca1, type: 2}
+  _liveTakenAway: {fileID: 11400000, guid: 05b7360c4e08aa848801746718888499, type: 2}
+  _gameOver: {fileID: 11400000, guid: 886251977e5fcf64485037f6756b7c51, type: 2}
 --- !u!1 &1010360058122808594
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +364,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010360058122808594}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

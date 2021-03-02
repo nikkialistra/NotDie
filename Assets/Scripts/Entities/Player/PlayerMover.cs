@@ -1,3 +1,4 @@
+using Entities.Data;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,9 @@ namespace Entities.Player
         [Range(0, 10)]
         [SerializeField] private float _attackDirectionLength;
 
+        [Header("Audio")]
+        [SerializeField] private Sound _playerMoving;
+
         private Rigidbody2D _rigidbody;
         private Vector2 _moveDirection;
         private Vector2 _lastVelocity;
@@ -29,6 +33,8 @@ namespace Entities.Player
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
+            
+            _playerMoving.CreateAudioSource(gameObject);
             
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions.FindAction("Move");
@@ -45,15 +51,20 @@ namespace Entities.Player
         private void FixedUpdate()
         {
             if (_moveDirection != Vector2.zero)
+            {
+                _playerMoving.Play();
                 MovePlayer();
+            }
+            else
+            {
+                _playerMoving.Stop();
+            }
+
             if (_lastVelocity != Vector2.zero)
                 MoveAttackDirection();
         }
 
-        private void SetAttackDirectionToDefaultPosition()
-        {
-            _attackDirection.position = transform.position + new Vector3(_attackDirectionLength, 0);
-        }
+        private void SetAttackDirectionToDefaultPosition() => _attackDirection.position = transform.position + new Vector3(_attackDirectionLength, 0);
 
         private void SetDamping()
         {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Services.PoolContracts
+namespace Core.Pool
 {
     public abstract class ObjectPool<T> : MonoBehaviour, IPool<T> where T : Component
     {

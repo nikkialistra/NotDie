@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Services
+namespace Core
 {
     [RequireComponent(typeof(EdgeCollider2D))]
     public class RoomConfigurator : MonoBehaviour
@@ -32,10 +32,12 @@ namespace Services
             MakeCollider();
         }
 
+        #if UNITY_EDITOR
         private void OnValidate()
         {
             SetupRoom();
         }
+        #endif
 
         private void SetupRoom()
         {

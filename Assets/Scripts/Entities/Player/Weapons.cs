@@ -1,12 +1,10 @@
 ﻿using System;
 using Entities.Data;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Entities.Player
 {
-    [RequireComponent(typeof(PlayerInput))]
-    public class Weapons : MonoBehaviour
+    public class Weapons
     {
         public event Action LeftWeaponChanged; 
         public event Action RightWeaponChanged;
@@ -14,7 +12,7 @@ namespace Entities.Player
         public event Action LeftWeaponIsActive;
         public event Action RightWeaponIsActive;
 
-        [SerializeField] private Weapon _hand;
+        private Weapon _hand;
 
         public Weapon LeftWeapon => _leftWeapon;
         public Weapon RightWeapon => _rightWeapon;
@@ -25,22 +23,11 @@ namespace Entities.Player
         private Weapon _rightWeapon;
         
         private bool _leftIsActive;
-        
-        private PlayerInput _input;
-        private InputAction _swapWeaponsAction;
-        
-        private void Awake()
+
+        public Weapons(Weapon hand)
         {
-            _input = GetComponent<PlayerInput>();
-            _swapWeaponsAction = _input.actions.FindAction("SwapWeapons");
-        }
-
-        private void OnEnable() => _swapWeaponsAction.started += OnSwapWeapons;
-
-        private void OnDisable() => _swapWeaponsAction.started -= OnSwapWeapons;
-
-        private void Start()
-        {
+            _hand = hand;
+            
             _leftWeapon = _hand;
             _rightWeapon = _hand;
         }
@@ -49,14 +36,11 @@ namespace Entities.Player
         {
             if (weapon == null)
                 throw new ArgumentNullException(nameof(weapon));
-            
-            var activeWeapon = _leftIsActive ? _leftWeapon : _rightWeapon;
-            var notActiveWeapon = _leftIsActive ? _rightWeapon : _leftWeapon;
 
-            if (TryTakeInsteadOfHands(weapon, activeWeapon, notActiveWeapon))
+            if (TryTakeInsteadOfHands(weapon))
                 return null;
 
-            return SwapWeapon(weapon, activeWeapon);
+            return SwapWeapon(weapon);
         }
 
         public Weapon DropWeapon()
@@ -65,30 +49,28 @@ namespace Entities.Player
             if (_leftIsActive)
             {
                 droppedWeapon = _leftWeapon;
-                if (droppedWeapon != _hand)
-                {
-                    _leftWeapon = _hand;
-                    LeftWeaponChanged?.Invoke();
+                if (droppedWeapon == _hand) 
+                    return null;
+                
+                _leftWeapon = _hand;
+                LeftWeaponChanged?.Invoke();
                     
-                    return droppedWeapon;
-                }
+                return droppedWeapon;
             }
             else
             {
                 droppedWeapon = _rightWeapon;
-                if (droppedWeapon != _hand)
-                {
-                    _rightWeapon = _hand;
-                    RightWeaponChanged?.Invoke();
+                if (droppedWeapon == _hand) 
+                    return null;
+                
+                _rightWeapon = _hand;
+                RightWeaponChanged?.Invoke();
                     
-                    return droppedWeapon;
-                }
+                return droppedWeapon;
             }
-            
-            return null;
         }
 
-        private void OnSwapWeapons(InputAction.CallbackContext context)
+        public void SwapWeapons()
         {
             _leftIsActive = !_leftIsActive;
             
@@ -98,8 +80,11 @@ namespace Entities.Player
                 RightWeaponIsActive?.Invoke();
         }
 
-        private bool TryTakeInsteadOfHands(Weapon weapon, Weapon activeWeapon, Weapon notActiveWeapon)
+        private bool TryTakeInsteadOfHands(Weapon weapon)
         {
+            var activeWeapon = _leftIsActive ? _leftWeapon : _rightWeapon;
+            var notActiveWeapon = _leftIsActive ? _rightWeapon : _leftWeapon;
+            
             if (activeWeapon == _hand)
             {
                 ChangeActiveWeapon(weapon);
@@ -115,11 +100,13 @@ namespace Entities.Player
             return false;
         }
 
-        private Weapon SwapWeapon(Weapon weapon, Weapon activeWeapon)
+        private Weapon SwapWeapon(Weapon weapon)
         {
+            var activeWeapon = _leftIsActive ? _leftWeapon : _rightWeapon;
+            
             var discardedWeapon = activeWeapon;
             ChangeActiveWeapon(weapon);
-
+            
             return discardedWeapon;
         }
 

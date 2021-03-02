@@ -1,5 +1,5 @@
-﻿using Entities.Player;
-using Services.StateSystem;
+﻿using Core.StateSystem;
+using Entities.Player;
 using UnityEngine;
 
 namespace Entities.Enemies.States

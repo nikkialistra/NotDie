@@ -7,11 +7,11 @@ namespace UI
 {
     public class UiManager : MonoBehaviour
     {
-        [SerializeField] private HpHandler _hpHandler;
+        [SerializeField] private Hp _hp;
         [SerializeField] private HpView _hpView;
         
         [Space]
-        [SerializeField] private Weapons _weapons;
+        [SerializeField] private WeaponHandler _weaponHandler;
         [SerializeField] private WeaponsView _weaponsView;
 
         private HpPresenter _hpPresenter;
@@ -20,8 +20,8 @@ namespace UI
 
         private void Start()
         {
-            _hpPresenter = new HpPresenter(_hpHandler, _hpView);
-            _weaponsPresenter = new WeaponsPresenter(_weapons, _weaponsView);
+            _hpPresenter = new HpPresenter(_hp, _hpView);
+            _weaponsPresenter = new WeaponsPresenter(_weaponHandler.Weapons, _weaponsView);
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System;
+using Entities.Data;
 using UnityEngine;
 
 namespace Entities.Player
 {
-    public class HpHandler : MonoBehaviour
+    public class Hp : MonoBehaviour
     {
         public event Action<int> HealthChanged;
         public event Action<int> LivesChanged;
@@ -12,22 +13,26 @@ namespace Entities.Player
         [SerializeField] private int _healthFullValue;
         [SerializeField] private int _lives;
 
+        [SerializeField] private Sound _liveTakenAway;
+        [SerializeField] private Sound _gameOver;
+        
+
         public int HealthFullValue => _healthFullValue;
         public int Lives => _lives;
 
         private int _healthValue;
         private bool IsAlive => _lives > 0;
 
-        private void Start()
+        private void Awake()
         {
-            _healthValue = _healthFullValue;
+            _liveTakenAway.CreateAudioSource(gameObject);
+            _gameOver.CreateAudioSource(gameObject);
         }
+        
+        private void Start() => _healthValue = _healthFullValue;
 
         [ContextMenu("Take damage")]
-        private void TakeDamageContextMenu()
-        {
-            TakeDamage(50);
-        }
+        private void TakeDamageContextMenu() => TakeDamage(50);
 
         public void TakeDamage(int damage)
         {
@@ -44,6 +49,7 @@ namespace Entities.Player
         private void TakeAwayLive()
         {
             _lives -= 1;
+            _liveTakenAway.Play();
             LivesChanged?.Invoke(_lives);
 
             if (IsAlive)
@@ -53,6 +59,7 @@ namespace Entities.Player
             }
             else
             {
+                _gameOver.Play();
                 GameOver?.Invoke();
             }
         }

@@ -291,6 +291,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -398,6 +399,102 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
+--- !u!82 &519420035
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c3e4da8f51d6b7448af6a399a60357c1, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.14
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &636913018 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7327317594015940180, guid: 460a97e5cd659e94baa96795b85f1b31, type: 3}
@@ -508,6 +605,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1010360058035573378, guid: 94ff85432863cee48b83860753576ba7, type: 3}
   m_PrefabInstance: {fileID: 1010360057819737126}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &937606821 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 937606830, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+  m_PrefabInstance: {fileID: 1010360057819737126}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937606820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d011c80f9d384ff3ba081486e52f6342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &937606831 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 937606831, guid: 94ff85432863cee48b83860753576ba7, type: 3}
@@ -517,17 +625,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b1fa85f490e48f8b3b37d8714688cc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &937606832 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 937606832, guid: 94ff85432863cee48b83860753576ba7, type: 3}
-  m_PrefabInstance: {fileID: 1010360057819737126}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 937606820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 782c6c3bfa9d4c9b850433b061493459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &996346589
@@ -545,6 +642,10 @@ PrefabInstance:
       propertyPath: _weapon
       value: 
       objectReference: {fileID: 11400000, guid: 3efa2474e89efed468362fee6e93bdb9, type: 2}
+    - target: {fileID: 2817982706502842859, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5267a1e54bcdd804abc750604a30a8ab, type: 3}
     - target: {fileID: 2817982706502842860, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -588,6 +689,22 @@ PrefabInstance:
     - target: {fileID: 2817982706502842860, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_Size.x
+      value: 1.078867
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.01113534
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.03125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.28125
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
@@ -904,6 +1021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 6930319871534074631, guid: 51a26e3dd016939489dda59768fd6be8, type: 3}
   _numberToSpawnAtStart: 10
+  _wave: {fileID: 11400000, guid: d3c7f09608d26904aa590196c8e92d1e, type: 2}
 --- !u!1 &1407669144
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,9 +1065,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf6360372d114a2dba558c8c81c73960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hpHandler: {fileID: 937606831}
+  _hp: {fileID: 937606831}
   _hpView: {fileID: 506971419}
-  _weapons: {fileID: 937606832}
+  _weaponHandler: {fileID: 937606821}
   _weaponsView: {fileID: 506971421}
 --- !u!1001 &1560596575
 PrefabInstance:
@@ -1282,6 +1400,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword
       objectReference: {fileID: 0}
+    - target: {fileID: 2817982706502842859, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ffd96d91433578a47981b69e461df596, type: 3}
     - target: {fileID: 2817982706502842860, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1325,6 +1447,22 @@ PrefabInstance:
     - target: {fileID: 2817982706502842860, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_Size.x
+      value: 0.737381
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0037117004
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.6875
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.1875
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
@@ -1571,6 +1709,10 @@ PrefabInstance:
       propertyPath: _weapon
       value: 
       objectReference: {fileID: 11400000, guid: 8c6e2d274f2a95744b15f4399123f5b5, type: 2}
+    - target: {fileID: 2817982706502842859, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9c10c498d1d7c3e42ab48d723eb405e0, type: 3}
     - target: {fileID: 2817982706502842860, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1614,6 +1756,22 @@ PrefabInstance:
     - target: {fileID: 2817982706502842860, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_Size.x
+      value: 0.62602735
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.00000011920929
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.46875
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.125
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
@@ -1713,18 +1871,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1010360058035573379, guid: 94ff85432863cee48b83860753576ba7, type: 3}
-      propertyPath: _attackDirectionLength
-      value: 0.63
-      objectReference: {fileID: 0}
     - target: {fileID: 1010360058035573388, guid: 94ff85432863cee48b83860753576ba7, type: 3}
-      propertyPath: _wavePool
+      propertyPath: _attack
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d74d50912356a743a3f2e24432dec5d, type: 2}
+    - target: {fileID: 1010360058035573388, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+      propertyPath: _waveSpawner
       value: 
       objectReference: {fileID: 1371663830}
-    - target: {fileID: 1010360058122808592, guid: 94ff85432863cee48b83860753576ba7, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94ff85432863cee48b83860753576ba7, type: 3}
 --- !u!1001 &1391676993452006308
