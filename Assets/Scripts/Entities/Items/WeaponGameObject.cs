@@ -2,7 +2,7 @@
 using Entities.Data;
 using UnityEngine;
 
-namespace Entities.RoomItems
+namespace Entities.Items
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class WeaponGameObject : MonoBehaviour
@@ -18,10 +18,21 @@ namespace Entities.RoomItems
             _renderer = GetComponent<SpriteRenderer>();
         }
 
-        private void Start()
+        private void Start() => _renderer.sprite =  _weapon.PickUp;
+
+        
+        #if UNITY_EDITOR
+        private void OnValidate() => UnityEditor.EditorApplication.delayCall += SetSprite;
+
+        private void SetSprite()
         {
-            _renderer.sprite =  _weapon.Active;
+            if (this == null)
+                return;
+            
+            _renderer = GetComponent<SpriteRenderer>();
+            _renderer.sprite = _weapon.PickUp;
         }
+        #endif
 
         public void SetWeapon(Weapon weapon)
         {

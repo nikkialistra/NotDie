@@ -1,6 +1,6 @@
 ﻿using System;
+using Core.StateSystem;
 using Entities.Enemies.States;
-using Services.StateSystem;
 using UnityEngine;
 
 namespace Entities.Enemies

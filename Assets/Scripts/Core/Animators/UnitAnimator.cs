@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Services.Animators
+namespace Core.Animators
 {
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Rigidbody2D))]

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Services
+namespace Core
 {
     [RequireComponent(typeof(Camera))]
     public class CameraFollow : MonoBehaviour

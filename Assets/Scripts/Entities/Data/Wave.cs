@@ -8,7 +8,8 @@ namespace Entities.Data
         public int DamageValue;
         public float Velocity;
         public float TimeToDestroy;
-
+        
+        #if UNITY_EDITOR
         private void OnValidate()
         {
             if (DamageValue < 0)
@@ -20,5 +21,6 @@ namespace Entities.Data
             if (TimeToDestroy < 0)
                 TimeToDestroy = 0;
         }
+        #endif
     }
 }
