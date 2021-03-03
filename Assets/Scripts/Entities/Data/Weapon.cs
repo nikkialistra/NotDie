@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Entities.Data
 {
@@ -12,14 +14,15 @@ namespace Entities.Data
         public Sprite NotActive;
         
         [Header("Specs")]
-        public int Damage;
+        public List<WaveSpecs> Waves;
 
-        #if UNITY_EDITOR
-        private void OnValidate()
+        public float CooldownTime;
+
+        [Serializable]
+        public class WaveSpecs
         {
-            if (Damage < 0)
-                Damage = 0;
+            public int Damage;
+            public float TimeToLive;
         }
-        #endif
     }
 }

@@ -13,7 +13,7 @@ namespace Core.Animators
             public float IdleSpeed;
         }
 
-        [SerializeField] private Settings _settings;
+        private Settings _settings;
 
         private Animator _animator;
 
@@ -33,10 +33,7 @@ namespace Core.Animators
             Flip();
         }
 
-        private void SetMovingAnimation()
-        {
-            _animator.SetBool(_isMoving, _rigidbody.velocity.magnitude > _settings.IdleSpeed);
-        }
+        private void SetMovingAnimation() => _animator.SetBool(_isMoving, _rigidbody.velocity.magnitude > _settings.IdleSpeed);
 
         private void Flip()
         {

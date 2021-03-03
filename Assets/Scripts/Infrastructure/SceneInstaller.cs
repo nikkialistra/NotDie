@@ -11,13 +11,16 @@ namespace Infrastructure
 {
     public class SceneInstaller : MonoInstaller
     {
+        [Header("Player base")]
         [SerializeField] private GameObject _player;
         [SerializeField] private Transform _attackDirection;
         
+        [Header("WeaponsHandler")]
         [SerializeField] private Weapon _hand;
+        [SerializeField] private GameObject _weaponPrefab;
+        [SerializeField] private WeaponAttack _weaponAttack;
 
-        [SerializeField] private GameObject _weapon;
-
+        [Header("Waves")]
         [SerializeField] private GameObject _waveFacadePrefab;
         [SerializeField] private Wave _wave;
 
@@ -30,7 +33,7 @@ namespace Infrastructure
             BindPlayerWeaponSystem();
             
             Container.BindFactory<Weapon, Vector3, WeaponGameObject, WeaponGameObject.Factory>()
-                .FromComponentInNewPrefab(_weapon)
+                .FromComponentInNewPrefab(_weaponPrefab)
                 .UnderTransformGroup("Weapons");
 
             BindWaveSpawner();
@@ -41,13 +44,15 @@ namespace Infrastructure
             Container.BindInstance(_player).WhenInjectedInto<CameraFollow>();
 
             Container.BindInstance(_attackDirection).WhenInjectedInto<PlayerMover>();
-            Container.BindInstance(_attackDirection).WhenInjectedInto<AttackHandler>();
+            Container.BindInstance(_attackDirection).WhenInjectedInto<PlayerAttack>();
         }
 
         private void BindPlayerWeaponSystem()
         {
             Container.BindInstance(_hand).WhenInjectedInto<Weapons>();
             Container.Bind<Weapons>().AsSingle();
+
+            Container.BindInstance(_weaponAttack);
         }
 
         private void BindWaveSpawner()

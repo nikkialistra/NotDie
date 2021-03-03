@@ -6,18 +6,18 @@ namespace Core
     public class RoomConfigurator : MonoBehaviour
     {
         [Header("Corners")] 
-        [SerializeField] private GameObject CornerLeftUp;
-        [SerializeField] private GameObject CornerRightUp;
-        [SerializeField] private GameObject CornerLeftDown;
-        [SerializeField] private GameObject CornerRightDown;
+        [SerializeField] private GameObject _cornerLeftUp;
+        [SerializeField] private GameObject _cornerRightUp;
+        [SerializeField] private GameObject _cornerLeftDown;
+        [SerializeField] private GameObject _cornerRightDown;
 
         [Header("Settings")]
         [Range(0, 20)]
-        [SerializeField] private float Width;
+        [SerializeField] private float _width;
         [Range(0, 20)]
-        [SerializeField] private float Height;
+        [SerializeField] private float _height;
         [Range(0, 8)]
-        [SerializeField] private float Perspective;
+        [SerializeField] private float _perspective;
 
         private EdgeCollider2D _collider;
 
@@ -30,10 +30,7 @@ namespace Core
         }
 
         #if UNITY_EDITOR
-        private void OnValidate()
-        {
-            SetupRoom();
-        }
+        private void OnValidate() => SetupRoom();
         #endif
 
         private void SetupRoom()
@@ -42,29 +39,26 @@ namespace Core
             PlaceCorners();
         }
 
-        private void CenterRoom()
-        {
-            transform.position = new Vector2(-Width / 2, Height / 2);
-        }
+        private void CenterRoom() => transform.position = new Vector2(-_width / 2, _height / 2);
 
         private void PlaceCorners()
         {
-            CornerLeftUp.transform.localPosition = Vector2.zero;
-            CornerRightUp.transform.localPosition = new Vector2(Width, 0);
+            _cornerLeftUp.transform.localPosition = Vector2.zero;
+            _cornerRightUp.transform.localPosition = new Vector2(_width, 0);
 
-            CornerLeftDown.transform.localPosition = new Vector2(0 - Perspective, -Height);
-            CornerRightDown.transform.localPosition = new Vector2(Width + Perspective, -Height);
+            _cornerLeftDown.transform.localPosition = new Vector2(0 - _perspective, -_height);
+            _cornerRightDown.transform.localPosition = new Vector2(_width + _perspective, -_height);
         }
 
         private void MakeCollider()
         {
             Vector2[] points =
             {
-                new Vector2(CornerLeftUp.transform.localPosition.x, CornerLeftUp.transform.localPosition.y),
-                new Vector2(CornerRightUp.transform.localPosition.x, CornerRightUp.transform.localPosition.y),
-                new Vector2(CornerRightDown.transform.localPosition.x, CornerRightDown.transform.localPosition.y),
-                new Vector2(CornerLeftDown.transform.localPosition.x, CornerLeftDown.transform.localPosition.y),
-                new Vector2(CornerLeftUp.transform.localPosition.x, CornerLeftUp.transform.localPosition.y)
+                new Vector2(_cornerLeftUp.transform.localPosition.x, _cornerLeftUp.transform.localPosition.y),
+                new Vector2(_cornerRightUp.transform.localPosition.x, _cornerRightUp.transform.localPosition.y),
+                new Vector2(_cornerRightDown.transform.localPosition.x, _cornerRightDown.transform.localPosition.y),
+                new Vector2(_cornerLeftDown.transform.localPosition.x, _cornerLeftDown.transform.localPosition.y),
+                new Vector2(_cornerLeftUp.transform.localPosition.x, _cornerLeftUp.transform.localPosition.y)
             };
 
             _collider.points = points;

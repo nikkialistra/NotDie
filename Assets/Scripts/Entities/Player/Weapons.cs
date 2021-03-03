@@ -13,8 +13,12 @@ namespace Entities.Player
 
         private Weapon _hand;
 
+        public Weapon ActiveWeapon => _leftIsActive ? _leftWeapon : _rightWeapon;
+        public Weapon NotActiveWeapon => _leftIsActive ? _rightWeapon : _leftWeapon;
+        
         public Weapon LeftWeapon => _leftWeapon;
         public Weapon RightWeapon => _rightWeapon;
+        
         
         public bool LeftIsActive => _leftIsActive;
 
@@ -81,16 +85,13 @@ namespace Entities.Player
 
         private bool TryTakeInsteadOfHands(Weapon weapon)
         {
-            var activeWeapon = _leftIsActive ? _leftWeapon : _rightWeapon;
-            var notActiveWeapon = _leftIsActive ? _rightWeapon : _leftWeapon;
-            
-            if (activeWeapon == _hand)
+            if (ActiveWeapon == _hand)
             {
                 ChangeActiveWeapon(weapon);
                 return true;
             }
             
-            if (notActiveWeapon == _hand)
+            if (NotActiveWeapon == _hand)
             {
                 ChangeNotActiveWeapon(weapon);
                 return true;
@@ -101,9 +102,7 @@ namespace Entities.Player
 
         private Weapon SwapWeapon(Weapon weapon)
         {
-            var activeWeapon = _leftIsActive ? _leftWeapon : _rightWeapon;
-            
-            var discardedWeapon = activeWeapon;
+            var discardedWeapon = ActiveWeapon;
             ChangeActiveWeapon(weapon);
             
             return discardedWeapon;
