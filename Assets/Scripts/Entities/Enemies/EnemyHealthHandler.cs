@@ -26,7 +26,7 @@ namespace Entities.Enemies
             if (wave == null) 
                 return;
 
-            wave.Disable();
+            wave.Dispose();
             TakeDamage(wave.DamageValue);
         }
 

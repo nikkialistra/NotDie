@@ -1,32 +1,32 @@
 ﻿using System;
 using Entities.Data;
 using UnityEngine;
+using Zenject;
 
 namespace Entities.Items
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class WeaponGameObject : MonoBehaviour
     {
-        [Serializable]
-        public class Settings
-        {
-            public Weapon Weapon;
-        }
+        [InjectOptional]
+        [SerializeField] private Weapon _weapon;
 
-        [SerializeField] private Settings _settings;
+        [InjectOptional] 
+        private Vector3? originalPosition;
 
-        public Weapon Weapon => _settings.Weapon;
+        public Weapon Weapon => _weapon;
 
         private SpriteRenderer _renderer;
 
         private void Awake()
         {
+            if (originalPosition != null)
+                transform.position = originalPosition.Value;
+            
             _renderer = GetComponent<SpriteRenderer>();
+            _renderer.sprite =  _weapon.PickUp;
         }
 
-        private void Start() => _renderer.sprite =  _settings.Weapon.PickUp;
-
-        
         #if UNITY_EDITOR
         private void OnValidate() => UnityEditor.EditorApplication.delayCall += SetSprite;
 
@@ -36,19 +36,12 @@ namespace Entities.Items
                 return;
             
             _renderer = GetComponent<SpriteRenderer>();
-            _renderer.sprite = _settings.Weapon.PickUp;
+            _renderer.sprite = _weapon.PickUp;
         }
         #endif
 
-
-        public void SetWeapon(Weapon weapon)
+        public class Factory : PlaceholderFactory<Weapon, Vector3, WeaponGameObject>
         {
-            if (weapon == null)
-                throw new ArgumentNullException(nameof(weapon));
-
-            _settings.Weapon = weapon;
-            
-            _renderer.sprite =  _settings.Weapon.Active;
         }
     }
 }
