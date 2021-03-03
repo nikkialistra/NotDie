@@ -1,5 +1,4 @@
 ﻿using System;
-using Core;
 using Entities.Data;
 using Entities.Items;
 using UnityEngine;
@@ -15,8 +14,6 @@ namespace Entities.Player
         public class Settings
         {
             public Weapon Hand;
-        
-            public GameObject WeaponPrefab;
 
             public float DistanceForTaking;
 
@@ -29,18 +26,19 @@ namespace Entities.Player
         private Settings _settings;
 
         public Weapons Weapons { get; private set; }
+        
+        private WeaponGameObject.Factory _weaponFactory;
 
         private PlayerInput _input;
-
         private InputAction _takeDropWeaponAction;
-
         private InputAction _swapWeaponsAction;
-        
+
         [Inject]
-        public void Construct(Settings settings, Weapons weapons)
+        public void Construct(Settings settings, Weapons weapons, WeaponGameObject.Factory weaponFactory)
         {
             Weapons = weapons;
             _settings = settings;
+            _weaponFactory = weaponFactory;
             
             _settings.TakingWeapon.CreateAudioSource(gameObject);
             _settings.DroppingWeapon.CreateAudioSource(gameObject);
@@ -100,7 +98,7 @@ namespace Entities.Player
             var weapon = Weapons.DropWeapon();
             if (weapon != null)
             {
-                InstantiateWeapon(weapon);
+                CreateWeapon(weapon);
                 _settings.DroppingWeapon.PlayOneShot();
             }
         }
@@ -113,17 +111,11 @@ namespace Entities.Player
 
             if (discardedWeapon != null)
             {
-                InstantiateWeapon(discardedWeapon);
+                CreateWeapon(discardedWeapon);
                 _settings.DroppingWeapon.PlayOneShot();
             }
         }
 
-        private void InstantiateWeapon(Weapon weaponToCreate)
-        {
-            var weapon = Instantiate(_settings.WeaponPrefab, transform.position, Quaternion.identity);
-
-            var weaponGameObject = weapon.GetComponent<WeaponGameObject>();
-            weaponGameObject.SetWeapon(weaponToCreate);
-        }
+        private void CreateWeapon(Weapon weaponToCreate) => _weaponFactory.Create(weaponToCreate, transform.position);
     }
 }

@@ -1,24 +1,22 @@
-﻿using Core.Pool;
+﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace Entities.Wave
 {
     [RequireComponent(typeof(WaveMover))]
-    public class WaveFacade : MonoBehaviour, IGameObjectPooled<WaveFacade>
+    public class WaveFacade : MonoBehaviour, IPoolable<Vector3, Vector2, Data.Wave, IMemoryPool>, IDisposable
     {
+        private IMemoryPool _pool;
+        
         private WaveMover _waveMover;
-
+        
         private float _timeToDestroy;
         private int _damageValue;
 
         public int DamageValue => _damageValue;
 
-        public IPool<WaveFacade> Pool { get; set; }
-
-        private void Awake()
-        {
-            _waveMover = GetComponent<WaveMover>();
-        }
+        private void Awake() => _waveMover = GetComponent<WaveMover>();
 
         private void Update()
         {
@@ -27,27 +25,28 @@ namespace Entities.Wave
             
             _timeToDestroy -= Time.deltaTime;
             if (_timeToDestroy <= 0)
-                Disable();
+                Dispose();
         }
 
-        public void Initialize(Vector3 position, Quaternion rotation, Vector2 direction, Data.Wave wave)
+        public void OnSpawned(Vector3 position, Vector2 direction, Data.Wave wave, IMemoryPool pool)
         {
+            _pool = pool;
+            
             transform.position = position;
-            transform.rotation = rotation;
 
             _waveMover.SetVelocity(wave.Velocity);
             _waveMover.SetDirection(direction);
             
             _timeToDestroy = wave.TimeToDestroy;
-
             _damageValue = wave.DamageValue;
-            
-            gameObject.SetActive(true);
         }
 
-        public void Disable()
+        public void Dispose() => _pool.Despawn(this);
+        
+        public void OnDespawned() => _pool = null;
+        
+        public class Factory : PlaceholderFactory<Vector3, Vector2, Data.Wave, WaveFacade>
         {
-            Pool.ReturnToPool(this);
         }
     }
 }
