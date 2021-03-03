@@ -2,6 +2,7 @@
 using Core.StateSystem;
 using Entities.Enemies.States;
 using UnityEngine;
+using Zenject;
 
 namespace Entities.Enemies
 {
@@ -14,9 +15,12 @@ namespace Entities.Enemies
             public float TimeToStay;
         }
 
-        [SerializeField] private Settings _settings;
+        private Settings _settings;
 
         private StateMachine _stateMachine;
+        
+        [Inject]
+        public void Construct(Settings settings) => _settings = settings;
 
         private void Awake()
         {

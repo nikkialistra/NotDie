@@ -28,10 +28,7 @@ namespace Core
 
         private EdgeCollider2D _collider;
 
-        private void Awake()
-        {
-            _collider = GetComponent<EdgeCollider2D>();
-        }
+        private void Awake() => _collider = GetComponent<EdgeCollider2D>();
 
         private void Start()
         {

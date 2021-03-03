@@ -24,7 +24,7 @@ namespace Entities.Player
         
         private WaveSpawner _waveSpawner;
         
-        private Renderer _placerRenderer;
+        private Renderer _attackDirectionRenderer;
 
         private PlayerInput _input;
         private InputAction _attackAction;
@@ -35,13 +35,12 @@ namespace Entities.Player
         {
             _settings = settings;
             _attackDirection = attackDirection;
+            _attackDirectionRenderer = _attackDirection.GetComponent<Renderer>();
             _waveSpawner = waveSpawner;
         }
 
         private void Awake()
         {
-            _placerRenderer = _attackDirection.GetComponent<Renderer>();
-            
             _settings.Attack.CreateAudioSource(gameObject);
             
             _input = GetComponent<PlayerInput>();
@@ -70,7 +69,7 @@ namespace Entities.Player
         private void OnShowAttackDirection(InputAction.CallbackContext context)
         {
             _attackDirectionIsVisible = !_attackDirectionIsVisible;
-            _placerRenderer.enabled = _attackDirectionIsVisible;
+            _attackDirectionRenderer.enabled = _attackDirectionIsVisible;
         }
     }
 }

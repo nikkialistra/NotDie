@@ -1,27 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace UI.Views
 {
-    [RequireComponent(typeof(Text))]
-    public class TimerView : MonoBehaviour
+    public class TimerView : IInitializable, ITickable
     {
         private Text _timer;
 
         private float _time;
         private bool _isWorking;
+        
+        public TimerView([Inject(Id = "timer")] Text timer) => _timer = timer;
 
-        private void Awake()
-        {
-            _timer = GetComponent<Text>();
-        }
+        public void Initialize() => _isWorking = true;
 
-        private void Start()
-        {
-            _isWorking = true;
-        }
-
-        public void Update()
+        public void Tick()
         {
             if (!_isWorking) 
                 return;
@@ -33,7 +27,7 @@ namespace UI.Views
         public void StartTimer() => _isWorking = true;
 
         public void StopTimer() => _isWorking = false;
-        
+
         public void ResetTimer() => _time = 0;
 
         private void SetTime()
@@ -42,7 +36,9 @@ namespace UI.Views
             var seconds = (int) (_time % 60f);
             var milliseconds = (int) (_time * 100f) % 100;
 
-            _timer.text = minutes.ToString("00") + "." + seconds.ToString("00") + "." + milliseconds.ToString("00");
+            _timer.text = $"{minutes:00}.{seconds:00}.{milliseconds:00}";
         }
+
+        
     }
 }

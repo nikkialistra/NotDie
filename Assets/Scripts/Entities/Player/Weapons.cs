@@ -1,6 +1,5 @@
 ﻿using System;
 using Entities.Data;
-using UnityEngine;
 
 namespace Entities.Player
 {

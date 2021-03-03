@@ -1,11 +1,8 @@
 ﻿using System;
-using Entities.Data;
-using UnityEngine;
-using Zenject;
 
 namespace Entities.Player
 {
-    public class Hp : MonoBehaviour
+    public class Hp
     {
         public event Action<int> HealthChanged;
 
@@ -18,35 +15,22 @@ namespace Entities.Player
         {
             public int HealthFullValue;
             public int Lives;
-
-            [Header("Audio")]
-            public Sound LiveTakenAway;
-            public Sound GameOver;
         }
 
         private Settings _settings;
 
         public int HealthFullValue => _settings.HealthFullValue;
-
         public int Lives => _settings.Lives;
 
         private int _healthValue;
 
         private bool IsAlive => _settings.Lives > 0;
         
-        [Inject]
-        public void Construct(Settings settings) => _settings = settings;
-
-        private void Awake()
+        public Hp(Settings settings)
         {
-            _settings.LiveTakenAway.CreateAudioSource(gameObject);
-            _settings.GameOver.CreateAudioSource(gameObject);
+            _settings = settings;
+            _healthValue = _settings.HealthFullValue;
         }
-
-        private void Start() => _healthValue = _settings.HealthFullValue;
-
-        [ContextMenu("Take damage")]
-        private void TakeDamageContextMenu() => TakeDamage(50);
 
         public void TakeDamage(int damage)
         {
@@ -69,7 +53,6 @@ namespace Entities.Player
                 throw new InvalidOperationException("It should not be invoked when lives not greater than 0");
             
             _settings.Lives -= 1;
-            _settings.LiveTakenAway.Play();
             LivesChanged?.Invoke(_settings.Lives);
 
             if (IsAlive)
@@ -79,7 +62,6 @@ namespace Entities.Player
             }
             else
             {
-                _settings.GameOver.Play();
                 GameOver?.Invoke();
             }
         }

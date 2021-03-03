@@ -37,12 +37,14 @@ namespace Entities.Player
         private InputAction _swapWeaponsAction;
         
         [Inject]
-        public void Construct(Settings settings) => _settings = settings;
+        public void Construct(Settings settings, Weapons weapons)
+        {
+            Weapons = weapons;
+            _settings = settings;
+        }
 
         private void Awake()
         {
-            Weapons = new Weapons(_settings.Hand);
-            
             _settings.TakingWeapon.CreateAudioSource(gameObject);
             _settings.DroppingWeapon.CreateAudioSource(gameObject);
             _settings.SwappingWeapons.CreateAudioSource(gameObject);
