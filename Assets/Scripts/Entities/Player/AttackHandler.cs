@@ -37,12 +37,12 @@ namespace Entities.Player
             _attackDirection = attackDirection;
             _attackDirectionRenderer = _attackDirection.GetComponent<Renderer>();
             _waveSpawner = waveSpawner;
+            
+            _settings.Attack.CreateAudioSource(gameObject);
         }
 
         private void Awake()
         {
-            _settings.Attack.CreateAudioSource(gameObject);
-            
             _input = GetComponent<PlayerInput>();
             _attackAction = _input.actions.FindAction("Attack");
             _showAttackDirectionAction = _input.actions.FindAction("ShowAttackDirection");

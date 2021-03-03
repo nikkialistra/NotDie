@@ -27,10 +27,7 @@ namespace Entities.Player
             
             _hp.LivesChanged += OnLivesChanged;
             _hp.GameOver += OnGameOver;
-        }
-
-        private void Start()
-        {
+            
             _settings.LiveTakenAway.CreateAudioSource(gameObject);
             _settings.GameOver.CreateAudioSource(gameObject);
         }

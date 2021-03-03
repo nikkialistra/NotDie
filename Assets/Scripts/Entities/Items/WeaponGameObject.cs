@@ -28,7 +28,6 @@ namespace Entities.Items
 
         
         #if UNITY_EDITOR
-
         private void OnValidate() => UnityEditor.EditorApplication.delayCall += SetSprite;
 
         private void SetSprite()
