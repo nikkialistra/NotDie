@@ -7,19 +7,19 @@ namespace Infrastructure
     [CreateAssetMenu(fileName = "PlayerSettingsInstaller", menuName = "Installers/PlayerSettingsInstaller")]
     public class PlayerSettingsInstaller : ScriptableObjectInstaller<PlayerSettingsInstaller>
     {
-        [SerializeField] private AttackHandler.Settings _attackHandler;
+        [SerializeField] private PlayerAttack.Settings _playerAttack;
         [SerializeField] private Hp.Settings _hp;
         [SerializeField] private HpHandler.Settings _hpHandler;
         [SerializeField] private PlayerMover.Settings _playerMover;
-        [SerializeField] private WeaponHandler.Settings _weaponHandler;
+        [SerializeField] private WeaponsHandler.Settings _weaponsHandler;
 
         public override void InstallBindings()
         {
-            Container.BindInstance(_attackHandler);
+            Container.BindInstance(_playerAttack);
             Container.BindInstance(_hp);
             Container.BindInstance(_hpHandler);
             Container.BindInstance(_playerMover);
-            Container.BindInstance(_weaponHandler);
+            Container.BindInstance(_weaponsHandler);
         }
     }
 }

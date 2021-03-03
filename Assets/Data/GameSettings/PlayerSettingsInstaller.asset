@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab37403a7a589f4c95475a2bf559787, type: 3}
   m_Name: PlayerSettingsInstaller
   m_EditorClassIdentifier: 
-  _attackHandler:
+  _playerAttack:
     Attack: {fileID: 11400000, guid: 4d74d50912356a743a3f2e24432dec5d, type: 2}
   _hp:
     HealthFullValue: 100
@@ -25,9 +25,8 @@ MonoBehaviour:
     Damping: 10
     AttackDirectionLength: 1
     PlayerMoving: {fileID: 11400000, guid: ad00f16de0bcb4140b265aebc3fbaad1, type: 2}
-  _weaponHandler:
+  _weaponsHandler:
     Hand: {fileID: 11400000, guid: b945b6d6c3b8a7a4e9e8b8f9f28f6ca1, type: 2}
-    WeaponPrefab: {fileID: 2817982706502842857, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
     DistanceForTaking: 1
     TakingWeapon: {fileID: 11400000, guid: ddbc187f205192546aae2046521e42e4, type: 2}
     DroppingWeapon: {fileID: 11400000, guid: c5725afb34d6fd24cb035face72dde28, type: 2}
