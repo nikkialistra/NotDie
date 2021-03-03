@@ -2,7 +2,7 @@
 
 namespace Entities.Data
 {
-    [CreateAssetMenu(fileName = "Weapon", menuName = "Data/Weapon", order = 1)]
+    [CreateAssetMenu(fileName = "Weapon", menuName = "Data/Weapon")]
     public class Weapon : ScriptableObject
     {
         [Header("Icons")] 

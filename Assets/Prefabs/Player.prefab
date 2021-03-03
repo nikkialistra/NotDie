@@ -211,12 +211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a54caaee17c6794c98576930dddd4bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings:
-    Speed: 15
-    Damping: 10
-    AttackDirection: {fileID: 1010360058122808595}
-    AttackDirectionLength: 0.6
-    PlayerMoving: {fileID: 11400000, guid: ad00f16de0bcb4140b265aebc3fbaad1, type: 2}
 --- !u!114 &1010360058035573388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,10 +223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 575a31bf934b46ccabef6cef91982303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings:
-    _attackDirection: {fileID: 1010360058122808595}
-    _waveSpawner: {fileID: 0}
-    _attack: {fileID: 11400000, guid: 4d74d50912356a743a3f2e24432dec5d, type: 2}
 --- !u!114 &937606821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,13 +297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d011c80f9d384ff3ba081486e52f6342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings:
-    Hand: {fileID: 11400000, guid: b945b6d6c3b8a7a4e9e8b8f9f28f6ca1, type: 2}
-    WeaponPrefab: {fileID: 2817982706502842857, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
-    DistanceForTaking: 0.6
-    TakingWeapon: {fileID: 11400000, guid: ddbc187f205192546aae2046521e42e4, type: 2}
-    DroppingWeapon: {fileID: 11400000, guid: 6924b3cb08a0cb04e9fbbb27cb2366b1, type: 2}
-    SwappingWeapons: {fileID: 11400000, guid: 6924b3cb08a0cb04e9fbbb27cb2366b1, type: 2}
 --- !u!114 &937606831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,14 +306,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1010360058035573378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b1fa85f490e48f8b3b37d8714688cc4, type: 3}
+  m_Script: {fileID: 11500000, guid: 05ee930a13b04339ba36ddcce058f8b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings:
-    HealthFullValue: 100
-    Lives: 9
-    LiveTakenAway: {fileID: 11400000, guid: 05b7360c4e08aa848801746718888499, type: 2}
-    GameOver: {fileID: 11400000, guid: 886251977e5fcf64485037f6756b7c51, type: 2}
 --- !u!1 &1010360058122808594
 GameObject:
   m_ObjectHideFlags: 0

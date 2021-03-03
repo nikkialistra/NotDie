@@ -28,16 +28,15 @@ namespace Entities.Player
         }
 
         private Settings _settings;
+        
         private Transform _attackDirection;
 
         private Rigidbody2D _rigidbody;
 
         private Vector2 _moveDirection;
-
         private Vector2 _lastVelocity;
 
         private PlayerInput _input;
-
         private InputAction _moveAction;
         
         [Inject]
@@ -92,7 +91,7 @@ namespace Entities.Player
         private void MovePlayer()
         {
             _rigidbody.velocity += _moveDirection * (_settings.Speed * Time.fixedDeltaTime);
-
+            
             _lastVelocity = _rigidbody.velocity;
         }
 

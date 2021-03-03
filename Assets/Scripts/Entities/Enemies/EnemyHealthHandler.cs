@@ -1,6 +1,7 @@
 ﻿using System;
 using Entities.Wave;
 using UnityEngine;
+using Zenject;
 
 namespace Entities.Enemies
 {
@@ -12,9 +13,12 @@ namespace Entities.Enemies
             public int Value;
         }
 
-        [SerializeField] private Settings _settings;
+        private Settings _settings;
 
         private bool isAlive => _settings.Value > 0;
+        
+        [Inject]
+        public void Construct(Settings settings) => _settings = settings;
 
         private void OnTriggerEnter2D(Collider2D other)
         {

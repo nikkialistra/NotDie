@@ -2,7 +2,7 @@
 
 namespace Entities.Data
 {
-    [CreateAssetMenu(fileName = "Wave", menuName = "Data/Wave", order = 0)]
+    [CreateAssetMenu(fileName = "Wave", menuName = "Data/Wave")]
     public class Wave : ScriptableObject
     {
         public int DamageValue;

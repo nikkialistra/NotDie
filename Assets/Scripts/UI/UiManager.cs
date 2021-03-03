@@ -1,35 +1,29 @@
-﻿using System;
-using Entities.Player;
+﻿using Entities.Player;
 using UI.Presenters;
 using UI.Views;
-using UnityEngine;
 
 namespace UI
 {
-    public class UiManager : MonoBehaviour
+    public class UiManager
     {
-        [SerializeField] private Settings _settings;
-
-        [Serializable]
-        public class Settings
-        {
-            public Hp Hp;
-            public HpView HpView;
+        private Hp _hp;
+        private HpView _hpView;
         
-            [Space]
-            public WeaponHandler WeaponHandler;
-            public WeaponsView WeaponsView;
-        }
+        private Weapons _weapons;
+        private WeaponsView _weaponsView;
 
         private HpPresenter _hpPresenter;
-
         private WeaponsPresenter _weaponsPresenter;
 
-
-        private void Start()
+        public UiManager(Hp hp, HpView hpView, Weapons weapons, WeaponsView weaponsView)
         {
-            _hpPresenter = new HpPresenter(_settings.Hp, _settings.HpView);
-            _weaponsPresenter = new WeaponsPresenter(_settings.WeaponHandler.Weapons, _settings.WeaponsView);
+            _hp = hp;
+            _hpView = hpView;
+            _weapons = weapons;
+            _weaponsView = weaponsView;
+            
+            _hpPresenter = new HpPresenter(_hp, _hpView);
+            _weaponsPresenter = new WeaponsPresenter(_weapons, _weaponsView);
         }
     }
 }

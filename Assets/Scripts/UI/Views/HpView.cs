@@ -1,38 +1,34 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace UI.Views
 {
-    public class HpView : MonoBehaviour
+    public class HpView
     {
-        [SerializeField] private Settings _settings;
-
-        [Serializable]
-        public class Settings
-        {
-            public Image FillIndicator;
+        private Image _fillIndicator;
         
-            public Text Lives;
-        
-            public Text Health;
-            public Text HealthShadow;
-        }
+        private Text _lives;
+        private Text _health;
 
         private float _fullHealthValue;
+
+        public HpView(Image fillIndicator, [Inject(Id = "lives")] Text lives, [Inject(Id = "health")] Text health)
+        {
+            _fillIndicator = fillIndicator;
+            _lives = lives;
+            _health = health;
+        }
 
         public void SetFullHealthValue(int fullValue) => _fullHealthValue = fullValue;
 
         public void SetHealth(int value)
         {
-            _settings.FillIndicator.fillAmount = value / _fullHealthValue;
+            _fillIndicator.fillAmount = value / _fullHealthValue;
             
-            _settings.Health.text = value.ToString();
+            _health.text = value.ToString();
         }
 
-        public void SetLives(int value)
-        {
-            _settings.Lives.text = value.ToString();
-        }
+        public void SetLives(int value) => _lives.text = value.ToString();
     }
 }
