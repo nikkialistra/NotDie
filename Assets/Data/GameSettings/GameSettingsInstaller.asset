@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d78298708092b24684d40eaffdf9990, type: 3}
+  m_Name: GameSettingsInstaller
+  m_EditorClassIdentifier: 
+  _unitAnimator:
+    IdleSpeed: 0.5
+  _cameraFollow:
+    FollowObject: {fileID: 0}
+    FollowOffset: {x: 2, y: 2.5}
+    Speed: 3
+  _roomConfigurator:
+    CornerLeftUp: {fileID: 7327317594015940180, guid: 460a97e5cd659e94baa96795b85f1b31, type: 3}
+    CornerRightUp: {fileID: 1391676992894649047, guid: 898e974e01b1a19469dbb1ed2edffbf3, type: 3}
+    CornerLeftDown: {fileID: 7558833513021367141, guid: b877c9204cac64449bdf204133999e75, type: 3}
+    CornerRightDown: {fileID: 8403015996332464324, guid: f02011bb3146c4449a30794c996d4440, type: 3}
+    Width: 3.73
+    Height: 5.22
+    Perspective: 2.37
+  _weaponGameObject:
+    Weapon: {fileID: 11400000, guid: 39916ba79dcb2844689f574b440fa03c, type: 2}
+  _hpView:
+    FillIndicator: {fileID: 0}
+    Lives: {fileID: 0}
+    Health: {fileID: 0}
+    HealthShadow: {fileID: 0}
+  _weaponsView:
+    LeftWeapon: {fileID: 0}
+    RightWeapon: {fileID: 0}

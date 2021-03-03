@@ -41,14 +41,14 @@ namespace Entities.Player
         {
             Weapons = weapons;
             _settings = settings;
+            
+            _settings.TakingWeapon.CreateAudioSource(gameObject);
+            _settings.DroppingWeapon.CreateAudioSource(gameObject);
+            _settings.SwappingWeapons.CreateAudioSource(gameObject);
         }
 
         private void Awake()
         {
-            _settings.TakingWeapon.CreateAudioSource(gameObject);
-            _settings.DroppingWeapon.CreateAudioSource(gameObject);
-            _settings.SwappingWeapons.CreateAudioSource(gameObject);
-            
             _input = GetComponent<PlayerInput>();
             _takeDropWeaponAction = _input.actions.FindAction("TakeDropWeapon");
             _swapWeaponsAction = _input.actions.FindAction("SwapWeapons");

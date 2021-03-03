@@ -44,13 +44,13 @@ namespace Entities.Player
         {
             _settings = settings;
             _attackDirection = attackDirection;
+            
+            _settings.PlayerMoving.CreateAudioSource(gameObject);
         }
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
-            
-            _settings.PlayerMoving.CreateAudioSource(gameObject);
             
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions.FindAction("Move");
