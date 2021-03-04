@@ -17,7 +17,7 @@ MonoBehaviour:
   NotActive: {fileID: 21300000, guid: 8942703db155cb244b41088908ede681, type: 3}
   Waves:
   - Damage: 15
-    TimeToLive: 5
+    TimeToLive: 1
   - Damage: 10
-    TimeToLive: 5
-  CooldownTime: 7
+    TimeToLive: 1
+  CooldownTime: 1

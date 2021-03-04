@@ -83,11 +83,11 @@ namespace Entities.Player
             var weapons = FindObjectsOfType<WeaponGameObject>();
             foreach (var weapon in weapons)
             {
-                if (Vector3.Distance(transform.position, weapon.transform.position) < _settings.DistanceForTaking)
-                {
-                    TakeWeapon(weapon);
-                    return true;
-                }
+                if (Vector3.Distance(transform.position, weapon.transform.position) >
+                      _settings.DistanceForTaking) continue;
+                
+                TakeWeapon(weapon);
+                return true;
             }
 
             return false;
@@ -96,11 +96,11 @@ namespace Entities.Player
         private void DropWeapon()
         {
             var weapon = _weapons.DropWeapon();
-            if (weapon != null)
-            {
-                CreateWeapon(weapon);
-                _settings.DroppingWeapon.PlayOneShot();
-            }
+            if (weapon == null) 
+                return;
+            
+            CreateWeapon(weapon);
+            _settings.DroppingWeapon.PlayOneShot();
         }
 
         private void TakeWeapon(WeaponGameObject weaponGameObject)
@@ -110,13 +110,16 @@ namespace Entities.Player
             Destroy(weaponGameObject.gameObject);
             _settings.TakingWeapon.PlayOneShot();
 
-            if (discardedWeapon != null)
-            {
-                CreateWeapon(discardedWeapon);
-                _settings.DroppingWeapon.PlayOneShot();
-            }
+            if (discardedWeapon == null) 
+                return;
+            
+            CreateWeapon(discardedWeapon);
+            _settings.DroppingWeapon.PlayOneShot();
         }
 
-        private void CreateWeapon(Weapon weaponToCreate) => _weaponFactory.Create(weaponToCreate, transform.position);
+        private void CreateWeapon(Weapon weaponToCreate)
+        {
+            _weaponFactory.Create(weaponToCreate, transform.position);
+        }
     }
 }
