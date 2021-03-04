@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: PlayerSettingsInstaller
   m_EditorClassIdentifier: 
   _playerAttack:
-    Attack: {fileID: 11400000, guid: 4d74d50912356a743a3f2e24432dec5d, type: 2}
+    Attack: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
   _hp:
     HealthFullValue: 100
     Lives: 9
   _hpHandler:
-    LiveTakenAway: {fileID: 11400000, guid: 05b7360c4e08aa848801746718888499, type: 2}
-    GameOver: {fileID: 11400000, guid: 886251977e5fcf64485037f6756b7c51, type: 2}
+    LiveTakenAway: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
+    GameOver: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
   _playerMover:
     Speed: 15
     Damping: 10
     AttackDirectionLength: 1
-    PlayerMoving: {fileID: 11400000, guid: ad00f16de0bcb4140b265aebc3fbaad1, type: 2}
+    PlayerMoving: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
   _weaponsHandler:
     Hand: {fileID: 11400000, guid: b945b6d6c3b8a7a4e9e8b8f9f28f6ca1, type: 2}
     DistanceForTaking: 1
-    TakingWeapon: {fileID: 11400000, guid: ddbc187f205192546aae2046521e42e4, type: 2}
-    DroppingWeapon: {fileID: 11400000, guid: c5725afb34d6fd24cb035face72dde28, type: 2}
-    SwappingWeapons: {fileID: 11400000, guid: 6924b3cb08a0cb04e9fbbb27cb2366b1, type: 2}
+    TakingWeapon: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
+    DroppingWeapon: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
+    SwappingWeapons: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
