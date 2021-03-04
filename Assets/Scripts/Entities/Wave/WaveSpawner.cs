@@ -15,9 +15,9 @@ namespace Entities.Wave
 
         public void Spawn(Vector3 playerPosition, Transform attackDirection, int waveNumber)
         {
-            var direction = (attackDirection.position - playerPosition).normalized;
-
-            _waveFactory.Create(attackDirection.transform.position, direction, _wave);
+            // var direction = (attackDirection.position - playerPosition).normalized;
+            //
+            // _waveFactory.Create(attackDirection.transform.position, direction, _wave);
         }
     }
 }

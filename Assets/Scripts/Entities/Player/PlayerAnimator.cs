@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -24,17 +25,23 @@ namespace Entities.Player
         private Rigidbody2D _rigidbody;
 
         private readonly int _isMoving = Animator.StringToHash("isMoving");
-        
-        private readonly int _handAttackingOne = Animator.StringToHash("handAttackingOne");
-        private readonly int _handAttackingTwo = Animator.StringToHash("handAttackingTwo");
+        private readonly int _comboReset = Animator.StringToHash("comboReset");
+
+        private List<int> _attackingTriggers = new List<int>();
 
         [Inject]
         public void Construct(Settings settings, WeaponAttack weaponAttack)
         {
             _settings = settings;
             _weaponAttack = weaponAttack;
+            
+            _attackingTriggers.Add(Animator.StringToHash("handAttackingOne"));
+            _attackingTriggers.Add(Animator.StringToHash("handAttackingTwo"));
+            _attackingTriggers.Add(Animator.StringToHash("handAttackingTwo"));
 
             _weaponAttack.Attacking += OnAttacking;
+            _weaponAttack.ComboReset += OnComboReset;
+            _weaponAttack.ComboExit += OnComboReset;
         }
 
         private void Awake()
@@ -53,8 +60,13 @@ namespace Entities.Player
 
         private void OnAttacking(int waveNumber)
         {
-            _animator.SetTrigger(waveNumber == 0 ? _handAttackingOne : _handAttackingTwo);
+            if (waveNumber > _attackingTriggers.Count)
+                throw new ArgumentOutOfRangeException(nameof(waveNumber), "wave should have corresponding item in list of triggers");
+            
+            _animator.SetTrigger(_attackingTriggers[waveNumber]);
         }
+
+        private void OnComboReset() => _animator.SetTrigger(_comboReset);
 
         private void Flip()
         {

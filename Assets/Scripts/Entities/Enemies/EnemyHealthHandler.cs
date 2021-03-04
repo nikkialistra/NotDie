@@ -13,12 +13,12 @@ namespace Entities.Enemies
             public int Value;
         }
 
-        private Settings _settings;
+        private int _value;
 
-        private bool isAlive => _settings.Value > 0;
+        private bool isAlive => _value > 0;
         
         [Inject]
-        public void Construct(Settings settings) => _settings = settings;
+        public void Construct(Settings settings) => _value = settings.Value;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -34,7 +34,7 @@ namespace Entities.Enemies
         {
             if (damage <= 0)
                 throw new ArgumentException("Damage must be more than zero");
-            _settings.Value -= damage;
+            _value -= damage;
 
 
             if (!isAlive)
