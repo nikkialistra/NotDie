@@ -14,7 +14,7 @@ namespace Infrastructure
         [Header("Player base")]
         [SerializeField] private GameObject _player;
         [SerializeField] private Transform _attackDirection;
-        
+
         [Header("WeaponsHandler")]
         [SerializeField] private Weapon _hand;
         [SerializeField] private GameObject _weaponPrefab;
@@ -29,6 +29,7 @@ namespace Infrastructure
             BindPlayerMovement();
 
             Container.Bind<Hp>().AsSingle();
+
             
             BindPlayerWeaponSystem();
             

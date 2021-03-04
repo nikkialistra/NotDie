@@ -13,9 +13,11 @@ namespace Entities.Player
             [Range(0, 1)]
             public float WaveCooldownMultiplierFromTimeToLive;
 
-            [Range(0, 1)]
+            [Range(0, 2)]
             public float timeToContinueCombo;
         }
+        
+        public event Action<int> Attacking;
 
         private Settings _settings;
         
@@ -74,8 +76,9 @@ namespace Entities.Player
             }
 
             Debug.Log($"Wave number {_waveNumber}");
-            _waveSpawner.Spawn(position, attackDirection, _waveNumber);
             
+            Attacking?.Invoke(_waveNumber);
+            _waveSpawner.Spawn(position, attackDirection, _waveNumber);
             _waveCooldownFinishingTime = Time.time + _weapons.ActiveWeapon.Waves[_waveNumber].TimeToLive *
                 _settings.WaveCooldownMultiplierFromTimeToLive;
 

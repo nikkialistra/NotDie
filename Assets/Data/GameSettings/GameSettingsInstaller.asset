@@ -18,5 +18,5 @@ MonoBehaviour:
     FollowOffset: {x: 2, y: 2.5}
     Speed: 3
   _weaponAttack:
-    WaveCooldownMultiplierFromTimeToLive: 0.76
-    timeToContinueCombo: 0.352
+    WaveCooldownMultiplierFromTimeToLive: 0.816
+    timeToContinueCombo: 0.309
