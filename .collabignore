@@ -31,3 +31,10 @@ ehthumbs.db
 [Bb]uild
 sysinfo.txt
 *.stackdump
+
+# Fmod
+.cache
+.unsaved
+.user
+
+\Assets\Plugins\FMOD\
