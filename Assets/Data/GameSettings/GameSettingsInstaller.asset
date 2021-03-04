@@ -17,6 +17,7 @@ MonoBehaviour:
   _cameraFollow:
     FollowOffset: {x: 2, y: 2.5}
     Speed: 3
+  _timerView:
+    UpdateTime: 0.01
   _weaponAttack:
-    WaveCooldownMultiplierFromTimeToLive: 0.816
-    timeToContinueCombo: 0.309
+    TimeToContinueCombo: 1.3

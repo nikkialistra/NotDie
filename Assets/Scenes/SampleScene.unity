@@ -949,6 +949,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dummy
       objectReference: {fileID: 0}
+    - target: {fileID: 1010360058035573378, guid: 0947e4218a84c6a45a3db73d03f115d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0947e4218a84c6a45a3db73d03f115d5, type: 3}
 --- !u!1 &1564520989
@@ -1716,7 +1720,7 @@ MonoBehaviour:
   _weaponPrefab: {fileID: 2817982706502842857, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
   _weaponAttack: {fileID: 937606822}
   _waveFacadePrefab: {fileID: 8287687326098823197, guid: 51a26e3dd016939489dda59768fd6be8, type: 3}
-  _wave: {fileID: 11400000, guid: d3c7f09608d26904aa590196c8e92d1e, type: 2}
+  _wave: {fileID: 0}
 --- !u!1001 &1010360057819737126
 PrefabInstance:
   m_ObjectHideFlags: 0
