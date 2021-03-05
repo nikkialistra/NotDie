@@ -15,9 +15,96 @@ MonoBehaviour:
   PickUp: {fileID: 0}
   Active: {fileID: 21300000, guid: dc59dc4e31cf05a4480bfcbf099f42c2, type: 3}
   NotActive: {fileID: 21300000, guid: 8942703db155cb244b41088908ede681, type: 3}
-  Waves:
+  ComboShots:
   - Damage: 15
-    TimeToLive: 0.6
+    Time: 0.6
+    ImpulseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.0041389465
+        value: 0
+        inSlope: 0.96456623
+        outSlope: 12.256755
+        tangentMode: 1
+        weightedMode: 2
+        inWeight: 0
+        outWeight: 0.22853184
+      - serializedVersion: 3
+        time: 0.3344241
+        value: 1
+        inSlope: -0.032499
+        outSlope: -0.032499
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3303491
+        outWeight: 0.4296799
+      - serializedVersion: 3
+        time: 0.5665787
+        value: 0.2749261
+        inSlope: -17.1014
+        outSlope: -20.143982
+        tangentMode: 1
+        weightedMode: 3
+        inWeight: 0.055451874
+        outWeight: 0.03531766
+      - serializedVersion: 3
+        time: 1
+        value: 0.00076293945
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Wave: {fileID: 0}
   - Damage: 10
-    TimeToLive: 1.2
+    Time: 1.2
+    ImpulseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.16003036
+        value: 0
+        inSlope: 0.96456623
+        outSlope: 7.2572803
+        tangentMode: 1
+        weightedMode: 2
+        inWeight: 0
+        outWeight: 0.41093686
+      - serializedVersion: 3
+        time: 0.48404747
+        value: 0.9912005
+        inSlope: -0.032499
+        outSlope: -0.032499
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3303491
+        outWeight: 0.4296799
+      - serializedVersion: 3
+        time: 0.716202
+        value: 0.2661266
+        inSlope: -17.1014
+        outSlope: -20.143982
+        tangentMode: 1
+        weightedMode: 3
+        inWeight: 0.055451874
+        outWeight: 0.03531766
+      - serializedVersion: 3
+        time: 1
+        value: 0.00076293945
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Wave: {fileID: 0}
+  ShotImpulse: 0.08
   CooldownTime: 0.4

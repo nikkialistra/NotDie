@@ -23,6 +23,7 @@ MonoBehaviour:
   _playerMover:
     Speed: 15
     Damping: 10
+    TimeToReturnControl: 1
     AttackDirectionLength: 1
     PlayerMoving: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
   _weaponsHandler:

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Entities.Data;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,7 +19,9 @@ namespace Entities.Player
             public float Speed;
             [Range(0, 100)]
             public float Damping;
-    
+            [Range(0, 2)] 
+            public float TimeToReturnControl;
+
             [Header("Direction Settings")]
             [Range(0, 10)]
             public float AttackDirectionLength;
@@ -28,25 +31,59 @@ namespace Entities.Player
         }
 
         private Settings _settings;
+
+        private bool _playerUnderControl = true;
         
         private Transform _attackDirection;
-
         private Rigidbody2D _rigidbody;
+        
+        private WeaponAttack _weaponAttack;
 
         private Vector2 _moveDirection;
         private Vector2 _lastVelocity;
 
         private PlayerInput _input;
         private InputAction _moveAction;
-        
+
         [Inject]
-        public void Construct(Settings settings, Transform attackDirection)
+        public void Construct(Settings settings, Transform attackDirection, WeaponAttack weaponAttack)
         {
             _settings = settings;
             _attackDirection = attackDirection;
+            _weaponAttack = weaponAttack;
+
+            _weaponAttack.Impulsed += OnImpulsed;
             
             _settings.PlayerMoving.CreateAudioSource(gameObject);
         }
+
+        private void OnImpulsed(float impulse, AnimationCurve impulseCurve)
+        {
+            _playerUnderControl = false;
+
+            var impulseDirection = (_attackDirection.position - transform.position).normalized;
+
+            StartCoroutine(UnderImpulse(impulse, impulseDirection, impulseCurve));
+        }
+
+        private IEnumerator UnderImpulse(float impulse, Vector3 impulseDirection, AnimationCurve impulseCurve)
+        {
+            var timeUnderImpulse = 0f;
+            var impulseAtThisMoment = 0f;
+
+            while (timeUnderImpulse < _settings.TimeToReturnControl)
+            {
+                impulseAtThisMoment = impulseCurve.Evaluate(timeUnderImpulse / _settings.TimeToReturnControl) * impulse;
+
+                _rigidbody.velocity += impulseAtThisMoment * (Vector2) impulseDirection;
+
+                timeUnderImpulse += Time.deltaTime;
+                yield return null;
+            }
+            
+            _playerUnderControl = true;
+        }
+
 
         private void Awake()
         {
@@ -60,7 +97,8 @@ namespace Entities.Player
 
         private void Update()
         {
-            _moveDirection = _moveAction.ReadValue<Vector2>();
+            _moveDirection = _playerUnderControl ? _moveAction.ReadValue<Vector2>() : Vector2.zero;
+
             SetDamping();
         }
 

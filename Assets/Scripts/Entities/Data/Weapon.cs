@@ -13,16 +13,19 @@ namespace Entities.Data
         public Sprite Active;
         public Sprite NotActive;
         
-        [Header("Specs")]
-        public List<WaveSpecs> Waves;
+        [Space]
+        public List<ComboShot> ComboShots;
 
+        public float ShotImpulse;
         public float CooldownTime;
 
         [Serializable]
-        public class WaveSpecs
+        public class ComboShot
         {
             public int Damage;
-            public float TimeToLive;
+            public float Time;
+            public AnimationCurve ImpulseCurve;
+            public GameObject Wave;
         }
     }
 }

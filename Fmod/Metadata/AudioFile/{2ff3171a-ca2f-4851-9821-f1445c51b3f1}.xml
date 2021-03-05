@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{2ff3171a-ca2f-4851-9821-f1445c51b3f1}">
+		<property name="assetPath">
+			<value>DroppingWeapon.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.53333333333333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{1f1afc1f-b5d3-4ba6-80df-4392d7d01b10}</destination>
+		</relationship>
+	</object>
+</objects>

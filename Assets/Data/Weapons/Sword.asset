@@ -15,7 +15,8 @@ MonoBehaviour:
   PickUp: {fileID: 21300000, guid: ffd96d91433578a47981b69e461df596, type: 3}
   Active: {fileID: 21300000, guid: 904e6fcd717b2574cbb36fb8bb5dc522, type: 3}
   NotActive: {fileID: 21300000, guid: 9171a769acfe8b64599df5360103f676, type: 3}
-  Waves:
+  ComboShots:
   - Damage: 25
-    TimeToLive: 1.2
+    Time: 1.2
+    Wave: {fileID: 0}
   CooldownTime: 0.6

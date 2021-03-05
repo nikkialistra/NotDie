@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{0300a985-8f89-4ba5-a19e-50c24e0c9ac9}">
+		<property name="assetPath">
+			<value>HandAttack.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.76165532879818598</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{1f1afc1f-b5d3-4ba6-80df-4392d7d01b10}</destination>
+		</relationship>
+	</object>
+</objects>

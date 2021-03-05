@@ -39,7 +39,7 @@ namespace Entities.Player
             _attackingTriggers.Add(Animator.StringToHash("handAttackingTwo"));
             _attackingTriggers.Add(Animator.StringToHash("handAttackingTwo"));
 
-            _weaponAttack.Attacking += OnAttacking;
+            _weaponAttack.Attacked += OnAttacked;
             _weaponAttack.ComboReset += OnComboReset;
             _weaponAttack.ComboExit += OnComboReset;
         }
@@ -58,7 +58,7 @@ namespace Entities.Player
 
         private void SetMovingAnimation() => _animator.SetBool(_isMoving, _rigidbody.velocity.magnitude > _settings.IdleSpeed);
 
-        private void OnAttacking(int waveNumber)
+        private void OnAttacked(int waveNumber)
         {
             if (waveNumber > _attackingTriggers.Count)
                 throw new ArgumentOutOfRangeException(nameof(waveNumber), "wave should have corresponding item in list of triggers");
