@@ -15,7 +15,8 @@ namespace Entities.Player
             public float TimeToContinueCombo;
         }
         
-        public event Action<int> Attacking;
+        public event Action<int> Attacked;
+        public event Action<float, AnimationCurve> Impulsed; 
         public event Action ComboReset;
         public event Action ComboExit;
 
@@ -60,7 +61,8 @@ namespace Entities.Player
             if (OnWaveCooldown)
                 return false;
             
-            Attacking?.Invoke(_waveNumber);
+            Attacked?.Invoke(_waveNumber);
+            Impulsed?.Invoke(_weapons.ActiveWeapon.ShotImpulse, _weapons.ActiveWeapon.ComboShots[_waveNumber].ImpulseCurve);
             
             _waveSpawner.Spawn(position, attackDirection, _waveNumber);
             
@@ -73,7 +75,7 @@ namespace Entities.Player
             if (_delayComboReset != null)
                 StopCoroutine(_delayComboReset);
             
-            _waveCooldownFinishingTime = Time.time + _weapons.ActiveWeapon.Waves[_waveNumber].TimeToLive;
+            _waveCooldownFinishingTime = Time.time + _weapons.ActiveWeapon.ComboShots[_waveNumber].Time;
 
             _wavesResetTime = _waveCooldownFinishingTime + _settings.TimeToContinueCombo;
 
@@ -93,7 +95,7 @@ namespace Entities.Player
         private void CompleteWave()
         {
             _waveNumber++;
-            if (_waveNumber != _weapons.ActiveWeapon.Waves.Count) 
+            if (_waveNumber != _weapons.ActiveWeapon.ComboShots.Count) 
                 return;
             
             if (_delayComboReset != null)
@@ -106,7 +108,7 @@ namespace Entities.Player
         {
             _waveCooldownFinishingTime = float.MaxValue;
             
-            var delayTime = _weapons.ActiveWeapon.Waves[_waveNumber - 1].TimeToLive;
+            var delayTime = _weapons.ActiveWeapon.ComboShots[_waveNumber - 1].Time;
             yield return new WaitForSeconds(delayTime);
             
             ComboExit?.Invoke();
