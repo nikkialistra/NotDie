@@ -19,13 +19,16 @@ namespace Entities.Player
             public float Speed;
             [Range(0, 100)]
             public float Damping;
-            [Range(0.5f, 2)] 
-            public float TimeToBlockControlMultiplier;
-
-            [Header("Audio")]
-            public Sound PlayerMoving;
+            [Range(0, 1)]
+            public float IdleSpeed;
         }
 
+        public Action Moving;
+        public Action Idle;
+
+        public Action MovingRight;
+        public Action MovingLeft;
+        
         public Action<Vector2> MovedByImpulse;
 
         private Settings _settings;
@@ -36,28 +39,28 @@ namespace Entities.Player
         private Rigidbody2D _rigidbody;
         
         private WeaponAttack _weaponAttack;
+        private PlayerAnimator _playerAnimation;
 
         private Vector2 _moveDirection;
-        private Vector2 _lastVelocity;
 
         private PlayerInput _input;
         private InputAction _moveAction;
 
         [Inject]
-        public void Construct(Settings settings, Transform attackDirection, WeaponAttack weaponAttack)
+        public void Construct(Settings settings, Transform attackDirection, WeaponAttack weaponAttack, PlayerAnimator playerAnimator)
         {
             _settings = settings;
             _attackDirection = attackDirection;
             _weaponAttack = weaponAttack;
-
-            _weaponAttack.Impulsed += OnImpulsed;
+            _playerAnimation = playerAnimator;
             
-            _settings.PlayerMoving.CreateAudioSource(gameObject);
+            _weaponAttack.Impulsed += OnImpulsed;
         }
-        
+
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
+            _rigidbody.drag = _settings.Damping;
             
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions.FindAction("Move");
@@ -65,43 +68,51 @@ namespace Entities.Player
 
         private void Update()
         {
+            UpdateMovindState();
+            
             _moveDirection = _playerUnderControl ? _moveAction.ReadValue<Vector2>() : Vector2.zero;
-
-            SetDamping();
         }
 
         private void FixedUpdate()
         {
-            if (_moveDirection != Vector2.zero)
-            {
-                _settings.PlayerMoving.Play();
+            if (_moveDirection != Vector2.zero) 
                 MovePlayer();
-            }
-            else
-            {
-                _settings.PlayerMoving.Stop();
-            }
         }
 
-        private void OnImpulsed(float impulse, AnimationCurve impulseCurve, float timeToBlockControl)
+        private void MovePlayer() => _rigidbody.velocity += _moveDirection * (_settings.Speed * Time.fixedDeltaTime);
+
+        private void UpdateMovindState()
+        {
+            if (_rigidbody.velocity.magnitude > _settings.IdleSpeed)
+                Moving?.Invoke();
+            else
+                Idle?.Invoke();
+            
+            if (_rigidbody.velocity.x > 0)
+                MovingRight?.Invoke();
+            
+            if (_rigidbody.velocity.x < 0)
+                MovingLeft?.Invoke();
+        }
+
+        private void OnImpulsed(float impulse, AnimationCurve curve, float time)
         {
             _playerUnderControl = false;
-
+            
             var impulseDirection = (_attackDirection.position - transform.position).normalized;
             MovedByImpulse?.Invoke(impulseDirection);
-
-            StartCoroutine(UnderImpulse(impulse, impulseDirection, impulseCurve, timeToBlockControl));
+            
+            StartCoroutine(UnderImpulse(impulse, impulseDirection, curve, time));
         }
 
-        private IEnumerator UnderImpulse(float impulse, Vector3 impulseDirection, AnimationCurve impulseCurve, float timeToBlockControl)
+        private IEnumerator UnderImpulse(float impulse, Vector3 impulseDirection, AnimationCurve impulseCurve, float time)
         {
             var timeUnderImpulse = 0f;
             var impulseAtThisMoment = 0f;
-            var finalTimeToBlockControl = timeToBlockControl * _settings.TimeToBlockControlMultiplier;
 
-            while (timeUnderImpulse < finalTimeToBlockControl)
+            while (timeUnderImpulse < time)
             {
-                impulseAtThisMoment = impulseCurve.Evaluate(timeUnderImpulse / finalTimeToBlockControl) * impulse;
+                impulseAtThisMoment = impulseCurve.Evaluate(timeUnderImpulse / time) * impulse;
 
                 _rigidbody.velocity += impulseAtThisMoment * (Vector2) impulseDirection;
 
@@ -110,19 +121,6 @@ namespace Entities.Player
             }
             
             _playerUnderControl = true;
-        }
-
-        private void SetDamping()
-        {
-            if (_rigidbody.drag != _settings.Damping)
-                _rigidbody.drag = _settings.Damping;
-        }
-
-        private void MovePlayer()
-        {
-            _rigidbody.velocity += _moveDirection * (_settings.Speed * Time.fixedDeltaTime);
-            
-            _lastVelocity = _rigidbody.velocity;
         }
     }
 }

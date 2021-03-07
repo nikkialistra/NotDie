@@ -16,8 +16,8 @@ MonoBehaviour:
   Active: {fileID: 21300000, guid: dc59dc4e31cf05a4480bfcbf099f42c2, type: 3}
   NotActive: {fileID: 21300000, guid: 8942703db155cb244b41088908ede681, type: 3}
   ComboShots:
-  - Damage: 15
-    Time: 0.6
+  - Clip: {fileID: 7400000, guid: 04c60b4ce481e6a43956ea16353a7ac8, type: 2}
+    HashedTriggerName: 1075460444
     ImpulseCurve:
       serializedVersion: 2
       m_Curve:
@@ -60,9 +60,10 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    Damage: 15
     Wave: {fileID: 0}
-  - Damage: 10
-    Time: 1.2
+  - Clip: {fileID: 7400000, guid: 4540b4ae05834144c886f4ce1271204e, type: 2}
+    HashedTriggerName: 733754827
     ImpulseCurve:
       serializedVersion: 2
       m_Curve:
@@ -105,6 +106,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    Damage: 10
     Wave: {fileID: 0}
   ShotImpulse: 0.08
+  TimeAfterCombo: 0.8
   CooldownTime: 0.4
