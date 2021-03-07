@@ -13,6 +13,7 @@ namespace Infrastructure
     {
         [Header("Player base")]
         [SerializeField] private GameObject _player;
+        [SerializeField] private PlayerMover _playerMover;
         [SerializeField] private Transform _attackDirection;
 
         [Header("WeaponsHandler")]
@@ -43,6 +44,8 @@ namespace Infrastructure
         private void BindPlayerMovement()
         {
             Container.BindInstance(_player).WhenInjectedInto<CameraFollow>();
+            Container.BindInstance(_player).WhenInjectedInto<AttackDirection>();
+            Container.BindInstance(_playerMover).WhenInjectedInto<AttackDirection>();
 
             Container.BindInstance(_attackDirection).WhenInjectedInto<PlayerMover>();
             Container.BindInstance(_attackDirection).WhenInjectedInto<PlayerAttack>();

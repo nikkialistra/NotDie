@@ -12,6 +12,8 @@ namespace Infrastructure
         [SerializeField] private HpHandler.Settings _hpHandler;
         [SerializeField] private PlayerMover.Settings _playerMover;
         [SerializeField] private WeaponsHandler.Settings _weaponsHandler;
+        [SerializeField] private AttackDirection.Settings _attackDirection;
+        
 
         public override void InstallBindings()
         {
@@ -20,6 +22,7 @@ namespace Infrastructure
             Container.BindInstance(_hpHandler);
             Container.BindInstance(_playerMover);
             Container.BindInstance(_weaponsHandler);
+            Container.BindInstance(_attackDirection);
         }
     }
 }

@@ -47,23 +47,18 @@ namespace Entities.Player
             _showAttackDirectionAction = _input.actions.FindAction("ShowAttackDirection");
         }
 
-        private void OnEnable()
+        private void Update()
         {
-            _attackAction.started += OnAttack;
-            _showAttackDirectionAction.started += OnShowAttackDirection;
+            var isAttack = _attackAction.ReadValue<float>();
+            if (isAttack > 0)
+                Attack();
         }
 
-        private void OnDisable()
-        {
-            _attackAction.started -= OnAttack;
-            _showAttackDirectionAction.started -= OnShowAttackDirection;
-        }
+        private void OnEnable() => _showAttackDirectionAction.performed += OnShowAttackDirection;
 
-        private void OnAttack(InputAction.CallbackContext context)
-        {
-            _settings.Attack.PlayOneShot();
-            _weaponAttack.Attack(transform.position, _attackDirection);
-        }
+        private void OnDisable() => _showAttackDirectionAction.started -= OnShowAttackDirection;
+
+        private void Attack() => _weaponAttack.Attack(transform.position, _attackDirection);
 
         private void OnShowAttackDirection(InputAction.CallbackContext context)
         {

@@ -16,7 +16,7 @@ namespace Entities.Player
         }
         
         public event Action<int> Attacked;
-        public event Action<float, AnimationCurve> Impulsed; 
+        public event Action<float, AnimationCurve, float> Impulsed; 
         public event Action ComboReset;
         public event Action ComboExit;
 
@@ -62,7 +62,11 @@ namespace Entities.Player
                 return false;
             
             Attacked?.Invoke(_waveNumber);
-            Impulsed?.Invoke(_weapons.ActiveWeapon.ShotImpulse, _weapons.ActiveWeapon.ComboShots[_waveNumber].ImpulseCurve);
+
+            var curve = _weapons.ActiveWeapon.ComboShots[_waveNumber].ImpulseCurve;
+            var timeToBlockControl = _weapons.ActiveWeapon.ComboShots[_waveNumber].Time;
+            
+            Impulsed?.Invoke(_weapons.ActiveWeapon.ShotImpulse, curve, timeToBlockControl);
             
             _waveSpawner.Spawn(position, attackDirection, _waveNumber);
             
@@ -108,7 +112,7 @@ namespace Entities.Player
         {
             _waveCooldownFinishingTime = float.MaxValue;
             
-            var delayTime = _weapons.ActiveWeapon.ComboShots[_waveNumber - 1].Time;
+            var delayTime = _weapons.ActiveWeapon.ComboShots[_waveNumber - 1].Time + _weapons.ActiveWeapon.TimeAfterCombo;
             yield return new WaitForSeconds(delayTime);
             
             ComboExit?.Invoke();
