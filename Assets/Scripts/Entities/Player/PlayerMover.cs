@@ -68,9 +68,15 @@ namespace Entities.Player
 
         private void Update()
         {
-            UpdateMovindState();
-            
-            _moveDirection = _playerUnderControl ? _moveAction.ReadValue<Vector2>() : Vector2.zero;
+            if (_playerUnderControl)
+            {
+                UpdateMovingState();
+                _moveDirection = _moveAction.ReadValue<Vector2>();
+            }
+            else
+            {
+                _moveDirection = Vector2.zero;
+            }
         }
 
         private void FixedUpdate()
@@ -81,7 +87,7 @@ namespace Entities.Player
 
         private void MovePlayer() => _rigidbody.velocity += _moveDirection * (_settings.Speed * Time.fixedDeltaTime);
 
-        private void UpdateMovindState()
+        private void UpdateMovingState()
         {
             if (_rigidbody.velocity.magnitude > _settings.IdleSpeed)
                 Moving?.Invoke();
