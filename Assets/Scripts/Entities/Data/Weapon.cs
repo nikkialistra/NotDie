@@ -17,14 +17,15 @@ namespace Entities.Data
         public List<ComboShot> ComboShots;
 
         public float ShotImpulse;
+        public float TimeAfterCombo;
         public float CooldownTime;
 
         [Serializable]
         public class ComboShot
         {
-            public int Damage;
             public float Time;
             public AnimationCurve ImpulseCurve;
+            public int Damage;
             public GameObject Wave;
         }
     }

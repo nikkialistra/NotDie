@@ -19,16 +19,14 @@ namespace Entities.Player
             public float Speed;
             [Range(0, 100)]
             public float Damping;
-            [Range(0, 2)] 
-            public float TimeToReturnControl;
-
-            [Header("Direction Settings")]
-            [Range(0, 10)]
-            public float AttackDirectionLength;
+            [Range(0.5f, 2)] 
+            public float TimeToBlockControlMultiplier;
 
             [Header("Audio")]
             public Sound PlayerMoving;
         }
+
+        public Action<Vector2> MovedByImpulse;
 
         private Settings _settings;
 
@@ -56,35 +54,7 @@ namespace Entities.Player
             
             _settings.PlayerMoving.CreateAudioSource(gameObject);
         }
-
-        private void OnImpulsed(float impulse, AnimationCurve impulseCurve)
-        {
-            _playerUnderControl = false;
-
-            var impulseDirection = (_attackDirection.position - transform.position).normalized;
-
-            StartCoroutine(UnderImpulse(impulse, impulseDirection, impulseCurve));
-        }
-
-        private IEnumerator UnderImpulse(float impulse, Vector3 impulseDirection, AnimationCurve impulseCurve)
-        {
-            var timeUnderImpulse = 0f;
-            var impulseAtThisMoment = 0f;
-
-            while (timeUnderImpulse < _settings.TimeToReturnControl)
-            {
-                impulseAtThisMoment = impulseCurve.Evaluate(timeUnderImpulse / _settings.TimeToReturnControl) * impulse;
-
-                _rigidbody.velocity += impulseAtThisMoment * (Vector2) impulseDirection;
-
-                timeUnderImpulse += Time.deltaTime;
-                yield return null;
-            }
-            
-            _playerUnderControl = true;
-        }
-
-
+        
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -92,8 +62,6 @@ namespace Entities.Player
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions.FindAction("Move");
         }
-
-        private void Start() => SetAttackDirectionToDefaultPosition();
 
         private void Update()
         {
@@ -113,12 +81,36 @@ namespace Entities.Player
             {
                 _settings.PlayerMoving.Stop();
             }
-
-            if (_lastVelocity != Vector2.zero)
-                MoveAttackDirection();
         }
 
-        private void SetAttackDirectionToDefaultPosition() => _attackDirection.position = transform.position + new Vector3(_settings.AttackDirectionLength, 0);
+        private void OnImpulsed(float impulse, AnimationCurve impulseCurve, float timeToBlockControl)
+        {
+            _playerUnderControl = false;
+
+            var impulseDirection = (_attackDirection.position - transform.position).normalized;
+            MovedByImpulse?.Invoke(impulseDirection);
+
+            StartCoroutine(UnderImpulse(impulse, impulseDirection, impulseCurve, timeToBlockControl));
+        }
+
+        private IEnumerator UnderImpulse(float impulse, Vector3 impulseDirection, AnimationCurve impulseCurve, float timeToBlockControl)
+        {
+            var timeUnderImpulse = 0f;
+            var impulseAtThisMoment = 0f;
+            var finalTimeToBlockControl = timeToBlockControl * _settings.TimeToBlockControlMultiplier;
+
+            while (timeUnderImpulse < finalTimeToBlockControl)
+            {
+                impulseAtThisMoment = impulseCurve.Evaluate(timeUnderImpulse / finalTimeToBlockControl) * impulse;
+
+                _rigidbody.velocity += impulseAtThisMoment * (Vector2) impulseDirection;
+
+                timeUnderImpulse += Time.deltaTime;
+                yield return null;
+            }
+            
+            _playerUnderControl = true;
+        }
 
         private void SetDamping()
         {
@@ -131,14 +123,6 @@ namespace Entities.Player
             _rigidbody.velocity += _moveDirection * (_settings.Speed * Time.fixedDeltaTime);
             
             _lastVelocity = _rigidbody.velocity;
-        }
-
-        private void MoveAttackDirection()
-        {
-            var lengthMultiplier = _settings.AttackDirectionLength / _lastVelocity.magnitude;
-        
-            _attackDirection.position = transform.position;
-            _attackDirection.position += (Vector3) _lastVelocity * lengthMultiplier;
         }
     }
 }
