@@ -12,15 +12,23 @@ namespace Entities.Player
         {
             [Range(0, 10)]
             public float AttackDirectionLength;
+            [Range(0, 10)]
+            public int ImpulseDirectionMultiplier;
+            [Range(0, 0.5f)] 
+            public float ButtonPressToleranceTime;
         }
 
         private Settings _settings;
 
+        private float _attackDirectionX;
+        private float _attackDirectionY;
+
+        private float _attackDirectionXLastTakenTime;
+        private float _attackDirectionYLastTakenTime;
+
         private GameObject _player;
         private Transform _playerTransform;
         private PlayerMover _playerMover;
-
-        private const int ImpulseDirectionMultiplier = 5;
 
         private PlayerInput _input;
         private InputAction _moveAction;
@@ -46,7 +54,72 @@ namespace Entities.Player
 
         private void Update()
         {
-            var attackDirection = _moveAction.ReadValue<Vector2>();
+            TakeDirectionValues();
+
+            var attackDirection = ComputeAttackDirection();
+
+            UpdatePosition(attackDirection);
+        }
+
+        private void TakeDirectionValues()
+        {
+            var moveDirection = _moveAction.ReadValue<Vector2>();
+
+            moveDirection = ClampTo0Or1(moveDirection);
+
+            if (moveDirection.x != 0)
+            {
+                _attackDirectionX = moveDirection.x;
+                _attackDirectionXLastTakenTime = Time.time;
+            }
+
+            if (moveDirection.y != 0)
+            {
+                _attackDirectionY = moveDirection.y;
+                _attackDirectionYLastTakenTime = Time.time;
+            }
+        }
+
+        private Vector2 ComputeAttackDirection()
+        {
+            var attackDirection = Vector2.zero;
+
+            if (_attackDirectionXLastTakenTime - _attackDirectionYLastTakenTime > _settings.ButtonPressToleranceTime)
+            {
+                attackDirection.x = _attackDirectionX;
+                attackDirection.y = 0;
+                return attackDirection;
+            }
+            
+            if (_attackDirectionYLastTakenTime - _attackDirectionXLastTakenTime > _settings.ButtonPressToleranceTime)
+            {
+                attackDirection.x = 0;
+                attackDirection.y = _attackDirectionY;
+                return attackDirection;
+            }
+            
+            attackDirection.x = _attackDirectionX;
+            attackDirection.y = _attackDirectionY;
+            return attackDirection;
+        }
+
+        private static Vector2 ClampTo0Or1(Vector2 moveDirection)
+        {
+            if (moveDirection.x > 0)
+                moveDirection.x = 1;
+            if (moveDirection.y > 0)
+                moveDirection.y = 1;
+            
+            if (moveDirection.x < 0)
+                moveDirection.x = -1;
+            if (moveDirection.y < 0)
+                moveDirection.y = -1;
+            
+            return moveDirection;
+        }
+
+        private void UpdatePosition(Vector2 attackDirection)
+        {
             if (attackDirection == Vector2.zero)
                 return;
 
@@ -54,7 +127,7 @@ namespace Entities.Player
         }
 
         private void OnMovedByImpulse(Vector2 impulseDirection) => transform.position =
-            _playerTransform.position + (Vector3) impulseDirection * ImpulseDirectionMultiplier;
+            _playerTransform.position + (Vector3) impulseDirection * _settings.ImpulseDirectionMultiplier;
 
         private void SetToDefaultPosition() => transform.position += new Vector3(_settings.AttackDirectionLength, 0);
     }

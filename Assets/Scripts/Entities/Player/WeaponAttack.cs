@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
-using Entities.Data;
 using Entities.Wave;
 using UnityEngine;
 using Zenject;
 
 namespace Entities.Player
 {
+    [RequireComponent(typeof(Animator))]
     public class WeaponAttack : MonoBehaviour
     {
         [Serializable]
@@ -26,6 +26,7 @@ namespace Entities.Player
         
         private Weapons _weapons;
         private WaveSpawner _waveSpawner;
+        private Animator _animator;
 
         private int _comboShotNumber;
         
@@ -43,6 +44,7 @@ namespace Entities.Player
             _settings = settings;
             _weapons = weapons;
             _waveSpawner = waveSpawner;
+            _animator = GetComponent<Animator>();
         }
 
         public void Attack(Vector3 position, Transform attackDirection)
@@ -64,6 +66,7 @@ namespace Entities.Player
             var comboShot = _weapons.ActiveWeapon.ComboShots;
             
             Attacked?.Invoke(comboShot[_comboShotNumber].HashedTriggerName, comboShot[_comboShotNumber].Clip);
+
             Impulsed?.Invoke(_weapons.ActiveWeapon.ShotImpulse, comboShot[_comboShotNumber].ImpulseCurve, comboShot[_comboShotNumber].Clip.length);
 
             //_waveSpawner.Spawn(position, attackDirection, _comboShotNumber);
