@@ -23,10 +23,24 @@ namespace Entities.Data
         [Serializable]
         public class ComboShot
         {
-            public float Time;
+            public AnimationClip Clip;
+            [HideInInspector] public int HashedTriggerName;
             public AnimationCurve ImpulseCurve;
             public int Damage;
             public GameObject Wave;
+        }
+
+        private void OnValidate()
+        {
+            foreach (var comboShot in ComboShots)
+            {
+                if (comboShot.Clip == null) 
+                    continue;
+                
+                var clipName = comboShot.Clip.name;
+                var triggerName = clipName.Substring(0, 1).ToLower() + clipName.Substring(1);
+                comboShot.HashedTriggerName = Animator.StringToHash(triggerName);
+            }
         }
     }
 }

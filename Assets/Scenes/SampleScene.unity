@@ -623,6 +623,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a54caaee17c6794c98576930dddd4bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &937606827 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1010360058035573386, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+  m_PrefabInstance: {fileID: 1010360057819737126}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937606820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94537d2e907c9c74ab65b7d7cfa715d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1087824022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,6 +1745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 937606820}
   _playerMover: {fileID: 937606826}
+  _playerAnimator: {fileID: 937606827}
   _attackDirection: {fileID: 614786974}
   _hand: {fileID: 11400000, guid: b945b6d6c3b8a7a4e9e8b8f9f28f6ca1, type: 2}
   _weaponPrefab: {fileID: 2817982706502842857, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
@@ -1802,6 +1814,38 @@ PrefabInstance:
     - target: {fileID: 1010360058035573378, guid: 94ff85432863cee48b83860753576ba7, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010360058035573386, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+      propertyPath: _attackingTriggerNames.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010360058035573386, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+      propertyPath: _attackingAnimationsNames.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010360058035573386, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+      propertyPath: _attackingTriggerNames.Array.data[0]
+      value: handAttackingOne
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010360058035573386, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+      propertyPath: _attackingTriggerNames.Array.data[1]
+      value: handAttackingTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010360058035573386, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+      propertyPath: _attackingTriggerNames.Array.data[2]
+      value: handAttackingTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010360058035573386, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+      propertyPath: _attackingAnimationsNames.Array.data[0]
+      value: HandAttackingOne
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010360058035573386, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+      propertyPath: _attackingAnimationsNames.Array.data[1]
+      value: HandAttackingTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010360058035573386, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+      propertyPath: _attackingAnimationsNames.Array.data[2]
+      value: HandAttackingTwo
       objectReference: {fileID: 0}
     - target: {fileID: 1010360058035573388, guid: 94ff85432863cee48b83860753576ba7, type: 3}
       propertyPath: _settings.Attack

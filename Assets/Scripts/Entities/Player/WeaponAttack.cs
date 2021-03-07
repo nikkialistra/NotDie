@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Entities.Data;
 using Entities.Wave;
 using UnityEngine;
 using Zenject;
@@ -13,11 +14,12 @@ namespace Entities.Player
         {
             [Range(0, 2)]
             public float TimeToContinueCombo;
+            [Range(1, 2)] 
+            public float ComboSwitchingTimeMultiplier;
         }
         
-        public event Action<int> Attacked;
+        public event Action<int, AnimationClip> Attacked;
         public event Action<float, AnimationCurve, float> Impulsed; 
-        public event Action ComboReset;
         public event Action ComboExit;
 
         private Settings _settings;
@@ -25,17 +27,15 @@ namespace Entities.Player
         private Weapons _weapons;
         private WaveSpawner _waveSpawner;
 
-        private int _waveNumber;
+        private int _comboShotNumber;
         
         private float _weaponCooldownFinishingTime;
         private float _waveCooldownFinishingTime;
-        private float _wavesResetTime;
-        
+
         private bool OnWeaponCooldown => _weaponCooldownFinishingTime > Time.time;
-        private bool OnWaveCooldown => _waveCooldownFinishingTime > Time.time;
+        private bool OnComboShotCooldown => _waveCooldownFinishingTime > Time.time;
 
         private Coroutine _delayComboReset;
-
 
         [Inject]
         public void Construct(Settings settings, Weapons weapons, WaveSpawner waveSpawner)
@@ -50,56 +50,56 @@ namespace Entities.Player
             if (OnWeaponCooldown)
                 return;
 
-            if(!TryStartWave(position, attackDirection))
+            if(!TryStartComboShot(position, attackDirection))
                 return;
             
-            CompleteWave();
+            CompleteComboShot();
         }
 
-        private bool TryStartWave(Vector3 position, Transform attackDirection)
+        private bool TryStartComboShot(Vector3 position, Transform attackDirection)
         {
-            if (OnWaveCooldown)
+            if (OnComboShotCooldown)
                 return false;
-            
-            Attacked?.Invoke(_waveNumber);
 
-            var curve = _weapons.ActiveWeapon.ComboShots[_waveNumber].ImpulseCurve;
-            var timeToBlockControl = _weapons.ActiveWeapon.ComboShots[_waveNumber].Time;
+            var comboShot = _weapons.ActiveWeapon.ComboShots;
             
-            Impulsed?.Invoke(_weapons.ActiveWeapon.ShotImpulse, curve, timeToBlockControl);
+            Attacked?.Invoke(comboShot[_comboShotNumber].HashedTriggerName, comboShot[_comboShotNumber].Clip);
+            Impulsed?.Invoke(_weapons.ActiveWeapon.ShotImpulse, comboShot[_comboShotNumber].ImpulseCurve, comboShot[_comboShotNumber].Clip.length);
+
+            //_waveSpawner.Spawn(position, attackDirection, _comboShotNumber);
             
-            _waveSpawner.Spawn(position, attackDirection, _waveNumber);
-            
-            SetUpNextWaveInterval();
+            SetUpComboShotInterval();
             return true;
         }
 
-        private void SetUpNextWaveInterval()
+        private void SetUpComboShotInterval()
         {
             if (_delayComboReset != null)
                 StopCoroutine(_delayComboReset);
+
+            var comboShotLength = _weapons.ActiveWeapon.ComboShots[_comboShotNumber].Clip.length * _settings.ComboSwitchingTimeMultiplier;
             
-            _waveCooldownFinishingTime = Time.time + _weapons.ActiveWeapon.ComboShots[_waveNumber].Time;
+            _waveCooldownFinishingTime = Time.time + comboShotLength;
 
-            _wavesResetTime = _waveCooldownFinishingTime + _settings.TimeToContinueCombo;
+            var wavesResetTime = comboShotLength + _settings.TimeToContinueCombo;
 
-            _delayComboReset = StartCoroutine(DelayComboReset());
+            _delayComboReset = StartCoroutine(DelayComboReset(wavesResetTime));
         }
 
-        private IEnumerator DelayComboReset()
+        private IEnumerator DelayComboReset(float time)
         {
-            yield return new WaitForSeconds(_wavesResetTime - Time.time);
+            yield return new WaitForSeconds(time);
             
-            ComboReset?.Invoke();
+            ComboExit?.Invoke();
             
-            _waveNumber = 0;
+            _comboShotNumber = 0;
             _weaponCooldownFinishingTime = Time.time + _weapons.ActiveWeapon.CooldownTime;
         }
 
-        private void CompleteWave()
+        private void CompleteComboShot()
         {
-            _waveNumber++;
-            if (_waveNumber != _weapons.ActiveWeapon.ComboShots.Count) 
+            _comboShotNumber++;
+            if (_comboShotNumber != _weapons.ActiveWeapon.ComboShots.Count) 
                 return;
             
             if (_delayComboReset != null)
@@ -112,12 +112,12 @@ namespace Entities.Player
         {
             _waveCooldownFinishingTime = float.MaxValue;
             
-            var delayTime = _weapons.ActiveWeapon.ComboShots[_waveNumber - 1].Time + _weapons.ActiveWeapon.TimeAfterCombo;
+            var delayTime = _weapons.ActiveWeapon.ComboShots[_comboShotNumber - 1].Clip.length + _weapons.ActiveWeapon.TimeAfterCombo;
             yield return new WaitForSeconds(delayTime);
             
             ComboExit?.Invoke();
             
-            _waveNumber = 0;
+            _comboShotNumber = 0;
             _waveCooldownFinishingTime = 0;
             _weaponCooldownFinishingTime = Time.time + _weapons.ActiveWeapon.CooldownTime;
         }

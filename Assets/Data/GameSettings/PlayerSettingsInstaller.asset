@@ -23,12 +23,12 @@ MonoBehaviour:
   _playerMover:
     Speed: 15
     Damping: 10
-    TimeToBlockControlMultiplier: 1.6
-    AttackDirectionLength: 1
-    PlayerMoving: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
+    IdleSpeed: 0.5
   _weaponsHandler:
     Hand: {fileID: 11400000, guid: b945b6d6c3b8a7a4e9e8b8f9f28f6ca1, type: 2}
     DistanceForTaking: 1
     TakingWeapon: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
     DroppingWeapon: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
     SwappingWeapons: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
+  _attackDirection:
+    AttackDirectionLength: 0

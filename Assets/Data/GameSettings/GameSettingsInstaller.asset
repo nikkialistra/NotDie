@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d78298708092b24684d40eaffdf9990, type: 3}
   m_Name: GameSettingsInstaller
   m_EditorClassIdentifier: 
-  _unitAnimator:
-    IdleSpeed: 0.5
   _cameraFollow:
     FollowOffset: {x: 2, y: 2.5}
     Speed: 3
@@ -21,3 +19,4 @@ MonoBehaviour:
     UpdateTime: 0.01
   _weaponAttack:
     TimeToContinueCombo: 1.3
+    ComboSwitchingTimeMultiplier: 1.227
