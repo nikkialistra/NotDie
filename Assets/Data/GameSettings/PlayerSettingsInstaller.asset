@@ -31,4 +31,5 @@ MonoBehaviour:
     DroppingWeapon: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
     SwappingWeapons: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
   _attackDirection:
-    AttackDirectionLength: 0
+    AttackDirectionLength: 1
+    ButtonPressToleranceTime: 0.1

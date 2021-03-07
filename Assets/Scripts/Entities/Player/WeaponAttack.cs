@@ -6,7 +6,6 @@ using Zenject;
 
 namespace Entities.Player
 {
-    [RequireComponent(typeof(Animator))]
     public class WeaponAttack : MonoBehaviour
     {
         [Serializable]
@@ -26,7 +25,6 @@ namespace Entities.Player
         
         private Weapons _weapons;
         private WaveSpawner _waveSpawner;
-        private Animator _animator;
 
         private int _comboShotNumber;
         
@@ -44,7 +42,6 @@ namespace Entities.Player
             _settings = settings;
             _weapons = weapons;
             _waveSpawner = waveSpawner;
-            _animator = GetComponent<Animator>();
         }
 
         public void Attack(Vector3 position, Transform attackDirection)
@@ -69,7 +66,7 @@ namespace Entities.Player
 
             Impulsed?.Invoke(_weapons.ActiveWeapon.ShotImpulse, comboShot[_comboShotNumber].ImpulseCurve, comboShot[_comboShotNumber].Clip.length);
 
-            //_waveSpawner.Spawn(position, attackDirection, _comboShotNumber);
+            _waveSpawner.Spawn(position, attackDirection, _comboShotNumber);
             
             SetUpComboShotInterval();
             return true;

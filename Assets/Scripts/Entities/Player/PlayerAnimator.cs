@@ -11,6 +11,8 @@ namespace Entities.Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerAnimator : MonoBehaviour
     {
+        public bool IsFlipped;
+        
         private WeaponAttack _weaponAttack;
 
         private Animator _animator;
@@ -49,6 +51,8 @@ namespace Entities.Player
             var scale = transform.localScale;
             scale.x = 1;
             transform.localScale = scale;
+
+            IsFlipped = false;
         }
         
         private void OnMovingLeft()
@@ -56,6 +60,8 @@ namespace Entities.Player
             var scale = transform.localScale;
             scale.x = -1;
             transform.localScale = scale;
+
+            IsFlipped = true;
         }
 
         private void OnAttacked(int trigger, AnimationClip clip) => _animator.SetTrigger(trigger);

@@ -1,4 +1,3 @@
-using System;
 using Core;
 using Entities.Data;
 using Entities.Items;
@@ -24,7 +23,6 @@ namespace Infrastructure
 
         [Header("Waves")]
         [SerializeField] private GameObject _waveFacadePrefab;
-        [SerializeField] private Wave _wave;
 
         public override void InstallBindings()
         {
@@ -32,7 +30,6 @@ namespace Infrastructure
 
             Container.Bind<Hp>().AsSingle();
 
-            
             BindPlayerWeaponSystem();
             
             Container.BindFactory<Weapon, Vector3, WeaponGameObject, WeaponGameObject.Factory>()
@@ -64,17 +61,16 @@ namespace Infrastructure
 
         private void BindWaveSpawner()
         {
-            Container.BindInstance(_wave);
             Container.Bind<WaveSpawner>().AsSingle();
 
-            Container.BindFactory<Vector3, Vector2, Wave, WaveFacade, WaveFacade.Factory>()
-                .FromPoolableMemoryPool<Vector3, Vector2, Wave, WaveFacade, WaveFacadePool>(poolBinder => poolBinder
-                    .WithInitialSize(10)
+            Container.BindFactory<Vector3, Vector2, WaveFacade, WaveFacade.Factory>()
+                .FromPoolableMemoryPool<Vector3, Vector2, WaveFacade, WaveFacadePool>(poolBinder => poolBinder
+                    .WithInitialSize(5)
                     .FromComponentInNewPrefab(_waveFacadePrefab)
                     .UnderTransformGroup("Waves"));
         }
 
-        class WaveFacadePool : MonoPoolableMemoryPool<Vector3, Vector2, Wave, IMemoryPool, WaveFacade>
+        class WaveFacadePool : MonoPoolableMemoryPool<Vector3, Vector2, IMemoryPool, WaveFacade>
         {
         }
     }

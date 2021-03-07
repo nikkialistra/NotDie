@@ -12,8 +12,6 @@ namespace Entities.Player
         {
             [Range(0, 10)]
             public float AttackDirectionLength;
-            [Range(0, 10)]
-            public int ImpulseDirectionMultiplier;
             [Range(0, 0.5f)] 
             public float ButtonPressToleranceTime;
         }
@@ -127,7 +125,7 @@ namespace Entities.Player
         }
 
         private void OnMovedByImpulse(Vector2 impulseDirection) => transform.position =
-            _playerTransform.position + (Vector3) impulseDirection * _settings.ImpulseDirectionMultiplier;
+            _playerTransform.position + (Vector3) impulseDirection;
 
         private void SetToDefaultPosition() => transform.position += new Vector3(_settings.AttackDirectionLength, 0);
     }

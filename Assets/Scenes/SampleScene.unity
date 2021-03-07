@@ -371,7 +371,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
 MonoBehaviour:
@@ -1499,11 +1499,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.6875
+      value: 0.46875
       objectReference: {fileID: 0}
     - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.1875
+      value: 0.125
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
@@ -1572,11 +1572,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.46875
+      value: 0.6875
       objectReference: {fileID: 0}
     - target: {fileID: 2817982706502842861, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.125
+      value: 0.1875
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
@@ -1750,8 +1750,7 @@ MonoBehaviour:
   _hand: {fileID: 11400000, guid: b945b6d6c3b8a7a4e9e8b8f9f28f6ca1, type: 2}
   _weaponPrefab: {fileID: 2817982706502842857, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
   _weaponAttack: {fileID: 937606822}
-  _waveFacadePrefab: {fileID: 8287687326098823197, guid: 51a26e3dd016939489dda59768fd6be8, type: 3}
-  _wave: {fileID: 0}
+  _waveFacadePrefab: {fileID: 3274925662554537503, guid: eecc16aaa9ba0924a8c058f391626c04, type: 3}
 --- !u!1001 &1010360057819737126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1769,7 +1768,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: c5725afb34d6fd24cb035face72dde28, type: 2}
     - target: {fileID: 1010360058035573377, guid: 94ff85432863cee48b83860753576ba7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1010360058035573377, guid: 94ff85432863cee48b83860753576ba7, type: 3}
       propertyPath: m_LocalPosition.x
