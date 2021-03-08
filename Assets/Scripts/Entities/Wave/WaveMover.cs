@@ -8,9 +8,6 @@ namespace Entities.Wave
     [RequireComponent(typeof(Rigidbody2D))]
     public class WaveMover : MonoBehaviour
     {
-        private float _velocity;
-        private Vector2 _direction;
-
         private PlayerAnimator _playerAnimator;
         private PlayerMover _playerMover;
 
@@ -26,14 +23,6 @@ namespace Entities.Wave
         }
 
         private void Awake() => _rigidBody = GetComponent<Rigidbody2D>();
-
-        public void SetVelocity(float velocity)
-        {
-            if (velocity < 0)
-                throw new ArgumentException("Velocity should be positive");
-            
-            _velocity = velocity;
-        }
 
         private void FixedUpdate() => _rigidBody.velocity = _playerRigidbody.velocity;
 
@@ -61,8 +50,6 @@ namespace Entities.Wave
                 transform.localScale = Vector3.one;
                 additionalRotation = 0;
             }
-
-            _direction = direction;
 
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle + additionalRotation, Vector3.forward);

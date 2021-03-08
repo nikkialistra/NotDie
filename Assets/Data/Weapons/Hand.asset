@@ -60,8 +60,10 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    WaveClip: {fileID: 7400000, guid: 2770e9ae49f417d4d92b937bbf5d47d8, type: 2}
+    HashedWaveTriggerName: -2022395241
     Damage: 15
-    Wave: {fileID: 3274925662554537503, guid: eecc16aaa9ba0924a8c058f391626c04, type: 3}
+    WaveDelay: 0.2
   - Clip: {fileID: 7400000, guid: 4540b4ae05834144c886f4ce1271204e, type: 2}
     HashedTriggerName: 733754827
     ImpulseCurve:
@@ -106,8 +108,10 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    WaveClip: {fileID: 7400000, guid: d490087c29205b046b103c565425c7e4, type: 2}
+    HashedWaveTriggerName: -321733120
     Damage: 10
-    Wave: {fileID: 3274925662554537503, guid: 4fb79d4c3ee960342a518a4345027c6b, type: 3}
+    WaveDelay: 0.2
   ShotImpulse: 0.15
   TimeAfterCombo: 0.8
   CooldownTime: 0.4

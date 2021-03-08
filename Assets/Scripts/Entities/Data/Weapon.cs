@@ -25,21 +25,35 @@ namespace Entities.Data
         {
             public AnimationClip Clip;
             [HideInInspector] public int HashedTriggerName;
+            
             public AnimationCurve ImpulseCurve;
+            
+            public AnimationClip WaveClip;
+            [HideInInspector] public int HashedWaveTriggerName;
             public int Damage;
-            public GameObject Wave;
+            [Range(0, 2)]
+            public float WaveDelay;
         }
 
         private void OnValidate()
         {
             foreach (var comboShot in ComboShots)
             {
-                if (comboShot.Clip == null) 
-                    continue;
+                if (comboShot.Clip != null)
+                {
+
+                    var clipName = comboShot.Clip.name;
+                    var triggerName = clipName.Substring(0, 1).ToLower() + clipName.Substring(1);
+                    comboShot.HashedTriggerName = Animator.StringToHash(triggerName);
+                }
                 
-                var clipName = comboShot.Clip.name;
-                var triggerName = clipName.Substring(0, 1).ToLower() + clipName.Substring(1);
-                comboShot.HashedTriggerName = Animator.StringToHash(triggerName);
+                if (comboShot.WaveClip != null)
+                {
+
+                    var clipName = comboShot.WaveClip.name;
+                    var triggerName = clipName.Substring(0, 1).ToLower() + clipName.Substring(1);
+                    comboShot.HashedWaveTriggerName = Animator.StringToHash(triggerName);
+                }
             }
         }
     }

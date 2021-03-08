@@ -12,6 +12,8 @@ namespace Entities.Player
         {
             [Range(0, 10)]
             public float AttackDirectionLength;
+            [Range(0, 3)]
+            public float ImpulseDirectionMultiplier;
             [Range(0, 0.5f)] 
             public float ButtonPressToleranceTime;
         }
@@ -39,7 +41,7 @@ namespace Entities.Player
             _playerTransform = player.transform;
             _playerMover = playerMover;
 
-            _playerMover.MovedByImpulse += OnMovedByImpulse;
+            _playerMover.MovedByImpulse += UpdatePosition;
         }
 
         private void Awake()
@@ -48,7 +50,12 @@ namespace Entities.Player
             _moveAction = _input.actions.FindAction("Move");
         }
 
-        private void Start() => SetToDefaultPosition();
+        private void Start()
+        {
+            var attackDirection = new Vector2(1, 0);
+
+            UpdatePosition(attackDirection);
+        }
 
         private void Update()
         {
@@ -121,12 +128,7 @@ namespace Entities.Player
             if (attackDirection == Vector2.zero)
                 return;
 
-            transform.position = _playerTransform.position + (Vector3) attackDirection;
+            transform.position = _playerTransform.position + (Vector3) attackDirection * _settings.ImpulseDirectionMultiplier;
         }
-
-        private void OnMovedByImpulse(Vector2 impulseDirection) => transform.position =
-            _playerTransform.position + (Vector3) impulseDirection;
-
-        private void SetToDefaultPosition() => transform.position += new Vector3(_settings.AttackDirectionLength, 0);
     }
 }

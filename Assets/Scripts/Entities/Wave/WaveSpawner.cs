@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Entities.Wave
+﻿namespace Entities.Wave
 {
     public class WaveSpawner
     {
@@ -8,11 +6,6 @@ namespace Entities.Wave
 
         public WaveSpawner(WaveFacade.Factory waveFactory) => _waveFactory = waveFactory;
 
-        public void Spawn(Vector3 playerPosition, Transform attackDirection, int waveNumber)
-        {
-            var direction = (attackDirection.position - playerPosition).normalized;
-            
-            _waveFactory.Create(attackDirection.position, direction);
-        }
+        public void Spawn(WaveSpecs waveSpecs) => _waveFactory.Create(waveSpecs);
     }
 }

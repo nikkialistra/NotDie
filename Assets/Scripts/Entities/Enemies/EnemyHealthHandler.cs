@@ -22,7 +22,7 @@ namespace Entities.Enemies
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var wave = other.GetComponent<WaveFacade>();
+            var wave = other.GetComponentInParent<WaveFacade>();
             if (wave == null) 
                 return;
 

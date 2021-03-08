@@ -7,7 +7,7 @@ namespace Entities.Wave
 {
     [RequireComponent(typeof(WaveMover))]
     [RequireComponent(typeof(Animator))]
-    public class WaveFacade : MonoBehaviour, IPoolable<Vector3, Vector2, IMemoryPool>, IDisposable
+    public class WaveFacade : MonoBehaviour, IPoolable<WaveSpecs, IMemoryPool>, IDisposable
     {
         private IMemoryPool _pool;
         
@@ -31,21 +31,23 @@ namespace Entities.Wave
                 Dispose();
         }
 
-        public void OnSpawned(Vector3 position, Vector2 direction, IMemoryPool pool)
+        public void OnSpawned(WaveSpecs waveSpecs, IMemoryPool pool)
         {
             _pool = pool;
+
+            _damageValue = waveSpecs.Damage;
             
-            _waveMover.SetPosition(position);
-            _waveMover.SetVelocity(100);
-            _waveMover.SetDirection(direction);
+            _waveMover.SetPosition(waveSpecs.Transform.position);
+            _waveMover.SetDirection(waveSpecs.Direction);
             
+            _animator.SetTrigger(waveSpecs.WaveTriggerName);
         }
 
         public void Dispose() => _pool.Despawn(this);
         
         public void OnDespawned() => _pool = null;
 
-        public class Factory : PlaceholderFactory<Vector3, Vector2, WaveFacade>
+        public class Factory : PlaceholderFactory<WaveSpecs, WaveFacade>
         {
         }
     }
