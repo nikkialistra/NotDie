@@ -63,14 +63,14 @@ namespace Infrastructure
         {
             Container.Bind<WaveSpawner>().AsSingle();
 
-            Container.BindFactory<Vector3, Vector2, WaveFacade, WaveFacade.Factory>()
-                .FromPoolableMemoryPool<Vector3, Vector2, WaveFacade, WaveFacadePool>(poolBinder => poolBinder
+            Container.BindFactory<WaveSpecs, WaveFacade, WaveFacade.Factory>()
+                .FromPoolableMemoryPool<WaveSpecs, WaveFacade, WaveFacadePool>(poolBinder => poolBinder
                     .WithInitialSize(5)
                     .FromComponentInNewPrefab(_waveFacadePrefab)
                     .UnderTransformGroup("Waves"));
         }
 
-        class WaveFacadePool : MonoPoolableMemoryPool<Vector3, Vector2, IMemoryPool, WaveFacade>
+        class WaveFacadePool : MonoPoolableMemoryPool<WaveSpecs, IMemoryPool, WaveFacade>
         {
         }
     }

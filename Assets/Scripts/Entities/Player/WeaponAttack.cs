@@ -60,16 +60,31 @@ namespace Entities.Player
             if (OnComboShotCooldown)
                 return false;
 
-            var comboShot = _weapons.ActiveWeapon.ComboShots;
+            var comboShot = _weapons.ActiveWeapon.ComboShots[_comboShotNumber];
             
-            Attacked?.Invoke(comboShot[_comboShotNumber].HashedTriggerName, comboShot[_comboShotNumber].Clip);
+            Attacked?.Invoke(comboShot.HashedTriggerName, comboShot.Clip);
 
-            Impulsed?.Invoke(_weapons.ActiveWeapon.ShotImpulse, comboShot[_comboShotNumber].ImpulseCurve, comboShot[_comboShotNumber].Clip.length);
+            Impulsed?.Invoke(_weapons.ActiveWeapon.ShotImpulse, comboShot.ImpulseCurve, comboShot.Clip.length);
 
-            _waveSpawner.Spawn(position, attackDirection, _comboShotNumber);
-            
+            var waveSpecs = new WaveSpecs
+            {
+                Transform = attackDirection.transform,
+                Direction = (attackDirection.position - position).normalized,
+                WaveTriggerName = comboShot.HashedWaveTriggerName,
+                Damage = comboShot.Damage
+            };
+
+            StartCoroutine(SpawnWaveAfterDelay(comboShot.WaveDelay, waveSpecs));
+
             SetUpComboShotInterval();
             return true;
+        }
+
+        private IEnumerator SpawnWaveAfterDelay(float delay, WaveSpecs waveSpecs)
+        {
+            yield return new WaitForSeconds(delay);
+            
+            _waveSpawner.Spawn(waveSpecs);
         }
 
         private void SetUpComboShotInterval()
