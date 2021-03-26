@@ -31,6 +31,7 @@ namespace Entities.Data
             public AnimationClip WaveClip;
             [HideInInspector] public int HashedWaveTriggerName;
             public int Damage;
+            public bool isPenetrable;
             [Range(0, 2)]
             public float WaveDelay;
         }

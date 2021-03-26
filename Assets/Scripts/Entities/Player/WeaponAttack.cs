@@ -22,6 +22,8 @@ namespace Entities.Player
         public event Action ComboExit;
 
         private Settings _settings;
+
+        private int _waveCounter;
         
         private Weapons _weapons;
         private WaveSpawner _waveSpawner;
@@ -68,10 +70,12 @@ namespace Entities.Player
 
             var waveSpecs = new WaveSpecs
             {
+                Id = _waveCounter++,
                 Transform = attackDirection.transform,
                 Direction = (attackDirection.position - position).normalized,
                 WaveTriggerName = comboShot.HashedWaveTriggerName,
-                Damage = comboShot.Damage
+                Damage = comboShot.Damage,
+                isPenetrable = comboShot.isPenetrable
             };
 
             StartCoroutine(SpawnWaveAfterDelay(comboShot.WaveDelay, waveSpecs));

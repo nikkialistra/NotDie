@@ -113,5 +113,5 @@ MonoBehaviour:
     Damage: 10
     WaveDelay: 0.2
   ShotImpulse: 0.15
-  TimeAfterCombo: 0.8
+  TimeAfterCombo: 0.2
   CooldownTime: 0.4

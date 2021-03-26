@@ -15,9 +15,15 @@ namespace Entities.Wave
 
         private Animator _animator;
 
+        private int _id;
         private int _damageValue;
+        private bool _isPenetrable;
+
+        public int Id => _id;
 
         public int DamageValue => _damageValue;
+
+        public bool IsPenetrable => _isPenetrable;
 
         private void Awake()
         {
@@ -35,7 +41,9 @@ namespace Entities.Wave
         {
             _pool = pool;
 
+            _id = waveSpecs.Id;
             _damageValue = waveSpecs.Damage;
+            _isPenetrable = waveSpecs.isPenetrable;
             
             _waveMover.SetPosition(waveSpecs.Transform.position);
             _waveMover.SetDirection(waveSpecs.Direction);
