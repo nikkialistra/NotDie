@@ -49,6 +49,7 @@ namespace Infrastructure
 
             Container.BindInstance(_attackDirection).WhenInjectedInto<PlayerMover>();
             Container.BindInstance(_attackDirection).WhenInjectedInto<PlayerAttack>();
+            Container.BindInstance(_attackDirection).WhenInjectedInto<PlayerAnimator>();
         }
 
         private void BindPlayerWeaponSystem()

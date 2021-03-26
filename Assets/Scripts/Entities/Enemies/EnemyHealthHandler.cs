@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Entities.Wave;
 using UnityEngine;
 using Zenject;
@@ -17,6 +19,8 @@ namespace Entities.Enemies
 
         private bool isAlive => _value > 0;
         
+        private IList<int> _damagedWaves = new List<int>();
+        
         [Inject]
         public void Construct(Settings settings) => _value = settings.Value;
 
@@ -26,8 +30,19 @@ namespace Entities.Enemies
             if (wave == null) 
                 return;
 
-            wave.Dispose();
+            if (!wave.IsPenetrable)
+                if (TakeOnce(wave)) return;
+
             TakeDamage(wave.DamageValue);
+        }
+
+        private bool TakeOnce(WaveFacade wave)
+        {
+            if (_damagedWaves.Contains(wave.Id))
+                return true;
+
+            _damagedWaves.Add(wave.Id);
+            return false;
         }
 
         private void TakeDamage(int damage)
@@ -35,6 +50,7 @@ namespace Entities.Enemies
             if (damage <= 0)
                 throw new ArgumentException("Damage must be more than zero");
             _value -= damage;
+            Debug.Log(damage);
 
 
             if (!isAlive)

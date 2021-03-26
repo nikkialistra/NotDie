@@ -1,6 +1,5 @@
 ﻿using Entities.Player;
 using UI.Views;
-using UnityEngine;
 
 namespace UI.Presenters
 {

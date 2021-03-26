@@ -26,6 +26,8 @@ namespace Entities.Player
         private float _attackDirectionXLastTakenTime;
         private float _attackDirectionYLastTakenTime;
 
+        private bool _takeDirectionBlocked;
+
         private GameObject _player;
         private Transform _playerTransform;
         private PlayerMover _playerMover;
@@ -42,6 +44,7 @@ namespace Entities.Player
             _playerMover = playerMover;
 
             _playerMover.MovedByImpulse += UpdatePosition;
+            _playerMover.MovingIsBlocked += OnMovingIsBlocked;
         }
 
         private void Awake()
@@ -59,7 +62,8 @@ namespace Entities.Player
 
         private void Update()
         {
-            TakeDirectionValues();
+            if (!_takeDirectionBlocked)
+                TakeDirectionValues();
 
             var attackDirection = ComputeAttackDirection();
 
@@ -130,5 +134,7 @@ namespace Entities.Player
 
             transform.position = _playerTransform.position + (Vector3) attackDirection * _settings.ImpulseDirectionMultiplier;
         }
+
+        private void OnMovingIsBlocked(bool isBlocked) => _takeDirectionBlocked = isBlocked;
     }
 }

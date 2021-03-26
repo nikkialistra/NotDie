@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Entities.Data;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -26,10 +25,9 @@ namespace Entities.Player
         public Action Moving;
         public Action Idle;
 
-        public Action MovingRight;
-        public Action MovingLeft;
-        
         public Action<Vector2> MovedByImpulse;
+
+        public Action<bool> MovingIsBlocked;
 
         private Settings _settings;
 
@@ -39,7 +37,6 @@ namespace Entities.Player
         private Rigidbody2D _rigidbody;
         
         private WeaponAttack _weaponAttack;
-        private PlayerAnimator _playerAnimation;
 
         private Vector2 _moveDirection;
 
@@ -52,8 +49,7 @@ namespace Entities.Player
             _settings = settings;
             _attackDirection = attackDirection;
             _weaponAttack = weaponAttack;
-            _playerAnimation = playerAnimator;
-            
+
             _weaponAttack.Impulsed += OnImpulsed;
         }
 
@@ -93,17 +89,12 @@ namespace Entities.Player
                 Moving?.Invoke();
             else
                 Idle?.Invoke();
-            
-            if (_rigidbody.velocity.x > 0)
-                MovingRight?.Invoke();
-            
-            if (_rigidbody.velocity.x < 0)
-                MovingLeft?.Invoke();
         }
 
         private void OnImpulsed(float impulse, AnimationCurve curve, float time)
         {
             _playerUnderControl = false;
+            MovingIsBlocked?.Invoke(true);
             
             var impulseDirection = (_attackDirection.position - transform.position).normalized;
             MovedByImpulse?.Invoke(impulseDirection);
@@ -127,6 +118,7 @@ namespace Entities.Player
             }
             
             _playerUnderControl = true;
+            MovingIsBlocked?.Invoke(false);
         }
     }
 }

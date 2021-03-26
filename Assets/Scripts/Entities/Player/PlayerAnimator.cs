@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Entities.Data;
 using UnityEngine;
 using Zenject;
 
@@ -18,20 +15,19 @@ namespace Entities.Player
         private Animator _animator;
 
         private PlayerMover _playerMover;
+        private Transform _attackDirection;
 
         private readonly int _isMoving = Animator.StringToHash("isMoving");
         private readonly int _comboReset = Animator.StringToHash("comboReset");
 
         [Inject]
-        public void Construct(PlayerMover playerMover, WeaponAttack weaponAttack)
+        public void Construct(PlayerMover playerMover, WeaponAttack weaponAttack, Transform attackDirection)
         {
             _playerMover = playerMover;
+            _attackDirection = attackDirection;
 
             _playerMover.Moving += OnMoving;
             _playerMover.Idle += OnIdle;
-
-            _playerMover.MovingRight += OnMovingRight;
-            _playerMover.MovingLeft += OnMovingLeft;
 
             _weaponAttack = weaponAttack;
 
@@ -45,8 +41,17 @@ namespace Entities.Player
         private void OnMoving() => _animator.SetBool(_isMoving, true);
 
         private void OnIdle() => _animator.SetBool(_isMoving, false);
-        
-        private void OnMovingRight()
+
+        private void Update()
+        {
+            if (transform.position.x < _attackDirection.position.x)
+                LookingRight();
+            
+            if (transform.position.x > _attackDirection.position.x)
+                LookingLeft();
+        }
+
+        private void LookingRight()
         {
             var scale = transform.localScale;
             scale.x = 1;
@@ -55,7 +60,7 @@ namespace Entities.Player
             IsFlipped = false;
         }
         
-        private void OnMovingLeft()
+        private void LookingLeft()
         {
             var scale = transform.localScale;
             scale.x = -1;
