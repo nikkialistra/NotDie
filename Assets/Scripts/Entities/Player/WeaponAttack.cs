@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using Entities.Wave;
 using UnityEngine;
@@ -46,18 +46,18 @@ namespace Entities.Player
             _waveSpawner = waveSpawner;
         }
 
-        public void Attack(Vector3 position, Transform attackDirection)
+        public void Attack(Vector3 position, Vector3 attackDirection)
         {
             if (OnWeaponCooldown)
                 return;
-
+            
             if(!TryStartComboShot(position, attackDirection))
                 return;
             
             CompleteComboShot();
         }
 
-        private bool TryStartComboShot(Vector3 position, Transform attackDirection)
+        private bool TryStartComboShot(Vector3 position, Vector3 attackDirection)
         {
             if (OnComboShotCooldown)
                 return false;
@@ -71,8 +71,8 @@ namespace Entities.Player
             var waveSpecs = new WaveSpecs
             {
                 Id = _waveCounter++,
-                Transform = attackDirection.transform,
-                Direction = (attackDirection.position - position).normalized,
+                Position = attackDirection,
+                Direction = (attackDirection - position).normalized,
                 WaveTriggerName = comboShot.HashedWaveTriggerName,
                 Damage = comboShot.Damage,
                 isPenetrable = comboShot.isPenetrable

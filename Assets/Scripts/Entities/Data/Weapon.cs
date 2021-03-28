@@ -43,8 +43,6 @@ namespace Entities.Data
             var takenName = name.Substring(0, 1).ToLower() + name.Substring(1) + "Taken";
             HashedTakenName = Animator.StringToHash(takenName);
 
-            Debug.Log($"{takenName} - {HashedTakenName}");
-            
             foreach (var comboShot in ComboShots)
             {
                 if (comboShot.Clip != null)

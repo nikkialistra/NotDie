@@ -10,8 +10,6 @@ namespace Entities.Player
         [Serializable]
         public class Settings
         {
-            [Range(0, 10)]
-            public float AttackDirectionLength;
             [Range(0, 3)]
             public float ImpulseDirectionMultiplier;
             [Range(0, 0.5f)] 
@@ -32,6 +30,8 @@ namespace Entities.Player
         private Transform _playerTransform;
         private PlayerMover _playerMover;
 
+        private Vector2 _attackDirection  = new Vector2(1, 0);
+
         private PlayerInput _input;
         private InputAction _moveAction;
 
@@ -42,8 +42,7 @@ namespace Entities.Player
             _player = player;
             _playerTransform = player.transform;
             _playerMover = playerMover;
-
-            _playerMover.MovedByImpulse += UpdatePosition;
+            
             _playerMover.MovingIsBlocked += OnMovingIsBlocked;
         }
 
@@ -53,27 +52,28 @@ namespace Entities.Player
             _moveAction = _input.actions.FindAction("Move");
         }
 
-        private void Start()
-        {
-            var attackDirection = new Vector2(1, 0);
-
-            UpdatePosition(attackDirection);
-        }
+        private void Start() => UpdatePosition();
 
         private void Update()
         {
             if (!_takeDirectionBlocked)
-                TakeDirectionValues();
+                ComputeAttackDirection();
 
-            var attackDirection = ComputeAttackDirection();
-
-            UpdatePosition(attackDirection);
+            UpdatePosition();
         }
 
-        private void TakeDirectionValues()
+        private void ComputeAttackDirection()
+        {
+            if (_input.currentControlScheme == "Keyboard")
+                ComputeForKeyboard();
+            else
+                _attackDirection = _moveAction.ReadValue<Vector2>();
+        }
+
+        private void ComputeForKeyboard()
         {
             var moveDirection = _moveAction.ReadValue<Vector2>();
-
+            
             moveDirection = ClampTo0Or1(moveDirection);
 
             if (moveDirection.x != 0)
@@ -87,29 +87,30 @@ namespace Entities.Player
                 _attackDirectionY = moveDirection.y;
                 _attackDirectionYLastTakenTime = Time.time;
             }
+
+            ComputeKeyCashing();
         }
 
-        private Vector2 ComputeAttackDirection()
+        private void ComputeKeyCashing()
         {
-            var attackDirection = Vector2.zero;
+            _attackDirection = Vector2.zero;
 
             if (_attackDirectionXLastTakenTime - _attackDirectionYLastTakenTime > _settings.ButtonPressToleranceTime)
             {
-                attackDirection.x = _attackDirectionX;
-                attackDirection.y = 0;
-                return attackDirection;
+                _attackDirection.x = _attackDirectionX;
+                _attackDirection.y = 0;
+                return;
             }
             
             if (_attackDirectionYLastTakenTime - _attackDirectionXLastTakenTime > _settings.ButtonPressToleranceTime)
             {
-                attackDirection.x = 0;
-                attackDirection.y = _attackDirectionY;
-                return attackDirection;
+                _attackDirection.x = 0;
+                _attackDirection.y = _attackDirectionY;
+                return;
             }
             
-            attackDirection.x = _attackDirectionX;
-            attackDirection.y = _attackDirectionY;
-            return attackDirection;
+            _attackDirection.x = _attackDirectionX;
+            _attackDirection.y = _attackDirectionY;
         }
 
         private static Vector2 ClampTo0Or1(Vector2 moveDirection)
@@ -127,12 +128,12 @@ namespace Entities.Player
             return moveDirection;
         }
 
-        private void UpdatePosition(Vector2 attackDirection)
+        private void UpdatePosition()
         {
-            if (attackDirection == Vector2.zero)
+            if (_attackDirection == Vector2.zero)
                 return;
 
-            transform.position = _playerTransform.position + (Vector3) attackDirection * _settings.ImpulseDirectionMultiplier;
+            transform.position = _playerTransform.position + (Vector3) _attackDirection.normalized * _settings.ImpulseDirectionMultiplier;
         }
 
         private void OnMovingIsBlocked(bool isBlocked) => _takeDirectionBlocked = isBlocked;
