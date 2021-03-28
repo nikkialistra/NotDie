@@ -22,7 +22,7 @@ namespace Entities.Player
             public float IdleSpeed;
         }
 
-        public Action Moving;
+        public Action<float> Moving;
         public Action Idle;
 
         public Action<Vector2> MovedByImpulse;
@@ -86,7 +86,7 @@ namespace Entities.Player
         private void UpdateMovingState()
         {
             if (_rigidbody.velocity.magnitude > _settings.IdleSpeed)
-                Moving?.Invoke();
+                Moving?.Invoke(_rigidbody.velocity.magnitude);
             else
                 Idle?.Invoke();
         }

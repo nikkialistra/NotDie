@@ -21,7 +21,7 @@ MonoBehaviour:
     LiveTakenAway: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
     GameOver: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
   _playerMover:
-    Speed: 15
+    Speed: 25
     Damping: 10
     IdleSpeed: 0.5
   _weaponsHandler:
