@@ -97,19 +97,17 @@ namespace Entities.Player
             MovingIsBlocked?.Invoke(true);
             
             var impulseDirection = (_attackDirection.position - transform.position).normalized;
-            MovedByImpulse?.Invoke(impulseDirection);
-            
+
             StartCoroutine(UnderImpulse(impulse, impulseDirection, curve, time));
         }
 
         private IEnumerator UnderImpulse(float impulse, Vector3 impulseDirection, AnimationCurve impulseCurve, float time)
         {
             var timeUnderImpulse = 0f;
-            var impulseAtThisMoment = 0f;
 
             while (timeUnderImpulse < time)
             {
-                impulseAtThisMoment = impulseCurve.Evaluate(timeUnderImpulse / time) * impulse;
+                var impulseAtThisMoment = impulseCurve.Evaluate(timeUnderImpulse / time) * impulse;
 
                 _rigidbody.velocity += impulseAtThisMoment * (Vector2) impulseDirection;
 
