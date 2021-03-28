@@ -12,8 +12,13 @@ namespace Infrastructure
         [SerializeField] private Image _fillIndicator;
         
         [SerializeField] private Text _lives;
-        [SerializeField] private Text _health;
         
+        [SerializeField] private DigitManager _digitManager;
+        
+        [SerializeField] private Image _healthFirst;
+        [SerializeField] private Image _healthSecond;
+        [SerializeField] private Image _healthThird;
+
         [Header("Timer")] 
         [SerializeField] private Text _timer;
 
@@ -33,9 +38,13 @@ namespace Infrastructure
         private void BindHpView()
         {
             Container.BindInstance(_fillIndicator);
+
+            Container.BindInstance(_digitManager);
             
             Container.BindInstance(_lives).WithId("lives");
-            Container.BindInstance(_health).WithId("health");
+            Container.BindInstance(_healthFirst).WithId("healthFirst");
+            Container.BindInstance(_healthSecond).WithId("healthSecond");
+            Container.BindInstance(_healthThird).WithId("healthThird");
 
             Container.Bind<HpView>().AsSingle();
         }
