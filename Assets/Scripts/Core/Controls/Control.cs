@@ -131,7 +131,7 @@ namespace Services.Controls
                 {
                     ""name"": ""up"",
                     ""id"": ""72469454-2390-4ba5-a2af-df10a9e24b20"",
-                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""path"": ""<HID::GreenAsia Inc.      USB  Joystick  >/hat/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -142,7 +142,7 @@ namespace Services.Controls
                 {
                     ""name"": ""down"",
                     ""id"": ""90978e90-5ad9-42b5-acfc-da697eec66e5"",
-                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""path"": ""<HID::GreenAsia Inc.      USB  Joystick  >/hat/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -153,7 +153,7 @@ namespace Services.Controls
                 {
                     ""name"": ""left"",
                     ""id"": ""16172348-e15d-4454-8c31-fa5a02fb86b5"",
-                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""path"": ""<HID::GreenAsia Inc.      USB  Joystick  >/hat/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -164,7 +164,7 @@ namespace Services.Controls
                 {
                     ""name"": ""right"",
                     ""id"": ""404a5aa2-7244-4cbe-bb31-dff34160d34c"",
-                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""path"": ""<HID::GreenAsia Inc.      USB  Joystick  >/hat/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -175,7 +175,7 @@ namespace Services.Controls
                 {
                     ""name"": """",
                     ""id"": ""053bd61b-4ceb-4a16-8a4e-0da608c72522"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -191,28 +191,6 @@ namespace Services.Controls
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""af87625a-3ae3-4c74-934c-4f656820b4b7"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwapWeapons"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""870d85c6-9305-4509-bab4-e0438f23673a"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwapWeapons"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -257,6 +235,28 @@ namespace Services.Controls
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ShowAttackDirection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af87625a-3ae3-4c74-934c-4f656820b4b7"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapWeapons"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""870d85c6-9305-4509-bab4-e0438f23673a"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapWeapons"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }

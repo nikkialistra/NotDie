@@ -13,6 +13,8 @@ namespace Entities.Data
         public Sprite Active;
         public Sprite NotActive;
         
+        [HideInInspector] public int HashedTakenName;
+        
         [Space]
         public List<ComboShot> ComboShots;
 
@@ -38,6 +40,11 @@ namespace Entities.Data
 
         private void OnValidate()
         {
+            var takenName = name.Substring(0, 1).ToLower() + name.Substring(1) + "Taken";
+            HashedTakenName = Animator.StringToHash(takenName);
+
+            Debug.Log($"{takenName} - {HashedTakenName}");
+            
             foreach (var comboShot in ComboShots)
             {
                 if (comboShot.Clip != null)

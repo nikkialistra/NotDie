@@ -15,6 +15,7 @@ MonoBehaviour:
   PickUp: {fileID: 0}
   Active: {fileID: 21300000, guid: dc59dc4e31cf05a4480bfcbf099f42c2, type: 3}
   NotActive: {fileID: 21300000, guid: 8942703db155cb244b41088908ede681, type: 3}
+  HashedTakenName: -317398062
   ComboShots:
   - Clip: {fileID: 7400000, guid: 04c60b4ce481e6a43956ea16353a7ac8, type: 2}
     HashedTriggerName: 1075460444
@@ -63,6 +64,7 @@ MonoBehaviour:
     WaveClip: {fileID: 7400000, guid: 2770e9ae49f417d4d92b937bbf5d47d8, type: 2}
     HashedWaveTriggerName: -2022395241
     Damage: 15
+    isPenetrable: 0
     WaveDelay: 0.2
   - Clip: {fileID: 7400000, guid: 4540b4ae05834144c886f4ce1271204e, type: 2}
     HashedTriggerName: 733754827
@@ -111,6 +113,7 @@ MonoBehaviour:
     WaveClip: {fileID: 7400000, guid: d490087c29205b046b103c565425c7e4, type: 2}
     HashedWaveTriggerName: -321733120
     Damage: 10
+    isPenetrable: 0
     WaveDelay: 0.2
   ShotImpulse: 0.15
   TimeAfterCombo: 0.2
