@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace Entities.Player
@@ -10,7 +9,6 @@ namespace Entities.Player
     {
         public bool IsFlipped;
         
-        private WeaponAttack _weaponAttack;
         private Weapons _weapons;
 
         private Animator _animator;
@@ -19,7 +17,6 @@ namespace Entities.Player
         private Transform _attackDirection;
 
         private readonly int _movingSpeed = Animator.StringToHash("movingSpeed");
-        private readonly int _comboReset = Animator.StringToHash("comboReset");
 
         private int[] _weaponsTakenHashes =
         {
@@ -36,12 +33,6 @@ namespace Entities.Player
             _playerMover.Moving += OnMoving;
             _playerMover.Idle += OnIdle;
 
-            _weaponAttack = weaponAttack;
-
-            _weaponAttack.Attacked += OnAttacked;
-            _weaponAttack.ComboExit += OnComboExit;
-            _weaponAttack.ComboExit += OnComboExit;
-
             _weapons = weapons;
 
             _weapons.LeftWeaponIsActive += OnLeftWeaponActive;
@@ -50,6 +41,8 @@ namespace Entities.Player
         }
 
         private void Awake() => _animator = GetComponent<Animator>();
+
+        public bool IsCurrentAnimationWithTag(string tag) => _animator.GetCurrentAnimatorStateInfo(0).IsTag(tag);
         
         private void OnMoving(float speed) => _animator.SetFloat(_movingSpeed, speed);
 
@@ -82,10 +75,8 @@ namespace Entities.Player
             IsFlipped = true;
         }
 
-        private void OnAttacked(int trigger, AnimationClip clip) => _animator.SetTrigger(trigger);
+        public void PlayAttackAnimation(int trigger) => _animator.SetTrigger(trigger);
 
-        private void OnComboExit() => _animator.SetTrigger(_comboReset);
-        
         private void OnLeftWeaponActive()
         {
             ActiveWeaponChange();

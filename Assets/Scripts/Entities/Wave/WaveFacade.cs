@@ -1,5 +1,4 @@
 ﻿using System;
-using Entities.Player;
 using UnityEngine;
 using Zenject;
 
@@ -45,7 +44,7 @@ namespace Entities.Wave
             _damageValue = waveSpecs.Damage;
             _isPenetrable = waveSpecs.isPenetrable;
             
-            _waveMover.SetPosition(waveSpecs.Position);
+            _waveMover.SetPosition(waveSpecs.Transform.position);
             _waveMover.SetDirection(waveSpecs.Direction);
             
             _animator.SetTrigger(waveSpecs.WaveTriggerName);

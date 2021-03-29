@@ -11,13 +11,11 @@ namespace Infrastructure
     {
         [SerializeField] private CameraFollow.Settings _cameraFollow;
         [SerializeField] private TimerView.Settings _timerView;
-        [SerializeField] private WeaponAttack.Settings _weaponAttack;
 
         public override void InstallBindings()
         {
             Container.BindInstance(_cameraFollow);
             Container.BindInstance(_timerView);
-            Container.BindInstance(_weaponAttack);
         }
     }
 }

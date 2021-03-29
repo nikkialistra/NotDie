@@ -19,7 +19,6 @@ namespace Entities.Data
         public List<ComboShot> ComboShots;
 
         public float ShotImpulse;
-        public float TimeAfterCombo;
         public float CooldownTime;
 
         [Serializable]
@@ -27,15 +26,16 @@ namespace Entities.Data
         {
             public AnimationClip Clip;
             [HideInInspector] public int HashedTriggerName;
-            
+
             public AnimationCurve ImpulseCurve;
             
             public AnimationClip WaveClip;
             [HideInInspector] public int HashedWaveTriggerName;
+            public float WaveDelay;
+            
+            [Space]
             public int Damage;
             public bool isPenetrable;
-            [Range(0, 2)]
-            public float WaveDelay;
         }
 
         private void OnValidate()
