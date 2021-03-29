@@ -73,6 +73,12 @@ namespace Entities.Player
             _waveSpawner.Spawn(waveSpecs);
         }
 
+        public void TryMoveInCombo()
+        {
+            if (_comboShotNumber > 0)
+                _playerAnimator.MoveInCombo();
+        }
+
         public void ResetCombo()
         {
             _weaponCooldownFinishingTime = Time.time + _weapons.ActiveWeapon.CooldownTime;

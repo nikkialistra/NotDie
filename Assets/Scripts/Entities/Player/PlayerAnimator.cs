@@ -17,6 +17,7 @@ namespace Entities.Player
         private Transform _attackDirection;
 
         private readonly int _movingSpeed = Animator.StringToHash("movingSpeed");
+        private readonly int _comboMove = Animator.StringToHash("comboMove");
 
         private int[] _weaponsTakenHashes =
         {
@@ -42,12 +43,6 @@ namespace Entities.Player
 
         private void Awake() => _animator = GetComponent<Animator>();
 
-        public bool IsCurrentAnimationWithTag(string tag) => _animator.GetCurrentAnimatorStateInfo(0).IsTag(tag);
-        
-        private void OnMoving(float speed) => _animator.SetFloat(_movingSpeed, speed);
-
-        private void OnIdle() => _animator.SetFloat(_movingSpeed, 0);
-
         private void Update()
         {
             if (transform.position.x < _attackDirection.position.x)
@@ -56,6 +51,15 @@ namespace Entities.Player
             if (transform.position.x > _attackDirection.position.x)
                 LookingLeft();
         }
+        public bool IsCurrentAnimationWithTag(string tag) => _animator.GetCurrentAnimatorStateInfo(0).IsTag(tag);
+        
+        private void OnMoving(float speed) => _animator.SetFloat(_movingSpeed, speed);
+        
+        public void PlayAttackAnimation(int trigger) => _animator.SetTrigger(trigger);
+
+        public void MoveInCombo() => _animator.SetTrigger(_comboMove);
+
+        private void OnIdle() => _animator.SetFloat(_movingSpeed, 0);
 
         private void LookingRight()
         {
@@ -74,8 +78,6 @@ namespace Entities.Player
 
             IsFlipped = true;
         }
-
-        public void PlayAttackAnimation(int trigger) => _animator.SetTrigger(trigger);
 
         private void OnLeftWeaponActive()
         {

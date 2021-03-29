@@ -116,4 +116,4 @@ MonoBehaviour:
     Damage: 15
     isPenetrable: 0
   ShotImpulse: 0.15
-  CooldownTime: 0.4
+  CooldownTime: 0.2
