@@ -58,7 +58,7 @@ namespace Entities.Player
 
         private void OnDisable() => _showAttackDirectionAction.started -= OnShowAttackDirection;
 
-        private void Attack() => _weaponAttack.Attack(transform.position, _attackDirection.position);
+        private void Attack() => _weaponAttack.Attack(transform.position, _attackDirection.transform);
 
         private void OnShowAttackDirection(InputAction.CallbackContext context)
         {

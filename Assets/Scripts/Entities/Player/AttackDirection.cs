@@ -64,15 +64,24 @@ namespace Entities.Player
 
         private void ComputeAttackDirection()
         {
-            if (_input.currentControlScheme == "Keyboard")
-                ComputeForKeyboard();
+            if (_input.currentControlScheme != "Keyboard")
+                Compute();
             else
-                _attackDirection = _moveAction.ReadValue<Vector2>();
+                ComputeForKeyboard();
+        }
+
+        private void Compute()
+        {
+            var moveDirection = _moveAction.ReadValue<Vector2>();
+            if (moveDirection != Vector2.zero)
+                _attackDirection = moveDirection;
         }
 
         private void ComputeForKeyboard()
         {
             var moveDirection = _moveAction.ReadValue<Vector2>();
+            if (moveDirection == Vector2.zero)
+                return;
             
             moveDirection = ClampTo0Or1(moveDirection);
 

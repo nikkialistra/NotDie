@@ -25,8 +25,6 @@ namespace Entities.Player
         public Action<float> Moving;
         public Action Idle;
 
-        public Action<Vector2> MovedByImpulse;
-
         public Action<bool> MovingIsBlocked;
 
         private Settings _settings;
@@ -35,8 +33,6 @@ namespace Entities.Player
         
         private Transform _attackDirection;
         private Rigidbody2D _rigidbody;
-        
-        private WeaponAttack _weaponAttack;
 
         private Vector2 _moveDirection;
 
@@ -44,13 +40,10 @@ namespace Entities.Player
         private InputAction _moveAction;
 
         [Inject]
-        public void Construct(Settings settings, Transform attackDirection, WeaponAttack weaponAttack, PlayerAnimator playerAnimator)
+        public void Construct(Settings settings, Transform attackDirection)
         {
             _settings = settings;
             _attackDirection = attackDirection;
-            _weaponAttack = weaponAttack;
-
-            _weaponAttack.Impulsed += OnImpulsed;
         }
 
         private void Awake()
@@ -91,7 +84,7 @@ namespace Entities.Player
                 Idle?.Invoke();
         }
 
-        private void OnImpulsed(float impulse, AnimationCurve curve, float time)
+       public void AddImpulse(float impulse, AnimationCurve curve, float time)
         {
             _playerUnderControl = false;
             MovingIsBlocked?.Invoke(true);
