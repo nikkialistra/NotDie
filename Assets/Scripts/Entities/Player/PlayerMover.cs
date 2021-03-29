@@ -34,16 +34,19 @@ namespace Entities.Player
         private Transform _attackDirection;
         private Rigidbody2D _rigidbody;
 
+        private WeaponAttack _weaponAttack;
+
         private Vector2 _moveDirection;
 
         private PlayerInput _input;
         private InputAction _moveAction;
 
         [Inject]
-        public void Construct(Settings settings, Transform attackDirection)
+        public void Construct(Settings settings, Transform attackDirection, WeaponAttack weaponAttack)
         {
             _settings = settings;
             _attackDirection = attackDirection;
+            _weaponAttack = weaponAttack;
         }
 
         private void Awake()
@@ -74,7 +77,11 @@ namespace Entities.Player
                 MovePlayer();
         }
 
-        private void MovePlayer() => _rigidbody.velocity += _moveDirection * (_settings.Speed * Time.fixedDeltaTime);
+        private void MovePlayer()
+        {
+            _weaponAttack.TryMoveInCombo();
+            _rigidbody.velocity += _moveDirection * (_settings.Speed * Time.fixedDeltaTime);
+        }
 
         private void UpdateMovingState()
         {
