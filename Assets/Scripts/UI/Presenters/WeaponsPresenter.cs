@@ -19,13 +19,13 @@ namespace UI.Presenters
 
             if (_leftIsActive)
             {
-                _view.SetLeftWeaponSprite(_weapons.LeftWeapon.Active);
-                _view.SetRightWeaponSprite(_weapons.RightWeapon.NotActive);
+                _view.SetLeftWeaponSpriteActive(_weapons.LeftWeapon, _weapons.LeftWeaponDurability);
+                _view.SetRightWeaponSpriteNotActive(_weapons.RightWeapon, _weapons.RightWeaponDurability);
             }
             else
             {
-                _view.SetLeftWeaponSprite(_weapons.LeftWeapon.NotActive);
-                _view.SetRightWeaponSprite(_weapons.RightWeapon.Active);
+                _view.SetLeftWeaponSpriteNotActive(_weapons.LeftWeapon, _weapons.LeftWeaponDurability);
+                _view.SetRightWeaponSpriteActive(_weapons.RightWeapon, _weapons.RightWeaponDurability);
             }
 
             _weapons.LeftWeaponIsActive += OnLeftWeaponIsActive;
@@ -56,17 +56,17 @@ namespace UI.Presenters
         private void OnLeftWeaponChanged()
         {
             if (_leftIsActive)
-                _view.SetLeftWeaponSprite(_weapons.LeftWeapon.Active);
+                _view.SetLeftWeaponSpriteActive(_weapons.LeftWeapon, _weapons.LeftWeaponDurability);
             else
-                _view.SetLeftWeaponSprite(_weapons.LeftWeapon.NotActive);
+                _view.SetLeftWeaponSpriteNotActive(_weapons.LeftWeapon, _weapons.LeftWeaponDurability);
         }
 
         private void OnRightWeaponChanged()
         {
             if (_leftIsActive)
-                _view.SetRightWeaponSprite(_weapons.RightWeapon.NotActive);
+                _view.SetRightWeaponSpriteNotActive(_weapons.RightWeapon, _weapons.RightWeaponDurability);
             else
-                _view.SetRightWeaponSprite(_weapons.RightWeapon.Active);
+                _view.SetRightWeaponSpriteActive(_weapons.RightWeapon, _weapons.RightWeaponDurability);
         }
     }
 }

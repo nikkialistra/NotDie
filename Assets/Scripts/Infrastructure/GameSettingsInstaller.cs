@@ -1,5 +1,4 @@
 using Core;
-using Entities.Player;
 using UI.Views;
 using UnityEngine;
 using Zenject;
@@ -11,11 +10,13 @@ namespace Infrastructure
     {
         [SerializeField] private CameraFollow.Settings _cameraFollow;
         [SerializeField] private TimerView.Settings _timerView;
+        [SerializeField] private WeaponsView.Settings _weaponsView;
 
         public override void InstallBindings()
         {
             Container.BindInstance(_cameraFollow);
             Container.BindInstance(_timerView);
+            Container.BindInstance(_weaponsView);
         }
     }
 }
