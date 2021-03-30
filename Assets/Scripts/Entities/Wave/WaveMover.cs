@@ -1,5 +1,6 @@
 ﻿using System;
 using Entities.Player;
+using Entities.Player.Animation;
 using UnityEngine;
 using Zenject;
 

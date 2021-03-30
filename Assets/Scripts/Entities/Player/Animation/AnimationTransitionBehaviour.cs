@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Entities.Player
+namespace Entities.Player.Animation
 {
     public class AnimationTransitionBehaviour : StateMachineBehaviour
     {

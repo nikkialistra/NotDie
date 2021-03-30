@@ -1,6 +1,7 @@
+using Entities.Player.Combat;
 using UnityEngine;
 
-namespace Entities.Player
+namespace Entities.Player.Animation
 {
     public class ComboResetBehaviour : StateMachineBehaviour
     {

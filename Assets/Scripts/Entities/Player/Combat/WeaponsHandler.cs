@@ -1,11 +1,12 @@
 ﻿using System;
 using Entities.Data;
 using Entities.Items;
+using Entities.Items.Weapon;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace Entities.Player
+namespace Entities.Player.Combat
 {
     [RequireComponent(typeof(PlayerInput))]
     public class WeaponsHandler : MonoBehaviour
@@ -91,19 +92,19 @@ namespace Entities.Player
 
         private void TakeWeapon(WeaponGameObject weaponGameObject)
         {
-            var discardedWeapon = _weapons.TakeWeapon(weaponGameObject.Weapon);
-            
-            Destroy(weaponGameObject.gameObject);
-
-            if (discardedWeapon == null) 
-                return;
-            
-            CreateWeapon(discardedWeapon);
+            // var discardedWeapon = _weapons.TakeWeapon(weaponGameObject.Weapon, weaponGameObject.Durability);
+            //
+            // Destroy(weaponGameObject.gameObject);
+            //
+            // if (discardedWeapon == null) 
+            //     return;
+            //
+            // CreateWeapon(discardedWeapon);
         }
 
         private void CreateWeapon(Weapon weaponToCreate)
         {
-            _weaponFactory.Create(weaponToCreate, transform.position);
+            // _weaponFactory.Create(weaponToCreate, transform.position);
         }
     }
 }

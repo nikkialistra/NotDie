@@ -1,6 +1,7 @@
 using System;
 using Entities.Data;
 using Entities.Player;
+using Entities.Player.Combat;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ namespace Tests.EditMode
         [Test]
         public void TakeWeapon_NullWeapon_ThrowsException()
         {
-            Assert.Throws<ArgumentNullException>(() => _weapons.TakeWeapon(null));
+            Assert.Throws<ArgumentNullException>(() => _weapons.TakeWeapon(null, 100));
         }
 
 
@@ -30,7 +31,7 @@ namespace Tests.EditMode
         {
             var weapon = ScriptableObject.CreateInstance<Weapon>();
 
-            var returnedWeapon = _weapons.TakeWeapon(weapon);
+            var returnedWeapon = _weapons.TakeWeapon(weapon, 100);
 
             Assert.Null(returnedWeapon);
             Assert.AreEqual(weapon, _weapons.RightWeapon);
@@ -43,7 +44,7 @@ namespace Tests.EditMode
             var eventRaised = false;
             _weapons.RightWeaponChanged += () => eventRaised = true;
 
-            _weapons.TakeWeapon(weapon);
+            _weapons.TakeWeapon(weapon, 100);
             
             Assert.AreEqual(true, eventRaised);
         }
@@ -54,8 +55,8 @@ namespace Tests.EditMode
             var firstWeapon = ScriptableObject.CreateInstance<Weapon>();
             var secondWeapon = ScriptableObject.CreateInstance<Weapon>();
 
-            _weapons.TakeWeapon(firstWeapon);
-            var returnedWeapon = _weapons.TakeWeapon(secondWeapon);
+            _weapons.TakeWeapon(firstWeapon, 100);
+            var returnedWeapon = _weapons.TakeWeapon(secondWeapon, 100);
             
             Assert.Null(returnedWeapon);
             
@@ -71,8 +72,8 @@ namespace Tests.EditMode
             var eventRaised = false;
             _weapons.LeftWeaponChanged += () => eventRaised = true;
 
-            _weapons.TakeWeapon(firstWeapon);
-            _weapons.TakeWeapon(secondWeapon);
+            _weapons.TakeWeapon(firstWeapon, 100);
+            _weapons.TakeWeapon(secondWeapon, 100);
             
             Assert.AreEqual(true, eventRaised);
         }
@@ -84,9 +85,9 @@ namespace Tests.EditMode
             var secondWeapon = ScriptableObject.CreateInstance<Weapon>();
             var thirdWeapon = ScriptableObject.CreateInstance<Weapon>();
 
-            _weapons.TakeWeapon(firstWeapon);
-            _weapons.TakeWeapon(secondWeapon);
-            var returnedWeapon = _weapons.TakeWeapon(thirdWeapon);
+            _weapons.TakeWeapon(firstWeapon, 100);
+            _weapons.TakeWeapon(secondWeapon, 100);
+            var returnedWeapon = _weapons.TakeWeapon(thirdWeapon, 100);
             
             Assert.AreEqual(returnedWeapon, firstWeapon);
             
@@ -103,9 +104,9 @@ namespace Tests.EditMode
             var eventRaised = false;
             _weapons.RightWeaponChanged += () => eventRaised = true;
 
-            _weapons.TakeWeapon(firstWeapon);
-            _weapons.TakeWeapon(secondWeapon);
-            _weapons.TakeWeapon(thirdWeapon);
+            _weapons.TakeWeapon(firstWeapon, 100);
+            _weapons.TakeWeapon(secondWeapon, 100);
+            _weapons.TakeWeapon(thirdWeapon, 100);
             
             Assert.AreEqual(true, eventRaised);
         }
@@ -117,10 +118,10 @@ namespace Tests.EditMode
             var secondWeapon = ScriptableObject.CreateInstance<Weapon>();
             var thirdWeapon = ScriptableObject.CreateInstance<Weapon>();
 
-            _weapons.TakeWeapon(firstWeapon);
-            _weapons.TakeWeapon(secondWeapon);
+            _weapons.TakeWeapon(firstWeapon, 100);
+            _weapons.TakeWeapon(secondWeapon, 100);
             _weapons.SwapWeapons();
-            var returnedWeapon = _weapons.TakeWeapon(thirdWeapon);
+            var returnedWeapon = _weapons.TakeWeapon(thirdWeapon, 100);
             
             Assert.AreEqual(returnedWeapon, secondWeapon);
             
@@ -137,10 +138,10 @@ namespace Tests.EditMode
             var eventRaised = false;
             _weapons.LeftWeaponChanged += () => eventRaised = true;
 
-            _weapons.TakeWeapon(firstWeapon);
-            _weapons.TakeWeapon(secondWeapon);
+            _weapons.TakeWeapon(firstWeapon, 100);
+            _weapons.TakeWeapon(secondWeapon, 100);
             _weapons.SwapWeapons();
-            _weapons.TakeWeapon(thirdWeapon);
+            _weapons.TakeWeapon(thirdWeapon, 100);
             
             Assert.AreEqual(true, eventRaised);
         }
@@ -158,7 +159,7 @@ namespace Tests.EditMode
         {
             var weapon = ScriptableObject.CreateInstance<Weapon>();
             
-            _weapons.TakeWeapon(weapon);
+            _weapons.TakeWeapon(weapon, 100);
             var droppedWeapon = _weapons.DropWeapon();
 
             Assert.AreEqual(weapon, droppedWeapon);
@@ -171,7 +172,7 @@ namespace Tests.EditMode
             var weapon = ScriptableObject.CreateInstance<Weapon>();
             
             _weapons.SwapWeapons();
-            _weapons.TakeWeapon(weapon);
+            _weapons.TakeWeapon(weapon, 100);
             var droppedWeapon = _weapons.DropWeapon();
 
             Assert.AreEqual(weapon, droppedWeapon);
@@ -185,7 +186,7 @@ namespace Tests.EditMode
             var eventRaised = false;
             _weapons.RightWeaponChanged += () => eventRaised = true;
             
-            _weapons.TakeWeapon(weapon);
+            _weapons.TakeWeapon(weapon, 100);
             _weapons.DropWeapon();
 
             Assert.AreEqual(true, eventRaised);
@@ -196,7 +197,7 @@ namespace Tests.EditMode
         {
             var weapon = ScriptableObject.CreateInstance<Weapon>();
             
-            _weapons.TakeWeapon(weapon);
+            _weapons.TakeWeapon(weapon, 100);
             _weapons.DropWeapon();
             var secondDroppedWeapon = _weapons.DropWeapon();
             
@@ -211,7 +212,7 @@ namespace Tests.EditMode
             _weapons.LeftWeaponChanged += () => eventRaised = true;
             
             _weapons.SwapWeapons();
-            _weapons.TakeWeapon(weapon);
+            _weapons.TakeWeapon(weapon, 100);
             _weapons.DropWeapon();
 
             Assert.AreEqual(true, eventRaised);
@@ -223,7 +224,7 @@ namespace Tests.EditMode
             var weapon = ScriptableObject.CreateInstance<Weapon>();
             
             _weapons.SwapWeapons();
-            _weapons.TakeWeapon(weapon);
+            _weapons.TakeWeapon(weapon, 100);
             _weapons.DropWeapon();
             var secondDroppedWeapon = _weapons.DropWeapon();
             
