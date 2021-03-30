@@ -16,11 +16,6 @@ namespace Entities.Player
             public Weapon Hand;
 
             public float DistanceForTaking;
-
-            [Header("Audio")]
-            public Sound TakingWeapon;
-            public Sound DroppingWeapon;
-            public Sound SwappingWeapons;
         }
 
         private Settings _settings;
@@ -39,10 +34,6 @@ namespace Entities.Player
             _weapons = weapons;
             _settings = settings;
             _weaponFactory = weaponFactory;
-
-            _settings.TakingWeapon.CreateAudioSource(gameObject);
-            _settings.DroppingWeapon.CreateAudioSource(gameObject);
-            _settings.SwappingWeapons.CreateAudioSource(gameObject);
         }
 
         private void Awake()
@@ -72,11 +63,7 @@ namespace Entities.Player
             DropWeapon();
         }
 
-        private void OnSwapWeapons(InputAction.CallbackContext context)
-        {
-            _weapons.SwapWeapons();
-            _settings.SwappingWeapons.PlayOneShot();
-        }
+        private void OnSwapWeapons(InputAction.CallbackContext context) => _weapons.SwapWeapons();
 
         private bool TryTakeWeapon()
         {
@@ -100,7 +87,6 @@ namespace Entities.Player
                 return;
             
             CreateWeapon(weapon);
-            _settings.DroppingWeapon.PlayOneShot();
         }
 
         private void TakeWeapon(WeaponGameObject weaponGameObject)
@@ -108,13 +94,11 @@ namespace Entities.Player
             var discardedWeapon = _weapons.TakeWeapon(weaponGameObject.Weapon);
             
             Destroy(weaponGameObject.gameObject);
-            _settings.TakingWeapon.PlayOneShot();
 
             if (discardedWeapon == null) 
                 return;
             
             CreateWeapon(discardedWeapon);
-            _settings.DroppingWeapon.PlayOneShot();
         }
 
         private void CreateWeapon(Weapon weaponToCreate)
