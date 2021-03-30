@@ -6,23 +6,23 @@ namespace Entities.Enemies.States
 {
     public class MoveToPlayer : State
     {
-        private Dummy _dummy;
         private Rigidbody2D _rigidBody;
+        private DummyAnimator _dummyAnimator;
         private PlayerMover _player;
         private float _speed;
 
-        public MoveToPlayer(Dummy dummy, float speed)
+        public MoveToPlayer(float speed, Rigidbody2D rigidBody, DummyAnimator dummyAnimator)
         {
-            _dummy = dummy;
-            _rigidBody = _dummy.GetComponent<Rigidbody2D>();
+            _rigidBody = rigidBody;
+            _dummyAnimator = dummyAnimator;
             _speed = speed;
         }
         
         public override void Tick()
         {
-            var direction = (_player.transform.position - _dummy.transform.position).normalized;
-            _dummy.MoveDirection = direction;
-            
+            var direction = (_player.transform.position - _rigidBody.transform.position).normalized;
+            _dummyAnimator.UpdateDirection(direction);
+
             _rigidBody.velocity += (Vector2) direction * (_speed * Time.fixedDeltaTime);
         }
 
