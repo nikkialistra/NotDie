@@ -13,6 +13,8 @@ namespace Entities.Player
         [Serializable]
         public class Settings
         {
+            [Range(0, 1)]
+            public float YPosition;
             [Header("Movement settings")]
             [Range(0, 100)]
             public float Speed;
@@ -64,6 +66,8 @@ namespace Entities.Player
                 _moveDirection = Vector2.zero;
         }
 
+        public Vector3 PositionCenter => transform.position + new Vector3(0, _settings.YPosition);
+
         private void FixedUpdate()
         {
             if (_moveDirection != Vector2.zero) 
@@ -72,21 +76,21 @@ namespace Entities.Player
                 _playerAnimator.Run(false);
         }
 
-        private void MovePlayer()
-        {
-            _playerAnimator.Run(true);
-            _weaponAttack.TryMoveInCombo();
-            _rigidbody.velocity += _moveDirection * (_settings.Speed * Time.fixedDeltaTime);
-        }
-
         public void AddImpulse(float impulse, AnimationCurve curve, float time)
         {
             _playerUnderControl = false;
             MovingIsBlocked?.Invoke(true);
             
-            var impulseDirection = (_attackDirection.position - transform.position).normalized;
+            var impulseDirection = (_attackDirection.position - PositionCenter).normalized;
 
             StartCoroutine(UnderImpulse(impulse, impulseDirection, curve, time));
+        }
+
+        private void MovePlayer()
+        {
+            _playerAnimator.Run(true);
+            _weaponAttack.TryMoveInCombo();
+            _rigidbody.velocity += _moveDirection * (_settings.Speed * Time.fixedDeltaTime);
         }
 
         private IEnumerator UnderImpulse(float impulse, Vector3 impulseDirection, AnimationCurve impulseCurve, float time)

@@ -1,6 +1,4 @@
-﻿using System;
-using Entities.Data;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -9,15 +7,7 @@ namespace Entities.Player
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerAttack : MonoBehaviour
     {
-        [Serializable]
-        public class Settings
-        {
-            [Header("Audio")]
-            public Sound Attack;
-        }
-
-        private Settings _settings;
-
+        private PlayerMover _playerMover;
         private Transform _attackDirection;
         private bool _attackDirectionIsVisible;
 
@@ -28,16 +18,14 @@ namespace Entities.Player
         private PlayerInput _input;
         private InputAction _attackAction;
         private InputAction _showAttackDirectionAction;
-        
+
         [Inject]
-        public void Construct(Settings settings, Transform attackDirection, WeaponAttack weaponAttack)
+        public void Construct(PlayerMover playerMover, Transform attackDirection, WeaponAttack weaponAttack)
         {
-            _settings = settings;
+            _playerMover = playerMover;
             _attackDirection = attackDirection;
             _attackDirectionRenderer = _attackDirection.GetComponent<Renderer>();
             _weaponAttack = weaponAttack;
-            
-            _settings.Attack.CreateAudioSource(gameObject);
         }
 
         private void Awake()
@@ -58,7 +46,7 @@ namespace Entities.Player
 
         private void OnDisable() => _showAttackDirectionAction.started -= OnShowAttackDirection;
 
-        private void Attack() => _weaponAttack.Attack(transform.position, _attackDirection.transform);
+        private void Attack() => _weaponAttack.Attack(_playerMover.PositionCenter, _attackDirection.transform);
 
         private void OnShowAttackDirection(InputAction.CallbackContext context)
         {

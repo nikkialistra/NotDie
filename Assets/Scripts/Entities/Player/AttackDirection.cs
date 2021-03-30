@@ -141,8 +141,8 @@ namespace Entities.Player
         {
             if (_attackDirection == Vector2.zero)
                 return;
-
-            transform.position = _playerTransform.position + (Vector3) _attackDirection.normalized * _settings.ImpulseDirectionMultiplier;
+            
+            transform.position =_playerMover.PositionCenter + (Vector3) _attackDirection.normalized * _settings.ImpulseDirectionMultiplier;
         }
 
         private void OnMovingIsBlocked(bool isBlocked) => _takeDirectionBlocked = isBlocked;
