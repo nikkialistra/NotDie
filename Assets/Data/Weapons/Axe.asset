@@ -13,10 +13,22 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   PickUp: {fileID: 21300000, guid: 5267a1e54bcdd804abc750604a30a8ab, type: 3}
-  Active: {fileID: 21300000, guid: effc53a9b1069764eb425215f120ebed, type: 3}
-  NotActive: {fileID: 21300000, guid: 1be45ecde19ad0847b4d7c85f72c413f, type: 3}
+  Active: {fileID: -2870163513822645888, guid: 6dcb276df1ff8214f94f9c8e2b9e29a7, type: 3}
+  NotActive: {fileID: -5156347624932570697, guid: 6dcb276df1ff8214f94f9c8e2b9e29a7, type: 3}
+  HashedTakenName: 1188459000
   ComboShots:
-  - Damage: 40
-    Time: 1.2
-    Wave: {fileID: 0}
+  - Clip: {fileID: 0}
+    HashedTriggerName: 0
+    ImpulseCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    WaveClip: {fileID: 0}
+    HashedWaveTriggerName: 0
+    WaveDelay: 0
+    Damage: 40
+    isPenetrable: 0
+  ShotImpulse: 0
   CooldownTime: 0.9

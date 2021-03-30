@@ -91,7 +91,7 @@ namespace Entities.Player
 
         private void TakeWeapon(WeaponGameObject weaponGameObject)
         {
-            var discardedWeapon = _weapons.TakeWeapon(weaponGameObject.Weapon);
+            var discardedWeapon = _weapons.TakeWeapon(weaponGameObject.Weapon, weaponGameObject.Durability);
             
             Destroy(weaponGameObject.gameObject);
 

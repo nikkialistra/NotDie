@@ -18,12 +18,17 @@ namespace Entities.Player
         
         public Weapon LeftWeapon => _leftWeapon;
         public Weapon RightWeapon => _rightWeapon;
-        
-        
+
+        public float LeftWeaponDurability => _leftWeaponDurability;
+        public float RightWeaponDurability => _rightWeaponDurability;
+
         public bool LeftIsActive => _leftIsActive;
 
         private Weapon _leftWeapon;
         private Weapon _rightWeapon;
+
+        private float _leftWeaponDurability = 1;
+        private float _rightWeaponDurability = 1;
         
         private bool _leftIsActive;
 
@@ -35,15 +40,15 @@ namespace Entities.Player
             _rightWeapon = _hand;
         }
 
-        public Weapon TakeWeapon(Weapon weapon)
+        public Weapon TakeWeapon(Weapon weapon, float durability)
         {
             if (weapon == null)
                 throw new ArgumentNullException(nameof(weapon));
 
-            if (TryTakeInsteadOfHands(weapon))
+            if (TryTakeInsteadOfHands(weapon, durability))
                 return null;
 
-            return SwapWeapon(weapon);
+            return SwapWeapon(weapon, durability);
         }
 
         public Weapon DropWeapon()
@@ -83,55 +88,59 @@ namespace Entities.Player
                 RightWeaponIsActive?.Invoke();
         }
 
-        private bool TryTakeInsteadOfHands(Weapon weapon)
+        private bool TryTakeInsteadOfHands(Weapon weapon, float durability)
         {
             if (ActiveWeapon == _hand)
             {
-                ChangeActiveWeapon(weapon);
+                ChangeActiveWeapon(weapon, durability);
                 return true;
             }
             
             if (NotActiveWeapon == _hand)
             {
-                ChangeNotActiveWeapon(weapon);
+                ChangeNotActiveWeapon(weapon, durability);
                 return true;
             }
             
             return false;
         }
 
-        private Weapon SwapWeapon(Weapon weapon)
+        private Weapon SwapWeapon(Weapon weapon, float durability)
         {
             var discardedWeapon = ActiveWeapon;
-            ChangeActiveWeapon(weapon);
+            ChangeActiveWeapon(weapon, durability);
             
             return discardedWeapon;
         }
 
-        private void ChangeActiveWeapon(Weapon weapon)
+        private void ChangeActiveWeapon(Weapon weapon, float durability)
         {
             if (_leftIsActive)
             {
                 _leftWeapon = weapon;
+                _leftWeaponDurability = durability;
                 LeftWeaponChanged?.Invoke();
             }
             else
             {
                 _rightWeapon = weapon;
+                _rightWeaponDurability = durability;
                 RightWeaponChanged?.Invoke();
             }
         }
         
-        private void ChangeNotActiveWeapon(Weapon weapon)
+        private void ChangeNotActiveWeapon(Weapon weapon, float durability)
         {
             if (_leftIsActive)
             {
                 _rightWeapon = weapon;
+                _rightWeaponDurability = durability;
                 RightWeaponChanged?.Invoke();
             }
             else
             {
                 _leftWeapon = weapon;
+                _leftWeaponDurability = durability;
                 LeftWeaponChanged?.Invoke();
             }
         }
