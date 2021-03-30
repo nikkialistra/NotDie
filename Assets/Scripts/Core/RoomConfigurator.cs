@@ -5,7 +5,9 @@ namespace Core
     [RequireComponent(typeof(EdgeCollider2D))]
     public class RoomConfigurator : MonoBehaviour
     {
-        [Header("Corners")] 
+        public EdgeCollider2D Collider => _collider;
+        
+        [Header("Corners")]
         [SerializeField] private GameObject _cornerLeftUp;
         [SerializeField] private GameObject _cornerRightUp;
         [SerializeField] private GameObject _cornerLeftDown;

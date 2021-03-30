@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Hand
   m_EditorClassIdentifier: 
   PickUp: {fileID: 0}
-  Active: {fileID: 21300000, guid: dc59dc4e31cf05a4480bfcbf099f42c2, type: 3}
-  NotActive: {fileID: 21300000, guid: 8942703db155cb244b41088908ede681, type: 3}
+  Active: {fileID: 8020529028887865597, guid: 30d8a83eb64774244a47aa9fbcb1305a, type: 3}
+  NotActive: {fileID: -7322360371056709617, guid: 30d8a83eb64774244a47aa9fbcb1305a, type: 3}
   HashedTakenName: -317398062
   ComboShots:
   - Clip: {fileID: 7400000, guid: 04c60b4ce481e6a43956ea16353a7ac8, type: 2}

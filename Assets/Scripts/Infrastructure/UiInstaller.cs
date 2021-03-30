@@ -15,6 +15,7 @@ namespace Infrastructure
         
         [SerializeField] private DigitManager _digitManager;
         
+        [Header("Digit images")]
         [SerializeField] private Image _healthFirst;
         [SerializeField] private Image _healthSecond;
         [SerializeField] private Image _healthThird;
@@ -25,6 +26,10 @@ namespace Infrastructure
         [Header("Weapons")]
         [SerializeField] private Image _leftWeapon;
         [SerializeField] private Image _rightWeapon;
+        
+        [Header("Frames")]
+        [SerializeField] private Image _leftWeaponFrame;
+        [SerializeField] private Image _rightWeaponFrame;
 
         public override void InstallBindings()
         {
@@ -60,6 +65,9 @@ namespace Infrastructure
         {
             Container.BindInstance(_leftWeapon).WithId("leftWeapon");
             Container.BindInstance(_rightWeapon).WithId("rightWeapon");
+            
+            Container.BindInstance(_leftWeaponFrame).WithId("leftWeaponFrame");
+            Container.BindInstance(_rightWeaponFrame).WithId("rightWeaponFrame");
             
             Container.Bind<WeaponsView>().AsSingle();
         }

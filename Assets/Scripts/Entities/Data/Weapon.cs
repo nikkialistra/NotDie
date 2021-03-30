@@ -12,7 +12,7 @@ namespace Entities.Data
         
         public Sprite Active;
         public Sprite NotActive;
-        
+
         [HideInInspector] public int HashedTakenName;
         
         [Space]
