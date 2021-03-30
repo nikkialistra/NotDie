@@ -4,7 +4,6 @@ using Zenject;
 namespace Entities.Player
 {
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerAnimator : MonoBehaviour
     {
         public bool IsFlipped;

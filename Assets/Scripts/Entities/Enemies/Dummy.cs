@@ -15,6 +15,8 @@ namespace Entities.Enemies
             public float TimeToStay;
         }
 
+        public Vector3 MoveDirection;
+
         private Settings _settings;
 
         private StateMachine _stateMachine;
