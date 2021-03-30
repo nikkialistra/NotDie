@@ -3,32 +3,22 @@
 namespace Entities.Enemies
 {
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(Dummy))]
     public class DummyAnimator : MonoBehaviour
     {
-        private Dummy _dummy;
-        
-        private Rigidbody2D _rigidBody;
         private Animator _animator;
 
-        private readonly int _movingSpeed = Animator.StringToHash("movingSpeed");
+        private readonly int _run = Animator.StringToHash("run");
 
-        private void Awake()
-        {
-            _dummy = GetComponent<Dummy>();
-            _rigidBody = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<Animator>();
-        }
+        private void Awake() => _animator = GetComponent<Animator>();
 
-        private void Update()
+        public void UpdateDirection(Vector3 direction)
         {
-            _animator.SetFloat(_movingSpeed, _rigidBody.velocity.magnitude);
+            _animator.SetBool(_run, direction.magnitude > 0);
             
-            if (_dummy.MoveDirection.x > 0)
+            if (direction.x > 0)
                 LookingRight();
             
-            if (_dummy.MoveDirection.x < 0)
+            if (direction.x < 0)
                 LookingLeft();
         }
 

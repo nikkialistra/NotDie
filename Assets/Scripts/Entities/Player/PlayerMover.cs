@@ -18,12 +18,7 @@ namespace Entities.Player
             public float Speed;
             [Range(0, 100)]
             public float Damping;
-            [Range(0, 1)]
-            public float IdleSpeed;
         }
-
-        public Action<float> Moving;
-        public Action Idle;
 
         public Action<bool> MovingIsBlocked;
 
@@ -36,17 +31,20 @@ namespace Entities.Player
 
         private WeaponAttack _weaponAttack;
 
+        private PlayerAnimator _playerAnimator;
+        
         private Vector2 _moveDirection;
 
         private PlayerInput _input;
         private InputAction _moveAction;
 
         [Inject]
-        public void Construct(Settings settings, Transform attackDirection, WeaponAttack weaponAttack)
+        public void Construct(Settings settings, Transform attackDirection, WeaponAttack weaponAttack, PlayerAnimator playerAnimator)
         {
             _settings = settings;
             _attackDirection = attackDirection;
             _weaponAttack = weaponAttack;
+            _playerAnimator = playerAnimator;
         }
 
         private void Awake()
@@ -61,37 +59,27 @@ namespace Entities.Player
         private void Update()
         {
             if (_playerUnderControl)
-            {
-                UpdateMovingState();
                 _moveDirection = _moveAction.ReadValue<Vector2>();
-            }
             else
-            {
                 _moveDirection = Vector2.zero;
-            }
         }
 
         private void FixedUpdate()
         {
             if (_moveDirection != Vector2.zero) 
                 MovePlayer();
+            else
+                _playerAnimator.Run(false);
         }
 
         private void MovePlayer()
         {
+            _playerAnimator.Run(true);
             _weaponAttack.TryMoveInCombo();
             _rigidbody.velocity += _moveDirection * (_settings.Speed * Time.fixedDeltaTime);
         }
 
-        private void UpdateMovingState()
-        {
-            if (_rigidbody.velocity.magnitude > _settings.IdleSpeed)
-                Moving?.Invoke(_rigidbody.velocity.magnitude);
-            else
-                Idle?.Invoke();
-        }
-
-       public void AddImpulse(float impulse, AnimationCurve curve, float time)
+        public void AddImpulse(float impulse, AnimationCurve curve, float time)
         {
             _playerUnderControl = false;
             MovingIsBlocked?.Invoke(true);

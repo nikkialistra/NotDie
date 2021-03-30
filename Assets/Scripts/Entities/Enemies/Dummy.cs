@@ -6,6 +6,8 @@ using Zenject;
 
 namespace Entities.Enemies
 {
+    [RequireComponent(typeof(DummyAnimator))]
+    [RequireComponent(typeof(Rigidbody2D))]
     public class Dummy : MonoBehaviour
     {
         [Serializable]
@@ -15,17 +17,21 @@ namespace Entities.Enemies
             public float TimeToStay;
         }
 
-        public Vector3 MoveDirection;
+        private DummyAnimator _dummyAnimator;
+        private Rigidbody2D _rigidBody;
 
         private Settings _settings;
 
         private StateMachine _stateMachine;
-        
+
         [Inject]
         public void Construct(Settings settings) => _settings = settings;
 
         private void Awake()
         {
+            _dummyAnimator = GetComponent<DummyAnimator>();
+            _rigidBody = GetComponent<Rigidbody2D>();
+
             _stateMachine = new StateMachine();
 
             SetupStateMachine();
@@ -36,7 +42,7 @@ namespace Entities.Enemies
         private void SetupStateMachine()
         {
             var stay = new Stay();
-            var moveToPlayer = new MoveToPlayer(this, _settings.Speed);
+            var moveToPlayer = new MoveToPlayer(_settings.Speed, _rigidBody, _dummyAnimator);
 
             At(moveToPlayer, stay, StayedEnoughTime());
 
