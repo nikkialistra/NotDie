@@ -1,25 +1,31 @@
 fileFormatVersion: 2
-guid: 420e2a9686f5cd24095925fb0453039c
+guid: ff4bf72a6f9ecf3429a1019bf64d79ae
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8386436167831189754
-    second: SlowWalkAnimation_0
+      213: -5758060072182017877
+    second: DummyRedRunning_0
   - first:
-      213: 5323386778097070107
-    second: SlowWalkAnimation_1
+      213: -25483305199320492
+    second: DummyRedRunning_1
   - first:
-      213: 5825839432866936963
-    second: SlowWalkAnimation_2
+      213: -8961440762919628415
+    second: DummyRedRunning_2
   - first:
-      213: 608875792211970991
-    second: SlowWalkAnimation_3
+      213: -5317077128671181030
+    second: DummyRedRunning_3
   - first:
-      213: -1936648389135555963
-    second: SlowWalkAnimation_4
+      213: -1544541573203977744
+    second: DummyRedRunning_4
   - first:
-      213: -6357657613250750049
-    second: SlowWalkAnimation_5
+      213: 5123375941130959904
+    second: DummyRedRunning_5
+  - first:
+      213: -8845949875584865679
+    second: DummyRedRunning_6
+  - first:
+      213: -1873902590509084607
+    second: DummyRedRunning_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,7 +127,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SlowWalkAnimation_0
+      name: DummyRedRunning_0
       rect:
         serializedVersion: 2
         x: 0
@@ -135,14 +141,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af8f01be24b926470800000000000000
-      internalID: 8386436167831189754
+      spriteID: ba01b323fd24710b0800000000000000
+      internalID: -5758060072182017877
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlowWalkAnimation_1
+      name: DummyRedRunning_1
       rect:
         serializedVersion: 2
         x: 128
@@ -156,14 +162,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b10bc76f11870e940800000000000000
-      internalID: 5323386778097070107
+      spriteID: 45244e5a11775aff0800000000000000
+      internalID: -25483305199320492
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlowWalkAnimation_2
+      name: DummyRedRunning_2
       rect:
         serializedVersion: 2
         x: 256
@@ -177,14 +183,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3883f7af81a89d050800000000000000
-      internalID: 5825839432866936963
+      spriteID: 181587a1b1192a380800000000000000
+      internalID: -8961440762919628415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlowWalkAnimation_3
+      name: DummyRedRunning_3
       rect:
         serializedVersion: 2
         x: 384
@@ -198,14 +204,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fab012b9e49237800800000000000000
-      internalID: 608875792211970991
+      spriteID: a174336c582f536b0800000000000000
+      internalID: -5317077128671181030
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlowWalkAnimation_4
+      name: DummyRedRunning_4
       rect:
         serializedVersion: 2
         x: 512
@@ -219,14 +225,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5822eb60d84af15e0800000000000000
-      internalID: -1936648389135555963
+      spriteID: 0f99a5c5f9fa09ae0800000000000000
+      internalID: -1544541573203977744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlowWalkAnimation_5
+      name: DummyRedRunning_5
       rect:
         serializedVersion: 2
         x: 640
@@ -240,8 +246,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9991a6c51015c7a0800000000000000
-      internalID: -6357657613250750049
+      spriteID: 02cb4ed0643e91740800000000000000
+      internalID: 5123375941130959904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DummyRedRunning_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17a6adcb47fdc3580800000000000000
+      internalID: -8845949875584865679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DummyRedRunning_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1409505b58f8ef5e0800000000000000
+      internalID: -1873902590509084607
       vertices: []
       indices: 
       edges: []

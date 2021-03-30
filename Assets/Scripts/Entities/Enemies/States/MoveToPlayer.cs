@@ -21,6 +21,7 @@ namespace Entities.Enemies.States
         public override void Tick()
         {
             var direction = (_player.transform.position - _dummy.transform.position).normalized;
+            _dummy.MoveDirection = direction;
             
             _rigidBody.velocity += (Vector2) direction * (_speed * Time.fixedDeltaTime);
         }
