@@ -1,7 +1,7 @@
 ﻿using System;
 using Entities.Data;
 
-namespace Entities.Player
+namespace Entities.Player.Combat
 {
     public class Weapons
     {

@@ -1,7 +1,10 @@
 using Core;
 using Entities.Data;
 using Entities.Items;
+using Entities.Items.Weapon;
 using Entities.Player;
+using Entities.Player.Animation;
+using Entities.Player.Combat;
 using Entities.Wave;
 using UnityEngine;
 using Zenject;
@@ -18,6 +21,7 @@ namespace Infrastructure
 
         [Header("WeaponsHandler")]
         [SerializeField] private Weapon _hand;
+        [SerializeField] private GameObject _weaponFacadePrefab;
         [SerializeField] private GameObject _weaponPrefab;
         [SerializeField] private WeaponAttack _weaponAttack;
 
@@ -31,12 +35,12 @@ namespace Infrastructure
             Container.Bind<Hp>().AsSingle();
 
             BindPlayerWeaponSystem();
-            
-            Container.BindFactory<Weapon, Vector3, WeaponGameObject, WeaponGameObject.Factory>()
-                .FromComponentInNewPrefab(_weaponPrefab)
-                .UnderTransformGroup("Weapons");
 
             BindWaveSpawner();
+            
+            BindWeaponSpawner();
+            
+            BindWeaponGameObjectSpawner();
         }
 
         private void BindPlayerMovement()
@@ -71,7 +75,35 @@ namespace Infrastructure
                     .UnderTransformGroup("Waves"));
         }
 
+        private void BindWeaponSpawner()
+        {
+            Container.Bind<WeaponSpawner>().AsSingle();
+
+            Container.BindFactory<WeaponSpecs, WeaponFacade, WeaponFacade.Factory>()
+                .FromPoolableMemoryPool<WeaponSpecs, WeaponFacade, WeaponFacadePool>(poolBinder => poolBinder
+                    .WithInitialSize(5)
+                    .FromComponentInNewPrefab(_weaponFacadePrefab)
+                    .UnderTransformGroup("Weapons"));
+        }
+
+        private void BindWeaponGameObjectSpawner()
+        {
+            Container.BindFactory<Vector3, WeaponFacade, WeaponGameObject, WeaponGameObject.Factory>()
+                .FromPoolableMemoryPool<Vector3, WeaponFacade, WeaponGameObject, WeaponGameObjectPool>(poolBinder => poolBinder
+                .WithInitialSize(5)
+                .FromComponentInNewPrefab(_weaponPrefab)
+                .UnderTransformGroup("WeaponPickups"));
+        }
+
         class WaveFacadePool : MonoPoolableMemoryPool<WaveSpecs, IMemoryPool, WaveFacade>
+        {
+        }
+        
+        class WeaponFacadePool : MonoPoolableMemoryPool<WeaponSpecs, IMemoryPool, WeaponFacade>
+        {
+        }
+        
+        class WeaponGameObjectPool : MonoPoolableMemoryPool<Vector3, WeaponFacade, IMemoryPool, WeaponGameObject>
         {
         }
     }

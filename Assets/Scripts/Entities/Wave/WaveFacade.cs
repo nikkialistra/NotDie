@@ -8,21 +8,18 @@ namespace Entities.Wave
     [RequireComponent(typeof(Animator))]
     public class WaveFacade : MonoBehaviour, IPoolable<WaveSpecs, IMemoryPool>, IDisposable
     {
-        private IMemoryPool _pool;
+        public int Id => _id;
+        public int DamageValue => _damageValue;
+        public bool IsPenetrable => _isPenetrable;
         
-        private WaveMover _waveMover;
-
-        private Animator _animator;
-
         private int _id;
         private int _damageValue;
         private bool _isPenetrable;
-
-        public int Id => _id;
-
-        public int DamageValue => _damageValue;
-
-        public bool IsPenetrable => _isPenetrable;
+        
+        private IMemoryPool _pool;
+        
+        private WaveMover _waveMover;
+        private Animator _animator;
 
         private void Awake()
         {
