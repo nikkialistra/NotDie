@@ -1,10 +1,11 @@
 using System.Collections;
 using Entities.Data;
+using Entities.Player.Animation;
 using Entities.Wave;
 using UnityEngine;
 using Zenject;
 
-namespace Entities.Player
+namespace Entities.Player.Combat
 {
     public class WeaponAttack : MonoBehaviour
     {
@@ -20,12 +21,16 @@ namespace Entities.Player
         private int _waveCounter = 0;
 
         [Inject]
-        public void Construct(Weapons weapons, WaveSpawner waveSpawner, PlayerAnimator playerAnimator, PlayerMover playerMover)
+        public void Construct(Weapons weapons, WaveSpawner waveSpawner)
         {
             _weapons = weapons;
             _waveSpawner = waveSpawner;
-            _playerAnimator = playerAnimator;
-            _playerMover = playerMover;
+        }
+
+        private void Awake()
+        {
+            _playerAnimator = GetComponent<PlayerAnimator>();
+            _playerMover = GetComponent<PlayerMover>();
         }
 
         public void Attack(Vector3 position, Transform attackDirection)

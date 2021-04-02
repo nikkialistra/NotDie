@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using Entities.Player.Animation;
+using Entities.Player.Combat;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -41,16 +43,17 @@ namespace Entities.Player
         private InputAction _moveAction;
 
         [Inject]
-        public void Construct(Settings settings, Transform attackDirection, WeaponAttack weaponAttack, PlayerAnimator playerAnimator)
+        public void Construct(Settings settings, Transform attackDirection)
         {
             _settings = settings;
             _attackDirection = attackDirection;
-            _weaponAttack = weaponAttack;
-            _playerAnimator = playerAnimator;
         }
 
         private void Awake()
         {
+            _weaponAttack = GetComponent<WeaponAttack>();
+            _playerAnimator = GetComponent<PlayerAnimator>();
+            
             _rigidbody = GetComponent<Rigidbody2D>();
             _rigidbody.drag = _settings.Damping;
             

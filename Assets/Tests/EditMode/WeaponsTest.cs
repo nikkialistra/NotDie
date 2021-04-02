@@ -1,6 +1,7 @@
 using System;
 using Entities.Data;
 using Entities.Player;
+using Entities.Player.Combat;
 using NUnit.Framework;
 using UnityEngine;
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Entities.Player.Combat;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -20,16 +21,17 @@ namespace Entities.Player
         private InputAction _showAttackDirectionAction;
 
         [Inject]
-        public void Construct(PlayerMover playerMover, Transform attackDirection, WeaponAttack weaponAttack)
+        public void Construct(Transform attackDirection)
         {
-            _playerMover = playerMover;
             _attackDirection = attackDirection;
             _attackDirectionRenderer = _attackDirection.GetComponent<Renderer>();
-            _weaponAttack = weaponAttack;
         }
 
         private void Awake()
         {
+            _playerMover = GetComponent<PlayerMover>();
+            _weaponAttack = GetComponent<WeaponAttack>();
+            
             _input = GetComponent<PlayerInput>();
             _attackAction = _input.actions.FindAction("Attack");
             _showAttackDirectionAction = _input.actions.FindAction("ShowAttackDirection");

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace Entities.Player
+namespace Entities.Player.Combat
 {
     public class AttackDirection : MonoBehaviour
     {
@@ -27,7 +27,6 @@ namespace Entities.Player
         private bool _takeDirectionBlocked;
 
         private GameObject _player;
-        private Transform _playerTransform;
         private PlayerMover _playerMover;
 
         private Vector2 _attackDirection  = new Vector2(1, 0);
@@ -40,7 +39,6 @@ namespace Entities.Player
         {
             _settings = settings;
             _player = player;
-            _playerTransform = player.transform;
             _playerMover = playerMover;
             
             _playerMover.MovingIsBlocked += OnMovingIsBlocked;

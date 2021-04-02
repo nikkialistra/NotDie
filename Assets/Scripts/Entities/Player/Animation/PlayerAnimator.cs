@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Entities.Player.Combat;
+using UnityEngine;
 using Zenject;
 
-namespace Entities.Player
+namespace Entities.Player.Animation
 {
     [RequireComponent(typeof(Animator))]
     public class PlayerAnimator : MonoBehaviour
@@ -24,7 +25,7 @@ namespace Entities.Player
         };
 
         [Inject]
-        public void Construct(WeaponAttack weaponAttack, Transform attackDirection, Weapons weapons)
+        public void Construct(Transform attackDirection, Weapons weapons)
         {
             _attackDirection = attackDirection;
 
