@@ -7,19 +7,31 @@ namespace Entities.Items.Weapon
 {
     public class WeaponFacade : MonoBehaviour, IPoolable<WeaponSpecs, IMemoryPool>, IDisposable
     {
-        [SerializeField] private ReactiveProperty<Data.Weapon> _weapon;
-        [SerializeField] private ReactiveProperty<float> _durability;
+        public event Action DurabilityChanged; 
+        
+        [SerializeField] private Data.Weapon _weapon;
+        [SerializeField] private float _durability;
 
-        public Data.Weapon Weapon => _weapon.Value;
+        public Data.Weapon Weapon => _weapon;
+        
+        [ContextMenu("Decrease durability")]
+        void DecreaseDurability()
+        {
+            Durability -= 0.3f;
+        }
 
         public float Durability
         {
-            get => _durability.Value;
+            get => _durability;
             set
             {
-                if (value < 0 || value > 1)
+                if (value > 1)
                     throw new ArgumentOutOfRangeException(nameof(Durability));
-                _durability.Value = value;
+                if (value <= 0)
+                    _durability = 0;
+                else
+                    _durability = value;
+                DurabilityChanged?.Invoke();
             }
         }
 
@@ -29,8 +41,8 @@ namespace Entities.Items.Weapon
         {
             _pool = pool;
 
-            _weapon.Value = weaponSpecs.Weapon;
-            _durability.Value = weaponSpecs.Durability;
+            _weapon = weaponSpecs.Weapon;
+            _durability = weaponSpecs.Durability;
         }
 
         public void Dispose() => _pool.Despawn(this);
