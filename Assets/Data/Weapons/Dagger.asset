@@ -17,44 +17,152 @@ MonoBehaviour:
   NotActive: {fileID: 325017638214441359, guid: 157332041b7ceb34ea6d104994d1eb56, type: 3}
   HashedTakenName: 1894563662
   ComboShots:
-  - Clip: {fileID: 0}
-    HashedTriggerName: 0
+  - Clip: {fileID: 7400000, guid: a15eb96148e644145981a3e132f1a3ef, type: 2}
+    HashedTriggerName: 1626209528
     ImpulseCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.0041389465
+        value: 0
+        inSlope: 0.96456623
+        outSlope: 12.256755
+        tangentMode: 1
+        weightedMode: 2
+        inWeight: 0
+        outWeight: 0.22853184
+      - serializedVersion: 3
+        time: 0.3344241
+        value: 1
+        inSlope: -0.032499
+        outSlope: -0.032499
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3303491
+        outWeight: 0.4296799
+      - serializedVersion: 3
+        time: 0.5665787
+        value: 0.2749261
+        inSlope: -17.1014
+        outSlope: -20.143982
+        tangentMode: 1
+        weightedMode: 3
+        inWeight: 0.055451874
+        outWeight: 0.03531766
+      - serializedVersion: 3
+        time: 1
+        value: 0.00076293945
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    WaveClip: {fileID: 0}
-    HashedWaveTriggerName: 0
-    WaveDelay: 0
-    Damage: 15
+    WaveClip: {fileID: 7400000, guid: 2770e9ae49f417d4d92b937bbf5d47d8, type: 2}
+    HashedWaveTriggerName: -2022395241
+    WaveDelay: 0.15
+    Damage: 10
     isPenetrable: 0
-  - Clip: {fileID: 0}
-    HashedTriggerName: 0
+  - Clip: {fileID: 7400000, guid: 6f346cdf6755d914b831c46fa505ce23, type: 2}
+    HashedTriggerName: 189526127
     ImpulseCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.0041389465
+        value: 0
+        inSlope: 0.96456623
+        outSlope: 12.256755
+        tangentMode: 1
+        weightedMode: 2
+        inWeight: 0
+        outWeight: 0.22853184
+      - serializedVersion: 3
+        time: 0.3344241
+        value: 1
+        inSlope: -0.032499
+        outSlope: -0.032499
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3303491
+        outWeight: 0.4296799
+      - serializedVersion: 3
+        time: 0.5665787
+        value: 0.2749261
+        inSlope: -17.1014
+        outSlope: -20.143982
+        tangentMode: 1
+        weightedMode: 3
+        inWeight: 0.055451874
+        outWeight: 0.03531766
+      - serializedVersion: 3
+        time: 1
+        value: 0.00076293945
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    WaveClip: {fileID: 0}
-    HashedWaveTriggerName: 0
-    WaveDelay: 0
+    WaveClip: {fileID: 7400000, guid: 2770e9ae49f417d4d92b937bbf5d47d8, type: 2}
+    HashedWaveTriggerName: -2022395241
+    WaveDelay: 0.15
     Damage: 15
     isPenetrable: 0
-  - Clip: {fileID: 0}
-    HashedTriggerName: 0
+  - Clip: {fileID: 7400000, guid: 723447179e8a0ce4fa50064c1905c943, type: 2}
+    HashedTriggerName: 668459295
     ImpulseCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.0041389465
+        value: 0
+        inSlope: 0.96456623
+        outSlope: 12.256755
+        tangentMode: 1
+        weightedMode: 2
+        inWeight: 0
+        outWeight: 0.22853184
+      - serializedVersion: 3
+        time: 0.3344241
+        value: 1
+        inSlope: -0.032499
+        outSlope: -0.032499
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.3303491
+        outWeight: 0.4296799
+      - serializedVersion: 3
+        time: 0.5665787
+        value: 0.2749261
+        inSlope: -17.1014
+        outSlope: -20.143982
+        tangentMode: 1
+        weightedMode: 3
+        inWeight: 0.055451874
+        outWeight: 0.03531766
+      - serializedVersion: 3
+        time: 1
+        value: 0.00076293945
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    WaveClip: {fileID: 0}
-    HashedWaveTriggerName: 0
-    WaveDelay: 0
-    Damage: 15
+    WaveClip: {fileID: 7400000, guid: d490087c29205b046b103c565425c7e4, type: 2}
+    HashedWaveTriggerName: -321733120
+    WaveDelay: 0.15
+    Damage: 20
     isPenetrable: 0
-  ShotImpulse: 0
-  CooldownTime: 0.3
+  ShotImpulse: 0.1
+  CooldownTime: 0.2
