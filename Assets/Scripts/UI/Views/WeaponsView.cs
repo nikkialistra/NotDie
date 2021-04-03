@@ -65,9 +65,15 @@ namespace UI.Views
         {
             if (durability <= 0 || durability > 1)
                 throw new ArgumentException("Value should be between 0 and 1");
-            
-            var index = (sprites.Count-1) * durability;
-            return sprites[(int) index];
+
+            if (durability > 0.75)
+                return sprites[3];
+            if (durability > 0.5)
+                return sprites[2];
+            if (durability > 0.25)
+                return sprites[1];
+            else
+                return sprites[0];
         }
     }
 }

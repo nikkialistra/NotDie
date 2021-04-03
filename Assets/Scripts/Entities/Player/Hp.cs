@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Entities.Player
 {
@@ -41,10 +42,11 @@ namespace Entities.Player
                 throw new InvalidOperationException("Health should not be 0 or less");
             
             _healthValue -= damage;
-            HealthChanged?.Invoke(_healthValue);
 
-            if (_healthValue <= 0) 
+            if (_healthValue <= 0)
                 TakeAwayLive();
+            
+            HealthChanged?.Invoke(_healthValue);
         }
 
         private void TakeAwayLive()

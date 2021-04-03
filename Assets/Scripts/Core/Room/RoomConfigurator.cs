@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Core
+namespace Core.Room
 {
     [RequireComponent(typeof(EdgeCollider2D))]
     public class RoomConfigurator : MonoBehaviour

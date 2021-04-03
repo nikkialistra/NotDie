@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Core;
+using Core.Room;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;

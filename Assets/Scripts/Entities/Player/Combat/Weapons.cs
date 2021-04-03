@@ -5,7 +5,7 @@ namespace Entities.Player.Combat
 {
     public class Weapons
     {
-        public event Action LeftWeaponChanged; 
+        public event Action LeftWeaponChanged;
         public event Action RightWeaponChanged;
 
         public event Action LeftWeaponIsActive;
@@ -51,9 +51,10 @@ namespace Entities.Player.Combat
             if (_leftIsActive)
             {
                 droppedWeapon = _leftWeapon;
-                if (droppedWeapon == _hand) 
+                if (droppedWeapon == _hand)
                     return null;
-                
+
+                _leftWeapon.DurabilityChanged -= LeftWeaponDurabilityChanged;
                 _leftWeapon = _hand;
                 LeftWeaponChanged?.Invoke();
                     
@@ -64,7 +65,8 @@ namespace Entities.Player.Combat
                 droppedWeapon = _rightWeapon;
                 if (droppedWeapon == _hand) 
                     return null;
-                
+
+                _rightWeapon.DurabilityChanged -= RightWeaponDurabilityChanged;
                 _rightWeapon = _hand;
                 RightWeaponChanged?.Invoke();
                     
@@ -111,28 +113,76 @@ namespace Entities.Player.Combat
         {
             if (_leftIsActive)
             {
-                _leftWeapon = weaponFacade;
+                SetLeftWeapon(weaponFacade);
                 LeftWeaponChanged?.Invoke();
             }
             else
             {
-                _rightWeapon = weaponFacade;
+                SetRightWeapon(weaponFacade);
                 RightWeaponChanged?.Invoke();
             }
         }
-        
+
         private void ChangeNotActiveWeapon(WeaponFacade weaponFacade)
         {
             if (_leftIsActive)
             {
-                _rightWeapon = weaponFacade;
+                SetRightWeapon(weaponFacade);
                 RightWeaponChanged?.Invoke();
             }
             else
             {
-                _leftWeapon = weaponFacade;
+                SetLeftWeapon(weaponFacade);
                 LeftWeaponChanged?.Invoke();
             }
+        }
+
+        private void SetLeftWeapon(WeaponFacade weaponFacade)
+        {
+            _leftWeapon.DurabilityChanged -= LeftWeaponDurabilityChanged;
+            
+            _leftWeapon = weaponFacade;
+            _leftWeapon.DurabilityChanged += LeftWeaponDurabilityChanged;
+        }
+
+        private void SetRightWeapon(WeaponFacade weaponFacade)
+        {
+            _rightWeapon.DurabilityChanged -= RightWeaponDurabilityChanged;
+            
+            _rightWeapon = weaponFacade;
+            _rightWeapon.DurabilityChanged += RightWeaponDurabilityChanged;
+        }
+
+        private void LeftWeaponDurabilityChanged()
+        {
+            if (LeftWeapon.Durability <= 0)
+                DestroyLeftWeapon();
+
+            LeftWeaponChanged?.Invoke();
+        }
+
+        private void RightWeaponDurabilityChanged()
+        {
+            if (RightWeapon.Durability <= 0)
+                DestroyRightWeapon();
+            
+            RightWeaponChanged?.Invoke();
+        }
+
+        private void DestroyLeftWeapon()
+        {
+            _leftWeapon.DurabilityChanged -= LeftWeaponDurabilityChanged;
+            _leftWeapon.Dispose();
+            _leftWeapon = _hand;
+            LeftWeaponChanged?.Invoke();
+        }
+
+        private void DestroyRightWeapon()
+        {
+            _rightWeapon.DurabilityChanged -= RightWeaponDurabilityChanged;
+            _rightWeapon.Dispose();
+            _rightWeapon = _hand;
+            RightWeaponChanged?.Invoke();
         }
     }
 }
