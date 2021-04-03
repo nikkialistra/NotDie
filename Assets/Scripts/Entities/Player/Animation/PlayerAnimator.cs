@@ -93,7 +93,7 @@ namespace Entities.Player.Animation
             foreach (var takenHash in _weaponsTakenHashes)
                 _animator.SetBool(takenHash, false);
 
-            _animator.SetBool(_weapons.ActiveWeapon.HashedTakenName, true);
+            _animator.SetBool(_weapons.ActiveWeapon.Weapon.HashedTakenName, true);
         }
     }
 }

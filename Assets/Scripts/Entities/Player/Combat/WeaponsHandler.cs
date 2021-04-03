@@ -1,6 +1,5 @@
 ﻿using System;
 using Entities.Data;
-using Entities.Items;
 using Entities.Items.Weapon;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,18 +22,18 @@ namespace Entities.Player.Combat
 
         private Weapons _weapons;
         
-        private WeaponGameObject.Factory _weaponFactory;
+        private WeaponGameObjectSpawner _weaponGameObjectSpawner;
 
         private PlayerInput _input;
         private InputAction _takeDropWeaponAction;
         private InputAction _swapWeaponsAction;
 
         [Inject]
-        public void Construct(Settings settings, Weapons weapons, WeaponGameObject.Factory weaponFactory)
+        public void Construct(Settings settings, Weapons weapons, WeaponGameObjectSpawner weaponGameObjectSpawner)
         {
             _weapons = weapons;
             _settings = settings;
-            _weaponFactory = weaponFactory;
+            _weaponGameObjectSpawner = weaponGameObjectSpawner;
         }
 
         private void Awake()
@@ -92,19 +91,20 @@ namespace Entities.Player.Combat
 
         private void TakeWeapon(WeaponGameObject weaponGameObject)
         {
-            // var discardedWeapon = _weapons.TakeWeapon(weaponGameObject.Weapon, weaponGameObject.Durability);
-            //
-            // Destroy(weaponGameObject.gameObject);
-            //
-            // if (discardedWeapon == null) 
-            //     return;
-            //
-            // CreateWeapon(discardedWeapon);
+            var weaponFacade = weaponGameObject.WeaponFacade;
+            weaponGameObject.Dispose();
+            
+            var discardedWeapon = _weapons.TakeWeapon(weaponFacade);
+
+            if (discardedWeapon == null) 
+                return;
+            
+            CreateWeapon(discardedWeapon);
         }
 
-        private void CreateWeapon(Weapon weaponToCreate)
+        private void CreateWeapon(WeaponFacade weaponFacade)
         {
-            // _weaponFactory.Create(weaponToCreate, transform.position);
+            _weaponGameObjectSpawner.Spawn(transform.position, weaponFacade);
         }
     }
 }

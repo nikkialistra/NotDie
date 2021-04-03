@@ -1,6 +1,4 @@
 using Core;
-using Entities.Data;
-using Entities.Items;
 using Entities.Items.Weapon;
 using Entities.Player;
 using Entities.Player.Animation;
@@ -20,7 +18,7 @@ namespace Infrastructure
         [SerializeField] private Transform _attackDirection;
 
         [Header("WeaponsHandler")]
-        [SerializeField] private Weapon _hand;
+        [SerializeField] private WeaponFacade _hand;
         [SerializeField] private GameObject _weaponFacadePrefab;
         [SerializeField] private GameObject _weaponPrefab;
         [SerializeField] private WeaponAttack _weaponAttack;
@@ -88,6 +86,8 @@ namespace Infrastructure
 
         private void BindWeaponGameObjectSpawner()
         {
+            Container.Bind<WeaponGameObjectSpawner>().AsSingle();
+            
             Container.BindFactory<Vector3, WeaponFacade, WeaponGameObject, WeaponGameObject.Factory>()
                 .FromPoolableMemoryPool<Vector3, WeaponFacade, WeaponGameObject, WeaponGameObjectPool>(poolBinder => poolBinder
                 .WithInitialSize(5)
