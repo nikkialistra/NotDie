@@ -20,13 +20,13 @@ namespace UI.Presenters
 
             if (_leftIsActive)
             {
-                _view.SetLeftWeaponSpriteActive(_weapons.LeftWeapon, _weapons.LeftWeaponDurability);
-                _view.SetRightWeaponSpriteNotActive(_weapons.RightWeapon, _weapons.RightWeaponDurability);
+                _view.SetLeftWeaponSpriteActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
+                _view.SetRightWeaponSpriteNotActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
             }
             else
             {
-                _view.SetLeftWeaponSpriteNotActive(_weapons.LeftWeapon, _weapons.LeftWeaponDurability);
-                _view.SetRightWeaponSpriteActive(_weapons.RightWeapon, _weapons.RightWeaponDurability);
+                _view.SetLeftWeaponSpriteNotActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
+                _view.SetRightWeaponSpriteActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
             }
 
             _weapons.LeftWeaponIsActive += OnLeftWeaponIsActive;
@@ -57,17 +57,17 @@ namespace UI.Presenters
         private void OnLeftWeaponChanged()
         {
             if (_leftIsActive)
-                _view.SetLeftWeaponSpriteActive(_weapons.LeftWeapon, _weapons.LeftWeaponDurability);
+                _view.SetLeftWeaponSpriteActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
             else
-                _view.SetLeftWeaponSpriteNotActive(_weapons.LeftWeapon, _weapons.LeftWeaponDurability);
+                _view.SetLeftWeaponSpriteNotActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
         }
 
         private void OnRightWeaponChanged()
         {
             if (_leftIsActive)
-                _view.SetRightWeaponSpriteNotActive(_weapons.RightWeapon, _weapons.RightWeaponDurability);
+                _view.SetRightWeaponSpriteNotActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
             else
-                _view.SetRightWeaponSpriteActive(_weapons.RightWeapon, _weapons.RightWeaponDurability);
+                _view.SetRightWeaponSpriteActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
         }
     }
 }

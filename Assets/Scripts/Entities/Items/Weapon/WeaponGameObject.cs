@@ -7,6 +7,8 @@ namespace Entities.Items.Weapon
     [RequireComponent(typeof(SpriteRenderer))]
     public class WeaponGameObject : MonoBehaviour, IPoolable<Vector3, WeaponFacade, IMemoryPool>, IDisposable
     {
+        public WeaponFacade WeaponFacade => _weaponFacade;
+
         private WeaponFacade _weaponFacade;
 
         private SpriteRenderer _renderer;
@@ -14,8 +16,6 @@ namespace Entities.Items.Weapon
         private IMemoryPool _pool;
 
         private void Awake() => _renderer = GetComponent<SpriteRenderer>();
-
-        private void Start() => _renderer.sprite = _weaponFacade.Weapon.PickUp;
         
         public void OnSpawned(Vector3 position, WeaponFacade weaponFacade, IMemoryPool pool)
         {
@@ -23,6 +23,7 @@ namespace Entities.Items.Weapon
 
             transform.position = position;
             _weaponFacade = weaponFacade;
+            _renderer.sprite = _weaponFacade.Weapon.PickUp;
         }
 
         public void Dispose() => _pool.Despawn(this);

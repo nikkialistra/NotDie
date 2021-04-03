@@ -39,17 +39,17 @@ namespace Entities.Player.Combat
                 return;
             
             if (_comboShotNumber == 0 || (_playerAnimator.IsCurrentAnimationWithTag("Transition") &&
-                                          _comboShotNumber < _weapons.ActiveWeapon.ComboShots.Count))
+                                          _comboShotNumber < _weapons.ActiveWeapon.Weapon.ComboShots.Count))
                 StartShot(position, attackDirection);
         }
 
         private void StartShot(Vector3 position, Transform attackDirection)
         {
-            var comboShot = _weapons.ActiveWeapon.ComboShots[_comboShotNumber];
+            var comboShot = _weapons.ActiveWeapon.Weapon.ComboShots[_comboShotNumber];
 
             _playerAnimator.PlayAttackAnimation(comboShot.HashedTriggerName);
 
-            _playerMover.AddImpulse(_weapons.ActiveWeapon.ShotImpulse, comboShot.ImpulseCurve, comboShot.Clip.length);
+            _playerMover.AddImpulse(_weapons.ActiveWeapon.Weapon.ShotImpulse, comboShot.ImpulseCurve, comboShot.Clip.length);
             
             _comboShotNumber++;
             
@@ -86,7 +86,7 @@ namespace Entities.Player.Combat
 
         public void ResetCombo()
         {
-            _weaponCooldownFinishingTime = Time.time + _weapons.ActiveWeapon.CooldownTime;
+            _weaponCooldownFinishingTime = Time.time + _weapons.ActiveWeapon.Weapon.CooldownTime;
             _comboShotNumber = 0;
         }
     }
