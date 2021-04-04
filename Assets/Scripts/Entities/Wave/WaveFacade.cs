@@ -1,4 +1,5 @@
 ﻿using System;
+using Entities.Items.Weapon;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +13,7 @@ namespace Entities.Wave
         public bool IsPenetrable => _isPenetrable;
         
         private int _id;
+        private WeaponFacade _weaponFacade;
         private int _damageValue;
         private bool _isPenetrable;
         
@@ -31,11 +33,14 @@ namespace Entities.Wave
             }
         }
 
+        public void Hitted() => _weaponFacade.Hitted();
+
         public void OnSpawned(WaveSpecs waveSpecs, IMemoryPool pool)
         {
             _pool = pool;
 
             _id = waveSpecs.Id;
+            _weaponFacade = waveSpecs.WeaponFacade;
             _damageValue = waveSpecs.Damage;
             _isPenetrable = waveSpecs.isPenetrable;
             

@@ -7,25 +7,6 @@ namespace Entities.Data
     [CreateAssetMenu(fileName = "Weapon", menuName = "Data/Weapon")]
     public class Weapon : ScriptableObject
     {
-        [Header("Icons")] 
-        public Sprite PickUp;
-        
-        public Sprite Active;
-        public Sprite NotActive;
-
-        [HideInInspector] public int HashedTakenName;
-        
-        [Space]
-        public List<ComboShot> ComboShots;
-
-        public GameObject WavePrefab;
-        [Range(0.3f, 10f)]
-        public float DirectionMultiplier;
-
-        public float ShotImpulse;
-        public float CooldownTime;
-
-
         [Serializable]
         public class ComboShot
         {
@@ -43,6 +24,40 @@ namespace Entities.Data
             public bool isPenetrable;
         }
 
+        [Header("Icons")] 
+        public Sprite PickUp;
+
+        public Sprite Active;
+
+        public Sprite NotActive;
+
+        [HideInInspector] public int HashedTakenName;
+
+        [Space]
+        public List<ComboShot> ComboShots;
+
+        public GameObject WavePrefab;
+        [Range(0.3f, 10f)]
+        public float DirectionMultiplier;
+        public float ShotImpulse;
+
+        [Space]
+        public float CooldownTime;
+        public Durability Durability;
+
+        public float DurabilityLostOnHit()
+        {
+            return Durability switch
+            {
+                Durability.Infinity => 0,
+                Durability.Strong => 0.05f,
+                Durability.Moderate => 0.15f,
+                Durability.Fragile => 0.35f,
+                Durability.VeryFragile => 1,
+                _ => throw new ArgumentOutOfRangeException(nameof(Durability))
+            };
+        }
+        
         private void OnValidate()
         {
             var takenName = name.Substring(0, 1).ToLower() + name.Substring(1) + "Taken";
@@ -67,5 +82,14 @@ namespace Entities.Data
                 }
             }
         }
+    }
+
+    public enum Durability
+    {
+        Infinity,
+        Strong,
+        Moderate,
+        Fragile,
+        VeryFragile
     }
 }
