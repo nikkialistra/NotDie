@@ -21,6 +21,8 @@ namespace Entities.Player.Combat
 
         public bool LeftIsActive => _leftIsActive;
 
+        public bool HandIsActive => ActiveWeapon == _hand;
+
         private WeaponFacade _leftWeapon;
         private WeaponFacade _rightWeapon;
 

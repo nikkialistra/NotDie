@@ -25,22 +25,25 @@ namespace Entities.Player
         }
 
         public Action<bool> MovingIsBlocked;
-
+        
+        public Vector3 PositionCenter => transform.position + new Vector3(0, _settings.YPosition);
+        
         private Settings _settings;
 
         private bool _playerUnderControl = true;
-        
+
         private Transform _attackDirection;
         private Rigidbody2D _rigidbody;
 
         private WeaponAttack _weaponAttack;
 
         private PlayerAnimator _playerAnimator;
-        
+
         private Vector2 _moveDirection;
 
         private PlayerInput _input;
         private InputAction _moveAction;
+
 
         [Inject]
         public void Construct(Settings settings, Transform attackDirection)
@@ -69,8 +72,6 @@ namespace Entities.Player
                 _moveDirection = Vector2.zero;
         }
 
-        public Vector3 PositionCenter => transform.position + new Vector3(0, _settings.YPosition);
-
         private void FixedUpdate()
         {
             if (_moveDirection != Vector2.zero) 
@@ -78,6 +79,10 @@ namespace Entities.Player
             else
                 _playerAnimator.Run(false);
         }
+
+        public void TakeAwayControl() => _playerUnderControl = false;
+        
+        public void ReturnControl() => _playerUnderControl = true;
 
         public void AddImpulse(float impulse, AnimationCurve curve, float time)
         {

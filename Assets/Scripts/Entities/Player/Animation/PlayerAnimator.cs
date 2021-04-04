@@ -17,6 +17,8 @@ namespace Entities.Player.Animation
 
         private readonly int _run = Animator.StringToHash("run");
         private readonly int _comboMove = Animator.StringToHash("comboMove");
+        private readonly int _throwing = Animator.StringToHash("throwing");
+        private readonly int _throw = Animator.StringToHash("throw");
 
         private readonly int[] _weaponsTakenHashes =
         {
@@ -56,6 +58,12 @@ namespace Entities.Player.Animation
 
         public void MoveInCombo() => _animator.SetTrigger(_comboMove);
 
+        public void StartThrowing() => _animator.SetBool(_throwing, true);
+
+        public void StopThrowing() => _animator.SetBool(_throwing, false);
+
+        public void Throw() => _animator.SetTrigger(_throw);
+
         private void LookingRight()
         {
             var scale = transform.localScale;
@@ -64,7 +72,7 @@ namespace Entities.Player.Animation
 
             IsFlipped = false;
         }
-        
+
         private void LookingLeft()
         {
             var scale = transform.localScale;

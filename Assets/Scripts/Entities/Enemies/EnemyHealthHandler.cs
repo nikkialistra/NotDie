@@ -33,7 +33,10 @@ namespace Entities.Enemies
             _value -= value;
 
             if (!IsAlive)
+            {
+                StopTakingDamage();
                 Destroy(gameObject);
+            }
         }
 
         public void TakeDamageContinuously(int value, float interval)

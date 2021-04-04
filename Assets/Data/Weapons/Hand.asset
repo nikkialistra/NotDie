@@ -119,3 +119,5 @@ MonoBehaviour:
   DirectionMultiplier: 1
   ShotImpulse: 0.15
   CooldownTime: 0.2
+  Durability: 0
+  DurabilityMultiplier: 1

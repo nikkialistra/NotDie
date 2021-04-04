@@ -38,21 +38,23 @@ namespace Entities.Data
 
         public GameObject WavePrefab;
         [Range(0.3f, 10f)]
-        public float DirectionMultiplier;
+        public float DirectionMultiplier = 1;
         public float ShotImpulse;
 
         [Space]
         public float CooldownTime;
         public Durability Durability;
+        [Range(0.5f, 2)]
+        public float DurabilityMultiplier = 1;
 
         public float DurabilityLostOnHit()
         {
             return Durability switch
             {
                 Durability.Infinity => 0,
-                Durability.Strong => 0.05f,
-                Durability.Moderate => 0.15f,
-                Durability.Fragile => 0.35f,
+                Durability.Strong => 0.05f / DurabilityMultiplier,
+                Durability.Moderate => 0.15f / DurabilityMultiplier,
+                Durability.Fragile => 0.35f / DurabilityMultiplier,
                 Durability.VeryFragile => 1,
                 _ => throw new ArgumentOutOfRangeException(nameof(Durability))
             };
