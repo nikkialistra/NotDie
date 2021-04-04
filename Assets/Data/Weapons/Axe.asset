@@ -35,3 +35,4 @@ MonoBehaviour:
   ShotImpulse: 0
   CooldownTime: 0.9
   Durability: 1
+  DurabilityMultiplier: 1

@@ -29,7 +29,7 @@ namespace Services.Controls
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Attack"",
+                    ""name"": ""AttackThrow"",
                     ""type"": ""Button"",
                     ""id"": ""93055143-3c09-49e6-81a7-0055fe3f78cc"",
                     ""expectedControlType"": ""Button"",
@@ -45,7 +45,7 @@ namespace Services.Controls
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""TakeDropWeapon"",
+                    ""name"": ""TakeDropThrowingWeapon"",
                     ""type"": ""Button"",
                     ""id"": ""52f095f1-70d7-4633-9960-e85e4d14ac10"",
                     ""expectedControlType"": ""Button"",
@@ -179,7 +179,7 @@ namespace Services.Controls
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Attack"",
+                    ""action"": ""AttackThrow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -190,7 +190,7 @@ namespace Services.Controls
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Attack"",
+                    ""action"": ""AttackThrow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -198,10 +198,10 @@ namespace Services.Controls
                     ""name"": """",
                     ""id"": ""32ec1a3e-fb9f-4d69-8a52-6dd6618fc011"",
                     ""path"": ""<Keyboard>/g"",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=0.3)"",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""TakeDropWeapon"",
+                    ""action"": ""TakeDropThrowingWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -212,7 +212,7 @@ namespace Services.Controls
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""TakeDropWeapon"",
+                    ""action"": ""TakeDropThrowingWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -291,9 +291,9 @@ namespace Services.Controls
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-            m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+            m_Player_AttackThrow = m_Player.FindAction("AttackThrow", throwIfNotFound: true);
             m_Player_SwapWeapons = m_Player.FindAction("SwapWeapons", throwIfNotFound: true);
-            m_Player_TakeDropWeapon = m_Player.FindAction("TakeDropWeapon", throwIfNotFound: true);
+            m_Player_TakeDropThrowingWeapon = m_Player.FindAction("TakeDropThrowingWeapon", throwIfNotFound: true);
             m_Player_ShowAttackDirection = m_Player.FindAction("ShowAttackDirection", throwIfNotFound: true);
         }
 
@@ -345,18 +345,18 @@ namespace Services.Controls
         private readonly InputActionMap m_Player;
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_Move;
-        private readonly InputAction m_Player_Attack;
+        private readonly InputAction m_Player_AttackThrow;
         private readonly InputAction m_Player_SwapWeapons;
-        private readonly InputAction m_Player_TakeDropWeapon;
+        private readonly InputAction m_Player_TakeDropThrowingWeapon;
         private readonly InputAction m_Player_ShowAttackDirection;
         public struct PlayerActions
         {
             private @Control m_Wrapper;
             public PlayerActions(@Control wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
-            public InputAction @Attack => m_Wrapper.m_Player_Attack;
+            public InputAction @AttackThrow => m_Wrapper.m_Player_AttackThrow;
             public InputAction @SwapWeapons => m_Wrapper.m_Player_SwapWeapons;
-            public InputAction @TakeDropWeapon => m_Wrapper.m_Player_TakeDropWeapon;
+            public InputAction @TakeDropThrowingWeapon => m_Wrapper.m_Player_TakeDropThrowingWeapon;
             public InputAction @ShowAttackDirection => m_Wrapper.m_Player_ShowAttackDirection;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
@@ -370,15 +370,15 @@ namespace Services.Controls
                     @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                    @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                    @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                    @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                    @AttackThrow.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackThrow;
+                    @AttackThrow.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackThrow;
+                    @AttackThrow.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackThrow;
                     @SwapWeapons.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapWeapons;
                     @SwapWeapons.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapWeapons;
                     @SwapWeapons.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwapWeapons;
-                    @TakeDropWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeDropWeapon;
-                    @TakeDropWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeDropWeapon;
-                    @TakeDropWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeDropWeapon;
+                    @TakeDropThrowingWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeDropThrowingWeapon;
+                    @TakeDropThrowingWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeDropThrowingWeapon;
+                    @TakeDropThrowingWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTakeDropThrowingWeapon;
                     @ShowAttackDirection.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowAttackDirection;
                     @ShowAttackDirection.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowAttackDirection;
                     @ShowAttackDirection.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowAttackDirection;
@@ -389,15 +389,15 @@ namespace Services.Controls
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
-                    @Attack.started += instance.OnAttack;
-                    @Attack.performed += instance.OnAttack;
-                    @Attack.canceled += instance.OnAttack;
+                    @AttackThrow.started += instance.OnAttackThrow;
+                    @AttackThrow.performed += instance.OnAttackThrow;
+                    @AttackThrow.canceled += instance.OnAttackThrow;
                     @SwapWeapons.started += instance.OnSwapWeapons;
                     @SwapWeapons.performed += instance.OnSwapWeapons;
                     @SwapWeapons.canceled += instance.OnSwapWeapons;
-                    @TakeDropWeapon.started += instance.OnTakeDropWeapon;
-                    @TakeDropWeapon.performed += instance.OnTakeDropWeapon;
-                    @TakeDropWeapon.canceled += instance.OnTakeDropWeapon;
+                    @TakeDropThrowingWeapon.started += instance.OnTakeDropThrowingWeapon;
+                    @TakeDropThrowingWeapon.performed += instance.OnTakeDropThrowingWeapon;
+                    @TakeDropThrowingWeapon.canceled += instance.OnTakeDropThrowingWeapon;
                     @ShowAttackDirection.started += instance.OnShowAttackDirection;
                     @ShowAttackDirection.performed += instance.OnShowAttackDirection;
                     @ShowAttackDirection.canceled += instance.OnShowAttackDirection;
@@ -426,9 +426,9 @@ namespace Services.Controls
         public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
-            void OnAttack(InputAction.CallbackContext context);
+            void OnAttackThrow(InputAction.CallbackContext context);
             void OnSwapWeapons(InputAction.CallbackContext context);
-            void OnTakeDropWeapon(InputAction.CallbackContext context);
+            void OnTakeDropThrowingWeapon(InputAction.CallbackContext context);
             void OnShowAttackDirection(InputAction.CallbackContext context);
         }
     }

@@ -14,7 +14,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Attack",
+                    "name": "AttackThrow",
                     "type": "Button",
                     "id": "93055143-3c09-49e6-81a7-0055fe3f78cc",
                     "expectedControlType": "Button",
@@ -30,7 +30,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "TakeDropWeapon",
+                    "name": "TakeDropThrowingWeapon",
                     "type": "Button",
                     "id": "52f095f1-70d7-4633-9960-e85e4d14ac10",
                     "expectedControlType": "Button",
@@ -164,7 +164,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Attack",
+                    "action": "AttackThrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -175,7 +175,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Attack",
+                    "action": "AttackThrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -183,10 +183,10 @@
                     "name": "",
                     "id": "32ec1a3e-fb9f-4d69-8a52-6dd6618fc011",
                     "path": "<Keyboard>/g",
-                    "interactions": "",
+                    "interactions": "Hold(duration=0.3)",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "TakeDropWeapon",
+                    "action": "TakeDropThrowingWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -197,7 +197,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "TakeDropWeapon",
+                    "action": "TakeDropThrowingWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

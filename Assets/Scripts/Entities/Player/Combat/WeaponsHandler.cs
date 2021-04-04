@@ -3,6 +3,7 @@ using Entities.Data;
 using Entities.Items.Weapon;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 using Zenject;
 
 namespace Entities.Player.Combat
@@ -18,15 +19,18 @@ namespace Entities.Player.Combat
             public float DistanceForTaking;
         }
 
+        public bool AnyWeaponActive => !_weapons.HandIsActive;
+        
         private Settings _settings;
 
         private Weapons _weapons;
-        
+
         private WeaponGameObjectSpawner _weaponGameObjectSpawner;
 
         private PlayerInput _input;
         private InputAction _takeDropWeaponAction;
         private InputAction _swapWeaponsAction;
+
 
         [Inject]
         public void Construct(Settings settings, Weapons weapons, WeaponGameObjectSpawner weaponGameObjectSpawner)
@@ -39,24 +43,27 @@ namespace Entities.Player.Combat
         private void Awake()
         {
             _input = GetComponent<PlayerInput>();
-            _takeDropWeaponAction = _input.actions.FindAction("TakeDropWeapon");
+            _takeDropWeaponAction = _input.actions.FindAction("TakeDropThrowingWeapon");
             _swapWeaponsAction = _input.actions.FindAction("SwapWeapons");
         }
 
         private void OnEnable()
         {
-            _takeDropWeaponAction.started += OnTakeDropWeapon;
+            _takeDropWeaponAction.canceled += OnTakeDropWeapon;
             _swapWeaponsAction.started += OnSwapWeapons;
         }
 
         private void OnDisable()
         {
-            _takeDropWeaponAction.started -= OnTakeDropWeapon;
+            _takeDropWeaponAction.canceled -= OnTakeDropWeapon;
             _swapWeaponsAction.started -= OnSwapWeapons;
         }
 
         private void OnTakeDropWeapon(InputAction.CallbackContext context)
         {
+            if (context.duration > 0.3f)
+                return;
+            
             if (TryTakeWeapon()) 
                 return;
 
