@@ -10,5 +10,6 @@ namespace Entities.Wave
         public int WaveTriggerName;
         public int Damage;
         public bool isPenetrable;
+        public GameObject Prefab;
     }
 }

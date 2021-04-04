@@ -10,8 +10,6 @@ namespace Entities.Player.Combat
         [Serializable]
         public class Settings
         {
-            [Range(0, 3)]
-            public float ImpulseDirectionMultiplier;
             [Range(0, 0.5f)] 
             public float ButtonPressToleranceTime;
         }
@@ -28,6 +26,7 @@ namespace Entities.Player.Combat
 
         private GameObject _player;
         private PlayerMover _playerMover;
+        private Weapons _weapons;
 
         private Vector2 _attackDirection  = new Vector2(1, 0);
 
@@ -35,11 +34,12 @@ namespace Entities.Player.Combat
         private InputAction _moveAction;
 
         [Inject]
-        public void Construct(Settings settings, GameObject player, PlayerMover playerMover)
+        public void Construct(Settings settings, GameObject player, PlayerMover playerMover, Weapons weapons)
         {
             _settings = settings;
             _player = player;
             _playerMover = playerMover;
+            _weapons = weapons;
             
             _playerMover.MovingIsBlocked += OnMovingIsBlocked;
         }
@@ -140,7 +140,7 @@ namespace Entities.Player.Combat
             if (_attackDirection == Vector2.zero)
                 return;
             
-            transform.position =_playerMover.PositionCenter + (Vector3) _attackDirection.normalized * _settings.ImpulseDirectionMultiplier;
+            transform.position =_playerMover.PositionCenter + (Vector3) _attackDirection.normalized * _weapons.ActiveWeapon.Weapon.DirectionMultiplier;
         }
 
         private void OnMovingIsBlocked(bool isBlocked) => _takeDirectionBlocked = isBlocked;

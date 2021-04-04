@@ -61,8 +61,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    WaveClip: {fileID: 7400000, guid: 2770e9ae49f417d4d92b937bbf5d47d8, type: 2}
-    HashedWaveTriggerName: -2022395241
+    WaveClip: {fileID: 7400000, guid: bfb2a229fd291af4dbe744006d6bec3d, type: 2}
+    HashedWaveTriggerName: 1694003903
     WaveDelay: 0.15
     Damage: 10
     isPenetrable: 0
@@ -110,8 +110,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    WaveClip: {fileID: 7400000, guid: 2770e9ae49f417d4d92b937bbf5d47d8, type: 2}
-    HashedWaveTriggerName: -2022395241
+    WaveClip: {fileID: 7400000, guid: bfb2a229fd291af4dbe744006d6bec3d, type: 2}
+    HashedWaveTriggerName: 1694003903
     WaveDelay: 0.15
     Damage: 15
     isPenetrable: 0
@@ -159,10 +159,12 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    WaveClip: {fileID: 7400000, guid: d490087c29205b046b103c565425c7e4, type: 2}
-    HashedWaveTriggerName: -321733120
+    WaveClip: {fileID: 7400000, guid: bfb2a229fd291af4dbe744006d6bec3d, type: 2}
+    HashedWaveTriggerName: 1694003903
     WaveDelay: 0.15
     Damage: 20
     isPenetrable: 0
+  WavePrefab: {fileID: 3274925662554537503, guid: 19810d412f606fa4f98b74d58e543748, type: 3}
+  DirectionMultiplier: 1.2
   ShotImpulse: 0.1
   CooldownTime: 0.2

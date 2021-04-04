@@ -12,14 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab37403a7a589f4c95475a2bf559787, type: 3}
   m_Name: PlayerSettingsInstaller
   m_EditorClassIdentifier: 
-  _playerAttack:
-    Attack: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
   _hp:
     HealthFullValue: 100
     Lives: 9
-  _hpHandler:
-    LiveTakenAway: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
-    GameOver: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
   _playerMover:
     YPosition: 0.8
     Speed: 25
@@ -27,9 +22,6 @@ MonoBehaviour:
   _weaponsHandler:
     Hand: {fileID: 11400000, guid: b945b6d6c3b8a7a4e9e8b8f9f28f6ca1, type: 2}
     DistanceForTaking: 1
-    TakingWeapon: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
-    DroppingWeapon: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
-    SwappingWeapons: {fileID: 11400000, guid: 32a5dd6af8a08f34fab051d8e8fc4801, type: 2}
   _attackDirection:
-    ImpulseDirectionMultiplier: 0.65
+    ImpulseDirectionMultiplier: 0.7
     ButtonPressToleranceTime: 0.1

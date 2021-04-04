@@ -18,7 +18,7 @@ MonoBehaviour:
   HashedTakenName: -317398062
   ComboShots:
   - Clip: {fileID: 7400000, guid: 04c60b4ce481e6a43956ea16353a7ac8, type: 2}
-    HashedTriggerName: 1075460444
+    HashedTriggerName: 332972124
     ImpulseCurve:
       serializedVersion: 2
       m_Curve:
@@ -62,12 +62,12 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     WaveClip: {fileID: 7400000, guid: 2770e9ae49f417d4d92b937bbf5d47d8, type: 2}
-    HashedWaveTriggerName: -2022395241
+    HashedWaveTriggerName: -1654301389
     WaveDelay: 0.3
     Damage: 10
     isPenetrable: 0
   - Clip: {fileID: 7400000, guid: 4540b4ae05834144c886f4ce1271204e, type: 2}
-    HashedTriggerName: 733754827
+    HashedTriggerName: 2021575883
     ImpulseCurve:
       serializedVersion: 2
       m_Curve:
@@ -111,9 +111,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     WaveClip: {fileID: 7400000, guid: d490087c29205b046b103c565425c7e4, type: 2}
-    HashedWaveTriggerName: -321733120
+    HashedWaveTriggerName: -154971740
     WaveDelay: 0.3
     Damage: 15
     isPenetrable: 0
+  WavePrefab: {fileID: 3274925662554537503, guid: eecc16aaa9ba0924a8c058f391626c04, type: 3}
+  DirectionMultiplier: 1
   ShotImpulse: 0.15
   CooldownTime: 0.2

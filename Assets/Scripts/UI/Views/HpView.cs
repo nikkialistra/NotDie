@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace UI.Views
@@ -50,20 +51,29 @@ namespace UI.Views
             _healthFirst.sprite = _digitManager.GetDigit(value / 100);
             _healthSecond.sprite = _digitManager.GetDigit(value / 10 % 10);
             _healthThird.sprite = _digitManager.GetDigit(value % 10);
+            
+            _healthFirst.gameObject.SetActive(true);
+            _healthSecond.gameObject.SetActive(true);
+            _healthThird.gameObject.SetActive(true);
         }
 
         private void SetTwoDigits(int value)
         {
-            _healthFirst.gameObject.SetActive(false);
             _healthSecond.sprite = _digitManager.GetDigit(value / 10);
             _healthThird.sprite = _digitManager.GetDigit(value % 10);
+            
+            _healthFirst.gameObject.SetActive(false);
+            _healthSecond.gameObject.SetActive(true);
+            _healthThird.gameObject.SetActive(true);
         }
 
         private void SetOneDigit(int value)
         {
+            _healthThird.sprite = _digitManager.GetDigit(value % 10);
+            
             _healthFirst.gameObject.SetActive(false);
             _healthSecond.gameObject.SetActive(false);
-            _healthThird.sprite = _digitManager.GetDigit(value % 10);
+            _healthThird.gameObject.SetActive(true);
         }
 
         public void SetLives(int value) => _lives.text = value.ToString();
