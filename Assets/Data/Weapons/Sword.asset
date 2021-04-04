@@ -31,7 +31,7 @@ MonoBehaviour:
     Damage: 25
     isPenetrable: 0
   WavePrefab: {fileID: 0}
-  DirectionMultiplier: 0
+  DirectionMultiplier: 1
   ShotImpulse: 0
   CooldownTime: 0.6
   Durability: 1
