@@ -1,5 +1,6 @@
 using System.Collections;
 using Entities.Data;
+using Entities.Items.Weapon;
 using Entities.Player.Animation;
 using Entities.Wave;
 using UnityEngine;
@@ -53,20 +54,21 @@ namespace Entities.Player.Combat
             
             _comboShotNumber++;
             
-            SpawnWave(position, attackDirection, comboShot, _weapons.ActiveWeapon.Weapon);
+            SpawnWave(position, attackDirection, comboShot, _weapons.ActiveWeapon);
         }
 
-        private void SpawnWave(Vector3 position, Transform attackDirection, Weapon.ComboShot comboShot, Weapon weapon)
+        private void SpawnWave(Vector3 position, Transform attackDirection, Weapon.ComboShot comboShot, WeaponFacade weaponFacade)
         {
             var waveSpecs = new WaveSpecs
             {
                 Id = _waveCounter++,
+                WeaponFacade = weaponFacade,
                 Transform = attackDirection,
                 Direction = (attackDirection.position - position).normalized,
                 WaveTriggerName = comboShot.HashedWaveTriggerName,
                 Damage = comboShot.Damage,
                 isPenetrable = comboShot.isPenetrable,
-                Prefab = weapon.WavePrefab
+                Prefab = weaponFacade.Weapon.WavePrefab
             };
 
             StartCoroutine(AddDelay(comboShot.WaveDelay, waveSpecs));

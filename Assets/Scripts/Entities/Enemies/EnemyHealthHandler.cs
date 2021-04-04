@@ -25,14 +25,14 @@ namespace Entities.Enemies
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var wave = other.GetComponentInParent<WaveFacade>();
-            if (wave == null) 
+            var waveFacade = other.GetComponentInParent<WaveFacade>();
+            if (waveFacade == null) 
                 return;
 
-            if (!wave.IsPenetrable)
-                if (TakeOnce(wave)) return;
+            if (!waveFacade.IsPenetrable)
+                if (TakeOnce(waveFacade)) return;
 
-            TakeDamage(wave.DamageValue);
+            TakeDamage(waveFacade.DamageValue, waveFacade);
         }
 
         private bool TakeOnce(WaveFacade wave)
@@ -44,11 +44,12 @@ namespace Entities.Enemies
             return false;
         }
 
-        private void TakeDamage(int damage)
+        private void TakeDamage(int damage, WaveFacade waveFacade)
         {
             if (damage <= 0)
                 throw new ArgumentException("Damage must be more than zero");
             _value -= damage;
+            waveFacade.Hitted();
             Debug.Log(damage);
 
 

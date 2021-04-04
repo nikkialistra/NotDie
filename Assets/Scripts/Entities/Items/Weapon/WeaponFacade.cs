@@ -37,6 +37,8 @@ namespace Entities.Items.Weapon
 
         private IMemoryPool _pool;
 
+        public void Hitted() => Durability -= _weapon.DurabilityLostOnHit();
+
         public void OnSpawned(WeaponSpecs weaponSpecs, IMemoryPool pool)
         {
             _pool = pool;
