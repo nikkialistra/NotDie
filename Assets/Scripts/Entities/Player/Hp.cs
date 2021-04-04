@@ -35,15 +35,15 @@ namespace Entities.Player
             _lives = _settings.Lives;
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(int value)
         {
-            if (damage <= 0)
+            if (value <= 0)
                 throw new ArgumentException("Damage must be more than zero");
             
             if (_healthValue <= 0)
                 throw new InvalidOperationException("Health should not be 0 or less");
             
-            _healthValue -= damage;
+            _healthValue -= value;
 
             if (_healthValue <= 0)
                 TakeAwayLive();

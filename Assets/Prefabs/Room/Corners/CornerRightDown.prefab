@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3389347467297617137}
   - component: {fileID: 24592273591332813}
   m_Layer: 0
-  m_Name: CornerRIghtDown
+  m_Name: CornerRightDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Library: []
   m_SpriteLibraryAsset: {fileID: 11400000, guid: d1b9890b1da701b4d89b82f99fd09f96, type: 2}
 --- !u!114 &24592273591332813
 MonoBehaviour:
@@ -112,3 +113,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CategoryHash: -1.9159815e+12
   m_labelHash: 958914800
+  m_SpriteKey: -2488.0544

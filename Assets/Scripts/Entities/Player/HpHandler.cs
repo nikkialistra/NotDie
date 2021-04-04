@@ -1,13 +1,15 @@
 ﻿using System.Collections;
-using Core.Room;
+using Core.Interfaces;
 using UnityEngine;
 using Zenject;
 
 namespace Entities.Player
 {
-    public class HpHandler : MonoBehaviour
+    public class HpHandler : MonoBehaviour, IDamageable
     {
         private Hp _hp;
+
+        private Coroutine _takingDamage;
 
         [Inject]
         public void Construct(Hp hp)
@@ -18,28 +20,24 @@ namespace Entities.Player
             _hp.GameOver += OnGameOver;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            var damager = other.GetComponent<Damager>();
+        public void TakeDamage(int value) => _hp.TakeDamage(value);
 
-            if (damager != null)
-                StartCoroutine(TakingDamage(damager.Value));
+        public void TakeDamageContinuously(int value, float interval)
+        {
+            if (_takingDamage != null)
+                StopCoroutine(_takingDamage);
+            
+            _takingDamage = StartCoroutine(TakingDamage(value, interval));
         }
 
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            var damager = other.GetComponent<Damager>();
+        public void StopTakingDamage() => StopCoroutine(_takingDamage);
 
-            if (damager != null)
-                StopAllCoroutines();
-        }
-
-        private IEnumerator TakingDamage(int damage)
+        private IEnumerator TakingDamage(int value, float interval)
         {
             while (true)
             {
-                _hp.TakeDamage(damage);
-                yield return new WaitForSeconds(0.5f);
+                TakeDamage(value);
+                yield return new WaitForSeconds(interval);
             }
         }
 

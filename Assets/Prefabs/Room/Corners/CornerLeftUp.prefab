@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 24592273591332813, guid: b877c9204cac64449bdf204133999e75, type: 3}
+      propertyPath: m_SpriteKey
+      value: -2.0539225e+21
+      objectReference: {fileID: 0}
+    - target: {fileID: 24592273591332813, guid: b877c9204cac64449bdf204133999e75, type: 3}
       propertyPath: m_labelHash
       value: 123.070244
       objectReference: {fileID: 0}

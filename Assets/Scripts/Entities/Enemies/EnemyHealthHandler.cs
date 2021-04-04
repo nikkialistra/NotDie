@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Core.Interfaces;
 using Entities.Wave;
 using UnityEngine;
 using Zenject;
 
 namespace Entities.Enemies
 {
-    public class EnemyHealthHandler : MonoBehaviour
+    public class EnemyHealthHandler : MonoBehaviour, IDamageable
     {
         [Serializable]
         public class Settings
@@ -15,13 +17,43 @@ namespace Entities.Enemies
         }
 
         private int _value;
+        private bool IsAlive => _value > 0;
 
-        private bool isAlive => _value > 0;
+        private Coroutine _takingDamage;
         
-        private IList<int> _damagedWaves = new List<int>();
+        private readonly IList<int> _damagedWaves = new List<int>();
         
         [Inject]
         public void Construct(Settings settings) => _value = settings.Value;
+
+        public void TakeDamage(int value)
+        {
+            if (value <= 0)
+                throw new ArgumentException("Damage must be more than zero");
+            _value -= value;
+
+            if (!IsAlive)
+                Destroy(gameObject);
+        }
+
+        public void TakeDamageContinuously(int value, float interval)
+        {
+            if (_takingDamage != null)
+                StopCoroutine(_takingDamage);
+            
+            _takingDamage = StartCoroutine(TakingDamage(value, interval));
+        }
+
+        public void StopTakingDamage() => StopCoroutine(_takingDamage);
+
+        private IEnumerator TakingDamage(int value, float interval)
+        {
+            while (true)
+            {
+                TakeDamage(value);
+                yield return new WaitForSeconds(interval);
+            }
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -32,7 +64,7 @@ namespace Entities.Enemies
             if (!waveFacade.IsPenetrable)
                 if (TakeOnce(waveFacade)) return;
 
-            TakeDamage(waveFacade.DamageValue, waveFacade);
+            TakeWaveDamage(waveFacade.DamageValue, waveFacade);
         }
 
         private bool TakeOnce(WaveFacade wave)
@@ -44,16 +76,15 @@ namespace Entities.Enemies
             return false;
         }
 
-        private void TakeDamage(int damage, WaveFacade waveFacade)
+        private void TakeWaveDamage(int value, WaveFacade waveFacade)
         {
-            if (damage <= 0)
+            if (value <= 0)
                 throw new ArgumentException("Damage must be more than zero");
-            _value -= damage;
+            _value -= value;
             waveFacade.Hitted();
-            Debug.Log(damage);
+            Debug.Log(value);
 
-
-            if (!isAlive)
+            if (!IsAlive)
                 Destroy(gameObject);
         }
     }
