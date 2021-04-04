@@ -53,10 +53,10 @@ namespace Entities.Player.Combat
             
             _comboShotNumber++;
             
-            SpawnWave(position, attackDirection, comboShot);
+            SpawnWave(position, attackDirection, comboShot, _weapons.ActiveWeapon.Weapon);
         }
 
-        private void SpawnWave(Vector3 position, Transform attackDirection, Weapon.ComboShot comboShot)
+        private void SpawnWave(Vector3 position, Transform attackDirection, Weapon.ComboShot comboShot, Weapon weapon)
         {
             var waveSpecs = new WaveSpecs
             {
@@ -65,7 +65,8 @@ namespace Entities.Player.Combat
                 Direction = (attackDirection.position - position).normalized,
                 WaveTriggerName = comboShot.HashedWaveTriggerName,
                 Damage = comboShot.Damage,
-                isPenetrable = comboShot.isPenetrable
+                isPenetrable = comboShot.isPenetrable,
+                Prefab = weapon.WavePrefab
             };
 
             StartCoroutine(AddDelay(comboShot.WaveDelay, waveSpecs));

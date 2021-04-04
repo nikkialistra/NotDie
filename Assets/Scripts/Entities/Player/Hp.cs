@@ -21,8 +21,9 @@ namespace Entities.Player
         private Settings _settings;
 
         public int HealthFullValue => _settings.HealthFullValue;
-        public int Lives => _settings.Lives;
+        public int Lives => _lives;
 
+        private int _lives;
         private int _healthValue;
 
         private bool IsAlive => _settings.Lives > 0;
@@ -31,6 +32,7 @@ namespace Entities.Player
         {
             _settings = settings;
             _healthValue = _settings.HealthFullValue;
+            _lives = _settings.Lives;
         }
 
         public void TakeDamage(int damage)
@@ -45,17 +47,17 @@ namespace Entities.Player
 
             if (_healthValue <= 0)
                 TakeAwayLive();
-            
-            HealthChanged?.Invoke(_healthValue);
+            else
+                HealthChanged?.Invoke(_healthValue);
         }
 
         private void TakeAwayLive()
         {
-            if (_settings.Lives <= 0)
+            if (_lives <= 0)
                 throw new InvalidOperationException("It should not be invoked when lives not greater than 0");
             
-            _settings.Lives -= 1;
-            LivesChanged?.Invoke(_settings.Lives);
+            _lives -= 1;
+            LivesChanged?.Invoke(_lives);
 
             if (IsAlive)
             {

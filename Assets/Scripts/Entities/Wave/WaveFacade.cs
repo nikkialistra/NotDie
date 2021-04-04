@@ -5,7 +5,6 @@ using Zenject;
 namespace Entities.Wave
 {
     [RequireComponent(typeof(WaveMover))]
-    [RequireComponent(typeof(Animator))]
     public class WaveFacade : MonoBehaviour, IPoolable<WaveSpecs, IMemoryPool>, IDisposable
     {
         public int Id => _id;
@@ -21,16 +20,15 @@ namespace Entities.Wave
         private WaveMover _waveMover;
         private Animator _animator;
 
-        private void Awake()
-        {
-            _waveMover = GetComponent<WaveMover>();
-            _animator = GetComponent<Animator>();
-        }
+        private void Awake() => _waveMover = GetComponent<WaveMover>();
 
         private void Update()
         {
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            {
+                Destroy(_animator.gameObject);
                 Dispose();
+            }
         }
 
         public void OnSpawned(WaveSpecs waveSpecs, IMemoryPool pool)
@@ -43,7 +41,10 @@ namespace Entities.Wave
             
             _waveMover.SetPosition(waveSpecs.Transform.position);
             _waveMover.SetDirection(waveSpecs.Direction);
-            
+
+            var wave = Instantiate(waveSpecs.Prefab, transform.position, transform.rotation, transform);
+
+            _animator = wave.GetComponent<Animator>();
             _animator.SetTrigger(waveSpecs.WaveTriggerName);
         }
 

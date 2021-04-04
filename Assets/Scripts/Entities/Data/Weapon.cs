@@ -18,8 +18,13 @@ namespace Entities.Data
         [Space]
         public List<ComboShot> ComboShots;
 
+        public GameObject WavePrefab;
+        [Range(0.3f, 10f)]
+        public float DirectionMultiplier;
+
         public float ShotImpulse;
         public float CooldownTime;
+
 
         [Serializable]
         public class ComboShot
