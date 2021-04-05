@@ -1,4 +1,5 @@
-﻿using Entities.Player.Animation;
+﻿using Entities.Items.Weapon;
+using Entities.Player.Animation;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -11,9 +12,11 @@ namespace Entities.Player.Combat
         private PlayerMover _playerMover;
         private PlayerAnimator _playerAnimator;
         
+        private ThrownWeapon _thrownWeapon;
+
         private Transform _attackDirection;
         private Renderer _throwingArrowRenderer;
-        
+
         private bool _attackDirectionIsVisible;
 
         private Transform _throwingArrow;
@@ -45,6 +48,7 @@ namespace Entities.Player.Combat
             _weaponsHandler = GetComponent<WeaponsHandler>();
             _weaponAttack = GetComponent<WeaponAttack>();
             _playerAnimator = GetComponent<PlayerAnimator>();
+            _thrownWeapon = GetComponent<ThrownWeapon>();
             
             _input = GetComponent<PlayerInput>();
             _attackThrowAction = _input.actions.FindAction("AttackThrow");
@@ -108,6 +112,7 @@ namespace Entities.Player.Combat
             
             _playerMover.TakeAwayControl();
             _playerAnimator.StartThrowing();
+            _thrownWeapon.StartThrowing();
             _throwing = true;
             _throwingArrowRenderer.enabled = true;
         }
@@ -116,9 +121,10 @@ namespace Entities.Player.Combat
         {
             if (context.duration < 0.3f)
                 return;
-            
-            _playerAnimator.StopThrowing();
+
             _playerMover.ReturnControl();
+            _playerAnimator.StopThrowing();
+            _thrownWeapon.StopThrowing();
             _throwing = false;
             _throwingArrowRenderer.enabled = false;
         }
