@@ -1,3 +1,4 @@
+using Entities.Items.Weapon;
 using Entities.Player;
 using Entities.Player.Combat;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Infrastructure
         [SerializeField] private PlayerMover.Settings _playerMover;
         [SerializeField] private WeaponsHandler.Settings _weaponsHandler;
         [SerializeField] private AttackDirection.Settings _attackDirection;
+        [SerializeField] private ThrowingWeapon.Settings _thrownWeapon;
+        
         
 
         public override void InstallBindings()
@@ -20,6 +23,7 @@ namespace Infrastructure
             Container.BindInstance(_playerMover);
             Container.BindInstance(_weaponsHandler);
             Container.BindInstance(_attackDirection);
+            Container.BindInstance(_thrownWeapon);
         }
     }
 }

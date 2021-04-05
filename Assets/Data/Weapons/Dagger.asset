@@ -170,3 +170,4 @@ MonoBehaviour:
   CooldownTime: 0.2
   Durability: 1
   DurabilityMultiplier: 1
+  ThrowDamage: 40

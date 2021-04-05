@@ -14,9 +14,9 @@ TagManager:
   - Foreground
   - Decorations
   - Player
-  - 
-  - 
-  - 
+  - FullHeightEntitites
+  - ThrownItems
+  - FullHeightPlayer
   - 
   - 
   - 

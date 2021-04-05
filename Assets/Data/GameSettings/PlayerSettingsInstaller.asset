@@ -24,3 +24,8 @@ MonoBehaviour:
     DistanceForTaking: 1
   _attackDirection:
     ButtonPressToleranceTime: 0.1
+  _thrownWeapon:
+    TimeToFly: 0.3
+    Speed: 0.15
+    TimeToDrop: 0.15
+    DropSpeed: 0.2

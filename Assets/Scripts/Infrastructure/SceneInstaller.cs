@@ -17,7 +17,7 @@ namespace Infrastructure
         [SerializeField] private PlayerAnimator _playerAnimator;
         [SerializeField] private Transform _attackDirection;
         [SerializeField] private Transform _throwingArrow;
-        [SerializeField] private GameObject _thrownWeapon;
+        [SerializeField] private ThrowingWeapon _throwingWeapon;
         
 
         [Header("WeaponsHandler")]
@@ -63,9 +63,9 @@ namespace Infrastructure
             Container.Bind<Weapons>().AsSingle();
 
             Container.BindInstance(_weaponAttack);
+            Container.BindInstance(_throwingWeapon);
             
             Container.BindInstance(_throwingArrow).WithId("throwingArrow").WhenInjectedInto<PlayerAttack>();
-            Container.BindInstance(_thrownWeapon).WhenInjectedInto<ThrownWeapon>();
         }
 
         private void BindWaveSpawner()

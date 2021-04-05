@@ -47,6 +47,9 @@ namespace Entities.Data
         [Range(0.5f, 2)]
         public float DurabilityMultiplier = 1;
 
+        [Space] 
+        public int ThrowDamage;
+
         public float DurabilityLostOnHit()
         {
             return Durability switch
