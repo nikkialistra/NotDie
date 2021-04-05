@@ -1,4 +1,5 @@
-﻿using Entities.Player.Combat;
+﻿using System;
+using Entities.Player.Combat;
 using UnityEngine;
 using Zenject;
 
@@ -7,18 +8,20 @@ namespace Entities.Player.Animation
     [RequireComponent(typeof(Animator))]
     public class PlayerAnimator : MonoBehaviour
     {
-        public bool IsFlipped;
-        
+        public bool IsFlipped { get; private set; }
+        public event Action<bool> WasFlipped;
+
         private Weapons _weapons;
 
         private Animator _animator;
-        
+
         private Transform _attackDirection;
 
         private readonly int _run = Animator.StringToHash("run");
         private readonly int _comboMove = Animator.StringToHash("comboMove");
         private readonly int _throwing = Animator.StringToHash("throwing");
         private readonly int _throw = Animator.StringToHash("throw");
+
 
         private readonly int[] _weaponsTakenHashes =
         {
@@ -42,18 +45,17 @@ namespace Entities.Player.Animation
 
         private void Update()
         {
-            if (transform.position.x < _attackDirection.position.x)
-                LookingRight();
+            if (_attackDirection.position.x - transform.position.x > 0)
+                Flip(false);
             
-            if (transform.position.x > _attackDirection.position.x)
-                LookingLeft();
+            if (_attackDirection.position.x - transform.position.x < 0)
+                Flip(true);
         }
 
         public void Run(bool shouldRun) => _animator.SetBool(_run, shouldRun);
-        
+
         public bool IsCurrentAnimationWithTag(string tag) => _animator.GetCurrentAnimatorStateInfo(0).IsTag(tag);
-        
-        
+
         public void PlayAttackAnimation(int trigger) => _animator.SetTrigger(trigger);
 
         public void MoveInCombo() => _animator.SetTrigger(_comboMove);
@@ -63,24 +65,6 @@ namespace Entities.Player.Animation
         public void StopThrowing() => _animator.SetBool(_throwing, false);
 
         public void Throw() => _animator.SetTrigger(_throw);
-
-        private void LookingRight()
-        {
-            var scale = transform.localScale;
-            scale.x = 1;
-            transform.localScale = scale;
-
-            IsFlipped = false;
-        }
-
-        private void LookingLeft()
-        {
-            var scale = transform.localScale;
-            scale.x = -1;
-            transform.localScale = scale;
-
-            IsFlipped = true;
-        }
 
         private void OnLeftWeaponActive()
         {
@@ -102,6 +86,17 @@ namespace Entities.Player.Animation
                 _animator.SetBool(takenHash, false);
 
             _animator.SetBool(_weapons.ActiveWeapon.Weapon.HashedTakenName, true);
+        }
+        
+        private void Flip(bool value)
+        {
+            IsFlipped = value;
+            
+            var scale = transform.localScale;
+            scale.x = value ? - 1 : 1;
+            transform.localScale = scale;
+
+            WasFlipped?.Invoke(value);
         }
     }
 }

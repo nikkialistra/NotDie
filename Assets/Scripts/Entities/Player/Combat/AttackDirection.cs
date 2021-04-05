@@ -140,7 +140,7 @@ namespace Entities.Player.Combat
             if (_attackDirection == Vector2.zero)
                 return;
             
-            transform.position =_playerMover.PositionCenter + (Vector3) _attackDirection.normalized * _weapons.ActiveWeapon.Weapon.DirectionMultiplier;
+            transform.position = _playerMover.PositionCenter + (Vector3) _attackDirection.normalized * _weapons.ActiveWeapon.Weapon.DirectionMultiplier;
         }
 
         private void OnMovingIsBlocked(bool isBlocked) => _takeDirectionBlocked = isBlocked;
