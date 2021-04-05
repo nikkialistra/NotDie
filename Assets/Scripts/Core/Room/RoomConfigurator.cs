@@ -13,6 +13,13 @@ namespace Core.Room
         [SerializeField] private GameObject _cornerLeftDown;
         [SerializeField] private GameObject _cornerRightDown;
 
+        [Header("Doors")]
+        [SerializeField] private GameObject _bottomDoor;
+        [SerializeField] private GameObject _upDoor;
+        [SerializeField] private GameObject _rightDoor;
+        [SerializeField] private GameObject _leftDoor;
+        
+
         [Header("Settings")]
         [Range(0, 20)]
         [SerializeField] private float _width;
@@ -39,6 +46,7 @@ namespace Core.Room
         {
             CenterRoom();
             PlaceCorners();
+            PlaceMiddles();
         }
 
         private void CenterRoom() => transform.position = new Vector2(-_width / 2, _height / 2);
@@ -50,6 +58,15 @@ namespace Core.Room
 
             _cornerLeftDown.transform.localPosition = new Vector2(0 - _perspective, -_height);
             _cornerRightDown.transform.localPosition = new Vector2(_width + _perspective, -_height);
+        }
+        
+        private void PlaceMiddles()
+        {
+            _upDoor.transform.localPosition = new Vector2(_width / 2 , 0);
+            _bottomDoor.transform.localPosition = new Vector2(_width / 2 , -_height);
+
+            _rightDoor.transform.localPosition = new Vector2(_width + _perspective / 2, -_height / 2);
+            _leftDoor.transform.localPosition = new Vector2(-_perspective / 2, -_height / 2);
         }
 
         private void MakeCollider()

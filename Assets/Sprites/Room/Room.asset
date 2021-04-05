@@ -37,3 +37,12 @@ MonoBehaviour:
     - m_Name: SmallRocks
       m_Hash: 401008182
       m_Sprite: {fileID: 21300000, guid: b7d8bfdd4a1ca284ca3bb0f1206a26d5, type: 3}
+  - m_Name: Doors
+    m_Hash: -1617274578
+    m_CategoryList:
+    - m_Name: DoorFrontClosed
+      m_Hash: -1935978086
+      m_Sprite: {fileID: 21300000, guid: 6c4778d6deaaf0d40b9202395338799a, type: 3}
+    - m_Name: DoorSideClosed
+      m_Hash: -1044367157
+      m_Sprite: {fileID: 21300000, guid: 57ca44e9362ccf04baf853357d17cf69, type: 3}

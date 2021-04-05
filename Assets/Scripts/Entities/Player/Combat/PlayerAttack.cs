@@ -12,7 +12,7 @@ namespace Entities.Player.Combat
         private PlayerMover _playerMover;
         private PlayerAnimator _playerAnimator;
         
-        private ThrownWeapon _thrownWeapon;
+        private ThrowingWeapon _throwingWeapon;
 
         private Transform _attackDirection;
         private Renderer _throwingArrowRenderer;
@@ -21,6 +21,7 @@ namespace Entities.Player.Combat
 
         private Transform _throwingArrow;
         private bool _throwing;
+        private bool _thrown;
 
         private WeaponsHandler _weaponsHandler;
         private WeaponAttack _weaponAttack;
@@ -33,13 +34,15 @@ namespace Entities.Player.Combat
         private InputAction _throwingAction;
 
         [Inject]
-        public void Construct([Inject(Id = "attackDirection")] Transform attackDirection, [Inject(Id = "throwingArrow")] Transform throwingArrow)
+        public void Construct([Inject(Id = "attackDirection")] Transform attackDirection, [Inject(Id = "throwingArrow")] Transform throwingArrow, ThrowingWeapon throwingWeapon)
         {
             _attackDirection = attackDirection;
             _attackDirectionRenderer = _attackDirection.GetComponent<Renderer>();
 
             _throwingArrow = throwingArrow;
             _throwingArrowRenderer = _throwingArrow.GetComponent<Renderer>();
+
+            _throwingWeapon = throwingWeapon;
         }
 
         private void Awake()
@@ -48,8 +51,7 @@ namespace Entities.Player.Combat
             _weaponsHandler = GetComponent<WeaponsHandler>();
             _weaponAttack = GetComponent<WeaponAttack>();
             _playerAnimator = GetComponent<PlayerAnimator>();
-            _thrownWeapon = GetComponent<ThrownWeapon>();
-            
+
             _input = GetComponent<PlayerInput>();
             _attackThrowAction = _input.actions.FindAction("AttackThrow");
             _showAttackDirectionAction = _input.actions.FindAction("ShowAttackDirection");
@@ -107,12 +109,18 @@ namespace Entities.Player.Combat
 
         private void OnThrowing(InputAction.CallbackContext context)
         {
+            if (context.duration < 0.3f)
+                return;
+
             if (!_weaponsHandler.AnyWeaponActive)
                 return;
-            
+
+            _thrown = false;
+
             _playerMover.TakeAwayControl();
             _playerAnimator.StartThrowing();
-            _thrownWeapon.StartThrowing();
+            _throwingWeapon.StartThrowing(_weaponsHandler.ActiveWeapon);
+            
             _throwing = true;
             _throwingArrowRenderer.enabled = true;
         }
@@ -124,14 +132,26 @@ namespace Entities.Player.Combat
 
             _playerMover.ReturnControl();
             _playerAnimator.StopThrowing();
-            _thrownWeapon.StopThrowing();
+            _throwingWeapon.StopThrowing();
+            
             _throwing = false;
             _throwingArrowRenderer.enabled = false;
         }
 
         private void Throw()
         {
+            if (_thrown)
+                return;
+            
+            var weapon = _weaponsHandler.TryTakeOffWeapon();
+
             _playerAnimator.Throw();
+            _throwingWeapon.Throw(weapon, _playerMover.PositionCenter, _attackDirection.transform.position);
+            
+            _thrown = true;
+            _throwingArrowRenderer.enabled = false;
+            
+            _playerMover.ReturnControl();
         }
 
         private void OnShowAttackDirection(InputAction.CallbackContext context)

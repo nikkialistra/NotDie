@@ -47,7 +47,11 @@ namespace Entities.Enemies
             _takingDamage = StartCoroutine(TakingDamage(value, interval));
         }
 
-        public void StopTakingDamage() => StopCoroutine(_takingDamage);
+        public void StopTakingDamage()
+        {
+            if (_takingDamage != null)
+                StopCoroutine(_takingDamage);
+        }
 
         private IEnumerator TakingDamage(int value, float interval)
         {

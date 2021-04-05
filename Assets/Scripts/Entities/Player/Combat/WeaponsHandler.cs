@@ -20,6 +20,7 @@ namespace Entities.Player.Combat
         }
 
         public bool AnyWeaponActive => !_weapons.HandIsActive;
+        public WeaponFacade ActiveWeapon => _weapons.ActiveWeapon;
         
         private Settings _settings;
 
@@ -57,6 +58,12 @@ namespace Entities.Player.Combat
         {
             _takeDropWeaponAction.canceled -= OnTakeDropWeapon;
             _swapWeaponsAction.started -= OnSwapWeapons;
+        }
+        
+        public WeaponFacade TryTakeOffWeapon()
+        {
+            var weapon = _weapons.DropWeapon();
+            return weapon;
         }
 
         private void OnTakeDropWeapon(InputAction.CallbackContext context)
@@ -109,9 +116,6 @@ namespace Entities.Player.Combat
             CreateWeapon(discardedWeapon);
         }
 
-        private void CreateWeapon(WeaponFacade weaponFacade)
-        {
-            _weaponGameObjectSpawner.Spawn(transform.position, weaponFacade);
-        }
+        private void CreateWeapon(WeaponFacade weaponFacade) => _weaponGameObjectSpawner.Spawn(transform.position, weaponFacade);
     }
 }
