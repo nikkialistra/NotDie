@@ -49,6 +49,8 @@ namespace Entities.Data
 
         [Space] 
         public int ThrowDamage;
+        [Space] 
+        public int ReclineValue;
 
         public float DurabilityLostOnHit()
         {

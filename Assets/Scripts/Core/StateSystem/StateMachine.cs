@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Core.StateSystem
 {
@@ -18,7 +19,7 @@ namespace Core.StateSystem
          var transition = GetTransition();
          if (transition != null)
             SetState(transition.To);
-      
+         
          _currentState?.Tick();
       }
 

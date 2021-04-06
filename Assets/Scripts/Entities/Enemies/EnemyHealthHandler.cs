@@ -16,12 +16,23 @@ namespace Entities.Enemies
             public int Value;
         }
 
+        public bool ShouldRecline => _reclineUnhandled > 0;
+
         private int _value;
         private bool IsAlive => _value > 0;
 
         private Coroutine _takingDamage;
         
         private readonly IList<int> _damagedWaves = new List<int>();
+        
+        private int _reclineUnhandled;
+        
+        public int HandleRecline()
+        {
+            var recline = _reclineUnhandled;
+            _reclineUnhandled = 0;
+            return recline;
+        }
         
         [Inject]
         public void Construct(Settings settings) => _value = settings.Value;
@@ -89,10 +100,14 @@ namespace Entities.Enemies
                 throw new ArgumentException("Damage must be more than zero");
             _value -= value;
             waveFacade.Hitted();
+            TakeInRecline(waveFacade);
+            
             Debug.Log(value);
 
             if (!IsAlive)
                 Destroy(gameObject);
         }
+
+        private void TakeInRecline(WaveFacade waveFacade) => _reclineUnhandled += waveFacade.ReclineValue;
     }
 }

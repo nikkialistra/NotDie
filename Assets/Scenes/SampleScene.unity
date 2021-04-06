@@ -1717,6 +1717,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DummyRedVariant
       objectReference: {fileID: 0}
+    - target: {fileID: 705020944030493967, guid: 3df90dd42c9b01343823287a18fc683f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9054757172631453447, guid: 3df90dd42c9b01343823287a18fc683f, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
       value: 4
@@ -3458,7 +3462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2062465801
 Transform:
   m_ObjectHideFlags: 0

@@ -68,7 +68,8 @@ namespace Entities.Player.Combat
                 WaveTriggerName = comboShot.HashedWaveTriggerName,
                 Damage = comboShot.Damage,
                 isPenetrable = comboShot.isPenetrable,
-                Prefab = weaponFacade.Weapon.WavePrefab
+                Prefab = weaponFacade.Weapon.WavePrefab,
+                ReclineValue = weaponFacade.Weapon.ReclineValue
             };
 
             StartCoroutine(AddDelay(comboShot.WaveDelay, waveSpecs));

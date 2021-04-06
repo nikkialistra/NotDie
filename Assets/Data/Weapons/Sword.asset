@@ -37,3 +37,4 @@ MonoBehaviour:
   Durability: 1
   DurabilityMultiplier: 1
   ThrowDamage: 60
+  ReclineValue: 40
