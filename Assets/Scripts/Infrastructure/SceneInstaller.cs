@@ -1,4 +1,5 @@
 using Core;
+using Core.Room;
 using Entities.Items.Weapon;
 using Entities.Player;
 using Entities.Player.Animation;
@@ -18,16 +19,20 @@ namespace Infrastructure
         [SerializeField] private Transform _attackDirection;
         [SerializeField] private Transform _throwingArrow;
         [SerializeField] private ThrowingWeapon _throwingWeapon;
-        
 
-        [Header("WeaponsHandler")]
+        [Header("Weapons")]
         [SerializeField] private WeaponFacade _hand;
         [SerializeField] private GameObject _weaponFacadePrefab;
         [SerializeField] private GameObject _weaponPrefab;
         [SerializeField] private WeaponAttack _weaponAttack;
-
-        [Header("Waves")]
         [SerializeField] private GameObject _waveFacadePrefab;
+
+        [Header("Room")]
+        [SerializeField] private RoomConfigurator _roomConfigurator;
+        [SerializeField] private PolygonCollider2D _polygonFloorBounds;
+        [SerializeField] private PolygonCollider2D _polygonWallBounds;
+        [SerializeField] private EdgeCollider2D _polygonFloorBorder;
+        [SerializeField] private EdgeCollider2D _polygonWallBorder;
 
         public override void InstallBindings()
         {
@@ -42,6 +47,8 @@ namespace Infrastructure
             BindWeaponSpawner();
             
             BindWeaponGameObjectSpawner();
+
+            BindRoom();
         }
 
         private void BindPlayerMovement()
@@ -101,10 +108,20 @@ namespace Infrastructure
                 .UnderTransformGroup("WeaponPickups"));
         }
 
+        private void BindRoom()
+        {
+            Container.BindInstance(_roomConfigurator);
+            
+            Container.BindInstance(_polygonFloorBounds).WithId("floor");
+            Container.BindInstance(_polygonWallBounds).WithId("wall");
+            Container.BindInstance(_polygonFloorBorder).WithId("floorBorder");
+            Container.BindInstance(_polygonWallBorder).WithId("wallBorder");
+        }
+
         class WaveFacadePool : MonoPoolableMemoryPool<WaveSpecs, IMemoryPool, WaveFacade>
         {
         }
-        
+
         class WeaponFacadePool : MonoPoolableMemoryPool<WeaponSpecs, IMemoryPool, WeaponFacade>
         {
         }

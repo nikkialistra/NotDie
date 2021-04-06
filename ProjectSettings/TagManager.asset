@@ -13,13 +13,13 @@ TagManager:
   - UI
   - Foreground
   - Decorations
-  - Player
+  - Creatures
   - FullHeightEntitites
   - ThrownItems
   - FullHeightPlayer
-  - 
-  - 
-  - 
+  - NonPerceptable
+  - FloorBorder
+  - WallBorder
   - 
   - 
   - 
