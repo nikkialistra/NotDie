@@ -1,10 +1,9 @@
 ﻿using System;
-using Entities.Data;
-using Entities.Items.Weapon;
+using Items.Weapon;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Interactions;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Entities.Player.Combat
 {
@@ -14,12 +13,10 @@ namespace Entities.Player.Combat
         [Serializable]
         public class Settings
         {
-            public Weapon Hand;
-
             public float DistanceForTaking;
         }
 
-        public bool AnyWeaponActive => !_weapons.HandIsActive;
+        public bool WeaponHeld => !_weapons.HandIsActive;
         public WeaponFacade ActiveWeapon => _weapons.ActiveWeapon;
         
         private Settings _settings;
@@ -71,7 +68,7 @@ namespace Entities.Player.Combat
             if (context.duration > 0.3f)
                 return;
             
-            if (TryTakeWeapon()) 
+            if (TryFindWeapon())
                 return;
 
             DropWeapon();
@@ -79,7 +76,7 @@ namespace Entities.Player.Combat
 
         private void OnSwapWeapons(InputAction.CallbackContext context) => _weapons.SwapWeapons();
 
-        private bool TryTakeWeapon()
+        private bool TryFindWeapon()
         {
             var weapons = FindObjectsOfType<WeaponGameObject>();
             foreach (var weapon in weapons)
@@ -100,22 +97,32 @@ namespace Entities.Player.Combat
             if (weapon == null) 
                 return;
             
-            CreateWeapon(weapon);
+            CreateWeapon(transform.position, weapon);
         }
 
         private void TakeWeapon(WeaponGameObject weaponGameObject)
         {
             var weaponFacade = weaponGameObject.WeaponFacade;
             weaponGameObject.Dispose();
-            
-            var discardedWeapon = _weapons.TakeWeapon(weaponFacade);
 
-            if (discardedWeapon == null) 
-                return;
-            
-            CreateWeapon(discardedWeapon);
+            _weapons.TakeWeapon(weaponFacade, out var firstDiscardedWeapon, out var secondDiscardedWeapon);
+
+            CreateWeaponsIfNeeded(firstDiscardedWeapon, secondDiscardedWeapon);
         }
 
-        private void CreateWeapon(WeaponFacade weaponFacade) => _weaponGameObjectSpawner.Spawn(transform.position, weaponFacade);
+        private void CreateWeaponsIfNeeded(WeaponFacade firstDiscardedWeapon, WeaponFacade secondDiscardedWeapon)
+        {
+            if (firstDiscardedWeapon == null) 
+                return;
+            
+            CreateWeapon(transform.position, firstDiscardedWeapon);
+
+            if (secondDiscardedWeapon == null)
+                return;
+            
+            CreateWeapon(transform.position + (Vector3) Random.insideUnitCircle * 0.2f, secondDiscardedWeapon);
+        }
+
+        private void CreateWeapon(Vector3 position, WeaponFacade weaponFacade) => _weaponGameObjectSpawner.Spawn(position, weaponFacade);
     }
 }

@@ -68,7 +68,7 @@ namespace Infrastructure
             
             Container.BindInstance(_leftWeaponFrame).WithId("leftWeaponFrame");
             Container.BindInstance(_rightWeaponFrame).WithId("rightWeaponFrame");
-            
+
             Container.Bind<WeaponsView>().AsSingle();
         }
     }

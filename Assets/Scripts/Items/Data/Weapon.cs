@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Entities.Data
+namespace Items.Data
 {
     [CreateAssetMenu(fileName = "Weapon", menuName = "Data/Weapon")]
     public class Weapon : ScriptableObject
@@ -30,6 +30,9 @@ namespace Entities.Data
         public Sprite Active;
 
         public Sprite NotActive;
+        
+        [Space] 
+        public bool IsTwoHanded;
 
         [HideInInspector] public int HashedTakenName;
 

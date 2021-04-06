@@ -1,9 +1,9 @@
 {
-    "name": "UI",
+    "name": "Items",
     "rootNamespace": "",
     "references": [
-        "GUID:e4e7de05c091d144399ebd74b7f3c121",
-        "GUID:dc2eb2a4d7f4bd044a8e2f9ce421b9d4"
+        "GUID:48ed87b220ab3db48adb0f74eac7e2fe",
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

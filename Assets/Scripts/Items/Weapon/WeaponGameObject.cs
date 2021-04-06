@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Entities.Items.Weapon
+namespace Items.Weapon
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class WeaponGameObject : MonoBehaviour, IPoolable<Vector3, WeaponFacade, IMemoryPool>, IDisposable

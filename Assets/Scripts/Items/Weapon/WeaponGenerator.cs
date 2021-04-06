@@ -4,7 +4,7 @@ using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
-namespace Entities.Items.Weapon
+namespace Items.Weapon
 {
     [RequireComponent(typeof(RoomConfigurator))]
     public class WeaponGenerator : MonoBehaviour
@@ -40,7 +40,7 @@ namespace Entities.Items.Weapon
             var weaponSpecs = new WeaponSpecs()
             {
                 Weapon = weapon,
-                Durability = Random.Range(0.5f, 1f)
+                Durability = Random.Range(0.8f, 1f)
             };
 
             var weaponFacade = _weaponSpawner.Spawn(weaponSpecs);

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Entities.Data;
+using Items.Data;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -23,7 +23,7 @@ namespace UI.Views
 
         private Image _leftWeaponFrame;
         private Image _rightWeaponFrame;
-        
+
         public WeaponsView(Settings settings,
             [Inject(Id = "leftWeapon")] Image leftWeapon, [Inject(Id = "rightWeapon")] Image rightWeapon, 
             [Inject(Id = "leftWeaponFrame")] Image leftWeaponFrame, [Inject(Id = "rightWeaponFrame")] Image rightWeaponFrame)

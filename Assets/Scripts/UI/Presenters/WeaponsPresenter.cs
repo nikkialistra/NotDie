@@ -1,5 +1,4 @@
-﻿using Entities.Player;
-using Entities.Player.Combat;
+﻿using Entities.Player.Combat;
 using UI.Views;
 
 namespace UI.Presenters

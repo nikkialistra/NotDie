@@ -1,6 +1,6 @@
-using Entities.Items.Weapon;
 using Entities.Player;
 using Entities.Player.Combat;
+using Items.Weapon;
 using UnityEngine;
 using Zenject;
 
