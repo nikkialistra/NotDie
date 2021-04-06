@@ -2076,6 +2076,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 39916ba79dcb2844689f574b440fa03c, type: 2}
   - {fileID: 11400000, guid: 8c6e2d274f2a95744b15f4399123f5b5, type: 2}
   - {fileID: 11400000, guid: 3efa2474e89efed468362fee6e93bdb9, type: 2}
+  - {fileID: 11400000, guid: 1e00091031a93f642b866daa62e74ff3, type: 2}
 --- !u!68 &1298433787
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -3438,6 +3439,7 @@ MonoBehaviour:
   _throwingArrow: {fileID: 429770173}
   _throwingWeapon: {fileID: 1381299470}
   _hand: {fileID: 6837428540410162515, guid: 2471b35604913e74eacbc4261b6146ee, type: 3}
+  _crossedSlot: {fileID: 6837428540410162515, guid: 79505bf5eca11df47a30631936e75a0d, type: 3}
   _weaponFacadePrefab: {fileID: 434846520202061160, guid: c234d91d03d83194f9d6c0910e5e0179, type: 3}
   _weaponPrefab: {fileID: 2817982706502842857, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
   _weaponAttack: {fileID: 937606822}
@@ -3462,7 +3464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2062465801
 Transform:
   m_ObjectHideFlags: 0

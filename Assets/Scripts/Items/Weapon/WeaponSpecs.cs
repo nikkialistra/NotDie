@@ -1,4 +1,4 @@
-﻿namespace Entities.Items.Weapon
+﻿namespace Items.Weapon
 {
     public class WeaponSpecs
     {

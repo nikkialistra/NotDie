@@ -1,5 +1,5 @@
-﻿using Entities.Items.Weapon;
-using Entities.Player.Animation;
+﻿using Entities.Player.Animation;
+using Items.Weapon;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -109,10 +109,10 @@ namespace Entities.Player.Combat
 
         private void OnThrowing(InputAction.CallbackContext context)
         {
-            if (context.duration < 0.3f)
+            if (NotHoldingButton(context))
                 return;
-
-            if (!_weaponsHandler.AnyWeaponActive)
+            
+            if (!_weaponsHandler.WeaponHeld || _playerAnimator.IsCurrentAnimationWithTag("Shot"))
                 return;
 
             _thrown = false;
@@ -124,6 +124,8 @@ namespace Entities.Player.Combat
             _throwing = true;
             _throwingArrowRenderer.enabled = true;
         }
+
+        private static bool NotHoldingButton(InputAction.CallbackContext context) => context.duration < 0.3f;
 
         private void OnCancelThrowing(InputAction.CallbackContext context)
         {
@@ -141,6 +143,9 @@ namespace Entities.Player.Combat
         private void Throw()
         {
             if (_thrown)
+                return;
+            
+            if (!_playerAnimator.IsCurrentAnimationWithTag("Transition"))
                 return;
             
             var weapon = _weaponsHandler.TryTakeOffWeapon();

@@ -1,8 +1,11 @@
 ﻿using System;
-using Entities.Items.Weapon;
+using Items.Weapon;
+using UnityEngine;
+using Zenject;
 
 namespace Entities.Player.Combat
 {
+    [RequireComponent(typeof(WeaponFacade))]
     public class Weapons
     {
         public event Action LeftWeaponChanged;
@@ -12,6 +15,7 @@ namespace Entities.Player.Combat
         public event Action RightWeaponIsActive;
 
         private WeaponFacade _hand;
+        private WeaponFacade _crossedSlot;
 
         public WeaponFacade ActiveWeapon => _leftIsActive ? _leftWeapon : _rightWeapon;
         public WeaponFacade NotActiveWeapon => _leftIsActive ? _rightWeapon : _leftWeapon;
@@ -23,67 +27,134 @@ namespace Entities.Player.Combat
 
         public bool HandIsActive => ActiveWeapon == _hand;
 
+        private bool IsBothSlotsFree => _leftWeapon == _hand && _rightWeapon == _hand;
+
         private WeaponFacade _leftWeapon;
         private WeaponFacade _rightWeapon;
 
         private bool _leftIsActive;
 
-        public Weapons(WeaponFacade hand)
+        public Weapons([Inject(Id = "hand")] WeaponFacade hand, [Inject(Id = "crossedSlot")] WeaponFacade crossedSlot)
         {
             _hand = hand;
-            
+            _crossedSlot = crossedSlot;
+
             _leftWeapon = _hand;
             _rightWeapon = _hand;
         }
 
-        public WeaponFacade TakeWeapon(WeaponFacade weaponFacade)
+        public void TakeWeapon(WeaponFacade weaponFacade, out WeaponFacade firstDiscardedWeapon, out WeaponFacade secondDiscardedWeapon)
         {
             if (weaponFacade == null)
                 throw new ArgumentNullException(nameof(weaponFacade));
 
-            if (TryTakeInsteadOfHands(weaponFacade))
-                return null;
+            firstDiscardedWeapon = null;
+            secondDiscardedWeapon = null;
 
-            return SwapWeapon(weaponFacade);
+            if (weaponFacade.Weapon.IsTwoHanded)
+            {
+                FreeSlotsIfNeeded(ref firstDiscardedWeapon, ref secondDiscardedWeapon);
+                TakeTwoHandedWeapon(weaponFacade);
+                return;
+            }
+
+            if (!TryTakeInsteadOfHands(weaponFacade))
+                firstDiscardedWeapon = SwapWeapon(weaponFacade);
         }
 
         public WeaponFacade DropWeapon()
         {
-            WeaponFacade droppedWeapon;
-            if (_leftIsActive)
-            {
-                droppedWeapon = _leftWeapon;
-                if (droppedWeapon == _hand)
-                    return null;
-
-                _leftWeapon.DurabilityChanged -= LeftWeaponDurabilityChanged;
-                _leftWeapon = _hand;
-                LeftWeaponChanged?.Invoke();
-                    
-                return droppedWeapon;
-            }
-            else
-            {
-                droppedWeapon = _rightWeapon;
-                if (droppedWeapon == _hand) 
-                    return null;
-
-                _rightWeapon.DurabilityChanged -= RightWeaponDurabilityChanged;
-                _rightWeapon = _hand;
-                RightWeaponChanged?.Invoke();
-                    
-                return droppedWeapon;
-            }
+            if (ActiveWeapon.Weapon.IsTwoHanded)
+                return DropTwoHandedWeapon();
+            
+            return _leftIsActive ? DropLeftWeapon() : DropRightWeapon();
         }
 
         public void SwapWeapons()
         {
+            if (ActiveWeapon.Weapon.IsTwoHanded)
+                return;
+            
             _leftIsActive = !_leftIsActive;
             
             if (_leftIsActive)
                 LeftWeaponIsActive?.Invoke();
             else
                 RightWeaponIsActive?.Invoke();
+        }
+
+        private void FreeSlotsIfNeeded(ref WeaponFacade firstDiscardedWeapon, ref WeaponFacade secondDiscardedWeapon)
+        {
+            if (IsBothSlotsFree)
+                return;
+
+            firstDiscardedWeapon = DropLeftWeapon();
+            secondDiscardedWeapon = DropRightWeapon();
+
+            if (firstDiscardedWeapon != null) 
+                return;
+            
+            firstDiscardedWeapon = secondDiscardedWeapon;
+            secondDiscardedWeapon = null;
+        }
+
+        private void TakeTwoHandedWeapon(WeaponFacade weaponFacade)
+        {
+            ChangeActiveWeapon(weaponFacade);
+            ChangeNotActiveWeapon(_crossedSlot);
+        }
+
+        private WeaponFacade DropTwoHandedWeapon()
+        {
+            WeaponFacade droppedWeapon;
+            if (_leftIsActive)
+            {
+                droppedWeapon = DropLeftWeapon();
+                _rightWeapon = _hand;
+                RightWeaponChanged?.Invoke();
+            }
+            else
+            {
+                droppedWeapon = DropRightWeapon();
+                _leftWeapon = _hand;
+                LeftWeaponChanged?.Invoke();
+            }
+
+            return droppedWeapon;
+        }
+
+        private WeaponFacade DropLeftWeapon()
+        {
+            var droppedWeapon = _leftWeapon;
+            if (droppedWeapon == _hand || droppedWeapon == _crossedSlot)
+                return null;
+
+            _leftWeapon.DurabilityChanged -= LeftWeaponDurabilityChanged;
+            _leftWeapon = _hand;
+            
+            LeftWeaponChanged?.Invoke();
+
+            if (_rightWeapon == _crossedSlot)
+                _rightWeapon = _hand;
+
+            return droppedWeapon;
+        }
+
+        private WeaponFacade DropRightWeapon()
+        {
+            var droppedWeapon = _rightWeapon;
+            if (droppedWeapon == _hand || droppedWeapon == _crossedSlot)
+                return null;
+
+            _rightWeapon.DurabilityChanged -= RightWeaponDurabilityChanged;
+            _rightWeapon = _hand;
+            
+            RightWeaponChanged?.Invoke();
+
+            if (_leftWeapon == _crossedSlot)
+                _leftWeapon = _hand;
+
+            return droppedWeapon;
         }
 
         private bool TryTakeInsteadOfHands(WeaponFacade weaponFacade)
@@ -108,7 +179,24 @@ namespace Entities.Player.Combat
             var discardedWeapon = ActiveWeapon;
             ChangeActiveWeapon(weaponFacade);
             
+            if (discardedWeapon.Weapon.IsTwoHanded) 
+                SwapTwoHandedWeapon();
+
             return discardedWeapon;
+        }
+
+        private void SwapTwoHandedWeapon()
+        {
+            if (_leftIsActive)
+            {
+                _rightWeapon = _hand;
+                RightWeaponChanged?.Invoke();
+            }
+            else
+            {
+                _leftWeapon = _hand;
+                LeftWeaponChanged?.Invoke();
+            }
         }
 
         private void ChangeActiveWeapon(WeaponFacade weaponFacade)

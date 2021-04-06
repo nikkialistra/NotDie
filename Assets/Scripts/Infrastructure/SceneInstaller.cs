@@ -1,10 +1,10 @@
 using Core;
 using Core.Room;
-using Entities.Items.Weapon;
 using Entities.Player;
 using Entities.Player.Animation;
 using Entities.Player.Combat;
 using Entities.Wave;
+using Items.Weapon;
 using UnityEngine;
 using Zenject;
 
@@ -22,6 +22,7 @@ namespace Infrastructure
 
         [Header("Weapons")]
         [SerializeField] private WeaponFacade _hand;
+        [SerializeField] private WeaponFacade _crossedSlot;
         [SerializeField] private GameObject _weaponFacadePrefab;
         [SerializeField] private GameObject _weaponPrefab;
         [SerializeField] private WeaponAttack _weaponAttack;
@@ -66,7 +67,8 @@ namespace Infrastructure
 
         private void BindPlayerWeaponSystem()
         {
-            Container.BindInstance(_hand).WhenInjectedInto<Weapons>();
+            Container.BindInstance(_hand).WithId("hand").WhenInjectedInto<Weapons>();
+            Container.BindInstance(_crossedSlot).WithId("crossedSlot").WhenInjectedInto<Weapons>();
             Container.Bind<Weapons>().AsSingle();
 
             Container.BindInstance(_weaponAttack);

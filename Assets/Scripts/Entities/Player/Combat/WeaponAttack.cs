@@ -1,8 +1,8 @@
 using System.Collections;
-using Entities.Data;
-using Entities.Items.Weapon;
 using Entities.Player.Animation;
 using Entities.Wave;
+using Items.Data;
+using Items.Weapon;
 using UnityEngine;
 using Zenject;
 
