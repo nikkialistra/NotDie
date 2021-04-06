@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Core.Interfaces;
+using Core.Room;
 using UnityEngine;
 using Zenject;
 
@@ -23,14 +24,15 @@ namespace Entities.Items.Weapon
         }
         
         private Settings _settings;
-        
+        private RoomConfigurator _roomConfigurator;
+
         private Rigidbody2D _rigidBody;
 
         private SpriteRenderer _spriteRenderer;
         private Animation _animation;
 
         private WeaponGameObjectSpawner _weaponGameObjectSpawner;
-        
+
         private WeaponFacade _thrownWeapon;
 
         private Coroutine _fly;
@@ -42,10 +44,11 @@ namespace Entities.Items.Weapon
         }
 
         [Inject]
-        public void Construct(Settings settings, WeaponGameObjectSpawner weaponGameObjectSpawner)
+        public void Construct(Settings settings, RoomConfigurator roomConfigurator, WeaponGameObjectSpawner weaponGameObjectSpawner)
         {
             _settings = settings;
-            
+            _roomConfigurator = roomConfigurator;
+
             _weaponGameObjectSpawner = weaponGameObjectSpawner;
         }
 
@@ -89,6 +92,11 @@ namespace Entities.Items.Weapon
             
             _thrownWeapon = weaponFacade;
             
+            var polygonBounds = _roomConfigurator.PolygonWallBounds;
+
+            if (!polygonBounds.OverlapPoint(startPosition))
+                startPosition = _roomConfigurator.PolygonFloorBorder.ClosestPoint(startPosition);
+
             transform.position = startPosition;
             var direction = (endPosition - startPosition).normalized;
             _fly = StartCoroutine(Fly(direction));

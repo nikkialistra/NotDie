@@ -1,5 +1,4 @@
-﻿using System;
-using Entities.Player.Combat;
+﻿using Entities.Player.Combat;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +8,6 @@ namespace Entities.Player.Animation
     public class PlayerAnimator : MonoBehaviour
     {
         public bool IsFlipped { get; private set; }
-        public event Action<bool> WasFlipped;
 
         private Weapons _weapons;
 
@@ -20,6 +18,7 @@ namespace Entities.Player.Animation
         private readonly int _run = Animator.StringToHash("run");
         private readonly int _comboMove = Animator.StringToHash("comboMove");
         private readonly int _throwing = Animator.StringToHash("throwing");
+        private readonly int _cancelThrow = Animator.StringToHash("cancelThrow");
         private readonly int _throw = Animator.StringToHash("throw");
 
 
@@ -62,7 +61,7 @@ namespace Entities.Player.Animation
 
         public void StartThrowing() => _animator.SetBool(_throwing, true);
 
-        public void StopThrowing() => _animator.SetBool(_throwing, false);
+        public void StopThrowing() => _animator.SetTrigger(_cancelThrow);
 
         public void Throw() => _animator.SetTrigger(_throw);
 
@@ -95,8 +94,6 @@ namespace Entities.Player.Animation
             var scale = transform.localScale;
             scale.x = value ? - 1 : 1;
             transform.localScale = scale;
-
-            WasFlipped?.Invoke(value);
         }
     }
 }

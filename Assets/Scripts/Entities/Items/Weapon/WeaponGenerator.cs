@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Core;
 using Core.Room;
 using UnityEngine;
 using Zenject;
@@ -24,10 +23,7 @@ namespace Entities.Items.Weapon
             _weaponGameObjectSpawner = weaponGameObjectSpawner;
         }
 
-        private void Awake()
-        {
-            _roomConfigurator = GetComponent<RoomConfigurator>();
-        }
+        private void Awake() => _roomConfigurator = GetComponent<RoomConfigurator>();
 
         private void Start()
         {
@@ -53,16 +49,18 @@ namespace Entities.Items.Weapon
 
         private void CreateWeaponGameObject(WeaponFacade weaponFacade)
         {
-            var bounds = _roomConfigurator.Collider.bounds;
+            var polygonBounds = _roomConfigurator.PolygonFloorBounds;
+            var roomBounds = _roomConfigurator.PolygonFloorBounds.bounds;
 
-            var spawnPosition = new Vector3(
-                Random.Range(bounds.min.x, bounds.max.x),
-                Random.Range(bounds.min.y, bounds.max.y)
+            var createPosition = new Vector3(
+                Random.Range(roomBounds.min.x, roomBounds.max.x),
+                Random.Range(roomBounds.min.y, roomBounds.max.y)
             );
+            
+            if (!polygonBounds.OverlapPoint(createPosition))
+                createPosition = _roomConfigurator.PolygonFloorBorder.ClosestPoint(createPosition);
 
-            spawnPosition = _roomConfigurator.Collider.ClosestPoint(spawnPosition);
-
-            _weaponGameObjectSpawner.Spawn(spawnPosition, weaponFacade);
+            _weaponGameObjectSpawner.Spawn(createPosition, weaponFacade);
         }
     }
 }
