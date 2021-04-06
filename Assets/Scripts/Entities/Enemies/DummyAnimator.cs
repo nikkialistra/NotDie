@@ -8,6 +8,7 @@ namespace Entities.Enemies
         private Animator _animator;
 
         private readonly int _run = Animator.StringToHash("run");
+        private readonly int _stun = Animator.StringToHash("stun");
 
         private void Awake() => _animator = GetComponent<Animator>();
 
@@ -22,13 +23,18 @@ namespace Entities.Enemies
                 LookingLeft();
         }
 
+        public void Stun()
+        {
+            _animator.SetBool(_run, false);
+        }
+
         private void LookingRight()
         {
             var scale = transform.localScale;
             scale.x = 1;
             transform.localScale = scale;
         }
-        
+
         private void LookingLeft()
         {
             var scale = transform.localScale;

@@ -11,14 +11,17 @@ namespace Entities.Wave
         public int Id => _id;
         public int DamageValue => _damageValue;
         public bool IsPenetrable => _isPenetrable;
-        
+
+        public int ReclineValue => _reclineValue;
+
         private int _id;
         private WeaponFacade _weaponFacade;
         private int _damageValue;
         private bool _isPenetrable;
-        
+        private int _reclineValue;
+
         private IMemoryPool _pool;
-        
+
         private WaveMover _waveMover;
         private Animator _animator;
 
@@ -43,6 +46,7 @@ namespace Entities.Wave
             _weaponFacade = waveSpecs.WeaponFacade;
             _damageValue = waveSpecs.Damage;
             _isPenetrable = waveSpecs.isPenetrable;
+            _reclineValue = waveSpecs.ReclineValue;
             
             _waveMover.SetPosition(waveSpecs.Transform.position);
             _waveMover.SetDirection(waveSpecs.Direction);

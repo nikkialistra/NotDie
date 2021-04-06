@@ -2,7 +2,9 @@
 {
     public abstract class State
     {
-        public abstract void Tick();
+        public virtual void Tick()
+        {
+        }
 
         public virtual void OnEnter()
         {

@@ -5,16 +5,16 @@ namespace Entities.Enemies.States
 {
     public class Stay : State
     {
-        public float TimeStayed { get; set; }
+        public float TimeInStay { get; private set; }
 
         public override void Tick()
         {
-            TimeStayed += Time.deltaTime;
+            TimeInStay += Time.deltaTime;
         }
 
         public override void OnEnter()
         {
-            TimeStayed = 0;
+            TimeInStay = 0;
         }
     }
 }

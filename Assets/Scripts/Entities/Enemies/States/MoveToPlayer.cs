@@ -11,11 +11,12 @@ namespace Entities.Enemies.States
         private PlayerMover _player;
         private float _speed;
 
-        public MoveToPlayer(float speed, Rigidbody2D rigidBody, DummyAnimator dummyAnimator)
+        public MoveToPlayer(float speed, Rigidbody2D rigidBody, DummyAnimator dummyAnimator, PlayerMover player)
         {
             _rigidBody = rigidBody;
             _dummyAnimator = dummyAnimator;
             _speed = speed;
+            _player = player;
         }
         
         public override void Tick()
@@ -24,11 +25,6 @@ namespace Entities.Enemies.States
             _dummyAnimator.UpdateDirection(direction);
 
             _rigidBody.velocity += (Vector2) direction * (_speed * Time.fixedDeltaTime);
-        }
-
-        public override void OnEnter()
-        {
-            _player = Object.FindObjectOfType<PlayerMover>();
         }
     }
 }

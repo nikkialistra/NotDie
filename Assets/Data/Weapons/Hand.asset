@@ -121,3 +121,5 @@ MonoBehaviour:
   CooldownTime: 0.2
   Durability: 0
   DurabilityMultiplier: 1
+  ThrowDamage: 0
+  ReclineValue: 30

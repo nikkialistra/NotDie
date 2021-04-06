@@ -13,5 +13,6 @@ namespace Entities.Wave
         public int Damage;
         public bool isPenetrable;
         public GameObject Prefab;
+        public int ReclineValue;
     }
 }
