@@ -73,16 +73,13 @@ namespace Items.Weapon
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            if (_fly != null)
+                StopCoroutine(_fly);
+            
             if (other.gameObject.GetComponent(typeof(IDamageable)) is IDamageable damageable)
-            {
                 damageable.TakeDamage(_thrownWeapon.Weapon.ThrowDamage);
 
-                if (_fly != null)
-                {
-                    StopCoroutine(_fly);
-                    StartCoroutine(Bounce(-_rigidBody.velocity.x));
-                }
-            }
+            StartCoroutine(Bounce(-_rigidBody.velocity.x));
         }
 
         public void Throw(WeaponFacade weaponFacade, Vector2 startPosition, Vector2 endPosition)

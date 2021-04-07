@@ -57,7 +57,7 @@ namespace Entities.Player.Combat
             _swapWeaponsAction.started -= OnSwapWeapons;
         }
         
-        public WeaponFacade TryTakeOffWeapon()
+        public WeaponFacade TakeOffWeapon()
         {
             var weapon = _weapons.DropWeapon();
             return weapon;
