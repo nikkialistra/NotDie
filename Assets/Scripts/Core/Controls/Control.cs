@@ -120,7 +120,7 @@ namespace Services.Controls
                 {
                     ""name"": ""Gamepad"",
                     ""id"": ""79c3f115-d0af-451d-928e-05c89ced1934"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -131,7 +131,7 @@ namespace Services.Controls
                 {
                     ""name"": ""up"",
                     ""id"": ""72469454-2390-4ba5-a2af-df10a9e24b20"",
-                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -142,7 +142,7 @@ namespace Services.Controls
                 {
                     ""name"": ""down"",
                     ""id"": ""90978e90-5ad9-42b5-acfc-da697eec66e5"",
-                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -153,7 +153,7 @@ namespace Services.Controls
                 {
                     ""name"": ""left"",
                     ""id"": ""16172348-e15d-4454-8c31-fa5a02fb86b5"",
-                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -164,7 +164,7 @@ namespace Services.Controls
                 {
                     ""name"": ""right"",
                     ""id"": ""404a5aa2-7244-4cbe-bb31-dff34160d34c"",
-                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -209,7 +209,7 @@ namespace Services.Controls
                     ""name"": """",
                     ""id"": ""1e772752-a33f-496e-b204-89c0f1b673d1"",
                     ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=0.3)"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""TakeDropThrowingWeapon"",
