@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallRock
       objectReference: {fileID: 0}
+    - target: {fileID: 4448114020255049957, guid: ba8ff93d25c780c4a954440ace503fa2, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5046829895776815318, guid: ba8ff93d25c780c4a954440ace503fa2, type: 3}
       propertyPath: m_labelHash
       value: 1.4921515e-24

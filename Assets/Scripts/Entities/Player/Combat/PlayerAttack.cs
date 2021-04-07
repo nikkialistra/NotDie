@@ -60,22 +60,20 @@ namespace Entities.Player.Combat
 
         private void Update()
         {
-            TryAttackOrThrow();
-            TryUpdateThrowing();
+            if (_attackThrowAction.ReadValue<float>() > 0)
+                ThrowOrAttack();
+            else
+                TryUpdateThrowing();
         }
 
-        private void TryAttackOrThrow()
+        private void ThrowOrAttack()
         {
-            var isAttackOrThrow = _attackThrowAction.ReadValue<float>();
-            if (isAttackOrThrow > 0)
-            {
-                if (_throwing)
-                    Throw();
-                else
-                    Attack();
-            }
+            if (_throwing)
+                Throw();
+            else
+                Attack();
         }
-
+        
         private void TryUpdateThrowing()
         {
             if (_throwing)
@@ -117,38 +115,40 @@ namespace Entities.Player.Combat
 
             _thrown = false;
 
-            _playerMover.TakeAwayControl();
             _playerAnimator.StartThrowing();
             _throwingWeapon.StartThrowing(_weaponsHandler.ActiveWeapon);
             
             _throwing = true;
             _throwingArrowRenderer.enabled = true;
+            
+            _playerMover.TakeAwayControl();
         }
-
-        private static bool NotHoldingButton(InputAction.CallbackContext context) => context.duration < 0.3f;
 
         private void OnCancelThrowing(InputAction.CallbackContext context)
         {
-            if (context.duration < 0.3f)
+            if (NotHoldingButton(context))
+                return;
+            
+            if (_thrown)
                 return;
 
-            _playerMover.ReturnControl();
             _playerAnimator.StopThrowing();
             _throwingWeapon.StopThrowing();
             
             _throwing = false;
             _throwingArrowRenderer.enabled = false;
+            
+            _playerMover.ReturnControl();
         }
+
+        private static bool NotHoldingButton(InputAction.CallbackContext context) => context.duration < 0.3f;
 
         private void Throw()
         {
-            if (_thrown)
+            if (_thrown || !_playerAnimator.IsCurrentAnimationWithTag("Transition"))
                 return;
-            
-            if (!_playerAnimator.IsCurrentAnimationWithTag("Transition"))
-                return;
-            
-            var weapon = _weaponsHandler.TryTakeOffWeapon();
+
+            var weapon = _weaponsHandler.TakeOffWeapon();
 
             _playerAnimator.Throw();
             _throwingWeapon.Throw(weapon, _playerMover.PositionCenter, _attackDirection.transform.position);
