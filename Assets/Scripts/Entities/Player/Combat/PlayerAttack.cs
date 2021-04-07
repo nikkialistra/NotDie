@@ -109,7 +109,7 @@ namespace Entities.Player.Combat
         {
             if (NotHoldingButton(context))
                 return;
-            
+
             if (!_weaponsHandler.WeaponHeld || _playerAnimator.IsCurrentAnimationWithTag("Shot"))
                 return;
 
@@ -127,18 +127,7 @@ namespace Entities.Player.Combat
         private void OnCancelThrowing(InputAction.CallbackContext context)
         {
             if (NotHoldingButton(context))
-                return;
-            
-            if (_thrown)
-                return;
-
-            _playerAnimator.StopThrowing();
-            _throwingWeapon.StopThrowing();
-            
-            _throwing = false;
-            _throwingArrowRenderer.enabled = false;
-            
-            _playerMover.ReturnControl();
+                CancelThrowing();
         }
 
         private static bool NotHoldingButton(InputAction.CallbackContext context) => context.duration < 0.3f;
@@ -148,6 +137,12 @@ namespace Entities.Player.Combat
             if (_thrown || !_playerAnimator.IsCurrentAnimationWithTag("Transition"))
                 return;
 
+            if (!_weaponsHandler.WeaponHeld)
+            {
+                CancelThrowing();
+                return;
+            }
+
             var weapon = _weaponsHandler.TakeOffWeapon();
 
             _playerAnimator.Throw();
@@ -156,6 +151,20 @@ namespace Entities.Player.Combat
             _thrown = true;
             _throwingArrowRenderer.enabled = false;
             
+            _playerMover.ReturnControl();
+        }
+
+        private void CancelThrowing()
+        {
+            if (_thrown)
+                return;
+
+            _playerAnimator.StopThrowing();
+            _throwingWeapon.StopThrowing();
+
+            _throwing = false;
+            _throwingArrowRenderer.enabled = false;
+
             _playerMover.ReturnControl();
         }
 

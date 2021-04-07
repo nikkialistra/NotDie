@@ -43,8 +43,7 @@ namespace Entities.Player
 
         private PlayerInput _input;
         private InputAction _moveAction;
-
-
+        
         [Inject]
         public void Construct(Settings settings, Transform attackDirection)
         {
