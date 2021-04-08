@@ -1,4 +1,5 @@
 ﻿using System;
+using Entities.Player.Animation;
 using Items.Weapon;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,6 +24,8 @@ namespace Entities.Player.Combat
 
         private Weapons _weapons;
 
+        private PlayerAnimator _playerAnimator;
+        
         private WeaponGameObjectSpawner _weaponGameObjectSpawner;
 
         private PlayerInput _input;
@@ -43,6 +46,7 @@ namespace Entities.Player.Combat
             _input = GetComponent<PlayerInput>();
             _takeDropWeaponAction = _input.actions.FindAction("TakeDropThrowingWeapon");
             _swapWeaponsAction = _input.actions.FindAction("SwapWeapons");
+            _playerAnimator = GetComponent<PlayerAnimator>();
         }
 
         private void OnEnable()
@@ -65,13 +69,21 @@ namespace Entities.Player.Combat
 
         private void OnTakeDropWeapon(InputAction.CallbackContext context)
         {
-            if (context.duration > 0.3f)
+            if (HoldingButton(context))
+                return;
+            
+            if (!_playerAnimator.IsCurrentAnimationWithTag("ActionReady"))
                 return;
             
             if (TryFindWeapon())
                 return;
 
             DropWeapon();
+        }
+
+        private static bool HoldingButton(InputAction.CallbackContext context)
+        {
+            return context.duration > 0.3f;
         }
 
         private void OnSwapWeapons(InputAction.CallbackContext context) => _weapons.SwapWeapons();

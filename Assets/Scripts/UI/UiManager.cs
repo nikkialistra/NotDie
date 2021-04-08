@@ -1,11 +1,14 @@
-﻿using Entities.Player;
+﻿using System;
+using Entities.Player;
 using Entities.Player.Combat;
 using UI.Presenters;
 using UI.Views;
+using UnityEngine;
+using Zenject;
 
 namespace UI
 {
-    public class UiManager
+    public class UiManager : MonoBehaviour
     {
         private Hp _hp;
         private HpView _hpView;
@@ -15,16 +18,24 @@ namespace UI
 
         private HpPresenter _hpPresenter;
         private WeaponsPresenter _weaponsPresenter;
-
-        public UiManager(Hp hp, HpView hpView, Weapons weapons, WeaponsView weaponsView)
+        
+        [Inject]
+        public void Construct(Hp hp, HpView hpView, Weapons weapons, WeaponsView weaponsView)
         {
             _hp = hp;
             _hpView = hpView;
+            
             _weapons = weapons;
             _weaponsView = weaponsView;
             
             _hpPresenter = new HpPresenter(_hp, _hpView);
             _weaponsPresenter = new WeaponsPresenter(_weapons, _weaponsView);
+        }
+
+        private void Start()
+        {
+            _hpPresenter.SetUp();
+            _weaponsPresenter.SetUp();
         }
     }
 }

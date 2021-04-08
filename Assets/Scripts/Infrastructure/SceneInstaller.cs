@@ -5,6 +5,8 @@ using Entities.Player.Animation;
 using Entities.Player.Combat;
 using Entities.Wave;
 using Items.Weapon;
+using UI;
+using UI.Views;
 using UnityEngine;
 using Zenject;
 
@@ -34,6 +36,12 @@ namespace Infrastructure
         [SerializeField] private PolygonCollider2D _polygonWallBounds;
         [SerializeField] private EdgeCollider2D _polygonFloorBorder;
         [SerializeField] private EdgeCollider2D _polygonWallBorder;
+        
+        [Header("UI")] 
+        [SerializeField] private UiManager _uiManager;
+        [SerializeField] private HpView _hpView;
+        [SerializeField] private TimerView _timerView;
+        [SerializeField] private WeaponsView _weaponsView;
 
         public override void InstallBindings()
         {
@@ -50,6 +58,9 @@ namespace Infrastructure
             BindWeaponGameObjectSpawner();
 
             BindRoom();
+
+            BindUI();
+
         }
 
         private void BindPlayerMovement()
@@ -118,6 +129,15 @@ namespace Infrastructure
             Container.BindInstance(_polygonWallBounds).WithId("wall");
             Container.BindInstance(_polygonFloorBorder).WithId("floorBorder");
             Container.BindInstance(_polygonWallBorder).WithId("wallBorder");
+        }
+
+        private void BindUI()
+        {
+            Container.BindInstance(_hpView);
+            Container.BindInstance(_timerView);
+            Container.BindInstance(_weaponsView);
+
+            Container.BindInstance(_uiManager);
         }
 
         class WaveFacadePool : MonoPoolableMemoryPool<WaveSpecs, IMemoryPool, WaveFacade>

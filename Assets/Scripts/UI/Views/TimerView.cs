@@ -1,40 +1,34 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
+﻿using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace UI.Views
 {
-    public class TimerView : IInitializable, ITickable
+    [RequireComponent(typeof(UIDocument))]
+    public class TimerView : MonoBehaviour
     {
-        [Serializable]
-        public class Settings
-        {
-            public float UpdateTime;
-        }
-
-        private Settings _settings;
+        [SerializeField] private float _updateTime;
         
-        private Text _timer;
+        private VisualElement _rootVisualElement;
+
+        private Label _timer;
 
         private float _time;
-        private bool _isWorking;
+        private bool _isWorking = true;
 
         private float _timeForNextUpdate;
-        
-        public TimerView(Settings settings, [Inject(Id = "timer")] Text timer)
+
+        private void Awake()
         {
-            _settings = settings;
-            _timer = timer;
+            _rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
+            
+            _timer = _rootVisualElement.Q<Label>("timer");
         }
 
-        public void Initialize() => _isWorking = true;
-
-        public void Tick()
+        private void Update()
         {
             if (!_isWorking) 
                 return;
-            
+
             _time += Time.deltaTime;
 
             if (_timeForNextUpdate > Time.time) 
@@ -42,7 +36,7 @@ namespace UI.Views
             
             SetTime();
             
-            _timeForNextUpdate = Time.time + _settings.UpdateTime;
+            _timeForNextUpdate = Time.time + _updateTime;
         }
 
         public void StartTimer() => _isWorking = true;
