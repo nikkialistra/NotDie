@@ -4,7 +4,7 @@ using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
-namespace Items.Weapon
+namespace Things.Weapon
 {
     [RequireComponent(typeof(RoomConfigurator))]
     public class WeaponGenerator : MonoBehaviour

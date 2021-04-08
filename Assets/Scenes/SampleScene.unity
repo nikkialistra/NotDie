@@ -858,6 +858,7 @@ GameObject:
   - component: {fileID: 716610165}
   - component: {fileID: 716610164}
   - component: {fileID: 716610166}
+  - component: {fileID: 716610168}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -975,6 +976,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5c16722d5b343439333e82e1bc9d3ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &716610168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716610160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d33045a392584e12b34ef21ff255651e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &813541852
@@ -1489,28 +1502,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8c6e2d274f2a95744b15f4399123f5b5, type: 2}
   - {fileID: 11400000, guid: 3efa2474e89efed468362fee6e93bdb9, type: 2}
   - {fileID: 11400000, guid: 1e00091031a93f642b866daa62e74ff3, type: 2}
---- !u!68 &1298433787
-EdgeCollider2D:
+--- !u!114 &1298433787
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1298433783}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.5, y: 0}
-  - {x: 0.5, y: 0}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 190aecac0dde47b991f17e5a85a18d09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _items:
+  - {fileID: 11400000, guid: b665a724f0f1a2346b959e12cb078c3a, type: 2}
+  - {fileID: 11400000, guid: b665a724f0f1a2346b959e12cb078c3a, type: 2}
+  - {fileID: 11400000, guid: b665a724f0f1a2346b959e12cb078c3a, type: 2}
 --- !u!1 &1381299464 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 437369560671245325, guid: 94ff85432863cee48b83860753576ba7, type: 3}
@@ -2310,6 +2317,8 @@ MonoBehaviour:
   _weaponPrefab: {fileID: 2817982706502842857, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
   _weaponAttack: {fileID: 937606822}
   _waveFacadePrefab: {fileID: 3274925662554537503, guid: 8cdd9ec471e768042b4841a29fa57cd0, type: 3}
+  _itemFacadePrefab: {fileID: 434846520202061160, guid: d7224fdaf8cdf0247a8298e378d70d2f, type: 3}
+  _itemPrefab: {fileID: 2817982706502842857, guid: ab30b4611054151409b417c48dd202ac, type: 3}
   _roomConfigurator: {fileID: 1298433784}
   _polygonFloorBounds: {fileID: 1564590633}
   _polygonWallBounds: {fileID: 687424469}
@@ -2319,6 +2328,7 @@ MonoBehaviour:
   _hpView: {fileID: 716610164}
   _timerView: {fileID: 716610163}
   _weaponsView: {fileID: 716610166}
+  _inventoryView: {fileID: 716610168}
 --- !u!1 &2062465800
 GameObject:
   m_ObjectHideFlags: 0

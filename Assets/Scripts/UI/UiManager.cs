@@ -1,6 +1,6 @@
-﻿using System;
-using Entities.Player;
+﻿using Entities.Player;
 using Entities.Player.Combat;
+using Entities.Player.Items;
 using UI.Presenters;
 using UI.Views;
 using UnityEngine;
@@ -10,32 +10,25 @@ namespace UI
 {
     public class UiManager : MonoBehaviour
     {
-        private Hp _hp;
-        private HpView _hpView;
-        
-        private Weapons _weapons;
-        private WeaponsView _weaponsView;
-
         private HpPresenter _hpPresenter;
         private WeaponsPresenter _weaponsPresenter;
-        
+        private InventoryPresenter _inventoryPresenter;
+
         [Inject]
-        public void Construct(Hp hp, HpView hpView, Weapons weapons, WeaponsView weaponsView)
+        public void Construct(Hp hp, HpView hpView,
+            Weapons weapons, WeaponsView weaponsView,
+            Inventory inventory, InventoryView inventoryView)
         {
-            _hp = hp;
-            _hpView = hpView;
-            
-            _weapons = weapons;
-            _weaponsView = weaponsView;
-            
-            _hpPresenter = new HpPresenter(_hp, _hpView);
-            _weaponsPresenter = new WeaponsPresenter(_weapons, _weaponsView);
+            _hpPresenter = new HpPresenter(hp, hpView);
+            _weaponsPresenter = new WeaponsPresenter(weapons, weaponsView);
+            _inventoryPresenter = new InventoryPresenter(inventory, inventoryView);
         }
 
         private void Start()
         {
             _hpPresenter.SetUp();
             _weaponsPresenter.SetUp();
+            _inventoryPresenter.SetUp();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using Entities.Player.Animation;
-using Items.Weapon;
+using Things.Weapon;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -36,8 +36,8 @@ namespace Entities.Player.Combat
         [Inject]
         public void Construct(Settings settings, Weapons weapons, WeaponGameObjectSpawner weaponGameObjectSpawner)
         {
-            _weapons = weapons;
             _settings = settings;
+            _weapons = weapons;
             _weaponGameObjectSpawner = weaponGameObjectSpawner;
         }
 

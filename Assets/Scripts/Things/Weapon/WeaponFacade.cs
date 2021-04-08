@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Items.Weapon
+namespace Things.Weapon
 {
     public class WeaponFacade : MonoBehaviour, IPoolable<WeaponSpecs, IMemoryPool>, IDisposable
     {
@@ -12,12 +12,6 @@ namespace Items.Weapon
         [SerializeField] private float _durability;
 
         public Data.Weapon Weapon => _weapon;
-        
-        [ContextMenu("Decrease durability")]
-        void DecreaseDurability()
-        {
-            Durability -= 0.3f;
-        }
 
         public float Durability
         {

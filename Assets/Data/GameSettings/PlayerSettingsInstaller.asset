@@ -20,7 +20,8 @@ MonoBehaviour:
     Speed: 25
     Damping: 10
   _weaponsHandler:
-    Hand: {fileID: 11400000, guid: b945b6d6c3b8a7a4e9e8b8f9f28f6ca1, type: 2}
+    DistanceForTaking: 1
+  _inventoryHandler:
     DistanceForTaking: 1
   _attackDirection:
     ButtonPressToleranceTime: 0.1

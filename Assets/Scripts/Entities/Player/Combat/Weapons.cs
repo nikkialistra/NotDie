@@ -1,11 +1,9 @@
 ﻿using System;
-using Items.Weapon;
-using UnityEngine;
+using Things.Weapon;
 using Zenject;
 
 namespace Entities.Player.Combat
 {
-    [RequireComponent(typeof(WeaponFacade))]
     public class Weapons
     {
         public event Action LeftWeaponChanged;
@@ -22,8 +20,6 @@ namespace Entities.Player.Combat
         
         public WeaponFacade LeftWeapon => _leftWeapon;
         public WeaponFacade RightWeapon => _rightWeapon;
-
-        public bool LeftIsActive => _leftIsActive;
 
         public bool HandIsActive => ActiveWeapon == _hand;
 

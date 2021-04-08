@@ -6,22 +6,22 @@ namespace UI.Presenters
     public class HpPresenter
     {
         private readonly Hp _hp;
-        private readonly HpView _view;
+        private readonly HpView _hpView;
 
-        public HpPresenter(Hp hp, HpView view)
+        public HpPresenter(Hp hp, HpView hpView)
         {
             _hp = hp;
-            _view = view;
+            _hpView = hpView;
         }
 
         public void SetUp()
         {
-             _view.SetLives(_hp.Lives);
-            _view.SetFullHealthValue(_hp.HealthFullValue);
-             _view.SetHealth(_hp.HealthFullValue);
+             _hpView.SetLives(_hp.Lives);
+            _hpView.SetFullHealthValue(_hp.HealthFullValue);
+             _hpView.SetHealth(_hp.HealthFullValue);
             
-            _hp.LivesChanged += _view.SetLives;
-            _hp.HealthChanged += _view.SetHealth;
+            _hp.LivesChanged += _hpView.SetLives;
+            _hp.HealthChanged += _hpView.SetHealth;
         }
     }
 }

@@ -4,7 +4,6 @@ using Zenject;
 
 namespace Core.Room
 {
-    [RequireComponent(typeof(EdgeCollider2D))]
     public class RoomConfigurator : MonoBehaviour
     {
         public PolygonCollider2D PolygonFloorBounds => _polygonFloorBounds;
