@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2817982706502842860}
   - component: {fileID: 2817982706502842859}
-  - component: {fileID: 2817982706502842858}
   - component: {fileID: 2817982706502842861}
-  m_Layer: 0
-  m_Name: GreatSword
+  - component: {fileID: 2405105763794807625}
+  m_Layer: 7
+  m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f52cf3969c0e0a641b004a159b95d4a2, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 5267a1e54bcdd804abc750604a30a8ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,18 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &2817982706502842858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2817982706502842857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2da6b448caf4b34bd420e7905a553c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &2817982706502842861
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -113,8 +101,8 @@ BoxCollider2D:
   m_Offset: {x: -0.00000011920929, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.59375, y: 0.46875}
+    pivot: {x: 0.31428573, y: 0.45454547}
+    oldSize: {x: 1.09375, y: 0.34375}
     newSize: {x: 0.28125, y: 0.53125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -123,3 +111,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.62602735, y: 0.47}
   m_EdgeRadius: 0
+--- !u!114 &2405105763794807625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2817982706502842857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aefb6d77e011485fabd9d5cf0e7efb67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

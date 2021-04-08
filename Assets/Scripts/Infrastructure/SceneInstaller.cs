@@ -3,8 +3,11 @@ using Core.Room;
 using Entities.Player;
 using Entities.Player.Animation;
 using Entities.Player.Combat;
+using Entities.Player.Items;
 using Entities.Wave;
-using Items.Weapon;
+using Things.Data;
+using Things.Item;
+using Things.Weapon;
 using UI;
 using UI.Views;
 using UnityEngine;
@@ -29,6 +32,10 @@ namespace Infrastructure
         [SerializeField] private GameObject _weaponPrefab;
         [SerializeField] private WeaponAttack _weaponAttack;
         [SerializeField] private GameObject _waveFacadePrefab;
+        
+        [Header("Items")]
+        [SerializeField] private GameObject _itemFacadePrefab;
+        [SerializeField] private GameObject _itemPrefab;
 
         [Header("Room")]
         [SerializeField] private RoomConfigurator _roomConfigurator;
@@ -42,6 +49,7 @@ namespace Infrastructure
         [SerializeField] private HpView _hpView;
         [SerializeField] private TimerView _timerView;
         [SerializeField] private WeaponsView _weaponsView;
+        [SerializeField] private InventoryView _inventoryView;
 
         public override void InstallBindings()
         {
@@ -50,17 +58,20 @@ namespace Infrastructure
             Container.Bind<Hp>().AsSingle();
 
             BindPlayerWeaponSystem();
+            
+            Container.Bind<Inventory>().AsSingle();
 
             BindWaveSpawner();
             
             BindWeaponSpawner();
-            
             BindWeaponGameObjectSpawner();
+            
+            BindItemSpawner();
+            BindItemGameObjectSpawner();
 
             BindRoom();
 
             BindUI();
-
         }
 
         private void BindPlayerMovement()
@@ -120,6 +131,28 @@ namespace Infrastructure
                 .FromComponentInNewPrefab(_weaponPrefab)
                 .UnderTransformGroup("WeaponPickups"));
         }
+        
+        private void BindItemSpawner()
+        {
+            Container.Bind<ItemSpawner>().AsSingle();
+
+            Container.BindFactory<Item, ItemFacade, ItemFacade.Factory>()
+                .FromPoolableMemoryPool<Item, ItemFacade, ItemFacadePool>(poolBinder => poolBinder
+                    .WithInitialSize(5)
+                    .FromComponentInNewPrefab(_itemFacadePrefab)
+                    .UnderTransformGroup("Items"));
+        }
+
+        private void BindItemGameObjectSpawner()
+        {
+            Container.Bind<ItemGameObjectSpawner>().AsSingle();
+            
+            Container.BindFactory<Vector3, ItemFacade, ItemGameObject, ItemGameObject.Factory>()
+                .FromPoolableMemoryPool<Vector3, ItemFacade, ItemGameObject, ItemGameObjectPool>(poolBinder => poolBinder
+                    .WithInitialSize(5)
+                    .FromComponentInNewPrefab(_itemPrefab)
+                    .UnderTransformGroup("ItemPickups"));
+        }
 
         private void BindRoom()
         {
@@ -136,6 +169,7 @@ namespace Infrastructure
             Container.BindInstance(_hpView);
             Container.BindInstance(_timerView);
             Container.BindInstance(_weaponsView);
+            Container.BindInstance(_inventoryView);
 
             Container.BindInstance(_uiManager);
         }
@@ -149,6 +183,14 @@ namespace Infrastructure
         }
         
         class WeaponGameObjectPool : MonoPoolableMemoryPool<Vector3, WeaponFacade, IMemoryPool, WeaponGameObject>
+        {
+        }
+        
+        class ItemFacadePool : MonoPoolableMemoryPool<Item, IMemoryPool, ItemFacade>
+        {
+        }
+        
+        class ItemGameObjectPool : MonoPoolableMemoryPool<Vector3, ItemFacade, IMemoryPool, ItemGameObject>
         {
         }
     }

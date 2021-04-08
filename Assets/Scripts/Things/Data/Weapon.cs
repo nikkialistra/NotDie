@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Items.Data
+namespace Things.Data
 {
     [CreateAssetMenu(fileName = "Weapon", menuName = "Data/Weapon")]
     public class Weapon : ScriptableObject
@@ -26,9 +26,7 @@ namespace Items.Data
 
         [Header("Icons")] 
         public Sprite PickUp;
-
         public Sprite Active;
-
         public Sprite NotActive;
         
         [Space] 

@@ -5,7 +5,7 @@ using Core.Room;
 using UnityEngine;
 using Zenject;
 
-namespace Items.Weapon
+namespace Things.Weapon
 {
     public class ThrowingWeapon : MonoBehaviour
     {

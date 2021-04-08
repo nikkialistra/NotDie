@@ -1,5 +1,5 @@
 ﻿using System;
-using Items.Weapon;
+using Things.Weapon;
 using UnityEngine;
 using Zenject;
 

@@ -1,5 +1,5 @@
 ﻿using Entities.Player.Animation;
-using Items.Weapon;
+using Things.Weapon;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;

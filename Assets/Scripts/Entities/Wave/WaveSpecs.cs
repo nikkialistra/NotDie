@@ -1,4 +1,4 @@
-﻿using Items.Weapon;
+﻿using Things.Weapon;
 using UnityEngine;
 
 namespace Entities.Wave

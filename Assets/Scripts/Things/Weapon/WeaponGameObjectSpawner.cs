@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Items.Weapon
+namespace Things.Weapon
 {
     public class WeaponGameObjectSpawner
     {

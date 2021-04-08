@@ -6,20 +6,20 @@ namespace UI.Presenters
     public class WeaponsPresenter
     {
         private readonly Weapons _weapons;
-        private readonly WeaponsView _view;
+        private readonly WeaponsView _weaponsView;
 
         private bool _leftIsActive;
 
-        public WeaponsPresenter(Weapons weapons, WeaponsView view)
+        public WeaponsPresenter(Weapons weapons, WeaponsView weaponsView)
         {
             _weapons = weapons;
-            _view = view;
+            _weaponsView = weaponsView;
         }
 
         public void SetUp()
         {
-            _view.SetLeftWeaponSpriteNotActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
-            _view.SetRightWeaponSpriteActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
+            _weaponsView.SetLeftWeaponSpriteNotActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
+            _weaponsView.SetRightWeaponSpriteActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
 
             _weapons.LeftWeaponIsActive += OnLeftWeaponIsActive;
             _weapons.RightWeaponIsActive += OnRightWeaponIsActive;
@@ -49,17 +49,17 @@ namespace UI.Presenters
         private void OnLeftWeaponChanged()
         {
             if (_leftIsActive)
-                _view.SetLeftWeaponSpriteActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
+                _weaponsView.SetLeftWeaponSpriteActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
             else
-                _view.SetLeftWeaponSpriteNotActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
+                _weaponsView.SetLeftWeaponSpriteNotActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
         }
 
         private void OnRightWeaponChanged()
         {
             if (_leftIsActive)
-                _view.SetRightWeaponSpriteNotActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
+                _weaponsView.SetRightWeaponSpriteNotActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
             else
-                _view.SetRightWeaponSpriteActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
+                _weaponsView.SetRightWeaponSpriteActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
         }
     }
 }
