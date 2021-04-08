@@ -9,14 +9,7 @@ namespace Infrastructure
     public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInstaller>
     {
         [SerializeField] private CameraFollow.Settings _cameraFollow;
-        [SerializeField] private TimerView.Settings _timerView;
-        [SerializeField] private WeaponsView.Settings _weaponsView;
 
-        public override void InstallBindings()
-        {
-            Container.BindInstance(_cameraFollow);
-            Container.BindInstance(_timerView);
-            Container.BindInstance(_weaponsView);
-        }
+        public override void InstallBindings() => Container.BindInstance(_cameraFollow);
     }
 }

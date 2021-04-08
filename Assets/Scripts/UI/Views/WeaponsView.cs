@@ -2,63 +2,56 @@
 using System.Collections.Generic;
 using Items.Data;
 using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
+using UnityEngine.UIElements;
 
 namespace UI.Views
 { 
-    public class WeaponsView
+    public class WeaponsView : MonoBehaviour
     {
-        [Serializable]
-        public class Settings
-        {
-            public List<Sprite> ActiveFrames;
-            public List<Sprite> NotActiveFrames;
-        }
+        [SerializeField] private List<Sprite> ActiveFrames;
+        [SerializeField] private List<Sprite> NotActiveFrames;
+        
+        private VisualElement _rootVisualElement;
 
-        private Settings _settings;
-
+        private Image _leftFrame;
+        private Image _rightFrame;
+        
         private Image _leftWeapon;
         private Image _rightWeapon;
-
-        private Image _leftWeaponFrame;
-        private Image _rightWeaponFrame;
-
-        public WeaponsView(Settings settings,
-            [Inject(Id = "leftWeapon")] Image leftWeapon, [Inject(Id = "rightWeapon")] Image rightWeapon, 
-            [Inject(Id = "leftWeaponFrame")] Image leftWeaponFrame, [Inject(Id = "rightWeaponFrame")] Image rightWeaponFrame)
+        
+        private void Awake()
         {
-            _settings = settings;
+            _rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
             
-            _leftWeapon = leftWeapon;
-            _rightWeapon = rightWeapon;
-            
-            _leftWeaponFrame = leftWeaponFrame;
-            _rightWeaponFrame = rightWeaponFrame;
+            _leftFrame = _rootVisualElement.Q<Image>("left_frame");
+            _rightFrame = _rootVisualElement.Q<Image>("right_frame");
+
+            _leftWeapon = _rootVisualElement.Q<Image>("left_weapon");
+            _rightWeapon = _rootVisualElement.Q<Image>("right_weapon");
         }
 
         public void SetLeftWeaponSpriteActive(Weapon weapon, float durability)
         {
             _leftWeapon.sprite = weapon.Active;
-            _leftWeaponFrame.sprite = GetSprite(_settings.ActiveFrames, durability);
+            _leftFrame.sprite = GetSprite(ActiveFrames, durability);
         }
 
         public void SetRightWeaponSpriteActive(Weapon weapon, float durability)
         {
             _rightWeapon.sprite = weapon.Active;
-            _rightWeaponFrame.sprite = GetSprite(_settings.ActiveFrames, durability);
+            _rightFrame.sprite = GetSprite(ActiveFrames, durability);
         }
         
         public void SetLeftWeaponSpriteNotActive(Weapon weapon, float durability)
         {
             _leftWeapon.sprite = weapon.NotActive;
-            _leftWeaponFrame.sprite = GetSprite(_settings.NotActiveFrames, durability);
+            _leftFrame.sprite = GetSprite(NotActiveFrames, durability);
         }
 
         public void SetRightWeaponSpriteNotActive(Weapon weapon, float durability)
         {
             _rightWeapon.sprite = weapon.NotActive;
-            _rightWeaponFrame.sprite = GetSprite(_settings.NotActiveFrames, durability);
+            _rightFrame.sprite = GetSprite(NotActiveFrames, durability);
         }
         
         private Sprite GetSprite(List<Sprite> sprites, float durability)

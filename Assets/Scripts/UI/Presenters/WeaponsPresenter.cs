@@ -14,19 +14,12 @@ namespace UI.Presenters
         {
             _weapons = weapons;
             _view = view;
+        }
 
-            _leftIsActive = weapons.LeftIsActive;
-
-            if (_leftIsActive)
-            {
-                _view.SetLeftWeaponSpriteActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
-                _view.SetRightWeaponSpriteNotActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
-            }
-            else
-            {
-                _view.SetLeftWeaponSpriteNotActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
-                _view.SetRightWeaponSpriteActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
-            }
+        public void SetUp()
+        {
+            _view.SetLeftWeaponSpriteNotActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
+            _view.SetRightWeaponSpriteActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
 
             _weapons.LeftWeaponIsActive += OnLeftWeaponIsActive;
             _weapons.RightWeaponIsActive += OnRightWeaponIsActive;

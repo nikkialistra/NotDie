@@ -1,0 +1,111 @@
+.screen {
+    width: 640px;
+    height: 360px;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+.part_container {
+    flex-direction: column;
+    align-items: center;
+}
+
+.main {
+    flex-grow: 1;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+.top__main {
+    margin-top: 20px;
+}
+
+.bottom_main {
+    margin-bottom: 30px;
+}
+
+.health_bar {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.health {
+    background-image: url('/Assets/Sprites/UI/Healthbar/HealthBarEmpty.png#HealthBarEmpty');
+    width: 100px;
+    height: 16px;
+    -unity-background-scale-mode: stretch-to-fill;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.health__fill {
+    background-image: url('/Assets/Sprites/UI/Healthbar/Healthbar.png#Healthbar');
+    width: 100px;
+    height: 16px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.health__fill_digit {
+    width: 8px;
+    height: 10px;
+}
+
+.health__fill_right_space {
+    width: 1px;
+    height: 10px;
+    background-image: url('/Assets/Sprites/UI/Fonts/HPNumbers.png#HPNumbers_10');
+}
+
+.lives {
+    -unity-font: url('/Assets/Sprites/UI/Fonts/HPFont.ttf');
+    color: rgb(255, 255, 255);
+    font-size: 8px;
+    -unity-text-align: middle-center;
+    margin-bottom: 0;
+}
+
+.slot {
+    width: 27px;
+    height: 50px;
+}
+
+.frame {
+    width: 27px;
+    height: 50px;
+}
+
+.weapon {
+    width: 27px;
+    height: 50px;
+}
+
+.top_left {
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.square_frame {
+    background-image: url('/Assets/Sprites/UI/Frames/SquareFrame.png#SquareFrame');
+    width: 27px;
+    height: 27px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.timer {
+    position: absolute;
+    bottom: 35px;
+    right: 70px;
+    -unity-font: url('/Assets/Sprites/UI/Fonts/Timer.ttf');
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+}
+
+.not_displayed {
+    display: none;
+}

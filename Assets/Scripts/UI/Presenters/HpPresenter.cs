@@ -12,11 +12,14 @@ namespace UI.Presenters
         {
             _hp = hp;
             _view = view;
+        }
 
-            _view.SetLives(_hp.Lives);
+        public void SetUp()
+        {
+             _view.SetLives(_hp.Lives);
             _view.SetFullHealthValue(_hp.HealthFullValue);
-            _view.SetHealth(_hp.HealthFullValue);
-
+             _view.SetHealth(_hp.HealthFullValue);
+            
             _hp.LivesChanged += _view.SetLives;
             _hp.HealthChanged += _view.SetHealth;
         }

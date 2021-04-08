@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
+using UnityEngine.UIElements;
 
 namespace UI.Views
 {
-    public class HpView
+    [RequireComponent(typeof(DigitManager))]
+    public class HpView : MonoBehaviour
     {
+        private VisualElement _rootVisualElement;
+
         private Image _fillIndicator;
-        
-        private Text _lives;
-        
+
+        private Label _lives;
+
         private DigitManager _digitManager;
         private Image _healthFirst;
         private Image _healthSecond;
@@ -17,26 +19,26 @@ namespace UI.Views
 
         private float _fullHealthValue;
 
-        public HpView(Image fillIndicator, [Inject(Id = "lives")] Text lives, DigitManager digitManager,
-            [Inject(Id = "healthFirst")] Image healthFirst, 
-            [Inject(Id = "healthSecond")] Image healthSecond,
-            [Inject(Id = "healthThird")] Image healthThird)
+        private void Awake()
         {
-            _fillIndicator = fillIndicator;
-            _lives = lives;
+            _digitManager = GetComponent<DigitManager>();
+            
+            _rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
 
-            _digitManager = digitManager;
+            _fillIndicator = _rootVisualElement.Q<Image>("fill_indicator");
 
-            _healthFirst = healthFirst;
-            _healthSecond = healthSecond;
-            _healthThird = healthThird;
+            _lives = _rootVisualElement.Q<Label>("lives");
+
+            _healthFirst = _rootVisualElement.Q<Image>("health__first");
+            _healthSecond = _rootVisualElement.Q<Image>("health__second");
+            _healthThird = _rootVisualElement.Q<Image>("health__third");
         }
 
         public void SetFullHealthValue(int fullValue) => _fullHealthValue = fullValue;
 
         public void SetHealth(int value)
         {
-            _fillIndicator.fillAmount = value / _fullHealthValue;
+            //_fillIndicator.fillAmount = value / _fullHealthValue;
 
             if (value >= 100)
                 SetThreeDigits(value);
@@ -51,10 +53,10 @@ namespace UI.Views
             _healthFirst.sprite = _digitManager.GetDigit(value / 100);
             _healthSecond.sprite = _digitManager.GetDigit(value / 10 % 10);
             _healthThird.sprite = _digitManager.GetDigit(value % 10);
-            
-            _healthFirst.gameObject.SetActive(true);
-            _healthSecond.gameObject.SetActive(true);
-            _healthThird.gameObject.SetActive(true);
+
+            _healthFirst.EnableInClassList("not_displayed", false);
+            _healthSecond.EnableInClassList("not_displayed", false);
+            _healthThird.EnableInClassList("not_displayed", false);
         }
 
         private void SetTwoDigits(int value)
@@ -62,18 +64,18 @@ namespace UI.Views
             _healthSecond.sprite = _digitManager.GetDigit(value / 10);
             _healthThird.sprite = _digitManager.GetDigit(value % 10);
             
-            _healthFirst.gameObject.SetActive(false);
-            _healthSecond.gameObject.SetActive(true);
-            _healthThird.gameObject.SetActive(true);
+            _healthFirst.EnableInClassList("not_displayed", true);
+            _healthSecond.EnableInClassList("not_displayed", false);
+            _healthThird.EnableInClassList("not_displayed", false);
         }
 
         private void SetOneDigit(int value)
         {
             _healthThird.sprite = _digitManager.GetDigit(value % 10);
             
-            _healthFirst.gameObject.SetActive(false);
-            _healthSecond.gameObject.SetActive(false);
-            _healthThird.gameObject.SetActive(true);
+            _healthFirst.EnableInClassList("not_displayed", true);
+            _healthSecond.EnableInClassList("not_displayed", true);
+            _healthThird.EnableInClassList("not_displayed", false);
         }
 
         public void SetLives(int value) => _lives.text = value.ToString();
