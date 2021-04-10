@@ -16,15 +16,19 @@
                     <ui:Image name="left_frame" class="frame top_left" />
                     <ui:Image name="left_weapon" class="weapon top_left" />
                 </ui:VisualElement>
-                <ui:VisualElement name="health_bar" class="health_bar">
+                <ui:VisualElement name="main__center">
                     <ui:Label text="9" display-tooltip-when-elided="true" name="lives" class="lives" />
-                    <ui:VisualElement name="health" class="health">
-                        <ui:VisualElement name="fill" class="health__fill">
+                    <ui:VisualElement name="health_bar" class="health_bar" style="background-image: none;">
+                        <ui:Image name="fill_indicator" class="health__fill top_left" />
+                        <ui:Image name="stitch" class="top_left stitch" />
+                        <ui:VisualElement name="health__values" class="health__values top_left">
                             <ui:Image name="health__first" class="health__fill_digit" />
                             <ui:Image name="health__second" class="health__fill_digit" />
                             <ui:Image name="health__third" class="health__fill_digit" />
                             <ui:Image name="health__right_space" class="health__fill_right_space" />
                         </ui:VisualElement>
+                        <ui:Image name="white_fill_indicator" class="health__fill top_left not_displayed" />
+                        <ui:Image name="health" class="health top_left"/>
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="right_slot" class="slot">

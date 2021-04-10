@@ -174,23 +174,23 @@ namespace Infrastructure
             Container.BindInstance(_uiManager);
         }
 
-        class WaveFacadePool : MonoPoolableMemoryPool<WaveSpecs, IMemoryPool, WaveFacade>
+        private class WaveFacadePool : MonoPoolableMemoryPool<WaveSpecs, IMemoryPool, WaveFacade>
         {
         }
 
-        class WeaponFacadePool : MonoPoolableMemoryPool<WeaponSpecs, IMemoryPool, WeaponFacade>
+        private class WeaponFacadePool : MonoPoolableMemoryPool<WeaponSpecs, IMemoryPool, WeaponFacade>
         {
         }
-        
-        class WeaponGameObjectPool : MonoPoolableMemoryPool<Vector3, WeaponFacade, IMemoryPool, WeaponGameObject>
+
+        private class WeaponGameObjectPool : MonoPoolableMemoryPool<Vector3, WeaponFacade, IMemoryPool, WeaponGameObject>
         {
         }
-        
-        class ItemFacadePool : MonoPoolableMemoryPool<Item, IMemoryPool, ItemFacade>
+
+        private class ItemFacadePool : MonoPoolableMemoryPool<Item, IMemoryPool, ItemFacade>
         {
         }
-        
-        class ItemGameObjectPool : MonoPoolableMemoryPool<Vector3, ItemFacade, IMemoryPool, ItemGameObject>
+
+        private class ItemGameObjectPool : MonoPoolableMemoryPool<Vector3, ItemFacade, IMemoryPool, ItemGameObject>
         {
         }
     }

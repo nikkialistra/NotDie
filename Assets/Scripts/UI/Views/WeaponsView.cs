@@ -32,7 +32,7 @@ namespace UI.Views
 
         public void SetLeftWeaponSpriteActive(Weapon weapon, float durability)
         {
-            _leftWeapon.sprite = weapon.Active;
+            _leftWeapon.image = FlippedTextureFromSprite(weapon.Active);
             _leftFrame.sprite = GetSprite(ActiveFrames, durability);
         }
 
@@ -44,7 +44,7 @@ namespace UI.Views
         
         public void SetLeftWeaponSpriteNotActive(Weapon weapon, float durability)
         {
-            _leftWeapon.sprite = weapon.NotActive;
+            _leftWeapon.image = FlippedTextureFromSprite(weapon.NotActive);
             _leftFrame.sprite = GetSprite(NotActiveFrames, durability);
         }
 
@@ -67,6 +67,26 @@ namespace UI.Views
                 return sprites[1];
             else
                 return sprites[0];
+        }
+
+        private static Texture2D FlippedTextureFromSprite(Sprite sprite)
+        {
+            var width = (int) sprite.rect.width;
+            var height = (int) sprite.rect.height;
+
+            var widthOffset = (int) sprite.textureRect.x;
+            var heightOffset = (int) sprite.textureRect.y;
+
+            var flippedTexture = new Texture2D(width, height);
+
+            for (var i = 0; i < width; i++)
+                for (var j = 0; j < height; j++)
+                    flippedTexture.SetPixel(width - i - 1, j, sprite.texture.GetPixel(widthOffset + i, heightOffset + j));
+
+            flippedTexture.filterMode = FilterMode.Point;
+            flippedTexture.Apply();
+            
+            return flippedTexture;
         }
     }
 }
