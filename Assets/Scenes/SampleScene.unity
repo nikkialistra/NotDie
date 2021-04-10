@@ -921,6 +921,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff3e1807c0848c88a5d70d8822f64af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _border: {fileID: 21300000, guid: 6ac4432969663a046b8a366d1a4958f6, type: 3}
+  _activatedBorderBig: {fileID: -846882572612332940, guid: 43d5499182ab06444a87bddaa9472895, type: 3}
+  _activatedBorderSmall: {fileID: 6437110664910656329, guid: 43d5499182ab06444a87bddaa9472895, type: 3}
+  _fill: {fileID: 21300000, guid: 3d3623fa5d96db14a9580030f184736f, type: 3}
+  _whiteFill: {fileID: 21300000, guid: 934fd1191dc32754dbb5cf7480a11ce5, type: 3}
+  _activatedFillBig: {fileID: -5176490577733255137, guid: 80d9ed25800a6e54992acc73720069c0, type: 3}
+  _activatedFillSmall: {fileID: 2502965981399533438, guid: 80d9ed25800a6e54992acc73720069c0, type: 3}
+  _stitch: {fileID: 21300000, guid: f1094d9957e023d4690a0bac2d784df5, type: 3}
 --- !u!114 &716610165
 MonoBehaviour:
   m_ObjectHideFlags: 0

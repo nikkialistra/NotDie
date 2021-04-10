@@ -26,14 +26,15 @@
 }
 
 .health_bar {
+    width: 100px;
+    height: 18px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
 .health {
-    background-image: url('/Assets/Sprites/UI/Healthbar/HealthBarEmpty.png#HealthBarEmpty');
     width: 100px;
-    height: 16px;
+    height: 18px;
     -unity-background-scale-mode: stretch-to-fill;
     margin-bottom: 0;
     margin-left: 0;
@@ -41,9 +42,14 @@
 }
 
 .health__fill {
-    background-image: url('/Assets/Sprites/UI/Healthbar/Healthbar.png#Healthbar');
     width: 100px;
-    height: 16px;
+    height: 18px;
+}
+
+.health__values {
+    width: 100px;
+    height: 18px;
+    margin-top: 1px;
     align-items: center;
     justify-content: center;
     flex-direction: row;
@@ -87,6 +93,11 @@
     top: 0;
     left: 0;
     position: absolute;
+}
+
+.stitch {
+    width: 2px;
+    height: 18px;
 }
 
 .square_frame {
