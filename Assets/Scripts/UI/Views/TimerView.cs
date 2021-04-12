@@ -53,7 +53,5 @@ namespace UI.Views
 
             _timer.text = $"{minutes:00}.{seconds:00}.{milliseconds:00}";
         }
-
-        
     }
 }

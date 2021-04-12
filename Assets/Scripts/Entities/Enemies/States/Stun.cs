@@ -7,7 +7,7 @@ namespace Entities.Enemies.States
     {
         public float TimeInStun { get; private set; }
         
-        private DummyAnimator _dummyAnimator;
+        private readonly DummyAnimator _dummyAnimator;
 
         public Stun(DummyAnimator dummyAnimator) => _dummyAnimator = dummyAnimator;
 

@@ -1,0 +1,36 @@
+.logo {
+    background-image: url('/Assets/Sprites/UI/Menu/NotDieLogo.png#NotDieLogo');
+    margin: 30px;
+    width: 68px;
+    height: 61px;
+}
+
+.screen {
+    background-color: black;
+    width: 640px;
+    height: 360px;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    width: 60px;
+    height: 20px;
+    background-image: url('/Assets/Sprites/UI/Menu/MenuButton.png#MenuButton');
+    -unity-font: url('/Assets/Sprites/UI/Fonts/LowPixels.ttf');
+    padding-top: 8px;
+    margin-bottom: 10px;
+    background-color: initial;
+    color: white;
+    border-color: initial;
+}
+
+.button:focus {
+    background-image: url('/Assets/Sprites/UI/Menu/MenuButtonSelected.png#MenuButtonSelected');
+    padding-top: 5px;
+}
+
+.button:active {
+    background-image: url('/Assets/Sprites/UI/Menu/MenuButtonPressed.png#MenuButtonPressed');
+    padding-top: 8px;
+}

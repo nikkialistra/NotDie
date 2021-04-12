@@ -9,9 +9,9 @@ namespace Entities.Enemies.States
     {
         public bool IsReclined { get; private set; }
         
-        private Rigidbody2D _rigidBody;
-        private EnemyHealthHandler _enemyHealthHandler;
-        private PlayerMover _player;
+        private readonly Rigidbody2D _rigidBody;
+        private readonly EnemyHealthHandler _enemyHealthHandler;
+        private readonly PlayerMover _player;
 
         public Recline(Rigidbody2D rigidBody, EnemyHealthHandler enemyHealthHandler, PlayerMover player)
         {
