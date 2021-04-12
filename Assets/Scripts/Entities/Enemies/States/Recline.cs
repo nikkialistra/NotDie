@@ -1,4 +1,5 @@
 ﻿using Core.StateSystem;
+using DG.Tweening;
 using Entities.Player;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace Entities.Enemies.States
 {
     public class Recline : State
     {
-        public bool IsReclined => _rigidBody.velocity.magnitude < 0.1f;
+        public bool IsReclined { get; private set; }
         
         private Rigidbody2D _rigidBody;
         private EnemyHealthHandler _enemyHealthHandler;
@@ -21,11 +22,15 @@ namespace Entities.Enemies.States
 
         public override void OnEnter()
         {
+            IsReclined = true;
+            
             var direction = (_rigidBody.position - (Vector2) _player.transform.position).normalized;
-
             var reclineValue = _enemyHealthHandler.HandleRecline();
-
-            _rigidBody.velocity = direction * reclineValue;
+            
+            var velocity = direction * reclineValue;
+            
+            DOTween.To(() => _rigidBody.velocity, x => _rigidBody.velocity = x, velocity, 0.25f).SetEase(Ease.OutQuint)
+                .OnComplete(() => IsReclined = false);
         }
     }
 }

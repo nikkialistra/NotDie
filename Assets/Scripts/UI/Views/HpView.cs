@@ -25,10 +25,11 @@ namespace UI.Views
 
         private Image _fillIndicator;
         private Image _whiteFillIndicator;
-        private Image _health;
+        private Image _activatedFillIndicator;
+        private Image _borders;
 
         private Image _stitchIndicator;
-        
+
         private Label _lives;
 
         private DigitManager _digitManager;
@@ -49,7 +50,8 @@ namespace UI.Views
 
             _fillIndicator = _rootVisualElement.Q<Image>("fill_indicator");
             _whiteFillIndicator = _rootVisualElement.Q<Image>("white_fill_indicator");
-            _health = _rootVisualElement.Q<Image>("health");
+            _activatedFillIndicator = _rootVisualElement.Q<Image>("activated_fill_indicator");
+            _borders = _rootVisualElement.Q<Image>("borders");
 
             _stitchIndicator = _rootVisualElement.Q<Image>("stitch");
 
@@ -64,12 +66,15 @@ namespace UI.Views
 
         public void SetInitialHealth(int value)
         {
-            _health.sprite = _border;
+            _borders.sprite = _border;
             _fillIndicator.sprite = _fill;
             _stitchIndicator.sprite = _stitch;
 
             var fillAmount = value / _fullHealthValue;
-            _fillIndicator.style.width = fillAmount * 100;
+            var targetWidth = fillAmount * 100;
+            
+            _fillIndicator.style.width = targetWidth;
+            _activatedFillIndicator.style.width = targetWidth;
             _stitchIndicator.style.left = 100;
 
             UpdateDigits(value);
@@ -77,58 +82,78 @@ namespace UI.Views
 
         public void SetHealth(int value)
         {
-            PlayFillAnimation(value);
-
             UpdateDigits(value);
 
             if (value != _fullHealthValue)
-                PlayHealthBarSpritesAnimation();
+                PlayHealthBarSpritesAnimation(value);
             else
-                _stitchIndicator.style.left = 100;
+                SetInitialHealth(value);
         }
 
-        private void PlayFillAnimation(int value)
-        {
-            var fillAmount = (float) value / _fullHealthValue;
-            _fillIndicator.experimental.animation.Start(
-                new StyleValues {width = fillAmount * 100}, 300);
-
-            _whiteFillIndicator.experimental.animation.Start(
-                new StyleValues {width = fillAmount * 100}, 300);
-            
-            _stitchIndicator.style.left = fillAmount * 100 - 3;
-        }
-
-        private void PlayHealthBarSpritesAnimation()
+        private void PlayHealthBarSpritesAnimation(float value)
         {
             if (_healthBarCoroutine != null)
                 StopCoroutine(_healthBarCoroutine);
             
-            _healthBarCoroutine = StartCoroutine(PlayHealthBarCoroutine());
+            var fillAmount = value / _fullHealthValue;
+            var targetWidth = fillAmount * 100;
+            
+            _healthBarCoroutine = StartCoroutine(PlayHealthBarCoroutine(targetWidth));
         }
 
-        private IEnumerator PlayHealthBarCoroutine()
+        private IEnumerator PlayHealthBarCoroutine(float targetWidth)
         {
-            _fillIndicator.EnableInClassList("not_displayed", true);
-            _whiteFillIndicator.EnableInClassList("not_displayed", false);
+            ShowBigWhiteFillIndicator();
 
-            _health.sprite = _activatedBorderBig;
-            _whiteFillIndicator.sprite = _activatedFillBig;
+            yield return new WaitForSeconds(0.1f);
 
-            yield return new WaitForSeconds(0.12f);
+            ShowMediumWhiteFillIndicator();
 
-            _health.sprite = _activatedBorderSmall;
-            _whiteFillIndicator.sprite = _activatedFillSmall;
+            yield return new WaitForSeconds(0.1f);
+            
+            ShowSmallWhiteIndicatorWithStitch(targetWidth);
 
-            yield return new WaitForSeconds(0.08f);
+            yield return new WaitForSeconds(0.1f);
 
-            _health.sprite = _border;
+            ShowRedFillIndicatorWithStitch(targetWidth);
+        }
+
+        private void ShowBigWhiteFillIndicator()
+        {
+            _fillIndicator.style.display = DisplayStyle.None;
+            _activatedFillIndicator.style.display = DisplayStyle.Flex;
+
+            _borders.sprite = _activatedBorderBig;
+            _activatedFillIndicator.sprite = _activatedFillBig;
+        }
+
+        private void ShowMediumWhiteFillIndicator()
+        {
+            _borders.sprite = _activatedBorderSmall;
+            _activatedFillIndicator.sprite = _activatedFillSmall;
+        }
+
+        private void ShowSmallWhiteIndicatorWithStitch(float targetWidth)
+        {
+            _activatedFillIndicator.style.display = DisplayStyle.None;
+            _whiteFillIndicator.style.display = DisplayStyle.Flex;
+
+            _borders.sprite = _border;
             _whiteFillIndicator.sprite = _whiteFill;
 
-            yield return new WaitForSeconds(0.06f);
+            _whiteFillIndicator.style.width = targetWidth + 1;
+            _stitchIndicator.style.left = targetWidth - 2;
+        }
 
-            _fillIndicator.EnableInClassList("not_displayed", false);
-            _whiteFillIndicator.EnableInClassList("not_displayed", true);
+        private void ShowRedFillIndicatorWithStitch(float targetWidth)
+        {
+            _whiteFillIndicator.style.display = DisplayStyle.None;
+            _fillIndicator.style.display = DisplayStyle.Flex;
+
+            _fillIndicator.style.width = targetWidth;
+            _stitchIndicator.style.left = targetWidth - 3;
+
+            _activatedFillIndicator.style.width = targetWidth;
 
             _fillIndicator.sprite = _fill;
         }

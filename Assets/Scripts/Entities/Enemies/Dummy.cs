@@ -56,7 +56,7 @@ namespace Entities.Enemies
             var stun = new Stun(_dummyAnimator);
 
             At(moveToPlayer, stay, EnoughTimeInStay());
-            At(stun, recline, IsReclined());
+            At(stun, recline, IsNotReclined());
             At(moveToPlayer, stun, EnoughTimeInStun());
             
             AtAny(recline, ShouldRecline());
@@ -67,7 +67,7 @@ namespace Entities.Enemies
             void AtAny(State to, Func<bool> condition) => _stateMachine.AddAnyTransition(to, condition);
 
             Func<bool> EnoughTimeInStay() => () => stay.TimeInStay > _settings.TimeInStay;
-            Func<bool> IsReclined() => () => recline.IsReclined;
+            Func<bool> IsNotReclined() => () => !recline.IsReclined;
             Func<bool> EnoughTimeInStun() => () => stun.TimeInStun > _settings.TimeInStun;
             
             Func<bool> ShouldRecline() => () => _enemyHealthHandler.ShouldRecline;
