@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using DG.Tweening;
 using Entities.Player.Animation;
 using Entities.Player.Combat;
 using UnityEngine;
@@ -79,18 +79,24 @@ namespace Entities.Player
                 _playerAnimator.Run(false);
         }
 
-        public void TakeAwayControl() => _playerUnderControl = false;
-        
-        public void ReturnControl() => _playerUnderControl = true;
-
-        public void AddImpulse(float impulse, AnimationCurve curve, float time)
+        public void AddVelocity(float strength, AnimationCurve curve, float time)
         {
             _playerUnderControl = false;
             MovingIsBlocked?.Invoke(true);
             
             var impulseDirection = (_attackDirection.position - PositionCenter).normalized;
+            var velocity = impulseDirection * strength;
 
-            StartCoroutine(UnderImpulse(impulse, impulseDirection, curve, time));
+            DOTween.To(() => (Vector3) _rigidbody.velocity, x => _rigidbody.velocity = x, velocity, time).SetEase(curve)
+                .OnComplete(ReturnControl);
+        }
+
+        public void TakeAwayControl() => _playerUnderControl = false;
+
+        public void ReturnControl()
+        {
+            _playerUnderControl = true;
+            MovingIsBlocked?.Invoke(false);
         }
 
         private void MovePlayer()
@@ -98,24 +104,6 @@ namespace Entities.Player
             _playerAnimator.Run(true);
             _weaponAttack.TryMoveInCombo();
             _rigidbody.velocity += _moveDirection * (_settings.Speed * Time.fixedDeltaTime);
-        }
-
-        private IEnumerator UnderImpulse(float impulse, Vector3 impulseDirection, AnimationCurve impulseCurve, float time)
-        {
-            var timeUnderImpulse = 0f;
-
-            while (timeUnderImpulse < time)
-            {
-                var impulseAtThisMoment = impulseCurve.Evaluate(timeUnderImpulse / time) * impulse;
-
-                _rigidbody.velocity += impulseAtThisMoment * (Vector2) impulseDirection;
-
-                timeUnderImpulse += Time.deltaTime;
-                yield return null;
-            }
-            
-            _playerUnderControl = true;
-            MovingIsBlocked?.Invoke(false);
         }
     }
 }

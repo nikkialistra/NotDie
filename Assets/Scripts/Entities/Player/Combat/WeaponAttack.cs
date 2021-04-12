@@ -50,7 +50,7 @@ namespace Entities.Player.Combat
 
             _playerAnimator.PlayAttackAnimation(comboShot.HashedTriggerName);
 
-            _playerMover.AddImpulse(_weapons.ActiveWeapon.Weapon.ShotImpulse, comboShot.ImpulseCurve, comboShot.Clip.length);
+            _playerMover.AddVelocity(_weapons.ActiveWeapon.Weapon.ShotImpulse, comboShot.ImpulseCurve, comboShot.Clip.length);
             
             _comboShotNumber++;
             

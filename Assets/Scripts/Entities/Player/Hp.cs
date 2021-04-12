@@ -55,9 +55,7 @@ namespace Entities.Player
         {
             if (_lives <= 0)
                 throw new InvalidOperationException("It should not be invoked when lives not greater than 0");
-            
-            HealthChanged?.Invoke(0);
-            
+
             _lives -= 1;
             LivesChanged?.Invoke(_lives);
 
