@@ -6,10 +6,10 @@ namespace Entities.Enemies.States
 {
     public class MoveToPlayer : State
     {
-        private Rigidbody2D _rigidBody;
-        private DummyAnimator _dummyAnimator;
-        private PlayerMover _player;
-        private float _speed;
+        private readonly Rigidbody2D _rigidBody;
+        private readonly DummyAnimator _dummyAnimator;
+        private readonly PlayerMover _player;
+        private readonly float _speed;
 
         public MoveToPlayer(float speed, Rigidbody2D rigidBody, DummyAnimator dummyAnimator, PlayerMover player)
         {

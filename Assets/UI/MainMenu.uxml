@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="MainMenuStyles.uss" />
+    <ui:VisualElement name="screen" class="screen">
+        <ui:VisualElement name="logo" class="logo" />
+        <ui:VisualElement name="buttons" style="align-items: center;">
+            <ui:Button text="Play" name="play" tabindex="1" focusable="true" class="button" />
+            <ui:Button text="Options" name="options" tabindex="2" focusable="true" class="button" />
+            <ui:Button text="Vault" name="vault" tabindex="3" focusable="true" class="button" />
+            <ui:Button text="Profiles" name="profiles" tabindex="4" focusable="true" class="button" />
+            <ui:Button text="Quit" name="quit" tabindex="5" focusable="true" class="button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

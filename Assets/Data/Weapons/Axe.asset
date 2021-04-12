@@ -33,9 +33,9 @@ MonoBehaviour:
     isPenetrable: 0
   WavePrefab: {fileID: 0}
   DirectionMultiplier: 1
-  ShotImpulse: 0
+  ShotImpulse: 5
   CooldownTime: 0.9
   Durability: 1
   DurabilityMultiplier: 1
   ThrowDamage: 80
-  ReclineValue: 50
+  ReclineValue: 10

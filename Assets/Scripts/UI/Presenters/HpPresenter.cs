@@ -17,7 +17,7 @@ namespace UI.Presenters
         public void SetUp()
         {
              _hpView.SetLives(_hp.Lives);
-            _hpView.SetFullHealthValue(_hp.HealthFullValue);
+             _hpView.SetFullHealthValue(_hp.HealthFullValue);
              _hpView.SetInitialHealth(_hp.HealthFullValue);
             
             _hp.LivesChanged += _hpView.SetLives;
