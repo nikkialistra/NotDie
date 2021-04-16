@@ -95,6 +95,7 @@ namespace Entities.Player
 
         public void ReturnControl()
         {
+            _rigidbody.velocity = Vector2.zero;
             _playerUnderControl = true;
             MovingIsBlocked?.Invoke(false);
         }

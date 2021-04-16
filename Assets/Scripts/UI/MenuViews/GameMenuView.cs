@@ -9,6 +9,8 @@ namespace UI.MenuViews
 {
     public class GameMenuView : MenuView
     {
+        public bool Shown { get; private set; }
+        
         private Button _resumeGame;
         private Button _restart;
         private Button _settings;
@@ -41,9 +43,22 @@ namespace UI.MenuViews
         protected override void Enable()
         {
             Time.timeScale = 0;
+
+            Shown = true;
             
             _menuManager.Return -= HideSelf;
             _menuManager.Return += ResumeGame;
+                
+            ResetFocus();
+        }
+
+        private void ResetFocus()
+        {
+            _restart.Focus();
+            _settings.Focus();
+            _saveAndExit.Focus();
+            _quitGame.Focus();
+
             _resumeGame.Focus();
         }
 
@@ -58,6 +73,9 @@ namespace UI.MenuViews
         {
             _menuManager.Return -= ResumeGame;
             
+            Shown = false;
+            Focused = _resumeGame;
+            
             Time.timeScale = 1;
             HideSelf();
         }
@@ -68,6 +86,8 @@ namespace UI.MenuViews
 
         private void Settings()
         {
+            _menuManager.Return -= ResumeGame;
+            Focused = _settings;
             HideSelf();
             _settingsView ??= new SettingsView(_root, this, _menuManager);
             _settingsView.ShowSelf();

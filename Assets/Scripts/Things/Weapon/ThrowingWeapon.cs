@@ -14,7 +14,7 @@ namespace Things.Weapon
         {
             [Range(0, 1)]
             public float TimeToFly;
-            [Range(0, 0.5f)]
+            [Range(0.5f, 2)]
             public float Speed;
             [Space]
             [Range(0, 1)]
@@ -27,6 +27,7 @@ namespace Things.Weapon
         private RoomConfigurator _roomConfigurator;
 
         private Rigidbody2D _rigidBody;
+        private Rigidbody2D _parentRigidBody;
 
         private SpriteRenderer _spriteRenderer;
         private Animation _animation;
@@ -34,14 +35,12 @@ namespace Things.Weapon
         private WeaponGameObjectSpawner _weaponGameObjectSpawner;
 
         private WeaponFacade _thrownWeapon;
+        private bool _thrown;
 
         private Coroutine _fly;
         private Collider2D _collider;
 
-        private void Start()
-        {
-            _collider = GetComponent<Collider2D>();
-        }
+        private void Start() => _collider = GetComponent<Collider2D>();
 
         [Inject]
         public void Construct(Settings settings, RoomConfigurator roomConfigurator, WeaponGameObjectSpawner weaponGameObjectSpawner)
@@ -55,6 +54,7 @@ namespace Things.Weapon
         private void Awake()
         {
             _rigidBody = GetComponent<Rigidbody2D>();
+            _parentRigidBody = transform.parent.GetComponent<Rigidbody2D>();
             
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animation = GetComponent<Animation>();
@@ -63,10 +63,20 @@ namespace Things.Weapon
         public void StartThrowing(WeaponFacade weaponFacade)
         {
             gameObject.SetActive(true);
+            
+            _thrown = false;
 
             _spriteRenderer.sprite = weaponFacade.Weapon.PickUp;
             _spriteRenderer.enabled = true;
             _animation.Play();
+        }
+
+        private void FixedUpdate()
+        {
+            if (_thrown)
+                return;
+
+            _rigidBody.velocity = _parentRigidBody.velocity;
         }
 
         public void StopThrowing() => gameObject.SetActive(false);
@@ -86,6 +96,8 @@ namespace Things.Weapon
         {
             if (weaponFacade == null)
                 throw new ArgumentNullException();
+
+            _thrown = true;
             
             _thrownWeapon = weaponFacade;
             
@@ -109,8 +121,8 @@ namespace Things.Weapon
             {
                 _rigidBody.velocity += direction * _settings.Speed;
                 
-                timeFlying += Time.deltaTime;
-                yield return null;
+                timeFlying += Time.fixedDeltaTime;
+                yield return new WaitForFixedUpdate();
             }
 
             _collider.enabled = false;

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemiesSettingsInstaller
   m_EditorClassIdentifier: 
   _dummy:
-    Speed: 4
+    Speed: 15
     TimeInStay: 2
     TimeInStun: 0.3
   _enemyHealthHandler:

@@ -145,6 +145,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2062465801}
     m_Modifications:
+    - target: {fileID: 10474752800487437, guid: 0947e4218a84c6a45a3db73d03f115d5, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1010360058035573377, guid: 0947e4218a84c6a45a3db73d03f115d5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -192,6 +196,10 @@ PrefabInstance:
     - target: {fileID: 1010360058035573378, guid: 0947e4218a84c6a45a3db73d03f115d5, type: 3}
       propertyPath: m_Name
       value: Dummy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010360058035573378, guid: 0947e4218a84c6a45a3db73d03f115d5, type: 3}
+      propertyPath: m_Layer
+      value: 23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0947e4218a84c6a45a3db73d03f115d5, type: 3}
@@ -1304,6 +1312,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2062465801}
     m_Modifications:
+    - target: {fileID: 569722352302655360, guid: 3df90dd42c9b01343823287a18fc683f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 705020944030493955, guid: 3df90dd42c9b01343823287a18fc683f, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
       value: 4
@@ -1375,6 +1387,10 @@ PrefabInstance:
     - target: {fileID: 705020944030493967, guid: 3df90dd42c9b01343823287a18fc683f, type: 3}
       propertyPath: m_Name
       value: DummyRedVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 705020944030493967, guid: 3df90dd42c9b01343823287a18fc683f, type: 3}
+      propertyPath: m_Layer
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 705020944030493967, guid: 3df90dd42c9b01343823287a18fc683f, type: 3}
       propertyPath: m_IsActive
@@ -2033,7 +2049,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: 0c8e27c5e3b4ff84f9a8e87cf623cf22, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 4d561514719f4dc448948f388ca459d4, type: 3}
-  m_SortingOrder: 0
+  m_SortingOrder: 1
 --- !u!4 &1733703390
 Transform:
   m_ObjectHideFlags: 0
@@ -2511,7 +2527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 437369560671245325, guid: 94ff85432863cee48b83860753576ba7, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 437369560671245325, guid: 94ff85432863cee48b83860753576ba7, type: 3}
       propertyPath: m_IsActive
@@ -2564,6 +2580,10 @@ PrefabInstance:
     - target: {fileID: 1010360058035573378, guid: 94ff85432863cee48b83860753576ba7, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010360058035573378, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+      propertyPath: m_Layer
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 1010360058035573390, guid: 94ff85432863cee48b83860753576ba7, type: 3}
       propertyPath: m_Enabled
@@ -2727,7 +2747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1973852483044160841, guid: 9a90ccd8d85c1a54885fbbfbc542ca7c, type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1973852483044160841, guid: 9a90ccd8d85c1a54885fbbfbc542ca7c, type: 3}
       propertyPath: m_IsActive

@@ -29,6 +29,6 @@ MonoBehaviour:
     ButtonPressToleranceTime: 0.1
   _thrownWeapon:
     TimeToFly: 0.3
-    Speed: 0.15
+    Speed: 1
     TimeToDrop: 0.15
     DropSpeed: 0.2
