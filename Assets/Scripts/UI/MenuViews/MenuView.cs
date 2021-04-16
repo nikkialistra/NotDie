@@ -4,6 +4,8 @@ namespace UI.MenuViews
 {
     public abstract class MenuView : IMenuView
     {
+        public bool Shown { get; private set; }
+        
         protected VisualElement Focused;
         
         protected readonly VisualElement _root;
@@ -24,6 +26,10 @@ namespace UI.MenuViews
         
         public void ShowSelf()
         {
+            _menuManager.Return += HideSelf;
+
+            Shown = true;
+            
             if (!_initialized)
             {
                 SetUpBindings();
@@ -35,12 +41,12 @@ namespace UI.MenuViews
             Enable();
             
             Focused?.Focus();
-            
-            _menuManager.Return += HideSelf;
         }
 
         protected void HideSelf()
         {
+            Shown = false;
+            
             _menuManager.Return -= HideSelf;
             _root.Remove(_tree);
             _parent.ShowSelf();

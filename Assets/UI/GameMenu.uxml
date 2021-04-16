@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="MenuStyles.uss" />
+    <ui:VisualElement name="screen" class="screen semi_transparent" style="opacity: 1;">
+        <ui:VisualElement name="logo" class="logo" />
+        <ui:VisualElement name="buttons" style="align-items: center;">
+            <ui:Button text="Resume Game&#10;" name="resume_game" tabindex="1" focusable="true" class="button" />
+            <ui:Button text="Restart&#10;" name="restart" tabindex="2" focusable="true" class="button" />
+            <ui:Button text="Settings" name="settings" tabindex="3" focusable="true" class="button" />
+            <ui:Button text="Save and Exit" name="save_and_exit" tabindex="4" focusable="true" class="button" />
+            <ui:Button text="Quit Game" name="quit_game" tabindex="5" focusable="true" class="button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
