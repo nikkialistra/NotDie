@@ -19,6 +19,8 @@ MonoBehaviour:
     YPosition: 0.95
     Speed: 25
     Damping: 10
+  _playerAttack:
+    AttackAfterThrowCooldown: 0.3
   _weaponsHandler:
     DistanceForTaking: 1
   _inventoryHandler:

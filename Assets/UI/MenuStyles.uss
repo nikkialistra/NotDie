@@ -1,8 +1,8 @@
 .logo {
-    background-image: url('/Assets/Sprites/UI/Menu/NotDieLogo.png#NotDieLogo');
+    background-image: url('/Assets/Sprites/UI/Menu/NotDieLogo.png');
     margin: 30px;
-    width: 68px;
-    height: 61px;
+    width: 102px;
+    height: 92px;
 }
 
 .screen {
@@ -14,8 +14,8 @@
 }
 
 .button {
-    width: 60px;
-    height: 20px;
+    width: 80px;
+    height: 25px;
     background-image: url('/Assets/Sprites/UI/Menu/MenuButton.png#MenuButton');
     -unity-font: url('/Assets/Sprites/UI/Fonts/LowPixels.ttf');
     padding-top: 8px;
@@ -23,6 +23,7 @@
     background-color: initial;
     color: white;
     border-color: initial;
+    font-size: 9px;
 }
 
 .button:focus {

@@ -1,4 +1,6 @@
-﻿using Entities.Player.Animation;
+﻿using System;
+using System.Collections;
+using Entities.Player.Animation;
 using Things.Weapon;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +11,15 @@ namespace Entities.Player.Combat
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerAttack : MonoBehaviour
     {
+        [Serializable]
+        public class Settings
+        {
+            [Range(0, 1f)] 
+            public float AttackAfterThrowCooldown;
+        }
+
+        private Settings _settings;
+        
         private PlayerMover _playerMover;
         private PlayerAnimator _playerAnimator;
         
@@ -34,8 +45,10 @@ namespace Entities.Player.Combat
         private InputAction _throwingAction;
 
         [Inject]
-        public void Construct([Inject(Id = "attackDirection")] Transform attackDirection, [Inject(Id = "throwingArrow")] Transform throwingArrow, ThrowingWeapon throwingWeapon)
+        public void Construct(Settings settings, [Inject(Id = "attackDirection")] Transform attackDirection, [Inject(Id = "throwingArrow")] Transform throwingArrow, ThrowingWeapon throwingWeapon)
         {
+            _settings = settings;
+            
             _attackDirection = attackDirection;
             _attackDirectionRenderer = _attackDirection.GetComponent<Renderer>();
 
@@ -152,6 +165,14 @@ namespace Entities.Player.Combat
             _throwingArrowRenderer.enabled = false;
             
             _playerMover.ReturnControl();
+
+            StartCoroutine(ReturnAttackControl());
+        }
+
+        private IEnumerator ReturnAttackControl()
+        {
+            yield return new WaitForSeconds(_settings.AttackAfterThrowCooldown);
+            _throwing = false;
         }
 
         private void CancelThrowing()

@@ -261,6 +261,33 @@ namespace Services.Controls
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""c1f65a4d-f8e2-4338-9d7e-c7604d8609e5"",
+            ""actions"": [
+                {
+                    ""name"": ""Return"",
+                    ""type"": ""Button"",
+                    ""id"": ""3423ed84-71a0-4272-8a61-37ab6575161c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""bc101554-d007-4bc8-8038-17a95812b792"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Return"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -295,6 +322,9 @@ namespace Services.Controls
             m_Player_SwapWeapons = m_Player.FindAction("SwapWeapons", throwIfNotFound: true);
             m_Player_TakeDropThrowingWeapon = m_Player.FindAction("TakeDropThrowingWeapon", throwIfNotFound: true);
             m_Player_ShowAttackDirection = m_Player.FindAction("ShowAttackDirection", throwIfNotFound: true);
+            // UI
+            m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+            m_UI_Return = m_UI.FindAction("Return", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -405,6 +435,39 @@ namespace Services.Controls
             }
         }
         public PlayerActions @Player => new PlayerActions(this);
+
+        // UI
+        private readonly InputActionMap m_UI;
+        private IUIActions m_UIActionsCallbackInterface;
+        private readonly InputAction m_UI_Return;
+        public struct UIActions
+        {
+            private @Control m_Wrapper;
+            public UIActions(@Control wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Return => m_Wrapper.m_UI_Return;
+            public InputActionMap Get() { return m_Wrapper.m_UI; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+            public void SetCallbacks(IUIActions instance)
+            {
+                if (m_Wrapper.m_UIActionsCallbackInterface != null)
+                {
+                    @Return.started -= m_Wrapper.m_UIActionsCallbackInterface.OnReturn;
+                    @Return.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnReturn;
+                    @Return.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnReturn;
+                }
+                m_Wrapper.m_UIActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Return.started += instance.OnReturn;
+                    @Return.performed += instance.OnReturn;
+                    @Return.canceled += instance.OnReturn;
+                }
+            }
+        }
+        public UIActions @UI => new UIActions(this);
         private int m_KeyboardSchemeIndex = -1;
         public InputControlScheme KeyboardScheme
         {
@@ -430,6 +493,10 @@ namespace Services.Controls
             void OnSwapWeapons(InputAction.CallbackContext context);
             void OnTakeDropThrowingWeapon(InputAction.CallbackContext context);
             void OnShowAttackDirection(InputAction.CallbackContext context);
+        }
+        public interface IUIActions
+        {
+            void OnReturn(InputAction.CallbackContext context);
         }
     }
 }
