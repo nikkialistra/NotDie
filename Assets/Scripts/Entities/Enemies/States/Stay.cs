@@ -7,14 +7,8 @@ namespace Entities.Enemies.States
     {
         public float TimeInStay { get; private set; }
 
-        public override void Tick()
-        {
-            TimeInStay += Time.deltaTime;
-        }
+        public override void Tick() => TimeInStay += Time.deltaTime;
 
-        public override void OnEnter()
-        {
-            TimeInStay = 0;
-        }
+        public override void OnEnter() => TimeInStay = 0;
     }
 }

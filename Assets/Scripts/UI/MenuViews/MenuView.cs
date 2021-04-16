@@ -1,11 +1,10 @@
-﻿using UnityEngine.UIElements;
+﻿using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace UI.MenuViews
 {
     public abstract class MenuView : IMenuView
     {
-        public bool Shown { get; private set; }
-        
         protected VisualElement Focused;
         
         protected readonly VisualElement _root;
@@ -28,8 +27,6 @@ namespace UI.MenuViews
         {
             _menuManager.Return += HideSelf;
 
-            Shown = true;
-            
             if (!_initialized)
             {
                 SetUpBindings();
@@ -45,8 +42,6 @@ namespace UI.MenuViews
 
         protected void HideSelf()
         {
-            Shown = false;
-            
             _menuManager.Return -= HideSelf;
             _root.Remove(_tree);
             _parent.ShowSelf();

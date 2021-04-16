@@ -46,7 +46,7 @@ namespace Entities.Enemies
             SetupStateMachine();
         }
 
-        private void Update() => _stateMachine.Tick();
+        private void FixedUpdate() => _stateMachine.Tick();
 
         private void SetupStateMachine()
         {

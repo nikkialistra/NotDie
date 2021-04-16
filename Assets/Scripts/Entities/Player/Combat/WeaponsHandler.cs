@@ -24,12 +24,9 @@ namespace Entities.Player.Combat
 
         private Weapons _weapons;
 
-        private PlayerAnimator _playerAnimator;
-        
         private WeaponGameObjectSpawner _weaponGameObjectSpawner;
 
         private PlayerInput _input;
-        private InputAction _takeDropWeaponAction;
         private InputAction _swapWeaponsAction;
 
 
@@ -44,46 +41,25 @@ namespace Entities.Player.Combat
         private void Awake()
         {
             _input = GetComponent<PlayerInput>();
-            _takeDropWeaponAction = _input.actions.FindAction("TakeDropThrowingWeapon");
             _swapWeaponsAction = _input.actions.FindAction("SwapWeapons");
-            _playerAnimator = GetComponent<PlayerAnimator>();
         }
 
-        private void OnEnable()
-        {
-            _takeDropWeaponAction.canceled += OnTakeDropWeapon;
-            _swapWeaponsAction.started += OnSwapWeapons;
-        }
+        private void OnEnable() => _swapWeaponsAction.started += OnSwapWeapons;
 
-        private void OnDisable()
-        {
-            _takeDropWeaponAction.canceled -= OnTakeDropWeapon;
-            _swapWeaponsAction.started -= OnSwapWeapons;
-        }
-        
+        private void OnDisable() => _swapWeaponsAction.started -= OnSwapWeapons;
+
         public WeaponFacade TakeOffWeapon()
         {
             var weapon = _weapons.DropWeapon();
             return weapon;
         }
 
-        private void OnTakeDropWeapon(InputAction.CallbackContext context)
+        public void TakeDropWeapon()
         {
-            if (HoldingButton(context))
-                return;
-            
-            if (!_playerAnimator.IsCurrentAnimationWithTag("ActionReady"))
-                return;
-            
             if (TryFindWeapon())
                 return;
 
             DropWeapon();
-        }
-
-        private static bool HoldingButton(InputAction.CallbackContext context)
-        {
-            return context.duration > 0.3f;
         }
 
         private void OnSwapWeapons(InputAction.CallbackContext context) => _weapons.SwapWeapons();

@@ -31,14 +31,16 @@ namespace UI.MenuViews
             _language.clicked += Language;
         }
 
-        protected override void Enable()
+        protected override void Enable() => ResetFocus();
+
+        private void ResetFocus()
         {
             _graphics.Focus();
             _controls.Focus();
             _hud.Focus();
             _language.Focus();
             _credits.Focus();
-            
+
             _audio.Focus();
         }
 

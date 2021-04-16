@@ -19,11 +19,6 @@ namespace Entities.Player.Items
         
         private Inventory _inventory;
 
-        private PlayerAnimator _playerAnimator;
-
-        private PlayerInput _input;
-        private InputAction _takeAction;
-
         [Inject]
         public void Construct(Settings settings, Inventory inventory)
         {
@@ -31,34 +26,7 @@ namespace Entities.Player.Items
             _inventory = inventory;
         }
 
-        private void Awake()
-        {
-            _playerAnimator = GetComponent<PlayerAnimator>();
-            _input = GetComponent<PlayerInput>();
-            _takeAction = _input.actions.FindAction("TakeDropThrowingWeapon");
-        }
-
-        private void OnEnable() => _takeAction.canceled += OnTakeItem;
-
-        private void OnDisable() => _takeAction.canceled -= OnTakeItem;
-
-        private void OnTakeItem(InputAction.CallbackContext context)
-        {
-            if (HoldingButton(context))
-                return;
-            
-            if (!_playerAnimator.IsCurrentAnimationWithTag("ActionReady"))
-                return;
-
-            TryTakeItem();
-        }
-
-        private static bool HoldingButton(InputAction.CallbackContext context)
-        {
-            return context.duration > 0.3f;
-        }
-
-        private void TryTakeItem()
+        public bool TryTakeItem()
         {
             var items = FindObjectsOfType<ItemGameObject>();
             foreach (var item in items)
@@ -67,7 +35,10 @@ namespace Entities.Player.Items
                     _settings.DistanceForTaking) continue;
                 
                 TakeItem(item);
+                return true;
             }
+
+            return false;
         }
         
         private void TakeItem(ItemGameObject itemGameObject)

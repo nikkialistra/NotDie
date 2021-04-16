@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Foreground
   - Decorations
-  - Creatures
+  - TopDecorations
   - FullHeightEntitites
   - ThrownItems
   - FullHeightPlayer
@@ -28,7 +28,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Creatures
   - 
   - 
   - 
