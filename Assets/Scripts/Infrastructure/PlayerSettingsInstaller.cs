@@ -12,6 +12,7 @@ namespace Infrastructure
     {
         [SerializeField] private Hp.Settings _hp;
         [SerializeField] private PlayerMover.Settings _playerMover;
+        [SerializeField] private PlayerAttack.Settings _playerAttack;
         [SerializeField] private WeaponsHandler.Settings _weaponsHandler;
         [SerializeField] private InventoryHandler.Settings _inventoryHandler;
         [SerializeField] private AttackDirection.Settings _attackDirection;
@@ -21,6 +22,7 @@ namespace Infrastructure
         {
             Container.BindInstance(_hp);
             Container.BindInstance(_playerMover);
+            Container.BindInstance(_playerAttack);
             Container.BindInstance(_weaponsHandler);
             Container.BindInstance(_inventoryHandler);
             Container.BindInstance(_attackDirection);

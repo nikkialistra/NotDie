@@ -30,7 +30,7 @@ namespace Entities.Wave
         {
             transform.position = position;
 
-            _playerRigidbody = _playerMover.GetComponent<Rigidbody2D>();
+            _playerRigidbody= _playerMover.GetComponent<Rigidbody2D>();
         }
         
         public void SetDirection(Vector2 direction)

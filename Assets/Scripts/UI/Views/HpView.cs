@@ -174,9 +174,9 @@ namespace UI.Views
             _healthSecond.sprite = _digitManager.GetDigit(value / 10 % 10);
             _healthThird.sprite = _digitManager.GetDigit(value % 10);
 
-            _healthFirst.EnableInClassList("not_displayed", false);
-            _healthSecond.EnableInClassList("not_displayed", false);
-            _healthThird.EnableInClassList("not_displayed", false);
+            _healthFirst.style.display = DisplayStyle.Flex;
+            _healthSecond.style.display = DisplayStyle.Flex;
+            _healthThird.style.display = DisplayStyle.Flex;
         }
 
         private void SetTwoDigits(int value)
@@ -184,18 +184,18 @@ namespace UI.Views
             _healthSecond.sprite = _digitManager.GetDigit(value / 10);
             _healthThird.sprite = _digitManager.GetDigit(value % 10);
 
-            _healthFirst.EnableInClassList("not_displayed", true);
-            _healthSecond.EnableInClassList("not_displayed", false);
-            _healthThird.EnableInClassList("not_displayed", false);
+            _healthFirst.style.display = DisplayStyle.None;
+            _healthSecond.style.display = DisplayStyle.Flex;
+            _healthThird.style.display = DisplayStyle.Flex;
         }
 
         private void SetOneDigit(int value)
         {
             _healthThird.sprite = _digitManager.GetDigit(value % 10);
 
-            _healthFirst.EnableInClassList("not_displayed", true);
-            _healthSecond.EnableInClassList("not_displayed", true);
-            _healthThird.EnableInClassList("not_displayed", false);
+            _healthFirst.style.display = DisplayStyle.None;
+            _healthSecond.style.display = DisplayStyle.None;
+            _healthThird.style.display = DisplayStyle.Flex;
         }
 
         public void SetLives(int value) => _lives.text = value.ToString();

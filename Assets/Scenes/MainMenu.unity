@@ -207,6 +207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668218719}
   - component: {fileID: 1668218718}
+  - component: {fileID: 1668218721}
   - component: {fileID: 1668218720}
   m_Layer: 0
   m_Name: UI
@@ -229,7 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 0c8e27c5e3b4ff84f9a8e87cf623cf22, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 7e6780e44294b4b45b36809dc22f3623, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 4d561514719f4dc448948f388ca459d4, type: 3}
   m_SortingOrder: 0
 --- !u!4 &1668218719
 Transform:
@@ -254,9 +255,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 1668218717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 064b3662de894b4b95e3f2e04a257178, type: 3}
+  m_Script: {fileID: 11500000, guid: 953dfebbf71440ee9d4462e90a3dcb9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1668218721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668218717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 464ddd84971e4a24a8ed844b34e86c11, type: 3}
+  m_NotificationBehavior: 3
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: UI
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &2129805870
 GameObject:
   m_ObjectHideFlags: 0
