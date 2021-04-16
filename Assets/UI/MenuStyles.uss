@@ -1,8 +1,8 @@
 .logo {
-    background-image: url('/Assets/Sprites/UI/Menu/NotDieLogo.png');
-    margin: 30px;
-    width: 102px;
-    height: 92px;
+    background-image: url('/Assets/Sprites/UI/Menu/NotDieLogo.png#NotDieLogo');
+    margin: 25px;
+    width: 108px;
+    height: 97px;
 }
 
 .screen {
@@ -11,6 +11,10 @@
     height: 360px;
     align-items: center;
     justify-content: center;
+}
+
+.screen.semi_transparent {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .button {

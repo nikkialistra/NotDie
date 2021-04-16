@@ -10,6 +10,13 @@ namespace UI
     [RequireComponent(typeof(PlayerInput))]
     public class MenuManager : MonoBehaviour, IMenuView
     {
+        [SerializeField] private bool _loadMainMenu;
+        [SerializeField] private bool _loadGameMenu;
+        
+        
+        private MainMenuView _mainMenu;
+        private GameMenuView _gameMenu;
+        
         public event Action Return;
         
         private VisualElement _rootVisualElement;
@@ -18,8 +25,15 @@ namespace UI
         
         private PlayerInput _input;
         private InputAction _returnAction;
-        
-        public void ShowSelf() => _screen.style.display = DisplayStyle.Flex;
+
+        private void OnValidate()
+        {
+            if (_loadMainMenu && _loadGameMenu)
+            {
+                _loadGameMenu = false;
+                _loadMainMenu = false;
+            }
+        }
 
         private void Awake()
         {
@@ -33,13 +47,32 @@ namespace UI
 
         private void Start()
         {
-            var menu = new MainMenuView(_rootVisualElement, this, this);
-            menu.ShowSelf();
+            if (_loadMainMenu)
+            {
+                _mainMenu = new MainMenuView(_rootVisualElement, this, this);
+                _mainMenu.ShowSelf();
+            }
+
+            if (_loadGameMenu)
+            {
+                _gameMenu = new GameMenuView(_rootVisualElement, this, this);
+                Return += ShowMenu;
+            }
         }
 
         private void OnEnable() => _returnAction.started += OnReturn;
         
         private void OnDisable() => _returnAction.started -= OnReturn;
+        
+        public void ShowSelf() => _screen.style.display = DisplayStyle.Flex;
+
+        private void ShowMenu()
+        {
+            if (_gameMenu.Shown)
+                return;
+            
+            _gameMenu.ShowSelf();
+        }
 
         private void OnReturn(InputAction.CallbackContext obj) => Return?.Invoke();
     }
