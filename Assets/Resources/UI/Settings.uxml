@@ -3,12 +3,12 @@
     <ui:VisualElement name="screen" class="screen">
         <ui:VisualElement name="logo" class="logo logo_small_margins" />
         <ui:VisualElement name="buttons" style="align-items: center;">
-            <ui:Button text="Audio" name="audio" tabindex="1" focusable="true" class="button--reset menu--button" />
-            <ui:Button text="Graphics" name="graphics" tabindex="2" focusable="true" class="button--reset menu--button" />
-            <ui:Button text="Controls" name="controls" tabindex="3" focusable="true" class="button--reset menu--button" />
-            <ui:Button text="HUD" name="hud" tabindex="4" focusable="true" class="button--reset menu--button" />
-            <ui:Button text="Language" name="language" tabindex="5" focusable="true" class="button--reset menu--button" />
-            <ui:Button text="Credits" name="credits" tabindex="5" focusable="true" class="button--reset menu--button" />
+            <ui:Button text="Audio" name="audio" tabindex="1" focusable="true" view-data-key="_audio" class="button--reset menu--button" />
+            <ui:Button text="Graphics" name="graphics" tabindex="2" focusable="true" view-data-key="_graphics" class="button--reset menu--button" />
+            <ui:Button text="Controls" name="controls" tabindex="3" focusable="true" view-data-key="_controls" class="button--reset menu--button" />
+            <ui:Button text="HUD" name="hud" tabindex="4" focusable="true" view-data-key="_hud" class="button--reset menu--button" />
+            <ui:Button text="Language" name="language" tabindex="5" focusable="true" view-data-key="_language" class="button--reset menu--button" />
+            <ui:Button text="Credits" name="credits" tabindex="5" focusable="true" view-data-key="_credits" class="button--reset menu--button" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

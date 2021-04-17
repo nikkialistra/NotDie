@@ -2,6 +2,9 @@
 using UI.MenuViews;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Tables;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UIElements;
 
 namespace UI
@@ -10,8 +13,12 @@ namespace UI
     [RequireComponent(typeof(PlayerInput))]
     public class MenuManager : MonoBehaviour, IMenuView
     {
+        [SerializeField] private LocalizedStringTable _table;
+        
         [SerializeField] private bool _loadMainMenu;
         [SerializeField] private bool _loadGameMenu;
+
+        private StringTable _localTable;
 
         public PlayerInput Input => _input;
 
@@ -22,7 +29,9 @@ namespace UI
         
         private VisualElement _rootVisualElement;
 
-        private VisualElement _screen;
+        private VisualElement _root;
+
+        private bool _loaded;
         
         private PlayerInput _input;
         private InputAction _returnAction;
@@ -40,14 +49,83 @@ namespace UI
         {
             _rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
 
-            _screen = _rootVisualElement.Q<VisualElement>("screen");
+            _root = _rootVisualElement.Q<VisualElement>("root");
 
             _input = GetComponent<PlayerInput>();
             _returnAction = _input.actions.FindAction("Return");
         }
 
-        private void Start()
+        private void OnEnable()
         {
+            _table.TableChanged += OnTableChanged;
+            _returnAction.started += OnReturn;
+        }
+
+        private void OnDisable()
+        {
+            _table.TableChanged -= OnTableChanged;
+            _returnAction.started -= OnReturn;
+        }
+
+        public void ShowSelf() => _root.style.display = DisplayStyle.Flex;
+
+        public void LocalizeRecursively(VisualElement element)
+        {
+            var elementHierarchy = element.hierarchy;
+            var numChildren = elementHierarchy.childCount;
+            for (var i = 0; i < numChildren; i++)
+            {
+                var child = elementHierarchy.ElementAt(i);
+                Localize(child);
+            }
+
+            for (var i = 0; i < numChildren; i++)
+            {
+                var child = elementHierarchy.ElementAt(i);
+                var childHierarchy = child.hierarchy;
+                var numGrandChildren = childHierarchy.childCount;
+                if (numGrandChildren != 0)
+                    LocalizeRecursively(child);
+            }
+        }
+
+        private void Localize(VisualElement element)
+        {
+            if (!(element is TextElement))
+                return;
+
+            var textElement = (TextElement) element;
+            var key = textElement.viewDataKey;
+            
+            if (string.IsNullOrEmpty(key) || key[0] != '_') 
+                return;
+            
+            key = key.TrimStart('_');
+            var entry = _localTable[key];
+            if (entry != null)
+                textElement.text = entry.LocalizedValue;
+            else
+                Debug.LogWarning($"No {_localTable.LocaleIdentifier.Code} translation for key: '{key}'");
+        }
+
+        private void OnTableChanged(StringTable table)
+        {
+            var handle = _table.GetTable();
+            handle.Completed -= OnLocalTableLoaded;
+            handle.Completed += OnLocalTableLoaded;
+        }
+
+        private void OnLocalTableLoaded(AsyncOperationHandle<StringTable> handle)
+        {
+            _localTable = handle.Result;
+            LoadMenu();
+        }
+
+        private void LoadMenu()
+        {
+            if (_loaded)
+                return;
+            
             if (_loadMainMenu)
             {
                 _mainMenu = new MainMenuView(_rootVisualElement, this, this);
@@ -59,13 +137,9 @@ namespace UI
                 _gameMenu = new GameMenuView(_rootVisualElement, this, this);
                 Return += ShowMenu;
             }
-        }
 
-        private void OnEnable() => _returnAction.started += OnReturn;
-        
-        private void OnDisable() => _returnAction.started -= OnReturn;
-        
-        public void ShowSelf() => _screen.style.display = DisplayStyle.Flex;
+            _loaded = true;
+        }
 
         private void ShowMenu()
         {

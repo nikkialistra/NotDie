@@ -21,7 +21,7 @@
     background-color: initial;
     color: white;
     border-color: initial;
-    font-size: 9px;
+    font-size: 8px;
 }
 
 .menu--button {
@@ -50,7 +50,7 @@
 .text {
     color: rgb(255, 255, 255);
     -unity-font: url('/Assets/Sprites/UI/Fonts/LowPixels.ttf');
-    font-size: 9px;
+    font-size: 8px;
     -unity-text-align: middle-center;
 }
 

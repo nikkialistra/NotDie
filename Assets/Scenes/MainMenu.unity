@@ -258,6 +258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953dfebbf71440ee9d4462e90a3dcb9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _table:
+    m_TableReference:
+      m_TableCollectionName: GUID:a3cab293a64461c4990275ba47f7acc5
   _loadMainMenu: 1
   _loadGameMenu: 0
 --- !u!114 &1668218721
