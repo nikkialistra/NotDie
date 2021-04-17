@@ -45,7 +45,7 @@ namespace UI.MenuViews
 
             Shown = true;
             
-            _menuManager.Return -= HideSelf;
+            _menuManager.Return -= ShowParent;
             _menuManager.Return += ResumeGame;
                 
             ResetFocus();
@@ -76,7 +76,7 @@ namespace UI.MenuViews
             Focused = _resumeGame;
             
             Time.timeScale = 1;
-            HideSelf();
+            ShowParent();
         }
 
         private static void Restart() => SceneManager.LoadScene("FirstStage", LoadSceneMode.Single);
@@ -87,7 +87,7 @@ namespace UI.MenuViews
         {
             _menuManager.Return -= ResumeGame;
             Focused = _settings;
-            HideSelf();
+            ShowParent();
             _settingsView ??= new SettingsView(_root, this, _menuManager);
             _settingsView.ShowSelf();
         }

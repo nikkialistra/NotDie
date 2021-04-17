@@ -24,7 +24,7 @@ namespace UI.MenuViews
         
         public void ShowSelf()
         {
-            _menuManager.Return += HideSelf;
+            _menuManager.Return += ShowParent;
 
             if (!_initialized)
             {
@@ -39,13 +39,19 @@ namespace UI.MenuViews
             Focused?.Focus();
         }
 
-        protected void HideSelf()
+        protected void ShowParent()
         {
-            _menuManager.Return -= HideSelf;
+            _menuManager.Return -= ShowParent;
             _root.Remove(_tree);
             _parent.ShowSelf();
         }
         
+        protected void HideSelf()
+        {
+            _menuManager.Return -= ShowParent;
+            _root.Remove(_tree);
+        }
+
         protected abstract void SetUpBindings();
         protected abstract void Enable();
     }

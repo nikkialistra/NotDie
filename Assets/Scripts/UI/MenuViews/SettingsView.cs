@@ -11,6 +11,8 @@ namespace UI.MenuViews
         private Button _hud;
         private Button _language;
         private Button _credits;
+        
+        private LanguageView _languageView;
 
         public SettingsView(VisualElement root, IMenuView parent, MenuManager menuManager) : base(root, parent, menuManager)
         {
@@ -43,6 +45,12 @@ namespace UI.MenuViews
             _audio.Focus();
         }
 
-        private static void Language() => Debug.Log("Language");
+        private void Language()
+        {
+            Focused = _language;
+            HideSelf();
+            _languageView ??= new LanguageView(_root, this, _menuManager);
+            _languageView.ShowSelf();
+        }
     }
 }

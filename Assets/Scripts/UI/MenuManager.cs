@@ -12,8 +12,9 @@ namespace UI
     {
         [SerializeField] private bool _loadMainMenu;
         [SerializeField] private bool _loadGameMenu;
-        
-        
+
+        public PlayerInput Input => _input;
+
         private MainMenuView _mainMenu;
         private GameMenuView _gameMenu;
         
@@ -74,6 +75,6 @@ namespace UI
             _gameMenu.ShowSelf();
         }
 
-        private void OnReturn(InputAction.CallbackContext obj) => Return?.Invoke();
+        private void OnReturn(InputAction.CallbackContext context) => Return?.Invoke();
     }
 }
