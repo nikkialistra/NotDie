@@ -100,12 +100,17 @@
     height: 18px;
 }
 
-.square_frame {
-    background-image: url('/Assets/Sprites/UI/Frames/SquareFrame.png#SquareFrame');
+.square {
     width: 27px;
     height: 27px;
     margin-left: 3px;
     margin-right: 3px;
+}
+
+.square_frame {
+    background-image: url('/Assets/Sprites/UI/Frames/SquareFrame.png#SquareFrame');
+    width: 27px;
+    height: 27px;
 }
 
 .timer {

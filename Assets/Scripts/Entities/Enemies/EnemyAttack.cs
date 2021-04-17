@@ -8,6 +8,7 @@ using Zenject;
 
 namespace Entities.Enemies
 {
+    [RequireComponent(typeof(EnemyMover))]
     public class EnemyAttack : MonoBehaviour
     {
         public Things.Data.EnemyWave EnemyWave;
@@ -43,6 +44,7 @@ namespace Entities.Enemies
         
         private Enemy _enemy;
         private EnemyAnimator _enemyAnimator;
+        private EnemyMover _enemyMover;
 
         [Inject]
         public void Construct(EnemyWaveSpawner enemyWaveSpawner) => _enemyWaveSpawner = enemyWaveSpawner;
@@ -51,6 +53,7 @@ namespace Entities.Enemies
         {
             _enemy = GetComponent<Enemy>();
             _enemyAnimator = GetComponent<EnemyAnimator>();
+            _enemyMover = GetComponent<EnemyMover>();
         }
 
         public void TryAttack(PlayerMover player)
@@ -59,7 +62,12 @@ namespace Entities.Enemies
                 return;
             
             _enemyAnimator.Attack();
+
+            var velocity = EnemyWave.Impulse * (player.PositionCenter - _enemy.PositionCenter).normalized;
+            _enemyMover.AddVelocity(velocity, EnemyWave.ImpulseCurve, EnemyWave.Length);
+            
             StartCoroutine(SpawnWaveAfterDelay(EnemyWave.WaveDelay,player));
+            
             _nextAttackTime = Time.time + _cooldown;
         }
 

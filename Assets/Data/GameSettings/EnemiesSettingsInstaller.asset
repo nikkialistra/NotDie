@@ -23,8 +23,8 @@ MonoBehaviour:
     Speed: 15
     EnemyWave: {fileID: 11400000, guid: eab1ab7ba7fe4454bbbbdbc812536802, type: 2}
     AttackDistance: 1.2
-    WaveDistance: 1.1
+    WaveDistance: 0.7
     AttackCooldown: 1.5
     TimeInStay: 2
     TimeInStun: 0.6
-    YPosition: 0.65
+    YPosition: 0.75

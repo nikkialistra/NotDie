@@ -53,12 +53,14 @@ namespace Entities.Player.Combat
             _playerMover.AddVelocity(_weapons.ActiveWeapon.Weapon.ShotImpulse, comboShot.ImpulseCurve, comboShot.Clip.length);
             
             _comboShotNumber++;
-            
-            SpawnWave(position, attackDirection, comboShot, _weapons.ActiveWeapon);
+
+            StartCoroutine(SpawnWaveAfterDelay(comboShot.WaveDelay, position, attackDirection, comboShot, _weapons.ActiveWeapon));
         }
 
-        private void SpawnWave(Vector3 position, Transform attackDirection, Weapon.ComboShot comboShot, WeaponFacade weaponFacade)
+        private IEnumerator SpawnWaveAfterDelay(float delay, Vector3 position, Transform attackDirection, Weapon.ComboShot comboShot, WeaponFacade weaponFacade)
         {
+            yield return new WaitForSeconds(delay);
+            
             var waveSpecs = new WaveSpecs
             {
                 Id = _waveCounter++,
@@ -71,13 +73,6 @@ namespace Entities.Player.Combat
                 Prefab = weaponFacade.Weapon.WavePrefab,
                 ReclineValue = weaponFacade.Weapon.ReclineValue
             };
-
-            StartCoroutine(AddDelay(comboShot.WaveDelay, waveSpecs));
-        }
-
-        private IEnumerator AddDelay(float delay, WaveSpecs waveSpecs)
-        {
-            yield return new WaitForSeconds(delay);
             
             _waveSpawner.Spawn(waveSpecs);
         }

@@ -3,11 +3,21 @@
     <ui:VisualElement name="screen" class="screen" style="justify-content: space-between;">
         <ui:VisualElement name="top" class="part_container">
             <ui:VisualElement name="top__main" class="main top__main">
-                <ui:Image name="item0" class="square_frame" />
-                <ui:Image name="item1" class="square_frame" />
-                <ui:Image name="item2" class="square_frame" />
-                <ui:Image name="item3" class="square_frame" />
-                <ui:Image name="item4" class="square_frame" />
+                <ui:Image name="item0" class="square">
+                    <ui:Image name="item0" class="square_frame" />
+                </ui:Image>
+                <ui:Image name="item1" class="square">
+                    <ui:Image name="item1" class="square_frame" />
+                </ui:Image>
+                <ui:Image name="item2" class="square">
+                    <ui:Image name="item2" class="square_frame" />
+                </ui:Image>
+                <ui:Image name="item3" class="square">
+                    <ui:Image name="item3" class="square_frame" />
+                </ui:Image>
+                <ui:Image name="item4" class="square">
+                    <ui:Image name="item4" class="square_frame" />
+                </ui:Image>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="bottom" class="part_container">

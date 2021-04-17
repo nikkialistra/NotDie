@@ -203,7 +203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1010360058035573378, guid: 0947e4218a84c6a45a3db73d03f115d5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0947e4218a84c6a45a3db73d03f115d5, type: 3}
@@ -1574,9 +1574,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _items:
-  - {fileID: 11400000, guid: b665a724f0f1a2346b959e12cb078c3a, type: 2}
-  - {fileID: 11400000, guid: b665a724f0f1a2346b959e12cb078c3a, type: 2}
-  - {fileID: 11400000, guid: b665a724f0f1a2346b959e12cb078c3a, type: 2}
+  - {fileID: 11400000, guid: 5c224b536ff127540a4b6ee04e044087, type: 2}
+  - {fileID: 11400000, guid: 370fdc3f27c4acc43a609f47287e072d, type: 2}
+  - {fileID: 11400000, guid: b738ab96b73ac6c44b1ee016b5ce063f, type: 2}
+  - {fileID: 11400000, guid: 45de1f02be4f6ae48adc9be66cc2ea1c, type: 2}
 --- !u!1 &1381299464 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 437369560671245325, guid: 94ff85432863cee48b83860753576ba7, type: 3}
@@ -2469,7 +2470,6 @@ MonoBehaviour:
   _weaponPrefab: {fileID: 2817982706502842857, guid: d82d9a6c695d5df43abd39c668eb5f09, type: 3}
   _weaponAttack: {fileID: 937606822}
   _waveFacadePrefab: {fileID: 3274925662554537503, guid: 8cdd9ec471e768042b4841a29fa57cd0, type: 3}
-  _enemyWaveFacadePrefab: {fileID: 3274925662554537503, guid: 91d90c9df856c9a4f81f2769dbd1a97e, type: 3}
   _itemFacadePrefab: {fileID: 434846520202061160, guid: d7224fdaf8cdf0247a8298e378d70d2f, type: 3}
   _itemPrefab: {fileID: 2817982706502842857, guid: ab30b4611054151409b417c48dd202ac, type: 3}
   _roomConfigurator: {fileID: 1298433784}
@@ -2477,6 +2477,7 @@ MonoBehaviour:
   _polygonWallBounds: {fileID: 687424469}
   _polygonFloorBorder: {fileID: 1602754021}
   _polygonWallBorder: {fileID: 241334232}
+  _enemyWaveFacadePrefab: {fileID: 3274925662554537503, guid: 91d90c9df856c9a4f81f2769dbd1a97e, type: 3}
   _uiManager: {fileID: 716610167}
   _hpView: {fileID: 716610164}
   _timerView: {fileID: 716610163}
@@ -2533,7 +2534,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 437369560671245325, guid: 94ff85432863cee48b83860753576ba7, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 437369560671245325, guid: 94ff85432863cee48b83860753576ba7, type: 3}
       propertyPath: m_IsActive
@@ -2635,6 +2636,7 @@ GameObject:
   - component: {fileID: 1384298112301976416}
   - component: {fileID: 1346688145117226043}
   - component: {fileID: 1346688145117226044}
+  - component: {fileID: 1346688145117226045}
   m_Layer: 23
   m_Name: Poor
   m_TagString: Untagged
@@ -2787,6 +2789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8c527346684d31b1ead32ea262786d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyWave: {fileID: 0}
 --- !u!114 &1346688145117226044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2797,6 +2800,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fc570a1feef4d4ca815966751b2fb18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1346688145117226045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346688145117226037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29170a705d6d409b8247b53b1b4e113e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1384298112301976416
@@ -3019,6 +3034,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1973852483044160841, guid: 9a90ccd8d85c1a54885fbbfbc542ca7c, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998853100477534350, guid: 9a90ccd8d85c1a54885fbbfbc542ca7c, type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4507484610588176689, guid: 9a90ccd8d85c1a54885fbbfbc542ca7c, type: 3}
