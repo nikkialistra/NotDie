@@ -37,7 +37,7 @@ namespace UI.MenuViews
 
         protected override void Enable()
         {
-            _menuManager.Return -= HideSelf;
+            _menuManager.Return -= ShowParent;
             _play.Focus();
         }
 
@@ -52,7 +52,7 @@ namespace UI.MenuViews
         private void Settings()
         {
             Focused = _settings;
-            HideSelf();
+            ShowParent();
             _settingsView ??= new SettingsView(_root, this, _menuManager);
             _settingsView.ShowSelf();
         }

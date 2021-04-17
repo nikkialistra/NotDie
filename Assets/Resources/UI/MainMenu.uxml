@@ -3,11 +3,11 @@
     <ui:VisualElement name="screen" class="screen">
         <ui:VisualElement name="logo" class="logo" />
         <ui:VisualElement name="buttons" style="align-items: center;">
-            <ui:Button text="Play" name="play" tabindex="1" focusable="true" class="button" />
-            <ui:Button text="Settings" name="settings" tabindex="2" focusable="true" class="button" />
-            <ui:Button text="Vault" name="vault" tabindex="3" focusable="true" class="button" />
-            <ui:Button text="Profiles" name="profiles" tabindex="4" focusable="true" class="button" />
-            <ui:Button text="Quit" name="quit" tabindex="5" focusable="true" class="button" />
+            <ui:Button text="Play" name="play" tabindex="1" focusable="true" class="button--reset menu--button" />
+            <ui:Button text="Settings" name="settings" tabindex="2" focusable="true" class="button--reset menu--button" />
+            <ui:Button text="Vault" name="vault" tabindex="3" focusable="true" class="button--reset menu--button" />
+            <ui:Button text="Profiles" name="profiles" tabindex="4" focusable="true" class="button--reset menu--button" />
+            <ui:Button text="Quit" name="quit" tabindex="5" focusable="true" class="button--reset menu--button" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

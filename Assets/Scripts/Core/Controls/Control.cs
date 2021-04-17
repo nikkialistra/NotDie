@@ -273,6 +273,22 @@ namespace Services.Controls
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""f768506f-1cdf-4619-988a-53291eef6384"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d7ac6de-190f-4f31-9ff4-6dba1a776e63"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -284,6 +300,28 @@ namespace Services.Controls
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Return"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d97ad531-91ed-40ed-aa04-0914be7eac82"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02e498c4-8ec4-4190-9ee4-d3fa2d839654"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -325,6 +363,8 @@ namespace Services.Controls
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Return = m_UI.FindAction("Return", throwIfNotFound: true);
+            m_UI_Left = m_UI.FindAction("Left", throwIfNotFound: true);
+            m_UI_Right = m_UI.FindAction("Right", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -440,11 +480,15 @@ namespace Services.Controls
         private readonly InputActionMap m_UI;
         private IUIActions m_UIActionsCallbackInterface;
         private readonly InputAction m_UI_Return;
+        private readonly InputAction m_UI_Left;
+        private readonly InputAction m_UI_Right;
         public struct UIActions
         {
             private @Control m_Wrapper;
             public UIActions(@Control wrapper) { m_Wrapper = wrapper; }
             public InputAction @Return => m_Wrapper.m_UI_Return;
+            public InputAction @Left => m_Wrapper.m_UI_Left;
+            public InputAction @Right => m_Wrapper.m_UI_Right;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -457,6 +501,12 @@ namespace Services.Controls
                     @Return.started -= m_Wrapper.m_UIActionsCallbackInterface.OnReturn;
                     @Return.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnReturn;
                     @Return.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnReturn;
+                    @Left.started -= m_Wrapper.m_UIActionsCallbackInterface.OnLeft;
+                    @Left.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnLeft;
+                    @Left.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnLeft;
+                    @Right.started -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
+                    @Right.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
+                    @Right.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
@@ -464,6 +514,12 @@ namespace Services.Controls
                     @Return.started += instance.OnReturn;
                     @Return.performed += instance.OnReturn;
                     @Return.canceled += instance.OnReturn;
+                    @Left.started += instance.OnLeft;
+                    @Left.performed += instance.OnLeft;
+                    @Left.canceled += instance.OnLeft;
+                    @Right.started += instance.OnRight;
+                    @Right.performed += instance.OnRight;
+                    @Right.canceled += instance.OnRight;
                 }
             }
         }
@@ -497,6 +553,8 @@ namespace Services.Controls
         public interface IUIActions
         {
             void OnReturn(InputAction.CallbackContext context);
+            void OnLeft(InputAction.CallbackContext context);
+            void OnRight(InputAction.CallbackContext context);
         }
     }
 }

@@ -35,7 +35,6 @@
 .health {
     width: 100px;
     height: 18px;
-    -unity-background-scale-mode: stretch-to-fill;
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
