@@ -5,7 +5,7 @@
         <ui:VisualElement name="elements" class="top_shifted">
             <ui:VisualElement name="language" class="flex--row">
                 <ui:VisualElement name="first_column0" class="first_column center_aligned">
-                    <ui:Label text="Language:" display-tooltip-when-elided="true" name="language__label" class="text" />
+                    <ui:Label text="Language:" display-tooltip-when-elided="true" name="language__label" view-data-key="_language_choice" class="text" />
                 </ui:VisualElement>
                 <ui:VisualElement name="second_column0" class="second_column flex--row center_aligned">
                     <ui:Button display-tooltip-when-elided="true" name="language__left" class="button--reset left--arrow menu--arrow" />

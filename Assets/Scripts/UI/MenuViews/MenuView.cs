@@ -1,4 +1,5 @@
-﻿using UnityEngine.UIElements;
+﻿using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace UI.MenuViews
 {
@@ -37,6 +38,9 @@ namespace UI.MenuViews
             Enable();
             
             Focused?.Focus();
+            
+            _menuManager.LocalizeRecursively(_root);
+            _root.MarkDirtyRepaint();
         }
 
         protected void ShowParent()

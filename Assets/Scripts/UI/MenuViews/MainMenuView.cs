@@ -8,6 +8,7 @@ namespace UI.MenuViews
 {
     public class MainMenuView : MenuView
     {
+        private VisualElement _screen;
         private Button _play;
         private Button _settings;
         private Button _vault;
@@ -24,6 +25,7 @@ namespace UI.MenuViews
 
         protected override void SetUpBindings()
         {
+            _screen = _tree.Q<VisualElement>("screen");
             _play = _tree.Q<Button>("play");
             _settings = _tree.Q<Button>("settings");
             _vault = _tree.Q<Button>("vault");
@@ -53,7 +55,7 @@ namespace UI.MenuViews
         {
             Focused = _settings;
             ShowParent();
-            _settingsView ??= new SettingsView(_root, this, _menuManager);
+            _settingsView ??= new SettingsView(_screen, this, _menuManager);
             _settingsView.ShowSelf();
         }
 
