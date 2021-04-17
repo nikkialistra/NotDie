@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7289a7622d14b7da0395d3f153cf425, type: 3}
+  m_Name: DreamCatcher
+  m_EditorClassIdentifier: 
+  PickUp: {fileID: 21300000, guid: 99718f575e7f26040961ac35faf1c0b7, type: 3}
+  InInventory: {fileID: 21300000, guid: d13b82b3596cfd24ebbf4b377137d3d3, type: 3}
+  Description: 
+  Note: 

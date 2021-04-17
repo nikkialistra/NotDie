@@ -15,7 +15,13 @@ namespace Entities.Enemies.EnemyWave
 
         private void Awake() => _rigidBody = GetComponent<Rigidbody2D>();
 
-        private void FixedUpdate() => _rigidBody.velocity = _enemyRigidbody.velocity;
+        private void FixedUpdate()
+        {
+            if (_enemyRigidbody == null)
+                return;
+            
+            _rigidBody.velocity = _enemyRigidbody.velocity;
+        }
 
         public void SetEnemy(Enemy enemy)
         {
