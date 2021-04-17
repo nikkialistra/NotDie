@@ -1,4 +1,4 @@
-using Entities.Enemies;
+using Entities.Enemies.Species;
 using UnityEngine;
 using Zenject;
 
@@ -7,14 +7,13 @@ namespace Infrastructure
     [CreateAssetMenu(fileName = "EnemiesSettingsInstaller", menuName = "Installers/EnemiesSettingsInstaller")]
     public class EnemiesSettingsInstaller : ScriptableObjectInstaller<EnemiesSettingsInstaller>
     {
-        [Header("Enemies")]
         [SerializeField] private Dummy.Settings _dummy;
-        [SerializeField] private EnemyHealthHandler.Settings _enemyHealthHandler;
-    
+        [SerializeField] private Poor.Settings _poor;
+
         public override void InstallBindings()
         {
             Container.BindInstance(_dummy);
-            Container.BindInstance(_enemyHealthHandler);
+            Container.BindInstance(_poor);
         }
     }
 }

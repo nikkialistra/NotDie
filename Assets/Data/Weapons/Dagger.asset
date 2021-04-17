@@ -167,7 +167,7 @@ MonoBehaviour:
     isPenetrable: 0
   WavePrefab: {fileID: 3274925662554537503, guid: 19810d412f606fa4f98b74d58e543748, type: 3}
   DirectionMultiplier: 1.2
-  ShotImpulse: 2
+  ShotImpulse: 4
   CooldownTime: 0.2
   Durability: 1
   DurabilityMultiplier: 1

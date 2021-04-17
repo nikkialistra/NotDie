@@ -1,5 +1,7 @@
 using Core;
 using Core.Room;
+using Entities.Enemies;
+using Entities.Enemies.EnemyWave;
 using Entities.Player;
 using Entities.Player.Animation;
 using Entities.Player.Combat;
@@ -32,7 +34,7 @@ namespace Infrastructure
         [SerializeField] private GameObject _weaponPrefab;
         [SerializeField] private WeaponAttack _weaponAttack;
         [SerializeField] private GameObject _waveFacadePrefab;
-        
+
         [Header("Items")]
         [SerializeField] private GameObject _itemFacadePrefab;
         [SerializeField] private GameObject _itemPrefab;
@@ -43,6 +45,9 @@ namespace Infrastructure
         [SerializeField] private PolygonCollider2D _polygonWallBounds;
         [SerializeField] private EdgeCollider2D _polygonFloorBorder;
         [SerializeField] private EdgeCollider2D _polygonWallBorder;
+        
+        [Header("Enemies")]
+        [SerializeField] private GameObject _enemyWaveFacadePrefab;
         
         [Header("UI")] 
         [SerializeField] private UiManager _uiManager;
@@ -62,6 +67,7 @@ namespace Infrastructure
             Container.Bind<Inventory>().AsSingle();
 
             BindWaveSpawner();
+            BindEnemyWaveSpawner();
             
             BindWeaponSpawner();
             BindWeaponGameObjectSpawner();
@@ -108,6 +114,17 @@ namespace Infrastructure
                     .WithInitialSize(5)
                     .FromComponentInNewPrefab(_waveFacadePrefab)
                     .UnderTransformGroup("Waves"));
+        }
+        
+        private void BindEnemyWaveSpawner()
+        {
+            Container.Bind<EnemyWaveSpawner>().AsSingle();
+
+            Container.BindFactory<EnemyWaveSpecs, EnemyWaveFacade, EnemyWaveFacade.Factory>()
+                .FromPoolableMemoryPool<EnemyWaveSpecs, EnemyWaveFacade, EnemyWaveFacadePool>(poolBinder => poolBinder
+                    .WithInitialSize(5)
+                    .FromComponentInNewPrefab(_enemyWaveFacadePrefab)
+                    .UnderTransformGroup("EnemyWaves"));
         }
 
         private void BindWeaponSpawner()
@@ -175,6 +192,10 @@ namespace Infrastructure
         }
 
         private class WaveFacadePool : MonoPoolableMemoryPool<WaveSpecs, IMemoryPool, WaveFacade>
+        {
+        }
+        
+        private class EnemyWaveFacadePool : MonoPoolableMemoryPool<EnemyWaveSpecs, IMemoryPool, EnemyWaveFacade>
         {
         }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -21,7 +20,7 @@ namespace UI.MenuViews
 
         public GameMenuView(VisualElement root, IMenuView parent, MenuManager menuManager) : base(root, parent, menuManager)
         {
-            var template = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/UI/GameMenu.uxml");
+            var template = Resources.Load<VisualTreeAsset>("UI/GameMenu");
             _tree = template.CloneTree();
         }
 

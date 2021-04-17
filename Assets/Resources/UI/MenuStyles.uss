@@ -19,7 +19,7 @@
 
 .button {
     width: 80px;
-    height: 25px;
+    height: 28px;
     background-image: url('/Assets/Sprites/UI/Menu/MenuButton.png#MenuButton');
     -unity-font: url('/Assets/Sprites/UI/Fonts/LowPixels.ttf');
     padding-top: 8px;
