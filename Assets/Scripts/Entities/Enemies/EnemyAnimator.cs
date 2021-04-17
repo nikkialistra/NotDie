@@ -3,11 +3,14 @@
 namespace Entities.Enemies
 {
     [RequireComponent(typeof(Animator))]
-    public class DummyAnimator : MonoBehaviour
+    public class EnemyAnimator : MonoBehaviour
     {
+        public bool IsFlipped { get; private set; }
+        
         private Animator _animator;
 
         private readonly int _run = Animator.StringToHash("run");
+        private readonly int _attack = Animator.StringToHash("attack");
         private readonly int _stun = Animator.StringToHash("stun");
 
         private void Awake() => _animator = GetComponent<Animator>();
@@ -17,29 +20,23 @@ namespace Entities.Enemies
             _animator.SetBool(_run, direction.magnitude > 0);
             
             if (direction.x > 0)
-                LookingRight();
+                Flip(false);
             
             if (direction.x < 0)
-                LookingLeft();
+                Flip(true);
         }
 
-        public void Stun()
-        {
-            _animator.SetBool(_run, false);
-        }
+        public void Stun() => _animator.SetBool(_run, false);
 
-        private void LookingRight()
+        private void Flip(bool value)
         {
+            IsFlipped = value;
+            
             var scale = transform.localScale;
-            scale.x = 1;
+            scale.x = value ? - 1 : 1;
             transform.localScale = scale;
         }
 
-        private void LookingLeft()
-        {
-            var scale = transform.localScale;
-            scale.x = -1;
-            transform.localScale = scale;
-        }
+        public void Attack() => _animator.SetTrigger(_attack);
     }
 }

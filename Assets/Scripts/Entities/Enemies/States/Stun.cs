@@ -7,16 +7,16 @@ namespace Entities.Enemies.States
     {
         public float TimeInStun { get; private set; }
         
-        private readonly DummyAnimator _dummyAnimator;
+        private readonly EnemyAnimator _enemyAnimator;
 
-        public Stun(DummyAnimator dummyAnimator) => _dummyAnimator = dummyAnimator;
+        public Stun(EnemyAnimator enemyAnimator) => _enemyAnimator = enemyAnimator;
 
         public override void Tick() => TimeInStun += Time.deltaTime;
 
         public override void OnEnter()
         {
             TimeInStun = 0;
-            _dummyAnimator.Stun();
+            _enemyAnimator.Stun();
         }
     }
 }

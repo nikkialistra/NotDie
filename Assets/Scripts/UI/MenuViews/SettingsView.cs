@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI.MenuViews
@@ -15,7 +14,7 @@ namespace UI.MenuViews
 
         public SettingsView(VisualElement root, IMenuView parent, MenuManager menuManager) : base(root, parent, menuManager)
         {
-            var template = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/UI/Settings.uxml");
+            var template = Resources.Load<VisualTreeAsset>("UI/Settings");
             _tree = template.CloneTree();
         }
 
