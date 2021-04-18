@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UIElements;
 
 namespace UI.MenuViews
@@ -9,19 +10,15 @@ namespace UI.MenuViews
     public class LanguageView : MenuView
     {
         private Label _languageChoice;
-        
-        private string[] _languages =
-        {
-            "English",
-            "Russian"
-        };
+
+        private List<Locale> _languages;
 
         private int _index;
-        
-        
+
         private PlayerInput _input;
         private InputAction _leftAction;
         private InputAction _rightAction;
+        private InputAction _selectAction;
 
         public LanguageView(VisualElement root, IMenuView parent, MenuManager menuManager) : base(root, parent, menuManager)
         {
@@ -29,32 +26,69 @@ namespace UI.MenuViews
             _tree = template.CloneTree();
         }
 
-        protected override void SetUpBindings()
+        protected override void SetUp()
         {
+            _languages = LocalizationSettings.AvailableLocales.Locales;
+
             _languageChoice = _tree.Q<Label>("language__choice");
+            SetLanguageText();
             
             _input = _menuManager.Input;
             _leftAction = _input.actions.FindAction("Left");
             _rightAction = _input.actions.FindAction("Right");
+            _selectAction = _input.actions.FindAction("Select");
 
             _leftAction.started += ChangeLanguageLeft;
             _rightAction.started += ChangeLanguageRight;
+            _selectAction.started += SetLanguage;
         }
+
+        protected override void ShowParent()
+        {
+            _leftAction.started -= ChangeLanguageLeft;
+            _rightAction.started -= ChangeLanguageRight;
+            _selectAction.started -= SetLanguage;
+            
+            base.ShowParent();
+        }
+
+        private void SetLanguage(InputAction.CallbackContext context) => LocalizationSettings.SelectedLocale = _languages[_index];
 
         private void ChangeLanguageLeft(InputAction.CallbackContext context)
         {
-            _index = (_index - 1) % _languages.Length;
+            _index = (_index - 1) % _languages.Count;
 
             if (_index == -1)
-                _index = _languages.Length - 1;
-            
-            _languageChoice.text = _languages[_index];
+                _index = _languages.Count - 1;
+
+            SetLanguageText();
         }
-        
+
         private void ChangeLanguageRight(InputAction.CallbackContext context)
         {
-            _index = (_index + 1) % _languages.Length;
-            _languageChoice.text = _languages[_index];
+            _index = (_index + 1) % _languages.Count;
+            
+            SetLanguageText();
+        }
+
+        private void SetLanguageText()
+        {
+            var locale = _languages[_index].Formatter.ToString();
+            
+            _languageChoice.text = locale switch
+            {
+                "en-US" => "English",
+                "ru-RU" => "Russian",
+                _ => "Unknown"
+            };
+            _languageChoice.viewDataKey = locale switch
+            {
+                "en-US" => "_english",
+                "ru-RU" => "_russian",
+                _ => "_unknown"
+            };
+            
+            _menuManager.Localize(_languageChoice);
         }
 
         protected override void Enable()

@@ -23,7 +23,7 @@ namespace UI.MenuViews
             _tree = template.CloneTree();
         }
 
-        protected override void SetUpBindings()
+        protected override void SetUp()
         {
             _screen = _tree.Q<VisualElement>("screen");
             _play = _tree.Q<Button>("play");
@@ -55,7 +55,7 @@ namespace UI.MenuViews
         {
             Focused = _settings;
             ShowParent();
-            _settingsView ??= new SettingsView(_screen, this, _menuManager);
+            _settingsView ??= new SettingsView(_root, this, _menuManager);
             _settingsView.ShowSelf();
         }
 

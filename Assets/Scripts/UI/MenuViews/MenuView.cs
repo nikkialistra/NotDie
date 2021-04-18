@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine.UIElements;
 
 namespace UI.MenuViews
 {
@@ -29,7 +28,7 @@ namespace UI.MenuViews
 
             if (!_initialized)
             {
-                SetUpBindings();
+                SetUp();
                 _root.Add(_tree);
                 _initialized = true;
             }
@@ -39,11 +38,10 @@ namespace UI.MenuViews
             
             Focused?.Focus();
             
-            _menuManager.LocalizeRecursively(_root);
-            _root.MarkDirtyRepaint();
+            _menuManager.LocalizeRecursively(_tree);
         }
 
-        protected void ShowParent()
+        protected virtual void ShowParent()
         {
             _menuManager.Return -= ShowParent;
             _root.Remove(_tree);
@@ -56,7 +54,7 @@ namespace UI.MenuViews
             _root.Remove(_tree);
         }
 
-        protected abstract void SetUpBindings();
+        protected abstract void SetUp();
         protected abstract void Enable();
     }
 }

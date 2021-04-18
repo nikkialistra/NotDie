@@ -24,7 +24,7 @@ namespace UI.MenuViews
             _tree = template.CloneTree();
         }
 
-        protected override void SetUpBindings()
+        protected override void SetUp()
         {
             _resumeGame = _tree.Q<Button>("resume_game");
             _restart = _tree.Q<Button>("restart");

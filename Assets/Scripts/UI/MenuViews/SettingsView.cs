@@ -20,7 +20,7 @@ namespace UI.MenuViews
             _tree = template.CloneTree();
         }
 
-        protected override void SetUpBindings()
+        protected override void SetUp()
         {
             _audio = _tree.Q<Button>("audio");
             _graphics = _tree.Q<Button>("graphics");
