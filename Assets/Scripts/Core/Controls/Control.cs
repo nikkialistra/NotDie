@@ -289,6 +289,14 @@ namespace Services.Controls
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""81711a55-f38f-424f-b808-db073c93fd48"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -322,6 +330,17 @@ namespace Services.Controls
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4440eec9-f85f-432a-93f1-36abc1ce4ce7"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -365,6 +384,7 @@ namespace Services.Controls
             m_UI_Return = m_UI.FindAction("Return", throwIfNotFound: true);
             m_UI_Left = m_UI.FindAction("Left", throwIfNotFound: true);
             m_UI_Right = m_UI.FindAction("Right", throwIfNotFound: true);
+            m_UI_Select = m_UI.FindAction("Select", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -482,6 +502,7 @@ namespace Services.Controls
         private readonly InputAction m_UI_Return;
         private readonly InputAction m_UI_Left;
         private readonly InputAction m_UI_Right;
+        private readonly InputAction m_UI_Select;
         public struct UIActions
         {
             private @Control m_Wrapper;
@@ -489,6 +510,7 @@ namespace Services.Controls
             public InputAction @Return => m_Wrapper.m_UI_Return;
             public InputAction @Left => m_Wrapper.m_UI_Left;
             public InputAction @Right => m_Wrapper.m_UI_Right;
+            public InputAction @Select => m_Wrapper.m_UI_Select;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -507,6 +529,9 @@ namespace Services.Controls
                     @Right.started -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
                     @Right.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
                     @Right.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
+                    @Select.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSelect;
+                    @Select.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSelect;
+                    @Select.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSelect;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
@@ -520,6 +545,9 @@ namespace Services.Controls
                     @Right.started += instance.OnRight;
                     @Right.performed += instance.OnRight;
                     @Right.canceled += instance.OnRight;
+                    @Select.started += instance.OnSelect;
+                    @Select.performed += instance.OnSelect;
+                    @Select.canceled += instance.OnSelect;
                 }
             }
         }
@@ -555,6 +583,7 @@ namespace Services.Controls
             void OnReturn(InputAction.CallbackContext context);
             void OnLeft(InputAction.CallbackContext context);
             void OnRight(InputAction.CallbackContext context);
+            void OnSelect(InputAction.CallbackContext context);
         }
     }
 }

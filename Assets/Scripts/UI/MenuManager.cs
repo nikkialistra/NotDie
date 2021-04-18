@@ -29,8 +29,6 @@ namespace UI
         
         private VisualElement _rootVisualElement;
 
-        private VisualElement _root;
-
         private bool _loaded;
         
         private PlayerInput _input;
@@ -49,8 +47,6 @@ namespace UI
         {
             _rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
 
-            _root = _rootVisualElement.Q<VisualElement>("root");
-
             _input = GetComponent<PlayerInput>();
             _returnAction = _input.actions.FindAction("Return");
         }
@@ -67,7 +63,9 @@ namespace UI
             _returnAction.started -= OnReturn;
         }
 
-        public void ShowSelf() => _root.style.display = DisplayStyle.Flex;
+        public void ShowSelf()
+        {
+        }
 
         public void LocalizeRecursively(VisualElement element)
         {
@@ -89,7 +87,7 @@ namespace UI
             }
         }
 
-        private void Localize(VisualElement element)
+        public void Localize(VisualElement element)
         {
             if (!(element is TextElement))
                 return;
@@ -111,14 +109,20 @@ namespace UI
         private void OnTableChanged(StringTable table)
         {
             var handle = _table.GetTable();
-            handle.Completed -= OnLocalTableLoaded;
-            handle.Completed += OnLocalTableLoaded;
+            
+            if (handle.IsDone)
+                OnLocalTableLoaded(handle);
+            else
+                handle.Completed += OnLocalTableLoaded;
         }
 
         private void OnLocalTableLoaded(AsyncOperationHandle<StringTable> handle)
         {
             _localTable = handle.Result;
             LoadMenu();
+            
+            LocalizeRecursively(_rootVisualElement);
+            _rootVisualElement.MarkDirtyRepaint();
         }
 
         private void LoadMenu()

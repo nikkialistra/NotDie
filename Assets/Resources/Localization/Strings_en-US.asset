@@ -10,76 +10,88 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: Texts_en
+  m_Name: Strings_en-US
   m_EditorClassIdentifier: 
   m_LocaleId:
-    m_Code: en
-  m_SharedData: {fileID: 11400000, guid: a3cab293a64461c4990275ba47f7acc5, type: 2}
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: 61c384be3f8920745b40b623037e9298, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 33367023616
+  - m_Id: 124253396992
     m_Localized: Play
     m_Metadata:
       m_Items: []
-  - m_Id: 11705758539776
+  - m_Id: 753914896384
     m_Localized: Settings
     m_Metadata:
       m_Items: []
-  - m_Id: 11754974502912
+  - m_Id: 799016247296
     m_Localized: Vault
     m_Metadata:
       m_Items: []
-  - m_Id: 11847932862464
+  - m_Id: 831169781760
     m_Localized: Profiles
     m_Metadata:
       m_Items: []
-  - m_Id: 11897094299648
+  - m_Id: 881845362688
     m_Localized: Quit
     m_Metadata:
       m_Items: []
-  - m_Id: 19538667397120
-    m_Localized: Resume Game
-    m_Metadata:
-      m_Items: []
-  - m_Id: 19621148385280
-    m_Localized: Restart
-    m_Metadata:
-      m_Items: []
-  - m_Id: 19698063532032
-    m_Localized: Save and Exit
-    m_Metadata:
-      m_Items: []
-  - m_Id: 19805924253696
-    m_Localized: Quit Game
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20174536466432
-    m_Localized: 'Language:'
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20448005087232
-    m_Localized: Language
-    m_Metadata:
-      m_Items: []
-  - m_Id: 20489415450624
+  - m_Id: 943061229568
     m_Localized: Audio
     m_Metadata:
       m_Items: []
-  - m_Id: 20547875659776
+  - m_Id: 985264316416
     m_Localized: Graphics
     m_Metadata:
       m_Items: []
-  - m_Id: 20607174729728
+  - m_Id: 1035839234048
     m_Localized: Controls
     m_Metadata:
       m_Items: []
-  - m_Id: 20659624501248
+  - m_Id: 1083121623040
     m_Localized: HUD
     m_Metadata:
       m_Items: []
-  - m_Id: 20790205767680
+  - m_Id: 1109298274304
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1160753995776
     m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1250348523520
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1356195979264
+    m_Localized: Russian
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403541282816
+    m_Localized: Unknown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1480729059328
+    m_Localized: Resume Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1540434976768
+    m_Localized: Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1579932737536
+    m_Localized: Save and Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1643254145024
+    m_Localized: Quit Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138848911360
+    m_Localized: 'Language:'
     m_Metadata:
       m_Items: []
   references:
