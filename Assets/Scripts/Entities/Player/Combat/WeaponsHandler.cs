@@ -1,5 +1,4 @@
 ﻿using System;
-using Entities.Player.Animation;
 using Things.Weapon;
 using UnityEngine;
 using UnityEngine.InputSystem;

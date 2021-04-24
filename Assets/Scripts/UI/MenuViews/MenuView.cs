@@ -41,20 +41,31 @@ namespace UI.MenuViews
             _menuManager.LocalizeRecursively(_tree);
         }
 
-        protected virtual void ShowParent()
+        public void HideSelf()
         {
-            _menuManager.Return -= ShowParent;
-            _root.Remove(_tree);
-            _parent.ShowSelf();
-        }
-        
-        protected void HideSelf()
-        {
+            Disable();
+            
             _menuManager.Return -= ShowParent;
             _root.Remove(_tree);
         }
 
+        protected void ShowParent()
+        {
+            Disable();
+            
+            _menuManager.Return -= ShowParent;
+            _root.Remove(_tree);
+            _parent.ShowSelf();
+        }
+
         protected abstract void SetUp();
-        protected abstract void Enable();
+        
+        protected virtual void Enable()
+        {
+        }
+
+        protected virtual void Disable()
+        {
+        }
     }
 }

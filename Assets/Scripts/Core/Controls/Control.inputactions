@@ -14,7 +14,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "AttackThrow",
+                    "name": "InteractAttackThrow",
                     "type": "Button",
                     "id": "93055143-3c09-49e6-81a7-0055fe3f78cc",
                     "expectedControlType": "Button",
@@ -30,7 +30,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "TakeDropThrowingWeapon",
+                    "name": "TakeDropThrowing",
                     "type": "Button",
                     "id": "52f095f1-70d7-4633-9960-e85e4d14ac10",
                     "expectedControlType": "Button",
@@ -41,6 +41,14 @@
                     "name": "ShowAttackDirection",
                     "type": "Button",
                     "id": "f9f8335e-f479-4557-8842-942ab48187b1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SpecialInteractAttack",
+                    "type": "Button",
+                    "id": "68fea22e-025b-4ee7-ac07-cda07f863f44",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -164,7 +172,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "AttackThrow",
+                    "action": "InteractAttackThrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -175,7 +183,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "AttackThrow",
+                    "action": "InteractAttackThrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -186,7 +194,7 @@
                     "interactions": "Hold(duration=0.3)",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "TakeDropThrowingWeapon",
+                    "action": "TakeDropThrowing",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -197,7 +205,7 @@
                     "interactions": "Hold(duration=0.3)",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "TakeDropThrowingWeapon",
+                    "action": "TakeDropThrowing",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -244,6 +252,17 @@
                     "action": "SwapWeapons",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "092413db-df6e-4e0d-aafa-7f89ac56fbc0",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialInteractAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -279,6 +298,22 @@
                     "name": "Select",
                     "type": "Button",
                     "id": "81711a55-f38f-424f-b808-db073c93fd48",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Up",
+                    "type": "Button",
+                    "id": "f0aa0d63-6c6f-4f3a-8293-ede1e5acd6d5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Down",
+                    "type": "Button",
+                    "id": "78a2d64b-c752-43ed-9d8d-6ead34e0f5af",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -326,6 +361,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7333f008-6101-49cf-8a0f-2d2e1828299c",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3fd37ac8-1168-474c-adf0-229dbe3ed005",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

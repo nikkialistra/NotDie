@@ -20,7 +20,7 @@ namespace UI.MenuViews
 
         public GameMenuView(VisualElement root, IMenuView parent, MenuManager menuManager) : base(root, parent, menuManager)
         {
-            var template = Resources.Load<VisualTreeAsset>("UI/GameMenu");
+            var template = Resources.Load<VisualTreeAsset>("UI/Menus/GameMenu");
             _tree = template.CloneTree();
         }
 
@@ -64,7 +64,6 @@ namespace UI.MenuViews
         private static IEnumerator WaitForButtonPress(Action action)
         {
             yield return new WaitForSecondsRealtime(0.15f);
-            Time.timeScale = 1;
             action();
         }
 
@@ -81,7 +80,7 @@ namespace UI.MenuViews
 
         private static void Restart() => SceneManager.LoadScene("FirstStage", LoadSceneMode.Single);
 
-        private void SaveAndExit() => SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        private static void SaveAndExit() => SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
 
         private void Settings()
         {

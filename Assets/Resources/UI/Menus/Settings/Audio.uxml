@@ -1,0 +1,35 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="/Assets/Resources/UI/Styles/MenuStyles.uss" />
+    <ui:VisualElement name="screen" class="screen top_aligned">
+        <ui:VisualElement name="logo" class="logo" style="opacity: 0.14;" />
+        <ui:VisualElement name="elements" class="top_shifted">
+            <ui:VisualElement name="master_volume" class="flex--row settings_row">
+                <ui:VisualElement name="first_column0" class="first_column center_aligned">
+                    <ui:Label text="Master Volume:" display-tooltip-when-elided="true" name="master_volume__label" view-data-key="_master_volume" class="text" />
+                </ui:VisualElement>
+                <ui:VisualElement name="second_column0" class="second_column flex--row center_aligned">
+                    <ui:Slider picking-mode="Ignore" label="Slider" value="5" high-value="5" name="master_volume__slider" style="width: 100px;" />
+                    <ui:Label display-tooltip-when-elided="true" name="master_volume__value" class="text slider__value" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="effects_volume" class="flex--row settings_row">
+                <ui:VisualElement name="first_column1" class="first_column center_aligned">
+                    <ui:Label text="Effects Volume:" display-tooltip-when-elided="true" name="effects_volume__label" view-data-key="_effects_volume" class="text" />
+                </ui:VisualElement>
+                <ui:VisualElement name="second_column1" class="second_column flex--row center_aligned">
+                    <ui:Slider picking-mode="Ignore" label="Slider" value="5" high-value="5" name="effects_volume__slider" style="width: 100px;" />
+                    <ui:Label display-tooltip-when-elided="true" name="effects_volume__value" class="text slider__value" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="music_volume" class="flex--row settings_row">
+                <ui:VisualElement name="first_column2" class="first_column center_aligned">
+                    <ui:Label text="Music Volume:" display-tooltip-when-elided="true" name="music_volume__label" view-data-key="_music_volume" class="text" />
+                </ui:VisualElement>
+                <ui:VisualElement name="second_column2" class="second_column flex--row center_aligned">
+                    <ui:Slider picking-mode="Ignore" label="Slider" value="5" high-value="5" name="music_volume__slider" style="width: 100px;" />
+                    <ui:Label display-tooltip-when-elided="true" name="music_volume__value" class="text slider__value" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

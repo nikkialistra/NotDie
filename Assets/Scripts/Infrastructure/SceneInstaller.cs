@@ -1,6 +1,5 @@
 using Core;
 using Core.Room;
-using Entities.Enemies;
 using Entities.Enemies.EnemyWave;
 using Entities.Player;
 using Entities.Player.Animation;
@@ -41,10 +40,6 @@ namespace Infrastructure
 
         [Header("Room")]
         [SerializeField] private RoomConfigurator _roomConfigurator;
-        [SerializeField] private PolygonCollider2D _polygonFloorBounds;
-        [SerializeField] private PolygonCollider2D _polygonWallBounds;
-        [SerializeField] private EdgeCollider2D _polygonFloorBorder;
-        [SerializeField] private EdgeCollider2D _polygonWallBorder;
         
         [Header("Enemies")]
         [SerializeField] private GameObject _enemyWaveFacadePrefab;
@@ -60,11 +55,13 @@ namespace Infrastructure
         {
             BindPlayerMovement();
 
-            Container.Bind<Hp>().AsSingle();
+            Container.Bind<Hp>()
+                .AsSingle();
 
             BindPlayerWeaponSystem();
             
-            Container.Bind<Inventory>().AsSingle();
+            Container.Bind<Inventory>()
+                .AsSingle();
 
             BindWaveSpawner();
             BindEnemyWaveSpawner();
@@ -85,29 +82,43 @@ namespace Infrastructure
             Container.BindInstance(_playerMover);
             Container.BindInstance(_playerAnimator);
             
-            Container.BindInstance(_player).WhenInjectedInto<CameraFollow>();
-            Container.BindInstance(_player).WhenInjectedInto<AttackDirection>();
+            Container.BindInstance(_player)
+                .WhenInjectedInto<CameraFollow>();
+            Container.BindInstance(_player)
+                .WhenInjectedInto<AttackDirection>();
 
-            Container.BindInstance(_attackDirection).WhenInjectedInto<PlayerMover>();
-            Container.BindInstance(_attackDirection).WithId("attackDirection").WhenInjectedInto<PlayerAttack>();
-            Container.BindInstance(_attackDirection).WhenInjectedInto<PlayerAnimator>();
+            Container.BindInstance(_attackDirection)
+                .WhenInjectedInto<PlayerMover>();
+            Container.BindInstance(_attackDirection)
+                .WithId("attackDirection")
+                .WhenInjectedInto<PlayerAttack>();
+            Container.BindInstance(_attackDirection)
+                .WhenInjectedInto<PlayerAnimator>();
         }
 
         private void BindPlayerWeaponSystem()
         {
-            Container.BindInstance(_hand).WithId("hand").WhenInjectedInto<Weapons>();
-            Container.BindInstance(_crossedSlot).WithId("crossedSlot").WhenInjectedInto<Weapons>();
-            Container.Bind<Weapons>().AsSingle();
+            Container.BindInstance(_hand)
+                .WithId("hand")
+                .WhenInjectedInto<Weapons>();
+            Container.BindInstance(_crossedSlot)
+                .WithId("crossedSlot")
+                .WhenInjectedInto<Weapons>();
+            Container.Bind<Weapons>()
+                .AsSingle();
 
             Container.BindInstance(_weaponAttack);
             Container.BindInstance(_throwingWeapon);
             
-            Container.BindInstance(_throwingArrow).WithId("throwingArrow").WhenInjectedInto<PlayerAttack>();
+            Container.BindInstance(_throwingArrow)
+                .WithId("throwingArrow")
+                .WhenInjectedInto<PlayerAttack>();
         }
 
         private void BindWaveSpawner()
         {
-            Container.Bind<WaveSpawner>().AsSingle();
+            Container.Bind<WaveSpawner>()
+                .AsSingle();
 
             Container.BindFactory<WaveSpecs, WaveFacade, WaveFacade.Factory>()
                 .FromPoolableMemoryPool<WaveSpecs, WaveFacade, WaveFacadePool>(poolBinder => poolBinder
@@ -115,10 +126,11 @@ namespace Infrastructure
                     .FromComponentInNewPrefab(_waveFacadePrefab)
                     .UnderTransformGroup("Waves"));
         }
-        
+
         private void BindEnemyWaveSpawner()
         {
-            Container.Bind<EnemyWaveSpawner>().AsSingle();
+            Container.Bind<EnemyWaveSpawner>()
+                .AsSingle();
 
             Container.BindFactory<EnemyWaveSpecs, EnemyWaveFacade, EnemyWaveFacade.Factory>()
                 .FromPoolableMemoryPool<EnemyWaveSpecs, EnemyWaveFacade, EnemyWaveFacadePool>(poolBinder => poolBinder
@@ -129,7 +141,8 @@ namespace Infrastructure
 
         private void BindWeaponSpawner()
         {
-            Container.Bind<WeaponSpawner>().AsSingle();
+            Container.Bind<WeaponSpawner>()
+                .AsSingle();
 
             Container.BindFactory<WeaponSpecs, WeaponFacade, WeaponFacade.Factory>()
                 .FromPoolableMemoryPool<WeaponSpecs, WeaponFacade, WeaponFacadePool>(poolBinder => poolBinder
@@ -140,7 +153,8 @@ namespace Infrastructure
 
         private void BindWeaponGameObjectSpawner()
         {
-            Container.Bind<WeaponGameObjectSpawner>().AsSingle();
+            Container.Bind<WeaponGameObjectSpawner>()
+                .AsSingle();
             
             Container.BindFactory<Vector3, WeaponFacade, WeaponGameObject, WeaponGameObject.Factory>()
                 .FromPoolableMemoryPool<Vector3, WeaponFacade, WeaponGameObject, WeaponGameObjectPool>(poolBinder => poolBinder
@@ -148,10 +162,11 @@ namespace Infrastructure
                 .FromComponentInNewPrefab(_weaponPrefab)
                 .UnderTransformGroup("WeaponPickups"));
         }
-        
+
         private void BindItemSpawner()
         {
-            Container.Bind<ItemSpawner>().AsSingle();
+            Container.Bind<ItemSpawner>()
+                .AsSingle();
 
             Container.BindFactory<Item, ItemFacade, ItemFacade.Factory>()
                 .FromPoolableMemoryPool<Item, ItemFacade, ItemFacadePool>(poolBinder => poolBinder
@@ -162,7 +177,8 @@ namespace Infrastructure
 
         private void BindItemGameObjectSpawner()
         {
-            Container.Bind<ItemGameObjectSpawner>().AsSingle();
+            Container.Bind<ItemGameObjectSpawner>()
+                .AsSingle();
             
             Container.BindFactory<Vector3, ItemFacade, ItemGameObject, ItemGameObject.Factory>()
                 .FromPoolableMemoryPool<Vector3, ItemFacade, ItemGameObject, ItemGameObjectPool>(poolBinder => poolBinder
@@ -171,15 +187,7 @@ namespace Infrastructure
                     .UnderTransformGroup("ItemPickups"));
         }
 
-        private void BindRoom()
-        {
-            Container.BindInstance(_roomConfigurator);
-            
-            Container.BindInstance(_polygonFloorBounds).WithId("floor");
-            Container.BindInstance(_polygonWallBounds).WithId("wall");
-            Container.BindInstance(_polygonFloorBorder).WithId("floorBorder");
-            Container.BindInstance(_polygonWallBorder).WithId("wallBorder");
-        }
+        private void BindRoom() => Container.BindInstance(_roomConfigurator);
 
         private void BindUI()
         {
@@ -194,7 +202,7 @@ namespace Infrastructure
         private class WaveFacadePool : MonoPoolableMemoryPool<WaveSpecs, IMemoryPool, WaveFacade>
         {
         }
-        
+
         private class EnemyWaveFacadePool : MonoPoolableMemoryPool<EnemyWaveSpecs, IMemoryPool, EnemyWaveFacade>
         {
         }

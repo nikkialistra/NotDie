@@ -198,25 +198,5 @@ namespace UI.Views
         }
 
         public void SetLives(int value) => _lives.text = value.ToString();
-
-        private static Texture2D TextureFromSprite(Sprite sprite)
-        {
-            var width = (int) sprite.rect.width;
-            var height = (int) sprite.rect.height;
-
-            var widthOffset = (int) sprite.textureRect.x;
-            var heightOffset = (int) sprite.textureRect.y;
-
-            var texture = new Texture2D(width, height);
-
-            for (var i = 0; i < width; i++)
-            for (var j = 0; j < height; j++)
-                texture.SetPixel(i, j, sprite.texture.GetPixel(widthOffset + i, heightOffset + j));
-
-            texture.filterMode = FilterMode.Point;
-            texture.Apply();
-
-            return texture;
-        }
     }
 }

@@ -20,8 +20,8 @@ namespace Things.Item
         public void OnSpawned(Vector3 position, ItemFacade itemFacade, IMemoryPool pool)
         {
             _pool = pool;
-
             transform.position = position;
+
             _itemFacade = itemFacade;
             _renderer.sprite = _itemFacade.Item.PickUp;
         }

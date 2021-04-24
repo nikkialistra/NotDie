@@ -1,8 +1,6 @@
 ﻿using System;
-using Entities.Player.Animation;
 using Things.Item;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Entities.Player.Items

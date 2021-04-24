@@ -94,5 +94,33 @@ MonoBehaviour:
     m_Localized: 'Language:'
     m_Metadata:
       m_Items: []
+  - m_Id: 2213840634011648
+    m_Localized: 'Master Volume:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2213904349683712
+    m_Localized: 'Effects Volume:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2213980329500672
+    m_Localized: 'Music Volume:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2223491236782080
+    m_Localized: 'Resolution:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2223548254150656
+    m_Localized: 'Display Mode:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2324085704253440
+    m_Localized: Full Screen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2324150065848320
+    m_Localized: Windowed
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

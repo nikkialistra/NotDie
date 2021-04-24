@@ -32,3 +32,5 @@ MonoBehaviour:
     Speed: 1
     TimeToDrop: 0.15
     DropSpeed: 0.2
+  _interactor:
+    DistanceForTaking: 1

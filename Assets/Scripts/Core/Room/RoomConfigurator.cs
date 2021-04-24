@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using UnityEngine;
-using Zenject;
 
 namespace Core.Room
 {
@@ -8,9 +7,13 @@ namespace Core.Room
     {
         public PolygonCollider2D PolygonFloorBounds => _polygonFloorBounds;
         public PolygonCollider2D PolygonWallBounds => _polygonWallBounds;
-        
         public EdgeCollider2D PolygonFloorBorder => _polygonFloorBorder;
-        public EdgeCollider2D PolygonWallBorder => _polygonWallBorder;
+        
+        [Header("Bounds")]
+        [SerializeField] private PolygonCollider2D _polygonFloorBounds;
+        [SerializeField] private PolygonCollider2D _polygonWallBounds;
+        [SerializeField] private EdgeCollider2D _polygonFloorBorder;
+        [SerializeField] private EdgeCollider2D _polygonWallBorder;
 
         [Header("Corners")]
         [SerializeField] private GameObject _cornerLeftUp;
@@ -31,23 +34,6 @@ namespace Core.Room
         [SerializeField] private float _height;
         [Range(0, 8)]
         [SerializeField] private float _perspective;
-        
-        private PolygonCollider2D _polygonFloorBounds;
-        private PolygonCollider2D _polygonWallBounds;
-        
-        private EdgeCollider2D _polygonFloorBorder;
-        private EdgeCollider2D _polygonWallBorder;
-
-        [Inject]
-        public void Construct([Inject(Id = "floor")] PolygonCollider2D polygonFloorBounds, [Inject(Id = "wall")] PolygonCollider2D polygonWallBounds,
-            [Inject(Id = "floorBorder")] EdgeCollider2D polygonFloorBorder, [Inject(Id = "wallBorder")] EdgeCollider2D polygonWallBorder)
-        {
-            _polygonFloorBounds = polygonFloorBounds;
-            _polygonWallBounds = polygonWallBounds;
-
-            _polygonFloorBorder = polygonFloorBorder;
-            _polygonWallBorder = polygonWallBorder;
-        }
 
         private void Start()
         {
@@ -88,22 +74,26 @@ namespace Core.Room
 
         private void MakeCollider()
         {
+            var leftUpPosition = _cornerLeftUp.transform.localPosition;
+            var rightUpPosition = _cornerRightUp.transform.localPosition;
+            var rightDownPosition = _cornerRightDown.transform.localPosition;
+            var leftDownPosition1 = _cornerLeftDown.transform.localPosition;
             Vector2[] points =
             {
-                new Vector2(_cornerLeftUp.transform.localPosition.x, _cornerLeftUp.transform.localPosition.y),
-                new Vector2(_cornerRightUp.transform.localPosition.x, _cornerRightUp.transform.localPosition.y),
-                new Vector2(_cornerRightDown.transform.localPosition.x, _cornerRightDown.transform.localPosition.y),
-                new Vector2(_cornerLeftDown.transform.localPosition.x, _cornerLeftDown.transform.localPosition.y),
-                new Vector2(_cornerLeftUp.transform.localPosition.x, _cornerLeftUp.transform.localPosition.y)
+                new Vector2(leftUpPosition.x, leftUpPosition.y),
+                new Vector2(rightUpPosition.x, rightUpPosition.y),
+                new Vector2(rightDownPosition.x, rightDownPosition.y),
+                new Vector2(leftDownPosition1.x, leftDownPosition1.y),
+                new Vector2(leftUpPosition.x, leftUpPosition.y)
             };
 
             var wallPoints = points.Select(x => x + new Vector2(0, 0.6f)).ToArray();
 
-            _polygonFloorBounds.points = points;
-            _polygonFloorBorder.points = points;
+            PolygonFloorBounds.points = points;
+            PolygonFloorBorder.points = points;
 
             _polygonWallBorder.points = wallPoints;
-            _polygonWallBounds.points = wallPoints;
+            PolygonWallBounds.points = wallPoints;
         }
     }
 }

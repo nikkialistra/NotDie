@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="MenuStyles.uss" />
+    <Style src="/Assets/Resources/UI/Styles/MenuStyles.uss" />
     <ui:VisualElement name="screen" class="screen top_aligned">
         <ui:VisualElement name="logo" class="logo" style="opacity: 0.14;" />
         <ui:VisualElement name="elements" class="top_shifted">

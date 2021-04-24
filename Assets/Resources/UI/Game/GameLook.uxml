@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="GameLookStyles.uss" />
+    <Style src="/Assets/Resources/UI/Styles/GameLookStyles.uss" />
     <ui:VisualElement name="screen" class="screen" style="justify-content: space-between;">
         <ui:VisualElement name="top" class="part_container">
             <ui:VisualElement name="top__main" class="main top__main">
@@ -39,7 +39,7 @@
                             <ui:Image name="health__right_space" class="health__fill_right_space" />
                         </ui:VisualElement>
                         <ui:Image name="activated_fill_indicator" class="health__fill top_left not_displayed" />
-                        <ui:Image name="borders" class="health top_left"/>
+                        <ui:Image name="borders" class="health top_left" />
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="right_slot" class="slot">

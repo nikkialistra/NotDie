@@ -16,10 +16,10 @@ namespace Entities.Player.Combat
         private PlayerAnimator _playerAnimator;
         private PlayerMover _playerMover;
         
-        private float _weaponCooldownFinishingTime = 0;
+        private float _weaponCooldownFinishingTime;
 
-        private int _comboShotNumber = 0;
-        private int _waveCounter = 0;
+        private int _comboShotNumber;
+        private int _waveCounter;
 
         [Inject]
         public void Construct(Weapons weapons, WaveSpawner waveSpawner)

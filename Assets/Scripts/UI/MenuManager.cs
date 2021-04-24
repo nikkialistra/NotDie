@@ -67,6 +67,10 @@ namespace UI
         {
         }
 
+        public void HideSelf()
+        {
+        }
+
         public void LocalizeRecursively(VisualElement element)
         {
             var elementHierarchy = element.hierarchy;

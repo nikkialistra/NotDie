@@ -11,12 +11,14 @@ namespace UI.MenuViews
         private Button _hud;
         private Button _language;
         private Button _credits;
-        
+
+        private AudioView _audioView;
+        private GraphicsView _graphicsView;
         private LanguageView _languageView;
 
         public SettingsView(VisualElement root, IMenuView parent, MenuManager menuManager) : base(root, parent, menuManager)
         {
-            var template = Resources.Load<VisualTreeAsset>("UI/Settings");
+            var template = Resources.Load<VisualTreeAsset>("UI/Menus/Settings/Settings");
             _tree = template.CloneTree();
         }
 
@@ -28,11 +30,23 @@ namespace UI.MenuViews
             _hud = _tree.Q<Button>("hud");
             _language = _tree.Q<Button>("language");
             _credits = _tree.Q<Button>("credits");
-
-            _language.clicked += Language;
         }
 
-        protected override void Enable() => ResetFocus();
+        protected override void Enable()
+        {
+            _audio.clicked += OnAudioClicked;
+            _graphics.clicked += OnGraphicsClicked;
+            _language.clicked += OnLanguageClicked;
+            
+            ResetFocus();
+        }
+
+        protected override void Disable()
+        {
+            _audio.clicked -= OnAudioClicked;
+            _graphics.clicked -= OnGraphicsClicked;
+            _language.clicked -= OnLanguageClicked;
+        }
 
         private void ResetFocus()
         {
@@ -45,7 +59,23 @@ namespace UI.MenuViews
             _audio.Focus();
         }
 
-        private void Language()
+        private void OnGraphicsClicked()
+        {
+            Focused = _graphics;
+            HideSelf();
+            _graphicsView ??= new GraphicsView(_root, this, _menuManager);
+            _graphicsView.ShowSelf();
+        }
+
+        private void OnAudioClicked()
+        {
+            Focused = _audio;
+            HideSelf();
+            _audioView ??= new AudioView(_root, this, _menuManager);
+            _audioView.ShowSelf();
+        }
+
+        private void OnLanguageClicked()
         {
             Focused = _language;
             HideSelf();

@@ -3,5 +3,6 @@
     public interface IMenuView
     {
         void ShowSelf();
+        void HideSelf();
     }
 }

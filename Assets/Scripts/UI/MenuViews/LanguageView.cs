@@ -22,7 +22,7 @@ namespace UI.MenuViews
 
         public LanguageView(VisualElement root, IMenuView parent, MenuManager menuManager) : base(root, parent, menuManager)
         {
-            var template = Resources.Load<VisualTreeAsset>("UI/Language");
+            var template = Resources.Load<VisualTreeAsset>("UI/Menus/Settings/Language");
             _tree = template.CloneTree();
         }
 
@@ -37,19 +37,20 @@ namespace UI.MenuViews
             _leftAction = _input.actions.FindAction("Left");
             _rightAction = _input.actions.FindAction("Right");
             _selectAction = _input.actions.FindAction("Select");
+        }
 
+        protected override void Enable()
+        {
             _leftAction.started += ChangeLanguageLeft;
             _rightAction.started += ChangeLanguageRight;
             _selectAction.started += SetLanguage;
         }
 
-        protected override void ShowParent()
+        protected override void Disable()
         {
             _leftAction.started -= ChangeLanguageLeft;
             _rightAction.started -= ChangeLanguageRight;
             _selectAction.started -= SetLanguage;
-            
-            base.ShowParent();
         }
 
         private void SetLanguage(InputAction.CallbackContext context) => LocalizationSettings.SelectedLocale = _languages[_index];
@@ -89,10 +90,6 @@ namespace UI.MenuViews
             };
             
             _menuManager.Localize(_languageChoice);
-        }
-
-        protected override void Enable()
-        {
         }
     }
 }
