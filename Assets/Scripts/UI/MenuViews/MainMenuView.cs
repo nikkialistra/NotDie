@@ -8,7 +8,6 @@ namespace UI.MenuViews
 {
     public class MainMenuView : MenuView
     {
-        private VisualElement _screen;
         private Button _play;
         private Button _settings;
         private Button _vault;
@@ -19,13 +18,12 @@ namespace UI.MenuViews
 
         public MainMenuView(VisualElement root, IMenuView parent, MenuManager menuManager) : base(root, parent, menuManager)
         {
-            var template = Resources.Load<VisualTreeAsset>("UI/MainMenu");
+            var template = Resources.Load<VisualTreeAsset>("UI/Menus/MainMenu");
             _tree = template.CloneTree();
         }
 
         protected override void SetUp()
         {
-            _screen = _tree.Q<VisualElement>("screen");
             _play = _tree.Q<Button>("play");
             _settings = _tree.Q<Button>("settings");
             _vault = _tree.Q<Button>("vault");
@@ -40,6 +38,17 @@ namespace UI.MenuViews
         protected override void Enable()
         {
             _menuManager.Return -= ShowParent;
+            
+            ResetFocus();
+        }
+
+        private void ResetFocus()
+        {
+            _settings.Focus();
+            _vault.Focus();
+            _profiles.Focus();
+            _quit.Focus();
+            
             _play.Focus();
         }
 

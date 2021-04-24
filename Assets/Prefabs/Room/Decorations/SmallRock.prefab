@@ -67,5 +67,7 @@ PrefabInstance:
       propertyPath: m_labelHash
       value: 1.4921515e-24
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4482988952645949456, guid: ba8ff93d25c780c4a954440ace503fa2, type: 3}
+    - {fileID: 5046829895776815318, guid: ba8ff93d25c780c4a954440ace503fa2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ba8ff93d25c780c4a954440ace503fa2, type: 3}

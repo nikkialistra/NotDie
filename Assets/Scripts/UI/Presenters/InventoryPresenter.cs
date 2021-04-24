@@ -9,8 +9,6 @@ namespace UI.Presenters
         private readonly Inventory _inventory;
         private readonly InventoryView _inventoryView;
 
-        private bool _leftIsActive;
-
         public InventoryPresenter(Inventory inventory, InventoryView inventoryView)
         {
             _inventory = inventory;

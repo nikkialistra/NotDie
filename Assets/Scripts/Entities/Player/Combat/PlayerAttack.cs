@@ -66,20 +66,32 @@ namespace Entities.Player.Combat
             _playerAnimator = GetComponent<PlayerAnimator>();
 
             _input = GetComponent<PlayerInput>();
-            _attackThrowAction = _input.actions.FindAction("AttackThrow");
+            _attackThrowAction = _input.actions.FindAction("InteractAttackThrow");
             _showAttackDirectionAction = _input.actions.FindAction("ShowAttackDirection");
-            _throwingAction = _input.actions.FindAction("TakeDropThrowingWeapon");
+            _throwingAction = _input.actions.FindAction("TakeDropThrowing");
+        }
+        
+        private void OnEnable()
+        {
+            _showAttackDirectionAction.started += OnShowAttackDirection;
+            _throwingAction.performed += OnThrowing;
+            _throwingAction.canceled += OnCancelThrowing;
+        }
+
+        private void OnDisable()
+        {
+            _showAttackDirectionAction.started -= OnShowAttackDirection;
+            _throwingAction.performed -= OnThrowing;
+            _throwingAction.canceled -= OnCancelThrowing;
         }
 
         private void Update()
         {
-            if (_attackThrowAction.ReadValue<float>() > 0)
-                ThrowOrAttack();
-            else
+            if (_attackThrowAction.ReadValue<float>() == 0)
                 TryUpdateThrowing();
         }
 
-        private void ThrowOrAttack()
+        public void ThrowOrAttack()
         {
             if (_throwing)
                 Throw();
@@ -100,20 +112,6 @@ namespace Entities.Player.Combat
             
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             _throwingArrow.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
-
-        private void OnEnable()
-        {
-            _showAttackDirectionAction.started += OnShowAttackDirection;
-            _throwingAction.performed += OnThrowing;
-            _throwingAction.canceled += OnCancelThrowing;
-        }
-
-        private void OnDisable()
-        {
-            _showAttackDirectionAction.started -= OnShowAttackDirection;
-            _throwingAction.performed -= OnThrowing;
-            _throwingAction.canceled -= OnCancelThrowing;
         }
 
         private void Attack() => _weaponAttack.Attack(_playerMover.PositionCenter, _attackDirection.transform);

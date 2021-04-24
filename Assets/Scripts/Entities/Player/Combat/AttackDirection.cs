@@ -137,7 +137,7 @@ namespace Entities.Player.Combat
 
         private void UpdatePosition()
         {
-            if (_attackDirection == Vector2.zero)
+            if (_attackDirection == Vector2.zero || Time.timeScale == 0)
                 return;
             
             transform.position = _playerMover.PositionCenter + (Vector3) _attackDirection.normalized * _weapons.ActiveWeapon.Weapon.DirectionMultiplier;

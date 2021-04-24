@@ -1,0 +1,28 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="/Assets/Resources/UI/Styles/MenuStyles.uss" />
+    <ui:VisualElement name="screen" class="screen top_aligned">
+        <ui:VisualElement name="logo" class="logo" style="opacity: 0.14;" />
+        <ui:VisualElement name="elements" class="top_shifted">
+            <ui:VisualElement name="resolution" class="flex--row settings_row">
+                <ui:VisualElement name="first_column0" class="first_column center_aligned">
+                    <ui:Label text="Resolution:" display-tooltip-when-elided="true" name="resolution__label" view-data-key="_resolution" class="text" />
+                </ui:VisualElement>
+                <ui:VisualElement name="second_column0" class="second_column flex--row center_aligned">
+                    <ui:Button display-tooltip-when-elided="true" name="resolution__left" class="button--reset left--arrow menu--arrow" />
+                    <ui:Label display-tooltip-when-elided="true" name="resolution__choice" tabindex="1" class="text choice" />
+                    <ui:Button display-tooltip-when-elided="true" name="resolution__right" class="button--reset right--arrow menu--arrow" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="display_mode" class="flex--row settings_row">
+                <ui:VisualElement name="first_column0" class="first_column center_aligned">
+                    <ui:Label text="Display Mode:" display-tooltip-when-elided="true" name="display_mode__label" view-data-key="_display_mode" class="text" />
+                </ui:VisualElement>
+                <ui:VisualElement name="second_column0" class="second_column flex--row center_aligned">
+                    <ui:Button display-tooltip-when-elided="true" name="display_mode__left" class="button--reset left--arrow menu--arrow" />
+                    <ui:Label display-tooltip-when-elided="true" name="display_mode__choice" tabindex="2" class="text choice" />
+                    <ui:Button display-tooltip-when-elided="true" name="display_mode__right" class="button--reset right--arrow menu--arrow" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

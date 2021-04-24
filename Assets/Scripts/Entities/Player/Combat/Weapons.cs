@@ -12,11 +12,11 @@ namespace Entities.Player.Combat
         public event Action LeftWeaponIsActive;
         public event Action RightWeaponIsActive;
 
-        private WeaponFacade _hand;
-        private WeaponFacade _crossedSlot;
+        private readonly WeaponFacade _hand;
+        private readonly WeaponFacade _crossedSlot;
 
         public WeaponFacade ActiveWeapon => _leftIsActive ? _leftWeapon : _rightWeapon;
-        public WeaponFacade NotActiveWeapon => _leftIsActive ? _rightWeapon : _leftWeapon;
+        private WeaponFacade NotActiveWeapon => _leftIsActive ? _rightWeapon : _leftWeapon;
         
         public WeaponFacade LeftWeapon => _leftWeapon;
         public WeaponFacade RightWeapon => _rightWeapon;

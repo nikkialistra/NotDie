@@ -17,6 +17,7 @@ namespace Infrastructure
         [SerializeField] private InventoryHandler.Settings _inventoryHandler;
         [SerializeField] private AttackDirection.Settings _attackDirection;
         [SerializeField] private ThrowingWeapon.Settings _thrownWeapon;
+        [SerializeField] private Interactor.Settings _interactor;
 
         public override void InstallBindings()
         {
@@ -27,6 +28,7 @@ namespace Infrastructure
             Container.BindInstance(_inventoryHandler);
             Container.BindInstance(_attackDirection);
             Container.BindInstance(_thrownWeapon);
+            Container.BindInstance(_interactor);
         }
     }
 }

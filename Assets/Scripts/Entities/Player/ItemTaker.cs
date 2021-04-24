@@ -25,7 +25,7 @@ namespace Entities.Player
             _playerAnimator = GetComponent<PlayerAnimator>();
 
             _input = GetComponent<PlayerInput>();
-            _takeDropAction = _input.actions.FindAction("TakeDropThrowingWeapon");
+            _takeDropAction = _input.actions.FindAction("TakeDropThrowing");
         }
         
         private void OnEnable() => _takeDropAction.canceled += OnTakeDrop;

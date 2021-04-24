@@ -91,6 +91,34 @@ MonoBehaviour:
     m_Key: language_choice
     m_Metadata:
       m_Items: []
+  - m_Id: 2213840634011648
+    m_Key: master_volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2213904349683712
+    m_Key: effects_volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2213980329500672
+    m_Key: music_volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2223491236782080
+    m_Key: resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2223548254150656
+    m_Key: display_mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2324085704253440
+    m_Key: fullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2324150065848320
+    m_Key: windowed
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
