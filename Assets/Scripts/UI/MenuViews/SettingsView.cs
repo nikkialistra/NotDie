@@ -15,6 +15,8 @@ namespace UI.MenuViews
         private AudioView _audioView;
         private GraphicsView _graphicsView;
         private LanguageView _languageView;
+        private CreditsView _creditsView;
+        private HudView _hudView;
 
         public SettingsView(VisualElement root, IMenuView parent, MenuManager menuManager) : base(root, parent, menuManager)
         {
@@ -36,7 +38,9 @@ namespace UI.MenuViews
         {
             _audio.clicked += OnAudioClicked;
             _graphics.clicked += OnGraphicsClicked;
+            _hud.clicked += OnHudClicked;
             _language.clicked += OnLanguageClicked;
+            _credits.clicked += OnCreditsClicked;
             
             ResetFocus();
         }
@@ -45,7 +49,9 @@ namespace UI.MenuViews
         {
             _audio.clicked -= OnAudioClicked;
             _graphics.clicked -= OnGraphicsClicked;
+            _hud.clicked -= OnHudClicked;
             _language.clicked -= OnLanguageClicked;
+            _credits.clicked -= OnCreditsClicked;
         }
 
         private void ResetFocus()
@@ -67,6 +73,14 @@ namespace UI.MenuViews
             _graphicsView.ShowSelf();
         }
 
+        private void OnHudClicked()
+        {
+            Focused = _hud;
+            HideSelf();
+            _hudView ??= new HudView(_root, this, _menuManager);
+            _hudView.ShowSelf();
+        }
+
         private void OnAudioClicked()
         {
             Focused = _audio;
@@ -81,6 +95,14 @@ namespace UI.MenuViews
             HideSelf();
             _languageView ??= new LanguageView(_root, this, _menuManager);
             _languageView.ShowSelf();
+        }
+        
+        private void OnCreditsClicked()
+        {
+            Focused = _credits;
+            HideSelf();
+            _creditsView ??= new CreditsView(_root, this, _menuManager);
+            _creditsView.ShowSelf();
         }
     }
 }

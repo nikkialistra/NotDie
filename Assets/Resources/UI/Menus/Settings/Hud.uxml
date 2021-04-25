@@ -1,0 +1,38 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="/Assets/Resources/UI/Styles/MenuStyles.uss" />
+    <ui:VisualElement name="screen" class="screen top_aligned">
+        <ui:VisualElement name="logo" class="logo" style="opacity: 0.14;" />
+        <ui:VisualElement name="elements" class="top_shifted">
+            <ui:VisualElement name="font_style" class="flex--row settings_row">
+                <ui:VisualElement name="first_column0" class="first_column center_aligned">
+                    <ui:Label text="Font Style:" display-tooltip-when-elided="true" name="font_style__label" view-data-key="_font_style" class="text" />
+                </ui:VisualElement>
+                <ui:VisualElement name="second_column0" class="second_column flex--row center_aligned">
+                    <ui:Button display-tooltip-when-elided="true" name="font_style__left" class="button--reset left--arrow menu--arrow" />
+                    <ui:Label display-tooltip-when-elided="true" name="font_style__choice" tabindex="1" class="text choice" />
+                    <ui:Button display-tooltip-when-elided="true" name="font_style__right" class="button--reset right--arrow menu--arrow" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="font_size" class="flex--row settings_row">
+                <ui:VisualElement name="first_column1" class="first_column center_aligned">
+                    <ui:Label text="Font Size:" display-tooltip-when-elided="true" name="font_size__label" view-data-key="_font_size" class="text" />
+                </ui:VisualElement>
+                <ui:VisualElement name="second_column1" class="second_column flex--row center_aligned">
+                    <ui:Button display-tooltip-when-elided="true" name="font_size__left" class="button--reset left--arrow menu--arrow" />
+                    <ui:Label display-tooltip-when-elided="true" name="font_size__choice" tabindex="2" class="text choice" />
+                    <ui:Button display-tooltip-when-elided="true" name="font_size__right" class="button--reset right--arrow menu--arrow" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="show_timer" class="flex--row settings_row">
+                <ui:VisualElement name="first_column2" class="first_column center_aligned">
+                    <ui:Label text="Show Timer:" display-tooltip-when-elided="true" name="show_timer__label" view-data-key="_show_timer" class="text" />
+                </ui:VisualElement>
+                <ui:VisualElement name="second_column2" class="second_column flex--row center_aligned">
+                    <ui:Button display-tooltip-when-elided="true" name="show_timer__left" class="button--reset left--arrow menu--arrow" />
+                    <ui:Label display-tooltip-when-elided="true" name="show_timer__choice" tabindex="2" class="text choice" />
+                    <ui:Button display-tooltip-when-elided="true" name="show_timer__right" class="button--reset right--arrow menu--arrow" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

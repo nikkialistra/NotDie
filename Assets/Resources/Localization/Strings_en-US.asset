@@ -122,5 +122,57 @@ MonoBehaviour:
     m_Localized: Windowed
     m_Metadata:
       m_Items: []
+  - m_Id: 2494775728300032
+    m_Localized: Ii
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2494824109596672
+    m_Localized: Nikki
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2495802275815424
+    m_Localized: Rutik
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2505906006024192
+    m_Localized: 'Font Style:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2505970719940608
+    m_Localized: 'Font Size:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2506037103190016
+    m_Localized: 'Show Timer:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2506094821007360
+    m_Localized: Pixelated
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2506260403740672
+    m_Localized: Regular
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2506297145843712
+    m_Localized: Small
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2506340674330624
+    m_Localized: Medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2506386748760064
+    m_Localized: Big
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2506415039340544
+    m_Localized: True
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2506453027151872
+    m_Localized: False
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

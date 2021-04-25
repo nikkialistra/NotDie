@@ -54,6 +54,10 @@
     -unity-text-align: middle-center;
 }
 
+.text.big {
+    font-size: 16px;
+}
+
 .menu--arrow {
     width: 22px;
     height: 13px;
@@ -140,4 +144,19 @@ Slider:focus #unity-dragger-border {
 
 Label.unfocused {
     color: gray;
+}
+
+.credits_image {
+    width: 100px;
+    height: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.align_center {
+    align-items: center;
+}
+
+.inscription {
+    margin-top: 10px;
 }
