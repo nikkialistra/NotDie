@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="/Assets/Resources/UI/Styles/MenuStyles.uss" />
+    <ui:VisualElement name="screen" class="screen top_aligned">
+        <ui:VisualElement name="logo" class="logo" style="opacity: 0.14;" />
+        <ui:VisualElement name="elements" class="top_shifted">
+            <ui:VisualElement name="credits" class="flex--row align_center">
+                <ui:Button display-tooltip-when-elided="true" name="credits__left" class="button--reset left--arrow menu--arrow" />
+                <ui:VisualElement name="author">
+                    <ui:Image name="author__image" class="credits_image" />
+                    <ui:Label text="Label" display-tooltip-when-elided="true" name="author__label" class="inscription text big" style="align-items: center; justify-content: center;" />
+                </ui:VisualElement>
+                <ui:Button display-tooltip-when-elided="true" name="credits__right" class="button--reset right--arrow menu--arrow" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

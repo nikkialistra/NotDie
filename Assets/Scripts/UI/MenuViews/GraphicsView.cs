@@ -11,8 +11,7 @@ namespace UI.MenuViews
         private Label _displayModeChoice;
 
         private readonly Resolution[] _resolutions = Screen.resolutions;
-        private readonly string[] _displayModes = {"Full Screen", "Windowed"};
-        private readonly string[] _displayModeKeys = {"_fullscreen", "_windowed"};
+        private readonly string[] _displayModes = {"_fullscreen", "_windowed"};
 
         private int _resolutionIndex;
         private int _displayModeIndex;
@@ -35,7 +34,6 @@ namespace UI.MenuViews
         protected override void SetUp()
         {
             _resolutionChoice = _tree.Q<Label>("resolution__choice");
-            
             _displayModeChoice = _tree.Q<Label>("display_mode__choice");
             
             SetGraphicsValues();
@@ -167,7 +165,7 @@ namespace UI.MenuViews
         private void SetDisplayModeText()
         {
             _displayModeChoice.text = _displayModes[_displayModeIndex];
-            _displayModeChoice.viewDataKey = _displayModeKeys[_displayModeIndex];
+            _displayModeChoice.viewDataKey = _displayModes[_displayModeIndex];
             
             _menuManager.Localize(_displayModeChoice);
         }
