@@ -36,6 +36,7 @@ namespace UI.MenuViews
             _resolutionChoice = _tree.Q<Label>("resolution__choice");
             _displayModeChoice = _tree.Q<Label>("display_mode__choice");
             
+            InitializeGraphicsValues();
             SetGraphicsValues();
 
             _input = _menuManager.Input;
@@ -66,6 +67,8 @@ namespace UI.MenuViews
 
         protected override void Disable()
         {
+            _menuManager.Settings.Save();
+            
             _upAction.started -= OnUpDown;
             _downAction.started -= OnUpDown;
             _leftAction.started -= OnLeftChange;
@@ -89,21 +92,36 @@ namespace UI.MenuViews
             }
         }
 
-        private void SetGraphicsValues()
+        private void InitializeGraphicsValues()
         {
-            SetResolutionText();
-            SetDisplayModeText();
+            if (!_menuManager.Settings.Loaded)
+                return;
+            
+            InitializeResolutionIndex();
+            InitializeDisplayModeIndex();
         }
 
-        private void OnSelect(InputAction.CallbackContext context) => Screen.SetResolution(
-            _resolutions[_resolutionIndex].width, _resolutions[_resolutionIndex].height, GetDisplayMode());
+        private void SetGraphicsValues()
+        {
+            SetDisplayModeText();
+            SetResolutionText();
+        }
+
+        private void OnSelect(InputAction.CallbackContext context)
+        {
+            _menuManager.Settings.Resolution = _resolutions[_resolutionIndex].ToString();
+            _menuManager.Settings.DisplayMode = _displayModes[_displayModeIndex];
+            
+            Screen.SetResolution(
+                _resolutions[_resolutionIndex].width, _resolutions[_resolutionIndex].height, GetDisplayMode());
+        }
 
         private FullScreenMode GetDisplayMode()
         {
             var displayMode = _displayModes[_displayModeIndex] switch
             {
-                "Full Screen" => FullScreenMode.FullScreenWindow,
-                "Windowed" => FullScreenMode.Windowed,
+                "_fullscreen" => FullScreenMode.FullScreenWindow,
+                "_windowed" => FullScreenMode.Windowed,
                 _ => throw new ArgumentException()
             };
 
@@ -160,11 +178,28 @@ namespace UI.MenuViews
             SetDisplayModeText();
         }
 
+        private void InitializeResolutionIndex()
+        {
+            for (var i = 0; i < _resolutions.Length; i++)
+            {
+                if (_resolutions[i].ToString() == _menuManager.Settings.Resolution)
+                    _resolutionIndex = i;
+            }
+        }
+
         private void SetResolutionText() => _resolutionChoice.text = _resolutions[_resolutionIndex].ToString();
+
+        private void InitializeDisplayModeIndex()
+        {
+            for (var i = 0; i < _displayModes.Length; i++)
+            {
+                if (_displayModes[i] == _menuManager.Settings.DisplayMode)
+                    _displayModeIndex = i;
+            }
+        }
 
         private void SetDisplayModeText()
         {
-            _displayModeChoice.text = _displayModes[_displayModeIndex];
             _displayModeChoice.viewDataKey = _displayModes[_displayModeIndex];
             
             _menuManager.Localize(_displayModeChoice);

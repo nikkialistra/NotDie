@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.Saving;
 using UI.MenuViews;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +10,7 @@ using UnityEngine.UIElements;
 
 namespace UI
 {
+    [RequireComponent(typeof(Settings))]
     [RequireComponent(typeof(UIDocument))]
     [RequireComponent(typeof(PlayerInput))]
     public class MenuManager : MonoBehaviour, IMenuView
@@ -18,9 +20,13 @@ namespace UI
         [SerializeField] private bool _loadMainMenu;
         [SerializeField] private bool _loadGameMenu;
 
-        private StringTable _localTable;
+        public Settings Settings => _settings;
+
+        private Settings _settings;
 
         public PlayerInput Input => _input;
+        
+        private StringTable _localTable;
 
         private MainMenuView _mainMenu;
         private GameMenuView _gameMenu;
@@ -30,7 +36,7 @@ namespace UI
         private VisualElement _rootVisualElement;
 
         private bool _loaded;
-        
+
         private PlayerInput _input;
         private InputAction _returnAction;
 
@@ -49,6 +55,8 @@ namespace UI
 
             _input = GetComponent<PlayerInput>();
             _returnAction = _input.actions.FindAction("Return");
+
+            _settings = GetComponent<Settings>();
         }
 
         private void OnEnable()

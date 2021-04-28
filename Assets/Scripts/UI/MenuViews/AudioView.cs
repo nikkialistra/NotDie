@@ -31,23 +31,31 @@ namespace UI.MenuViews
             _musicVolumeSlider = _tree.Q<Slider>("music_volume__slider");
             _musicVolumeValue = _tree.Q<Label>("music_volume__value");
             
-            _masterVolumeSlider.RegisterCallback<ChangeEvent<float>, Label>(OnVolumeChange, _masterVolumeValue);
-            _effectsVolumeSlider.RegisterCallback<ChangeEvent<float>, Label>(OnVolumeChange, _effectsVolumeValue);
-            _musicVolumeSlider.RegisterCallback<ChangeEvent<float>, Label>(OnVolumeChange, _musicVolumeValue);
+            InitializeSliders();
+            SetSliderValues();
 
-            SetAudioValues();
+            _masterVolumeSlider.RegisterCallback<ChangeEvent<float>>(OnMasterVolumeChange);
+            _effectsVolumeSlider.RegisterCallback<ChangeEvent<float>>(OnEffectsVolumeChange);
+            _musicVolumeSlider.RegisterCallback<ChangeEvent<float>>(OnMusicVolumeChange);
         }
 
-        private void OnVolumeChange(ChangeEvent<float> slider, Label label) => ShowSliderValueNormalized(label, slider.newValue);
 
-        private void SetAudioValues()
+        private void InitializeSliders()
+        {
+            if (!_menuManager.Settings.Loaded)
+                return;
+            
+            _masterVolumeSlider.value = _menuManager.Settings.MasterVolume;
+            _effectsVolumeSlider.value = _menuManager.Settings.EffectsVolume;
+            _musicVolumeSlider.value = _menuManager.Settings.MusicVolume;
+        }
+
+        private void SetSliderValues()
         {
             ShowSliderValueNormalized(_masterVolumeValue, _masterVolumeSlider.value);
             ShowSliderValueNormalized(_effectsVolumeValue, _effectsVolumeSlider.value);
             ShowSliderValueNormalized(_musicVolumeValue, _musicVolumeSlider.value);
         }
-
-        private void ShowSliderValueNormalized(Label label, float value) => label.text = Mathf.RoundToInt(value * 20).ToString();
 
         protected override void Enable()
         {
@@ -56,5 +64,22 @@ namespace UI.MenuViews
             
             _masterVolumeSlider.Focus();
         }
+
+        protected override void Disable()
+        {
+            _menuManager.Settings.MasterVolume = _masterVolumeSlider.value;
+            _menuManager.Settings.EffectsVolume = _effectsVolumeSlider.value;
+            _menuManager.Settings.MusicVolume = _musicVolumeSlider.value;
+            
+            _menuManager.Settings.Save();
+        }
+
+        private void OnMasterVolumeChange(ChangeEvent<float> slider) => ShowSliderValueNormalized(_masterVolumeValue, slider.newValue);
+
+        private void OnEffectsVolumeChange(ChangeEvent<float> slider) => ShowSliderValueNormalized(_effectsVolumeValue, slider.newValue);
+
+        private void OnMusicVolumeChange(ChangeEvent<float> slider) => ShowSliderValueNormalized(_musicVolumeValue, slider.newValue);
+
+        private static void ShowSliderValueNormalized(Label label, float value) => label.text = Mathf.RoundToInt(value * 20).ToString();
     }
 }

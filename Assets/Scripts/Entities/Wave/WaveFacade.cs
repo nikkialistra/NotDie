@@ -29,7 +29,7 @@ namespace Entities.Wave
 
         private void Update()
         {
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99)
             {
                 Destroy(_animator.gameObject);
                 Dispose();

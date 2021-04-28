@@ -31,6 +31,8 @@ namespace UI.MenuViews
             _languages = LocalizationSettings.AvailableLocales.Locales;
 
             _languageChoice = _tree.Q<Label>("language__choice");
+
+            InitializeLanguageIndex();
             SetLanguageText();
             
             _input = _menuManager.Input;
@@ -48,12 +50,31 @@ namespace UI.MenuViews
 
         protected override void Disable()
         {
+            _menuManager.Settings.Save();
+            
             _leftAction.started -= ChangeLanguageLeft;
             _rightAction.started -= ChangeLanguageRight;
             _selectAction.started -= SetLanguage;
         }
 
-        private void SetLanguage(InputAction.CallbackContext context) => LocalizationSettings.SelectedLocale = _languages[_index];
+        private void InitializeLanguageIndex()
+        {
+            if (!_menuManager.Settings.Loaded)
+                return;
+            
+            for (var i = 0; i < _languages.Count; i++)
+            {
+                if (_languages[i].ToString() == _menuManager.Settings.Language)
+                    _index = i;
+            }
+        }
+
+        private void SetLanguage(InputAction.CallbackContext context)
+        {
+            _menuManager.Settings.Language = _languages[_index].ToString();
+            
+            LocalizationSettings.SelectedLocale = _languages[_index];
+        }
 
         private void ChangeLanguageLeft(InputAction.CallbackContext context)
         {
@@ -76,12 +97,6 @@ namespace UI.MenuViews
         {
             var locale = _languages[_index].Formatter.ToString();
             
-            _languageChoice.text = locale switch
-            {
-                "en-US" => "English",
-                "ru-RU" => "Russian",
-                _ => "Unknown"
-            };
             _languageChoice.viewDataKey = locale switch
             {
                 "en-US" => "_english",
