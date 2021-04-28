@@ -1,7 +1,9 @@
 ﻿using System;
+using Core.Saving;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using FontStyle = Core.Saving.FontStyle;
 
 namespace UI.MenuViews
 {
@@ -10,15 +12,11 @@ namespace UI.MenuViews
         private Label _fontStyleChoice;
         private Label _fontSizeChoice;
         private Label _showTimerChoice;
-        
-        private readonly string[] _fontStyles = {"_pixelated", "_regular"};
-        private readonly string[] _fontSizes = {"_small", "_medium", "_big"};
-        private readonly string[] _showTimerChoices = {"_true", "_false"};
 
-        private int _fontStyleIndex;
-        private int _fontSizeIndex;
-        private int _showTimerIndex;
-        
+        private FontStyle _fontStyle;
+        private FontSize _fontSize;
+        private ShowTimer _showTimer;
+
         private enum ActiveParameter
         {
             FontStyle,
@@ -42,6 +40,7 @@ namespace UI.MenuViews
             _fontSizeChoice = _tree.Q<Label>("font_size__choice");
             _showTimerChoice = _tree.Q<Label>("show_timer__choice");
             
+            InitializeHudValues();
             SetHudValues();
 
             _input = _menuManager.Input;
@@ -74,6 +73,8 @@ namespace UI.MenuViews
 
         protected override void Disable()
         {
+            _menuManager.Settings.Save();
+            
             _upAction.started -= OnUp;
             _downAction.started -= OnDown;
             _leftAction.started -= OnLeftChange;
@@ -120,6 +121,16 @@ namespace UI.MenuViews
             }
         }
 
+        private void InitializeHudValues()
+        {
+            if (!_menuManager.Settings.Loaded)
+                return;
+            
+            _fontStyle = _menuManager.Settings.FontStyle;
+            _fontSize = _menuManager.Settings.FontSize;
+            _showTimer = _menuManager.Settings.ShowTimer;
+        }
+
         private void SetHudValues()
         {
             SetFontStyleText();
@@ -137,73 +148,113 @@ namespace UI.MenuViews
                 SelectShowTimer();
         }
 
-        private void SelectFontStyle()
-        {
-            
-        }
+        private void SelectFontStyle() => _menuManager.Settings.FontStyle = _fontStyle;
 
-        private void SelectFontSize()
-        {
-            
-        }
+        private void SelectFontSize() => _menuManager.Settings.FontSize = _fontSize;
 
-        private void SelectShowTimer()
-        {
-            
-        }
+        private void SelectShowTimer() => _menuManager.Settings.ShowTimer = _showTimer;
 
         private void OnLeftChange(InputAction.CallbackContext context)
         {
             if (_activeParameter == ActiveParameter.FontStyle)
-                ChangeElementLeft(_fontStyles, ref _fontStyleIndex, SetFontStyleText);
+                ChangeFontStyle();
             if (_activeParameter == ActiveParameter.FontSize)
-                ChangeElementLeft(_fontSizes, ref _fontSizeIndex, SetFontSizeText);
+                ChangeFontSizeLeft();
             if (_activeParameter == ActiveParameter.ShowTimer)
-                ChangeElementLeft(_showTimerChoices, ref _showTimerIndex, SetShowTimerText);
+                ChangeShowTimer();
         }
-        
+
         private void OnRightChange(InputAction.CallbackContext context)
         {
             if (_activeParameter == ActiveParameter.FontStyle)
-                ChangeElementRight(_fontStyles, ref _fontStyleIndex, SetFontStyleText);
+                ChangeFontStyle();
             if (_activeParameter == ActiveParameter.FontSize)
-                ChangeElementRight(_fontSizes, ref _fontSizeIndex, SetFontSizeText);
+                ChangeFontSizeRight();
             if (_activeParameter == ActiveParameter.ShowTimer)
-                ChangeElementRight(_showTimerChoices, ref _showTimerIndex, SetShowTimerText);
+                ChangeShowTimer();
         }
 
-        private void ChangeElementLeft(string[] elements, ref int elementIndex, Action setText)
+        private void ChangeFontStyle()
         {
-            elementIndex = (elementIndex - 1) % elements.Length;
-
-            if (elementIndex == -1)
-                elementIndex = elements.Length - 1;
-
-            setText();
+            _fontStyle = _fontStyle switch
+            {
+                FontStyle.Pixelated => FontStyle.Regular,
+                FontStyle.Regular => FontStyle.Pixelated,
+                _ => throw new ArgumentOutOfRangeException(nameof(_fontStyle))
+            };
+            
+            SetFontStyleText();
         }
 
-        private void ChangeElementRight(string[] elements, ref int elementIndex, Action setText)
+        private void ChangeFontSizeLeft()
         {
-            elementIndex = (elementIndex + 1) % elements.Length;
+            _fontSize = _fontSize switch
+            {
+                FontSize.Small => FontSize.Big,
+                FontSize.Medium => FontSize.Small,
+                FontSize.Big => FontSize.Medium,
+                _ => throw new ArgumentOutOfRangeException(nameof(_fontSize))
+            };
+            
+            SetFontSizeText();
+        }
 
-            setText();
+        private void ChangeFontSizeRight()
+        {
+            _fontSize = _fontSize switch
+            {
+                FontSize.Small => FontSize.Medium,
+                FontSize.Medium => FontSize.Big,
+                FontSize.Big => FontSize.Small,
+                _ => throw new ArgumentOutOfRangeException(nameof(_fontSize))
+            };
+            
+            SetFontSizeText();
+        }
+
+        private void ChangeShowTimer()
+        {
+            _showTimer = _showTimer switch
+            {
+                ShowTimer.False => ShowTimer.True,
+                ShowTimer.True => ShowTimer.False,
+                _ => throw new ArgumentOutOfRangeException(nameof(_showTimer))
+            };
+            
+            SetShowTimerText();
         }
 
         private void SetFontStyleText()
         {
-            _fontStyleChoice.viewDataKey = _fontStyles[_fontStyleIndex];
+            _fontStyleChoice.viewDataKey = _fontStyle switch
+            {
+                FontStyle.Pixelated => "_pixelated",
+                FontStyle.Regular => "_regular",
+                _ => throw new ArgumentOutOfRangeException(nameof(_fontStyle))
+            };
             _menuManager.Localize(_fontStyleChoice);
         }
 
         private void SetFontSizeText()
         {
-            _fontSizeChoice.viewDataKey = _fontSizes[_fontSizeIndex];
+            _fontSizeChoice.viewDataKey = _fontSize switch
+            {
+                FontSize.Small => "_small",
+                FontSize.Medium => "_medium",
+                FontSize.Big => "_big",
+                _ => throw new ArgumentOutOfRangeException(nameof(_fontSize))
+            };
             _menuManager.Localize(_fontSizeChoice);
         }
 
         private void SetShowTimerText()
         {
-            _showTimerChoice.viewDataKey = _showTimerChoices[_showTimerIndex];
+            _showTimerChoice.viewDataKey = _showTimer switch
+            {
+                ShowTimer.True => "_true",
+                ShowTimer.False => "_false",
+                _ => throw new ArgumentOutOfRangeException(nameof(_showTimer))
+            };
             _menuManager.Localize(_showTimerChoice);
         }
     }
