@@ -9,12 +9,15 @@ using Zenject;
 
 namespace Entities.Player
 {
+    [RequireComponent(typeof(PlayerStats))]
     public class HpHandler : MonoBehaviour, IDamageable
     {
         private Hp _hp;
 
-        private Coroutine _takingDamage;
+        private PlayerStats _playerStats;
         
+        private Coroutine _takingDamage;
+
         private readonly IList<(Enemy, int)> _damagedWaves = new List<(Enemy, int)>();
 
         [Inject]
@@ -24,6 +27,17 @@ namespace Entities.Player
             
             _hp.LivesChanged += OnLivesChanged;
             _hp.GameOver += OnGameOver;
+        }
+
+        private void Awake()
+        {
+            _playerStats = GetComponent<PlayerStats>();
+        }
+
+        private void Start()
+        {
+            _hp.HealthFullValue = _playerStats.HealthFull.Value;
+            _hp.HealthValue = _playerStats.HealthFull.Value;
         }
 
         public void TakeDamage(int value) => _hp.TakeDamage(value);

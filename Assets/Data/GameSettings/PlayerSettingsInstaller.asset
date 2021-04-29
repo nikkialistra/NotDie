@@ -34,3 +34,6 @@ MonoBehaviour:
     DropSpeed: 0.2
   _interactor:
     DistanceForTaking: 1
+  _playerStats:
+    BaseHealthFull: 100
+    BaseSpeed: 25
