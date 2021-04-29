@@ -37,7 +37,7 @@ namespace UI.Views
         private Image _healthSecond;
         private Image _healthThird;
 
-        private int _fullHealthValue;
+        private float _fullHealthValue;
 
         private Coroutine _healthBarCoroutine;
 
@@ -61,12 +61,12 @@ namespace UI.Views
             _healthThird = _rootVisualElement.Q<Image>("health__third");
         }
 
-        public void SetFullHealthValue(int fullValue)
+        public void SetFullHealthValue(float fullValue)
         {
             _fullHealthValue = fullValue;
         }
 
-        public void SetInitialHealth(int value)
+        public void SetInitialHealth(float value)
         {
             _borders.sprite = _border;
             _fillIndicator.sprite = _fill;
@@ -82,7 +82,7 @@ namespace UI.Views
             UpdateDigits(value);
         }
 
-        public void SetHealth(int value)
+        public void SetHealth(float value)
         {
             UpdateDigits(value);
 
@@ -166,7 +166,7 @@ namespace UI.Views
             _fillIndicator.sprite = _fill;
         }
 
-        private void UpdateDigits(int value)
+        private void UpdateDigits(float value)
         {
             if (value >= 100)
             {
@@ -182,30 +182,30 @@ namespace UI.Views
             }
         }
 
-        private void SetThreeDigits(int value)
+        private void SetThreeDigits(float value)
         {
-            _healthFirst.sprite = _digitManager.GetDigit(value / 100);
-            _healthSecond.sprite = _digitManager.GetDigit(value / 10 % 10);
-            _healthThird.sprite = _digitManager.GetDigit(value % 10);
+            _healthFirst.sprite = _digitManager.GetDigitSprite(value / 100);
+            _healthSecond.sprite = _digitManager.GetDigitSprite(value / 10 % 10);
+            _healthThird.sprite = _digitManager.GetDigitSprite(value % 10);
 
             _healthFirst.style.display = DisplayStyle.Flex;
             _healthSecond.style.display = DisplayStyle.Flex;
             _healthThird.style.display = DisplayStyle.Flex;
         }
 
-        private void SetTwoDigits(int value)
+        private void SetTwoDigits(float value)
         {
-            _healthSecond.sprite = _digitManager.GetDigit(value / 10);
-            _healthThird.sprite = _digitManager.GetDigit(value % 10);
+            _healthSecond.sprite = _digitManager.GetDigitSprite(value / 10);
+            _healthThird.sprite = _digitManager.GetDigitSprite(value % 10);
 
             _healthFirst.style.display = DisplayStyle.None;
             _healthSecond.style.display = DisplayStyle.Flex;
             _healthThird.style.display = DisplayStyle.Flex;
         }
 
-        private void SetOneDigit(int value)
+        private void SetOneDigit(float value)
         {
-            _healthThird.sprite = _digitManager.GetDigit(value % 10);
+            _healthThird.sprite = _digitManager.GetDigitSprite(value % 10);
 
             _healthFirst.style.display = DisplayStyle.None;
             _healthSecond.style.display = DisplayStyle.None;

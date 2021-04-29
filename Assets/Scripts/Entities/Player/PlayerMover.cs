@@ -9,6 +9,7 @@ using Zenject;
 namespace Entities.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(PlayerStats))]
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerMover : MonoBehaviour
     {
@@ -17,9 +18,6 @@ namespace Entities.Player
         {
             [Range(0, 1)]
             public float YPosition;
-            [Header("Movement settings")]
-            [Range(0, 100)]
-            public float Speed;
             [Range(0, 100)]
             public float Damping;
         }
@@ -30,6 +28,9 @@ namespace Entities.Player
         
         private Settings _settings;
 
+        private PlayerStats _playerStats;
+        private float _speed;
+        
         private bool _playerUnderControl = true;
 
         private Transform _attackDirection;
@@ -43,7 +44,7 @@ namespace Entities.Player
 
         private PlayerInput _input;
         private InputAction _moveAction;
-        
+
         [Inject]
         public void Construct(Settings settings, Transform attackDirection)
         {
@@ -58,9 +59,16 @@ namespace Entities.Player
             
             _rigidbody = GetComponent<Rigidbody2D>();
             _rigidbody.drag = _settings.Damping;
+
+            _playerStats = GetComponent<PlayerStats>();
             
             _input = GetComponent<PlayerInput>();
             _moveAction = _input.actions.FindAction("Move");
+        }
+
+        private void Start()
+        {
+            _speed = _playerStats.Speed.Value;
         }
 
         private void Update()
@@ -116,7 +124,7 @@ namespace Entities.Player
         {
             _playerAnimator.Run(true);
             _weaponAttack.TryMoveInCombo();
-            _rigidbody.velocity += _moveDirection * (_settings.Speed * Time.fixedDeltaTime);
+            _rigidbody.velocity += _moveDirection * (_speed * Time.fixedDeltaTime);
         }
     }
 }

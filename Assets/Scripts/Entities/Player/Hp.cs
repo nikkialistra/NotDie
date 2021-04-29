@@ -4,7 +4,7 @@ namespace Entities.Player
 {
     public class Hp
     {
-        public event Action<int> HealthChanged;
+        public event Action<float> HealthChanged;
 
         public event Action<int> LivesChanged;
 
@@ -13,24 +13,52 @@ namespace Entities.Player
         [Serializable]
         public class Settings
         {
-            public int HealthFullValue;
             public int Lives;
         }
+        
+        public float HealthFullValue
+        {
+            get => _healthFullValue;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(HealthFullValue));
+                }
+                
+                _healthFullValue = value;
+            }
+        }
+        
+        public float HealthValue
+        {
+            get => _healthValue;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(HealthFullValue));
+                }
+                
+                _healthValue = value;
+            }
+        }
 
-        private Settings _settings;
-
-        public int HealthFullValue => _settings.HealthFullValue;
         public int Lives => _lives;
 
+        private readonly Settings _settings;
+        
         private int _lives;
-        private int _healthValue;
+
+        private float _healthFullValue;
+        private float _healthValue;
+
 
         private bool IsAlive => _settings.Lives > 0;
         
         public Hp(Settings settings)
         {
             _settings = settings;
-            _healthValue = _settings.HealthFullValue;
             _lives = _settings.Lives;
         }
 
@@ -70,8 +98,8 @@ namespace Entities.Player
 
             if (IsAlive)
             {
-                _healthValue = _settings.HealthFullValue;
-                HealthChanged?.Invoke(_healthValue);
+                HealthValue = HealthFullValue;
+                HealthChanged?.Invoke(HealthValue);
             }
             else
             {

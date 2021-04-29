@@ -8,8 +8,10 @@ namespace UI
     {
         [SerializeField] private List<Sprite> _numbers;
 
-        public Sprite GetDigit(int index)
+        public Sprite GetDigitSprite(float digit)
         {
+            var index = (int) digit;
+            
             if (index < 0 || index > 9)
             {
                 throw new ArgumentException("Index should be between 0 and 9");

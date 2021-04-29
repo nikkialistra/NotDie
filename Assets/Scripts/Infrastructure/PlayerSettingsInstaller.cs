@@ -18,6 +18,8 @@ namespace Infrastructure
         [SerializeField] private AttackDirection.Settings _attackDirection;
         [SerializeField] private ThrowingWeapon.Settings _thrownWeapon;
         [SerializeField] private Interactor.Settings _interactor;
+        [SerializeField] private PlayerStats.Settings _playerStats;
+        
 
         public override void InstallBindings()
         {
@@ -29,6 +31,7 @@ namespace Infrastructure
             Container.BindInstance(_attackDirection);
             Container.BindInstance(_thrownWeapon);
             Container.BindInstance(_interactor);
+            Container.BindInstance(_playerStats);
         }
     }
 }
