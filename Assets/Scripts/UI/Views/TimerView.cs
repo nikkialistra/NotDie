@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using Core.Saving;
+using UnityEngine;
 using UnityEngine.UIElements;
+using Zenject;
 
 namespace UI.Views
 {
@@ -16,12 +19,25 @@ namespace UI.Views
         private bool _isWorking = true;
 
         private float _timeForNextUpdate;
+        
+        private GameSettings _gameSettings;
+
+        [Inject]
+        public void Construct(GameSettings gameSettings) => _gameSettings = gameSettings;
 
         private void Awake()
         {
             _rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
             
             _timer = _rootVisualElement.Q<Label>("timer");
+
+            _gameSettings.Change += OnSettingsChange;
+        }
+
+        private void Start()
+        {
+            if (_gameSettings.ShowTimer == ShowTimer.False)
+                gameObject.SetActive(false);
         }
 
         private void Update()
@@ -37,6 +53,14 @@ namespace UI.Views
             SetTime();
             
             _timeForNextUpdate = Time.time + _updateTime;
+        }
+
+        private void OnSettingsChange()
+        {
+            if (_gameSettings.ShowTimer == ShowTimer.False)
+                gameObject.SetActive(false);
+            else
+                gameObject.SetActive(true);
         }
 
         public void StartTimer() => _isWorking = true;

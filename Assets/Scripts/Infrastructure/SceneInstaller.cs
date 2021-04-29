@@ -1,5 +1,6 @@
 using Core;
 using Core.Room;
+using Core.Saving;
 using Entities.Enemies.EnemyWave;
 using Entities.Player;
 using Entities.Player.Animation;
@@ -50,6 +51,10 @@ namespace Infrastructure
         [SerializeField] private TimerView _timerView;
         [SerializeField] private WeaponsView _weaponsView;
         [SerializeField] private InventoryView _inventoryView;
+        
+        [Header("Other")] 
+        [SerializeField] private GameSettings _gameSettings;
+        [SerializeField] private MenuManager _menuManager;
 
         public override void InstallBindings()
         {
@@ -75,6 +80,9 @@ namespace Infrastructure
             BindRoom();
 
             BindUI();
+
+            Container.BindInstance(_gameSettings);
+            Container.BindInstance(_menuManager);
         }
 
         private void BindPlayerMovement()

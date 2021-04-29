@@ -287,7 +287,7 @@ Transform:
   - {fileID: 429770173}
   - {fileID: 614786974}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &222730356
 GameObject:
@@ -504,7 +504,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420034
 MonoBehaviour:
@@ -934,7 +934,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &716610162
 MonoBehaviour:
@@ -1347,6 +1347,58 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1010360058035573377, guid: 94ff85432863cee48b83860753576ba7, type: 3}
   m_PrefabInstance: {fileID: 1010360057819737126}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1016144182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1016144184}
+  - component: {fileID: 1016144183}
+  m_Layer: 0
+  m_Name: Settings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1016144183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016144182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ab0bc842a14c4ca0f763ec952e209e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MasterVolume: 0
+  EffectsVolume: 0
+  MusicVolume: 0
+  Resolution: 
+  DisplayMode: 
+  FontStyle: 0
+  FontSize: 0
+  ShowTimer: 0
+  Language: 
+--- !u!4 &1016144184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016144182}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.5847883, y: -0.1892408, z: -6.045707}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1051072673 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 705020944030493964, guid: 3df90dd42c9b01343823287a18fc683f, type: 3}
@@ -1505,7 +1557,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1093702545 stripped
 Transform:
@@ -1589,7 +1641,7 @@ Transform:
   - {fileID: 222730357}
   - {fileID: 1995141941}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1298433786
 MonoBehaviour:
@@ -1802,7 +1854,7 @@ Transform:
   - {fileID: 183476699}
   - {fileID: 11298873}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1423666763 stripped
 Transform:
@@ -2149,7 +2201,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1817856297
 GameObject:
@@ -2223,7 +2275,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1828698718
 PrefabInstance:
@@ -2561,6 +2613,8 @@ MonoBehaviour:
   _timerView: {fileID: 716610163}
   _weaponsView: {fileID: 716610166}
   _inventoryView: {fileID: 716610168}
+  _gameSettings: {fileID: 1016144183}
+  _menuManager: {fileID: 1733703387}
 --- !u!1 &2062465800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2592,7 +2646,7 @@ Transform:
   - {fileID: 1051072673}
   - {fileID: 1346688145117226038}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2111957492 stripped
 Transform:

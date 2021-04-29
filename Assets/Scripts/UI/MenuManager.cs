@@ -7,10 +7,10 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Tables;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UIElements;
+using Zenject;
 
 namespace UI
 {
-    [RequireComponent(typeof(Settings))]
     [RequireComponent(typeof(UIDocument))]
     [RequireComponent(typeof(PlayerInput))]
     public class MenuManager : MonoBehaviour, IMenuView
@@ -20,9 +20,7 @@ namespace UI
         [SerializeField] private bool _loadMainMenu;
         [SerializeField] private bool _loadGameMenu;
 
-        public Settings Settings => _settings;
-
-        private Settings _settings;
+        public GameSettings GameSettings { get; private set; }
 
         public PlayerInput Input => _input;
         
@@ -39,6 +37,9 @@ namespace UI
 
         private PlayerInput _input;
         private InputAction _returnAction;
+        
+        [Inject]
+        public void Construct(GameSettings gameSettings) => GameSettings = gameSettings;
 
         private void OnValidate()
         {
@@ -55,8 +56,6 @@ namespace UI
 
             _input = GetComponent<PlayerInput>();
             _returnAction = _input.actions.FindAction("Return");
-
-            _settings = GetComponent<Settings>();
         }
 
         private void OnEnable()
@@ -141,6 +140,8 @@ namespace UI
         {
             if (_loaded)
                 return;
+
+            GameSettings.Apply();
             
             if (_loadMainMenu)
             {
