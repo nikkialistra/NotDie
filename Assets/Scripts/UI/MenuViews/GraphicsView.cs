@@ -67,7 +67,7 @@ namespace UI.MenuViews
 
         protected override void Disable()
         {
-            _menuManager.Settings.Save();
+            _menuManager.GameSettings.Save();
             
             _upAction.started -= OnUpDown;
             _downAction.started -= OnUpDown;
@@ -94,7 +94,7 @@ namespace UI.MenuViews
 
         private void InitializeGraphicsValues()
         {
-            if (!_menuManager.Settings.Loaded)
+            if (!_menuManager.GameSettings.Loaded)
                 return;
             
             InitializeResolutionIndex();
@@ -109,8 +109,8 @@ namespace UI.MenuViews
 
         private void OnSelect(InputAction.CallbackContext context)
         {
-            _menuManager.Settings.Resolution = _resolutions[_resolutionIndex].ToString();
-            _menuManager.Settings.DisplayMode = _displayModes[_displayModeIndex];
+            _menuManager.GameSettings.Resolution = _resolutions[_resolutionIndex].ToString();
+            _menuManager.GameSettings.DisplayMode = _displayModes[_displayModeIndex];
             
             Screen.SetResolution(
                 _resolutions[_resolutionIndex].width, _resolutions[_resolutionIndex].height, GetDisplayMode());
@@ -182,7 +182,7 @@ namespace UI.MenuViews
         {
             for (var i = 0; i < _resolutions.Length; i++)
             {
-                if (_resolutions[i].ToString() == _menuManager.Settings.Resolution)
+                if (_resolutions[i].ToString() == _menuManager.GameSettings.Resolution)
                     _resolutionIndex = i;
             }
         }
@@ -193,7 +193,7 @@ namespace UI.MenuViews
         {
             for (var i = 0; i < _displayModes.Length; i++)
             {
-                if (_displayModes[i] == _menuManager.Settings.DisplayMode)
+                if (_displayModes[i] == _menuManager.GameSettings.DisplayMode)
                     _displayModeIndex = i;
             }
         }

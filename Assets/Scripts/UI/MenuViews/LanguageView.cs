@@ -50,7 +50,7 @@ namespace UI.MenuViews
 
         protected override void Disable()
         {
-            _menuManager.Settings.Save();
+            _menuManager.GameSettings.Save();
             
             _leftAction.started -= ChangeLanguageLeft;
             _rightAction.started -= ChangeLanguageRight;
@@ -59,19 +59,19 @@ namespace UI.MenuViews
 
         private void InitializeLanguageIndex()
         {
-            if (!_menuManager.Settings.Loaded)
+            if (!_menuManager.GameSettings.Loaded)
                 return;
             
             for (var i = 0; i < _languages.Count; i++)
             {
-                if (_languages[i].ToString() == _menuManager.Settings.Language)
+                if (_languages[i].ToString() == _menuManager.GameSettings.Language)
                     _index = i;
             }
         }
 
         private void SetLanguage(InputAction.CallbackContext context)
         {
-            _menuManager.Settings.Language = _languages[_index].ToString();
+            _menuManager.GameSettings.Language = _languages[_index].ToString();
             
             LocalizationSettings.SelectedLocale = _languages[_index];
         }

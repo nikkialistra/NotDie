@@ -32,7 +32,6 @@ namespace UI.MenuViews
         private InputAction _downAction;
         private InputAction _leftAction;
         private InputAction _rightAction;
-        private InputAction _selectAction;
 
         protected override void SetUp()
         {
@@ -48,7 +47,6 @@ namespace UI.MenuViews
             _downAction = _input.actions.FindAction("Down");
             _leftAction = _input.actions.FindAction("Left");
             _rightAction = _input.actions.FindAction("Right");
-            _selectAction = _input.actions.FindAction("Select");
         }
 
         public HudView(VisualElement root, IMenuView parent, MenuManager menuManager) : base(root, parent, menuManager)
@@ -68,18 +66,14 @@ namespace UI.MenuViews
             _downAction.started += OnDown;
             _leftAction.started += OnLeftChange;
             _rightAction.started += OnRightChange;
-            _selectAction.started += OnSelect;
         }
 
         protected override void Disable()
         {
-            _menuManager.Settings.Save();
-            
             _upAction.started -= OnUp;
             _downAction.started -= OnDown;
             _leftAction.started -= OnLeftChange;
             _rightAction.started -= OnRightChange;
-            _selectAction.started -= OnSelect;
         }
 
         private void OnUp(InputAction.CallbackContext context)
@@ -123,12 +117,12 @@ namespace UI.MenuViews
 
         private void InitializeHudValues()
         {
-            if (!_menuManager.Settings.Loaded)
+            if (!_menuManager.GameSettings.Loaded)
                 return;
             
-            _fontStyle = _menuManager.Settings.FontStyle;
-            _fontSize = _menuManager.Settings.FontSize;
-            _showTimer = _menuManager.Settings.ShowTimer;
+            _fontStyle = _menuManager.GameSettings.FontStyle;
+            _fontSize = _menuManager.GameSettings.FontSize;
+            _showTimer = _menuManager.GameSettings.ShowTimer;
         }
 
         private void SetHudValues()
@@ -137,22 +131,6 @@ namespace UI.MenuViews
             SetFontSizeText();
             SetShowTimerText();
         }
-
-        private void OnSelect(InputAction.CallbackContext context)
-        {
-            if (_activeParameter == ActiveParameter.FontStyle)
-                SelectFontStyle();
-            if (_activeParameter == ActiveParameter.FontSize)
-                SelectFontSize();
-            if (_activeParameter == ActiveParameter.ShowTimer)
-                SelectShowTimer();
-        }
-
-        private void SelectFontStyle() => _menuManager.Settings.FontStyle = _fontStyle;
-
-        private void SelectFontSize() => _menuManager.Settings.FontSize = _fontSize;
-
-        private void SelectShowTimer() => _menuManager.Settings.ShowTimer = _showTimer;
 
         private void OnLeftChange(InputAction.CallbackContext context)
         {
@@ -183,7 +161,10 @@ namespace UI.MenuViews
                 _ => throw new ArgumentOutOfRangeException(nameof(_fontStyle))
             };
             
+            _menuManager.GameSettings.FontStyle = _fontStyle;
+
             SetFontStyleText();
+            _menuManager.GameSettings.Save();
         }
 
         private void ChangeFontSizeLeft()
@@ -196,7 +177,10 @@ namespace UI.MenuViews
                 _ => throw new ArgumentOutOfRangeException(nameof(_fontSize))
             };
             
+            _menuManager.GameSettings.FontSize = _fontSize;
+
             SetFontSizeText();
+            _menuManager.GameSettings.Save();
         }
 
         private void ChangeFontSizeRight()
@@ -209,7 +193,10 @@ namespace UI.MenuViews
                 _ => throw new ArgumentOutOfRangeException(nameof(_fontSize))
             };
             
+            _menuManager.GameSettings.FontSize = _fontSize;
+
             SetFontSizeText();
+            _menuManager.GameSettings.Save();
         }
 
         private void ChangeShowTimer()
@@ -221,7 +208,10 @@ namespace UI.MenuViews
                 _ => throw new ArgumentOutOfRangeException(nameof(_showTimer))
             };
             
+            _menuManager.GameSettings.ShowTimer = _showTimer;
+
             SetShowTimerText();
+            _menuManager.GameSettings.Save();
         }
 
         private void SetFontStyleText()

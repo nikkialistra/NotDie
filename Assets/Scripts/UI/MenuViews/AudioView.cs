@@ -42,12 +42,12 @@ namespace UI.MenuViews
 
         private void InitializeSliders()
         {
-            if (!_menuManager.Settings.Loaded)
+            if (!_menuManager.GameSettings.Loaded)
                 return;
             
-            _masterVolumeSlider.value = _menuManager.Settings.MasterVolume;
-            _effectsVolumeSlider.value = _menuManager.Settings.EffectsVolume;
-            _musicVolumeSlider.value = _menuManager.Settings.MusicVolume;
+            _masterVolumeSlider.value = _menuManager.GameSettings.MasterVolume;
+            _effectsVolumeSlider.value = _menuManager.GameSettings.EffectsVolume;
+            _musicVolumeSlider.value = _menuManager.GameSettings.MusicVolume;
         }
 
         private void SetSliderValues()
@@ -67,11 +67,11 @@ namespace UI.MenuViews
 
         protected override void Disable()
         {
-            _menuManager.Settings.MasterVolume = _masterVolumeSlider.value;
-            _menuManager.Settings.EffectsVolume = _effectsVolumeSlider.value;
-            _menuManager.Settings.MusicVolume = _musicVolumeSlider.value;
+            _menuManager.GameSettings.MasterVolume = _masterVolumeSlider.value;
+            _menuManager.GameSettings.EffectsVolume = _effectsVolumeSlider.value;
+            _menuManager.GameSettings.MusicVolume = _musicVolumeSlider.value;
             
-            _menuManager.Settings.Save();
+            _menuManager.GameSettings.Save();
         }
 
         private void OnMasterVolumeChange(ChangeEvent<float> slider) => ShowSliderValueNormalized(_masterVolumeValue, slider.newValue);
