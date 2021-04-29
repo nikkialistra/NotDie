@@ -95,7 +95,9 @@ namespace UI.MenuViews
         private void InitializeGraphicsValues()
         {
             if (!_menuManager.GameSettings.Loaded)
+            {
                 return;
+            }
             
             InitializeResolutionIndex();
             InitializeDisplayModeIndex();
@@ -131,17 +133,27 @@ namespace UI.MenuViews
         private void OnLeftChange(InputAction.CallbackContext context)
         {
             if (_activeParameter == ActiveParameter.Resolution)
+            {
                 ChangeResolutionLeft();
+            }
+
             if (_activeParameter == ActiveParameter.DisplayMode)
+            {
                 ChangeDisplayModeLeft();
+            }
         }
 
         private void OnRightChange(InputAction.CallbackContext context)
         {
             if (_activeParameter == ActiveParameter.Resolution)
+            {
                 ChangeResolutionRight();
+            }
+
             if (_activeParameter == ActiveParameter.DisplayMode)
+            {
                 ChangeDisplayModeRight();
+            }
         }
 
         private void ChangeResolutionLeft()
@@ -149,7 +161,9 @@ namespace UI.MenuViews
             _resolutionIndex = (_resolutionIndex - 1) % _resolutions.Length;
 
             if (_resolutionIndex == -1)
+            {
                 _resolutionIndex = _resolutions.Length - 1;
+            }
 
             SetResolutionText();
         }
@@ -166,7 +180,9 @@ namespace UI.MenuViews
             _displayModeIndex = (_displayModeIndex - 1) % _displayModes.Length;
 
             if (_displayModeIndex == -1)
+            {
                 _displayModeIndex = _displayModes.Length - 1;
+            }
 
             SetDisplayModeText();
         }
@@ -183,7 +199,9 @@ namespace UI.MenuViews
             for (var i = 0; i < _resolutions.Length; i++)
             {
                 if (_resolutions[i].ToString() == _menuManager.GameSettings.Resolution)
+                {
                     _resolutionIndex = i;
+                }
             }
         }
 
@@ -194,7 +212,9 @@ namespace UI.MenuViews
             for (var i = 0; i < _displayModes.Length; i++)
             {
                 if (_displayModes[i] == _menuManager.GameSettings.DisplayMode)
+                {
                     _displayModeIndex = i;
+                }
             }
         }
 

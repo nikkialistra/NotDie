@@ -25,7 +25,10 @@ namespace Entities.Wave
         private WaveMover _waveMover;
         private Animator _animator;
 
-        private void Awake() => _waveMover = GetComponent<WaveMover>();
+        private void Awake()
+        {
+            _waveMover = GetComponent<WaveMover>();
+        }
 
         private void Update()
         {
@@ -36,7 +39,10 @@ namespace Entities.Wave
             }
         }
 
-        public void Hitted() => _weaponFacade.Hitted();
+        public void Hitted()
+        {
+            _weaponFacade.Hitted();
+        }
 
         public void OnSpawned(WaveSpecs waveSpecs, IMemoryPool pool)
         {
@@ -57,9 +63,15 @@ namespace Entities.Wave
             _animator.SetTrigger(waveSpecs.WaveTriggerName);
         }
 
-        public void Dispose() => _pool.Despawn(this);
-        
-        public void OnDespawned() => _pool = null;
+        public void Dispose()
+        {
+            _pool.Despawn(this);
+        }
+
+        public void OnDespawned()
+        {
+            _pool = null;
+        }
 
         public class Factory : PlaceholderFactory<WaveSpecs, WaveFacade>
         {

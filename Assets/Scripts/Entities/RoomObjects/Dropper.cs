@@ -10,10 +10,19 @@ namespace Entities.RoomObjects
         [SerializeField] private Sprite _activeState;
         [SerializeField] private Sprite _notActiveState;
 
-        private void Awake() => _renderer = GetComponent<SpriteRenderer>();
+        private void Awake()
+        {
+            _renderer = GetComponent<SpriteRenderer>();
+        }
 
-        private void Start() => _renderer.sprite = _activeState;
+        private void Start()
+        {
+            _renderer.sprite = _activeState;
+        }
 
-        public override void Use() => _renderer.sprite = _notActiveState;
+        public override void Use()
+        {
+            _renderer.sprite = _notActiveState;
+        }
     }
 }

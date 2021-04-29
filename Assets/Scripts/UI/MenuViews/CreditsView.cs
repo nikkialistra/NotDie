@@ -34,6 +34,7 @@ namespace UI.MenuViews
         {
             _authorImage = _tree.Q<Image>("author__image");
             _authorLabel = _tree.Q<Label>("author__label");
+            
             SetAuthors();
             
             _input = _menuManager.Input;
@@ -58,7 +59,9 @@ namespace UI.MenuViews
             _index = (_index - 1) % _authorSprites.Length;
 
             if (_index == -1)
+            {
                 _index = _authorSprites.Length - 1;
+            }
 
             SetAuthors();
         }

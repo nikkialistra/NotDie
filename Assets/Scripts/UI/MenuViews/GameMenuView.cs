@@ -78,9 +78,15 @@ namespace UI.MenuViews
             ShowParent();
         }
 
-        private static void Restart() => SceneManager.LoadScene("FirstStage", LoadSceneMode.Single);
+        private static void Restart()
+        {
+            SceneManager.LoadScene("FirstStage", LoadSceneMode.Single);
+        }
 
-        private static void SaveAndExit() => SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        private static void SaveAndExit()
+        {
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        }
 
         private void Settings()
         {
@@ -91,6 +97,9 @@ namespace UI.MenuViews
             _settingsView.ShowSelf();
         }
 
-        private static void Quit() => Application.Quit();
+        private static void Quit()
+        {
+            Application.Quit();
+        }
     }
 }

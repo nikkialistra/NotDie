@@ -58,7 +58,10 @@ namespace UI.MenuViews
             action();
         }
 
-        private static void Play() => SceneManager.LoadScene("FirstStage", LoadSceneMode.Single);
+        private static void Play()
+        {
+            SceneManager.LoadScene("FirstStage", LoadSceneMode.Single);
+        }
 
         private void Settings()
         {
@@ -68,6 +71,9 @@ namespace UI.MenuViews
             _settingsView.ShowSelf();
         }
 
-        private static void Quit() => Application.Quit();
+        private static void Quit()
+        {
+            Application.Quit();
+        }
     }
 }

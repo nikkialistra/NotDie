@@ -4,6 +4,15 @@ using UnityEngine;
 
 namespace Things.Data
 {
+    public enum Durability
+    {
+        Infinity,
+        Strong,
+        Moderate,
+        Fragile,
+        VeryFragile
+    }
+
     [CreateAssetMenu(fileName = "Weapon", menuName = "Data/Weapon")]
     public class Weapon : ScriptableObject
     {
@@ -90,14 +99,5 @@ namespace Things.Data
                 }
             }
         }
-    }
-
-    public enum Durability
-    {
-        Infinity,
-        Strong,
-        Moderate,
-        Fragile,
-        VeryFragile
     }
 }

@@ -36,7 +36,10 @@ namespace Core
             _camera = GetComponent<Camera>();
         }
 
-        private void Start() => _threshold = CalculateThreshold();
+        private void Start()
+        {
+            _threshold = CalculateThreshold();
+        }
 
         private void FixedUpdate()
         {

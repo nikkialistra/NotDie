@@ -53,9 +53,15 @@ namespace Entities.Enemies.EnemyWave
             _animator.SetTrigger(_wave);
         }
 
-        public void Dispose() => _pool.Despawn(this);
-        
-        public void OnDespawned() => _pool = null;
+        public void Dispose()
+        {
+            _pool.Despawn(this);
+        }
+
+        public void OnDespawned()
+        {
+            _pool = null;
+        }
 
         public class Factory : PlaceholderFactory<EnemyWaveSpecs, EnemyWaveFacade>
         {

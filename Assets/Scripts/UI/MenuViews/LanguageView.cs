@@ -60,12 +60,16 @@ namespace UI.MenuViews
         private void InitializeLanguageIndex()
         {
             if (!_menuManager.GameSettings.Loaded)
+            {
                 return;
+            }
             
             for (var i = 0; i < _languages.Count; i++)
             {
                 if (_languages[i].ToString() == _menuManager.GameSettings.Language)
+                {
                     _index = i;
+                }
             }
         }
 
@@ -81,7 +85,9 @@ namespace UI.MenuViews
             _index = (_index - 1) % _languages.Count;
 
             if (_index == -1)
+            {
                 _index = _languages.Count - 1;
+            }
 
             SetLanguageText();
         }

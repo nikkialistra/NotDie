@@ -15,7 +15,10 @@ namespace Entities.Enemies
             set
             {
                 if (value <= 0)
+                {
                     throw new ArgumentOutOfRangeException(nameof(Health));
+                }
+
                 _health = value;
             }
         }
@@ -55,15 +58,19 @@ namespace Entities.Enemies
         public void TakeDamageContinuously(int value, float interval)
         {
             if (_takingDamage != null)
+            {
                 StopCoroutine(_takingDamage);
-            
+            }
+
             _takingDamage = StartCoroutine(TakingDamage(value, interval));
         }
 
         public void StopTakingDamage()
         {
             if (_takingDamage != null)
+            {
                 StopCoroutine(_takingDamage);
+            }
         }
 
         private IEnumerator TakingDamage(int value, float interval)
@@ -78,11 +85,15 @@ namespace Entities.Enemies
         private void OnTriggerEnter2D(Collider2D other)
         {
             var waveFacade = other.GetComponentInParent<WaveFacade>();
-            if (waveFacade == null) 
+            if (waveFacade == null)
+            {
                 return;
+            }
 
-            if (!waveFacade.IsPenetrable)
-                if (TakeOnce(waveFacade)) return;
+            if (!waveFacade.IsPenetrable && TakeOnce(waveFacade))
+            {
+                return;
+            }
 
             TakeWaveDamage(waveFacade.DamageValue, waveFacade);
         }
@@ -90,7 +101,9 @@ namespace Entities.Enemies
         private bool TakeOnce(WaveFacade wave)
         {
             if (_damagedWaves.Contains(wave.Id))
+            {
                 return true;
+            }
 
             _damagedWaves.Add(wave.Id);
             return false;
@@ -99,7 +112,10 @@ namespace Entities.Enemies
         private void TakeWaveDamage(int value, WaveFacade waveFacade)
         {
             if (value <= 0)
+            {
                 throw new ArgumentException("Damage must be more than zero");
+            }
+
             _health -= value;
             waveFacade.Hitted();
             TakeInRecline(waveFacade);
@@ -107,9 +123,14 @@ namespace Entities.Enemies
             Debug.Log(value);
 
             if (!IsAlive)
+            {
                 Destroy(gameObject);
+            }
         }
 
-        private void TakeInRecline(WaveFacade waveFacade) => _reclineUnhandled += waveFacade.ReclineValue;
+        private void TakeInRecline(WaveFacade waveFacade)
+        {
+            _reclineUnhandled += waveFacade.ReclineValue;
+        }
     }
 }

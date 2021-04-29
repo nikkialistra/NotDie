@@ -28,21 +28,34 @@ namespace Entities.Player
             _takeDropAction = _input.actions.FindAction("TakeDropThrowing");
         }
         
-        private void OnEnable() => _takeDropAction.canceled += OnTakeDrop;
+        private void OnEnable()
+        {
+            _takeDropAction.canceled += OnTakeDrop;
+        }
 
-        private void OnDisable() => _takeDropAction.canceled -= OnTakeDrop;
+        private void OnDisable()
+        {
+            _takeDropAction.canceled -= OnTakeDrop;
+        }
 
         private void OnTakeDrop(InputAction.CallbackContext context)
         {
             if (HoldingButton(context) || !_playerAnimator.IsCurrentAnimationWithTag("ActionReady"))
+            {
                 return;
+            }
 
             if (_inventoryHandler.TryTakeItem())
+            {
                 return;
+            }
             
             _weaponsHandler.TakeDropWeapon();
         }
         
-        private static bool HoldingButton(InputAction.CallbackContext context) => context.duration >= 0.3f;
+        private static bool HoldingButton(InputAction.CallbackContext context)
+        {
+            return context.duration >= 0.3f;
+        }
     }
 }

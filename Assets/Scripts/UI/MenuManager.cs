@@ -101,30 +101,42 @@ namespace UI
         public void Localize(VisualElement element)
         {
             if (!(element is TextElement))
+            {
                 return;
+            }
 
             var textElement = (TextElement) element;
             var key = textElement.viewDataKey;
-            
-            if (string.IsNullOrEmpty(key) || key[0] != '_') 
+
+            if (string.IsNullOrEmpty(key) || key[0] != '_')
+            {
                 return;
+            }
             
             key = key.TrimStart('_');
             var entry = _localTable[key];
             if (entry != null)
+            {
                 textElement.text = entry.LocalizedValue;
+            }
             else
+            {
                 Debug.LogWarning($"No {_localTable.LocaleIdentifier.Code} translation for key: '{key}'");
+            }
         }
 
         private void OnTableChanged(StringTable table)
         {
             var handle = _table.GetTable();
-            
+
             if (handle.IsDone)
+            {
                 OnLocalTableLoaded(handle);
+            }
             else
+            {
                 handle.Completed += OnLocalTableLoaded;
+            }
         }
 
         private void OnLocalTableLoaded(AsyncOperationHandle<StringTable> handle)
@@ -139,7 +151,9 @@ namespace UI
         private void LoadMenu()
         {
             if (_loaded)
+            {
                 return;
+            }
 
             GameSettings.Apply();
             
@@ -161,11 +175,16 @@ namespace UI
         private void ShowMenu()
         {
             if (_gameMenu.Shown)
+            {
                 return;
+            }
             
             _gameMenu.ShowSelf();
         }
 
-        private void OnReturn(InputAction.CallbackContext context) => Return?.Invoke();
+        private void OnReturn(InputAction.CallbackContext context)
+        {
+            Return?.Invoke();
+        }
     }
 }

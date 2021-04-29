@@ -15,8 +15,11 @@ namespace Things.Weapon
 
         private IMemoryPool _pool;
 
-        private void Awake() => _renderer = GetComponent<SpriteRenderer>();
-        
+        private void Awake()
+        {
+            _renderer = GetComponent<SpriteRenderer>();
+        }
+
         public void OnSpawned(Vector3 position, WeaponFacade weaponFacade, IMemoryPool pool)
         {
             _pool = pool;
@@ -26,9 +29,15 @@ namespace Things.Weapon
             _renderer.sprite = _weaponFacade.Weapon.PickUp;
         }
 
-        public void Dispose() => _pool.Despawn(this);
-        
-        public void OnDespawned() => _pool = null;
+        public void Dispose()
+        {
+            _pool.Despawn(this);
+        }
+
+        public void OnDespawned()
+        {
+            _pool = null;
+        }
 
         public class Factory : PlaceholderFactory<Vector3, WeaponFacade, WeaponGameObject>
         {

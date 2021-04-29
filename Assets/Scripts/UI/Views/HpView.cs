@@ -61,7 +61,10 @@ namespace UI.Views
             _healthThird = _rootVisualElement.Q<Image>("health__third");
         }
 
-        public void SetFullHealthValue(int fullValue) => _fullHealthValue = fullValue;
+        public void SetFullHealthValue(int fullValue)
+        {
+            _fullHealthValue = fullValue;
+        }
 
         public void SetInitialHealth(int value)
         {
@@ -84,15 +87,21 @@ namespace UI.Views
             UpdateDigits(value);
 
             if (value != _fullHealthValue)
+            {
                 PlayHealthBarSpritesAnimation(value);
+            }
             else
+            {
                 SetInitialHealth(value);
+            }
         }
 
         private void PlayHealthBarSpritesAnimation(float value)
         {
             if (_healthBarCoroutine != null)
+            {
                 StopCoroutine(_healthBarCoroutine);
+            }
             
             var fillAmount = value / _fullHealthValue;
             var targetWidth = fillAmount * 100;
@@ -160,11 +169,17 @@ namespace UI.Views
         private void UpdateDigits(int value)
         {
             if (value >= 100)
+            {
                 SetThreeDigits(value);
+            }
             else if (value >= 10)
+            {
                 SetTwoDigits(value);
+            }
             else
+            {
                 SetOneDigit(value);
+            }
         }
 
         private void SetThreeDigits(int value)
@@ -197,6 +212,9 @@ namespace UI.Views
             _healthThird.style.display = DisplayStyle.Flex;
         }
 
-        public void SetLives(int value) => _lives.text = value.ToString();
+        public void SetLives(int value)
+        {
+            _lives.text = value.ToString();
+        }
     }
 }

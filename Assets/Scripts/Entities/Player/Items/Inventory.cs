@@ -13,12 +13,16 @@ namespace Entities.Player.Items
         public bool TryTakeItem(ItemFacade itemFacade)
         {
             if (itemFacade == null)
+            {
                 throw new ArgumentNullException(nameof(itemFacade));
+            }
 
             var index = Array.FindIndex(_items, item => item == null);
-            
+
             if (index == -1)
+            {
                 return false;
+            }
 
             _items[index] = itemFacade;
 

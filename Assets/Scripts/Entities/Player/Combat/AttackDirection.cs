@@ -50,12 +50,17 @@ namespace Entities.Player.Combat
             _moveAction = _input.actions.FindAction("Move");
         }
 
-        private void Start() => UpdatePosition();
+        private void Start()
+        {
+            UpdatePosition();
+        }
 
         private void Update()
         {
             if (!_takeDirectionBlocked)
+            {
                 ComputeAttackDirection();
+            }
 
             UpdatePosition();
         }
@@ -63,24 +68,32 @@ namespace Entities.Player.Combat
         private void ComputeAttackDirection()
         {
             if (_input.currentControlScheme != "Keyboard")
+            {
                 Compute();
+            }
             else
+            {
                 ComputeForKeyboard();
+            }
         }
 
         private void Compute()
         {
             var moveDirection = _moveAction.ReadValue<Vector2>();
             if (moveDirection != Vector2.zero)
+            {
                 _attackDirection = moveDirection;
+            }
         }
 
         private void ComputeForKeyboard()
         {
             var moveDirection = _moveAction.ReadValue<Vector2>();
             if (moveDirection == Vector2.zero)
+            {
                 return;
-            
+            }
+
             moveDirection = ClampTo0Or1(moveDirection);
 
             if (moveDirection.x != 0)
@@ -138,11 +151,16 @@ namespace Entities.Player.Combat
         private void UpdatePosition()
         {
             if (_attackDirection == Vector2.zero || Time.timeScale == 0)
+            {
                 return;
-            
+            }
+
             transform.position = _playerMover.PositionCenter + (Vector3) _attackDirection.normalized * _weapons.ActiveWeapon.Weapon.DirectionMultiplier;
         }
 
-        private void OnMovingIsBlocked(bool isBlocked) => _takeDirectionBlocked = isBlocked;
+        private void OnMovingIsBlocked(bool isBlocked)
+        {
+            _takeDirectionBlocked = isBlocked;
+        }
     }
 }

@@ -8,7 +8,10 @@ namespace Entities.Enemies
     {
         private Rigidbody2D _rigidbody;
 
-        private void Awake() => _rigidbody = GetComponent<Rigidbody2D>();
+        private void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody2D>();
+        }
 
         public void AddVelocity(Vector3 velocity, AnimationCurve curve, float time)
         {
@@ -17,7 +20,10 @@ namespace Entities.Enemies
             void Setter(Vector3 x)
             {
                 if (_rigidbody == null)
+                {
                     return;
+                }
+
                 _rigidbody.velocity = x;
             }
         }

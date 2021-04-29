@@ -56,21 +56,28 @@ namespace Entities.Player.Combat
         public void TakeDropWeapon()
         {
             if (TryFindWeapon())
+            {
                 return;
+            }
 
             DropWeapon();
         }
 
-        private void OnSwapWeapons(InputAction.CallbackContext context) => _weapons.SwapWeapons();
+        private void OnSwapWeapons(InputAction.CallbackContext context)
+        {
+            _weapons.SwapWeapons();
+        }
 
         private bool TryFindWeapon()
         {
             var weapons = FindObjectsOfType<WeaponGameObject>();
             foreach (var weapon in weapons)
             {
-                if (Vector3.Distance(transform.position, weapon.transform.position) >
-                      _settings.DistanceForTaking) continue;
-                
+                if (Vector3.Distance(transform.position, weapon.transform.position) > _settings.DistanceForTaking)
+                {
+                    continue;
+                }
+
                 TakeWeapon(weapon);
                 return true;
             }
@@ -81,9 +88,11 @@ namespace Entities.Player.Combat
         private void DropWeapon()
         {
             var weapon = _weapons.DropWeapon();
-            if (weapon == null) 
+            if (weapon == null)
+            {
                 return;
-            
+            }
+
             CreateWeapon(transform.position, weapon);
         }
 
@@ -99,17 +108,24 @@ namespace Entities.Player.Combat
 
         private void CreateWeaponsIfNeeded(WeaponFacade firstDiscardedWeapon, WeaponFacade secondDiscardedWeapon)
         {
-            if (firstDiscardedWeapon == null) 
+            if (firstDiscardedWeapon == null)
+            { 
                 return;
-            
+            }
+
             CreateWeapon(transform.position, firstDiscardedWeapon);
 
             if (secondDiscardedWeapon == null)
+            {
                 return;
-            
+            }
+
             CreateWeapon(transform.position + (Vector3) Random.insideUnitCircle * 0.2f, secondDiscardedWeapon);
         }
 
-        private void CreateWeapon(Vector3 position, WeaponFacade weaponFacade) => _weaponGameObjectSpawner.Spawn(position, weaponFacade);
+        private void CreateWeapon(Vector3 position, WeaponFacade weaponFacade)
+        {
+            _weaponGameObjectSpawner.Spawn(position, weaponFacade);
+        }
     }
 }

@@ -2,10 +2,16 @@
 {
     public class WaveSpawner
     {
-        private WaveFacade.Factory _waveFactory;
+        private readonly WaveFacade.Factory _waveFactory;
 
-        public WaveSpawner(WaveFacade.Factory waveFactory) => _waveFactory = waveFactory;
+        public WaveSpawner(WaveFacade.Factory waveFactory)
+        {
+            _waveFactory = waveFactory;
+        }
 
-        public void Spawn(WaveSpecs waveSpecs) => _waveFactory.Create(waveSpecs);
+        public void Spawn(WaveSpecs waveSpecs)
+        {
+            _waveFactory.Create(waveSpecs);
+        }
     }
 }

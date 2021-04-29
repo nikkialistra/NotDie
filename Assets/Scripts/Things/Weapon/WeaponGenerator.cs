@@ -23,7 +23,10 @@ namespace Things.Weapon
             _weaponGameObjectSpawner = weaponGameObjectSpawner;
         }
 
-        private void Awake() => _roomConfigurator = GetComponent<RoomConfigurator>();
+        private void Awake()
+        {
+            _roomConfigurator = GetComponent<RoomConfigurator>();
+        }
 
         private void Start()
         {
@@ -56,9 +59,11 @@ namespace Things.Weapon
                 Random.Range(roomBounds.min.x, roomBounds.max.x),
                 Random.Range(roomBounds.min.y, roomBounds.max.y)
             );
-            
+
             if (!polygonBounds.OverlapPoint(createPosition))
+            {
                 createPosition = _roomConfigurator.PolygonFloorBorder.ClosestPoint(createPosition);
+            }
 
             _weaponGameObjectSpawner.Spawn(createPosition, weaponFacade);
         }

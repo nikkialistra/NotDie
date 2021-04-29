@@ -45,7 +45,10 @@ namespace Entities.Enemies.Species
         private StateMachine _stateMachine;
 
         [Inject]
-        public void Construct(Settings settings) => _settings = settings;
+        public void Construct(Settings settings)
+        {
+            _settings = settings;
+        }
 
         private void Awake()
         {
@@ -69,7 +72,10 @@ namespace Entities.Enemies.Species
             _enemyAttack.WaveDistance = _settings.WaveDistance;
         }
 
-        private void FixedUpdate() => _stateMachine.Tick();
+        private void FixedUpdate()
+        {
+            _stateMachine.Tick();
+        }
 
         private void SetupStateMachine()
         {
