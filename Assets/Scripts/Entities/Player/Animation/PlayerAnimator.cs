@@ -40,30 +40,58 @@ namespace Entities.Player.Animation
             _weapons.RightWeaponChanged += ActiveWeaponChange;
         }
 
-        private void Awake() => _animator = GetComponent<Animator>();
+        private void Awake()
+        {
+            _animator = GetComponent<Animator>();
+        }
 
         private void Update()
         {
             if (_attackDirection.position.x - transform.position.x > 0)
+            {
                 Flip(false);
-            
+            }
+
             if (_attackDirection.position.x - transform.position.x < 0)
+            {
                 Flip(true);
+            }
         }
 
-        public void Run(bool shouldRun) => _animator.SetBool(_run, shouldRun);
+        public void Run(bool shouldRun)
+        {
+            _animator.SetBool(_run, shouldRun);
+        }
 
-        public bool IsCurrentAnimationWithTag(string tag) => _animator.GetCurrentAnimatorStateInfo(0).IsTag(tag);
+        public bool IsCurrentAnimationWithTag(string tag)
+        {
+            return _animator.GetCurrentAnimatorStateInfo(0).IsTag(tag);
+        }
 
-        public void PlayAttackAnimation(int trigger) => _animator.SetTrigger(trigger);
+        public void PlayAttackAnimation(int trigger)
+        {
+            _animator.SetTrigger(trigger);
+        }
 
-        public void MoveInCombo() => _animator.SetTrigger(_comboMove);
+        public void MoveInCombo()
+        {
+            _animator.SetTrigger(_comboMove);
+        }
 
-        public void StartThrowing() => _animator.SetBool(_throwing, true);
+        public void StartThrowing()
+        {
+            _animator.SetBool(_throwing, true);
+        }
 
-        public void StopThrowing() => _animator.SetTrigger(_cancelThrow);
+        public void StopThrowing()
+        {
+            _animator.SetTrigger(_cancelThrow);
+        }
 
-        public void Throw() => _animator.SetTrigger(_throw);
+        public void Throw()
+        {
+            _animator.SetTrigger(_throw);
+        }
 
         private void OnLeftWeaponActive()
         {
@@ -82,7 +110,9 @@ namespace Entities.Player.Animation
         private void ActiveWeaponChange()
         {
             foreach (var takenHash in _weaponsTakenHashes)
+            {
                 _animator.SetBool(takenHash, false);
+            }
 
             _animator.SetBool(_weapons.ActiveWeapon.Weapon.HashedTakenName, true);
         }

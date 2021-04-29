@@ -22,9 +22,15 @@ namespace Entities.Wave
             _playerMover = playerMover;
         }
 
-        private void Awake() => _rigidBody = GetComponent<Rigidbody2D>();
+        private void Awake()
+        {
+            _rigidBody = GetComponent<Rigidbody2D>();
+        }
 
-        private void FixedUpdate() => _rigidBody.velocity = _playerRigidbody.velocity;
+        private void FixedUpdate()
+        {
+            _rigidBody.velocity = _playerRigidbody.velocity;
+        }
 
         public void SetPosition(Vector3 position)
         {
@@ -35,8 +41,10 @@ namespace Entities.Wave
         
         public void SetDirection(Vector2 direction)
         {
-            if (direction == Vector2.zero) 
+            if (direction == Vector2.zero)
+            {
                 return;
+            }
 
             int additionalRotation;
 

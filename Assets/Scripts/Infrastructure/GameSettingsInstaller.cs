@@ -9,6 +9,9 @@ namespace Infrastructure
     {
         [SerializeField] private CameraFollow.Settings _cameraFollow;
 
-        public override void InstallBindings() => Container.BindInstance(_cameraFollow);
+        public override void InstallBindings()
+        {
+            Container.BindInstance(_cameraFollow);
+        }
     }
 }

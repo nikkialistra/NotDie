@@ -37,11 +37,15 @@ namespace Entities.Player.Combat
         public void Attack(Vector3 position, Transform attackDirection)
         {
             if (_weaponCooldownFinishingTime > Time.time)
+            {
                 return;
-            
+            }
+
             if (_comboShotNumber == 0 || (_playerAnimator.IsCurrentAnimationWithTag("Transition") &&
                                           _comboShotNumber < _weapons.ActiveWeapon.Weapon.ComboShots.Count))
+            {
                 StartShot(position, attackDirection);
+            }
         }
 
         private void StartShot(Vector3 position, Transform attackDirection)
@@ -80,7 +84,9 @@ namespace Entities.Player.Combat
         public void TryMoveInCombo()
         {
             if (_comboShotNumber > 0)
+            {
                 _playerAnimator.MoveInCombo();
+            }
         }
 
         public void ResetCombo()

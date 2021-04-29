@@ -15,8 +15,14 @@ namespace UI.Presenters
             _inventoryView = inventoryView;
         }
 
-        public void SetUp() => _inventory.ItemChanged += OnItemChanged;
+        public void SetUp()
+        {
+            _inventory.ItemChanged += OnItemChanged;
+        }
 
-        private void OnItemChanged(int index, Item item) => _inventoryView.SetItem(index, item);
+        private void OnItemChanged(int index, Item item)
+        {
+            _inventoryView.SetItem(index, item);
+        }
     }
 }

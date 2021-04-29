@@ -30,7 +30,10 @@ namespace Entities.Player.Items
             foreach (var item in items)
             {
                 if (Vector3.Distance(transform.position, item.transform.position) >
-                    _settings.DistanceForTaking) continue;
+                    _settings.DistanceForTaking)
+                {
+                    continue;
+                }
                 
                 TakeItem(item);
                 return true;
@@ -42,9 +45,11 @@ namespace Entities.Player.Items
         private void TakeItem(ItemGameObject itemGameObject)
         {
             var itemFacade = itemGameObject.ItemFacade;
-            
+
             if (_inventory.TryTakeItem(itemFacade))
+            {
                 itemGameObject.Dispose();
+            }
         }
     }
 }

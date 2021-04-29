@@ -23,7 +23,10 @@ namespace UI.Views
         private GameSettings _gameSettings;
 
         [Inject]
-        public void Construct(GameSettings gameSettings) => _gameSettings = gameSettings;
+        public void Construct(GameSettings gameSettings)
+        {
+            _gameSettings = gameSettings;
+        }
 
         private void Awake()
         {
@@ -37,18 +40,24 @@ namespace UI.Views
         private void Start()
         {
             if (_gameSettings.ShowTimer == ShowTimer.False)
+            {
                 gameObject.SetActive(false);
+            }
         }
 
         private void Update()
         {
-            if (!_isWorking) 
+            if (!_isWorking)
+            {
                 return;
+            }
 
             _time += Time.deltaTime;
 
-            if (_timeForNextUpdate > Time.time) 
+            if (_timeForNextUpdate > Time.time)
+            {
                 return;
+            }
             
             SetTime();
             
@@ -58,16 +67,29 @@ namespace UI.Views
         private void OnSettingsChange()
         {
             if (_gameSettings.ShowTimer == ShowTimer.False)
+            {
                 gameObject.SetActive(false);
+            }
             else
+            {
                 gameObject.SetActive(true);
+            }
         }
 
-        public void StartTimer() => _isWorking = true;
+        public void StartTimer()
+        {
+            _isWorking = true;
+        }
 
-        public void StopTimer() => _isWorking = false;
+        public void StopTimer()
+        {
+            _isWorking = false;
+        }
 
-        public void ResetTimer() => _time = 0;
+        public void ResetTimer()
+        {
+            _time = 0;
+        }
 
         private void SetTime()
         {

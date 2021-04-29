@@ -81,7 +81,9 @@ namespace UI.MenuViews
             _activeParameter = (ActiveParameter) (((int) _activeParameter - 1) % (int) ActiveParameter.Length);
 
             if ((int) _activeParameter == -1)
+            {
                 _activeParameter = ActiveParameter.Length - 1;
+            }
             
             UpdateFocusedLabel();
         }
@@ -118,7 +120,9 @@ namespace UI.MenuViews
         private void InitializeHudValues()
         {
             if (!_menuManager.GameSettings.Loaded)
+            {
                 return;
+            }
             
             _fontStyle = _menuManager.GameSettings.FontStyle;
             _fontSize = _menuManager.GameSettings.FontSize;
@@ -135,21 +139,37 @@ namespace UI.MenuViews
         private void OnLeftChange(InputAction.CallbackContext context)
         {
             if (_activeParameter == ActiveParameter.FontStyle)
+            {
                 ChangeFontStyle();
+            }
+
             if (_activeParameter == ActiveParameter.FontSize)
+            {
                 ChangeFontSizeLeft();
+            }
+
             if (_activeParameter == ActiveParameter.ShowTimer)
+            {
                 ChangeShowTimer();
+            }
         }
 
         private void OnRightChange(InputAction.CallbackContext context)
         {
             if (_activeParameter == ActiveParameter.FontStyle)
+            {
                 ChangeFontStyle();
+            }
+
             if (_activeParameter == ActiveParameter.FontSize)
+            {
                 ChangeFontSizeRight();
+            }
+
             if (_activeParameter == ActiveParameter.ShowTimer)
+            {
                 ChangeShowTimer();
+            }
         }
 
         private void ChangeFontStyle()

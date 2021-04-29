@@ -49,17 +49,25 @@ namespace UI.Presenters
         private void OnLeftWeaponChanged()
         {
             if (_leftIsActive)
+            {
                 _weaponsView.SetLeftWeaponSpriteActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
+            }
             else
+            {
                 _weaponsView.SetLeftWeaponSpriteNotActive(_weapons.LeftWeapon.Weapon, _weapons.LeftWeapon.Durability);
+            }
         }
 
         private void OnRightWeaponChanged()
         {
             if (_leftIsActive)
+            {
                 _weaponsView.SetRightWeaponSpriteNotActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
+            }
             else
+            {
                 _weaponsView.SetRightWeaponSpriteActive(_weapons.RightWeapon.Weapon, _weapons.RightWeapon.Durability);
+            }
         }
     }
 }

@@ -9,9 +9,15 @@ namespace Entities.Enemies.States
         
         private readonly EnemyAnimator _enemyAnimator;
 
-        public Stun(EnemyAnimator enemyAnimator) => _enemyAnimator = enemyAnimator;
+        public Stun(EnemyAnimator enemyAnimator)
+        {
+            _enemyAnimator = enemyAnimator;
+        }
 
-        public override void Tick() => TimeInStun += Time.deltaTime;
+        public override void Tick()
+        {
+            TimeInStun += Time.deltaTime;
+        }
 
         public override void OnEnter()
         {

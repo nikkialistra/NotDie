@@ -6,7 +6,9 @@ namespace Entities.Player.Animation
     {
         private static readonly int _comboMove = Animator.StringToHash("comboMove");
 
-        public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) =>
+        public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
             animator.ResetTrigger(_comboMove);
+        }
     }
 }

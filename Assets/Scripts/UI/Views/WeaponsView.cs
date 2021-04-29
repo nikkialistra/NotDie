@@ -60,13 +60,23 @@ namespace UI.Views
                 throw new ArgumentException("Value should be between 0 and 1");
 
             if (durability > 0.75)
+            {
                 return sprites[3];
+            }
+
             if (durability > 0.5)
+            {
                 return sprites[2];
+            }
+
             if (durability > 0.25)
+            {
                 return sprites[1];
+            }
             else
+            {
                 return sprites[0];
+            }
         }
 
         private static Texture2D FlippedTextureFromSprite(Sprite sprite)
@@ -80,8 +90,13 @@ namespace UI.Views
             var flippedTexture = new Texture2D(width, height);
 
             for (var i = 0; i < width; i++)
+            {
                 for (var j = 0; j < height; j++)
-                    flippedTexture.SetPixel(width - i - 1, j, sprite.texture.GetPixel(widthOffset + i, heightOffset + j));
+                {
+                    flippedTexture.SetPixel(width - i - 1, j,
+                        sprite.texture.GetPixel(widthOffset + i, heightOffset + j));
+                }
+            }
 
             flippedTexture.filterMode = FilterMode.Point;
             flippedTexture.Apply();

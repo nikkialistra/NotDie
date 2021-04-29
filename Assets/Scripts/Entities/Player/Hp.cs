@@ -37,23 +37,33 @@ namespace Entities.Player
         public void TakeDamage(int value)
         {
             if (value <= 0)
+            {
                 throw new ArgumentException("Damage must be more than zero");
-            
+            }
+
             if (_healthValue <= 0)
+            {
                 throw new InvalidOperationException("Health should not be 0 or less");
+            }
             
             _healthValue -= value;
 
             if (_healthValue > 0)
+            {
                 HealthChanged?.Invoke(_healthValue);
+            }
             else
+            {
                 TakeAwayLive();
+            }
         }
 
         private void TakeAwayLive()
         {
             if (_lives <= 0)
+            {
                 throw new InvalidOperationException("It should not be invoked when lives not greater than 0");
+            }
 
             _lives -= 1;
             LivesChanged?.Invoke(_lives);

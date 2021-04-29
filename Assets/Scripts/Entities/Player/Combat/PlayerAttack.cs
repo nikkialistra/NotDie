@@ -88,21 +88,29 @@ namespace Entities.Player.Combat
         private void Update()
         {
             if (_attackThrowAction.ReadValue<float>() == 0)
+            {
                 TryUpdateThrowing();
+            }
         }
 
         public void ThrowOrAttack()
         {
             if (_throwing)
+            {
                 Throw();
+            }
             else
+            {
                 Attack();
+            }
         }
         
         private void TryUpdateThrowing()
         {
             if (_throwing)
+            {
                 Throwing();
+            }
         }
 
         private void Throwing()
@@ -114,15 +122,22 @@ namespace Entities.Player.Combat
             _throwingArrow.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        private void Attack() => _weaponAttack.Attack(_playerMover.PositionCenter, _attackDirection.transform);
+        private void Attack()
+        {
+            _weaponAttack.Attack(_playerMover.PositionCenter, _attackDirection.transform);
+        }
 
         private void OnThrowing(InputAction.CallbackContext context)
         {
             if (NotHoldingButton(context))
+            {
                 return;
+            }
 
             if (!_weaponsHandler.WeaponHeld || _playerAnimator.IsCurrentAnimationWithTag("Shot"))
+            {
                 return;
+            }
 
             _thrown = false;
 
@@ -138,15 +153,22 @@ namespace Entities.Player.Combat
         private void OnCancelThrowing(InputAction.CallbackContext context)
         {
             if (NotHoldingButton(context))
+            {
                 CancelThrowing();
+            }
         }
 
-        private static bool NotHoldingButton(InputAction.CallbackContext context) => context.duration < 0.3f;
+        private static bool NotHoldingButton(InputAction.CallbackContext context)
+        {
+            return context.duration < 0.3f;
+        }
 
         private void Throw()
         {
             if (_thrown || !_playerAnimator.IsCurrentAnimationWithTag("Transition"))
+            {
                 return;
+            }
 
             if (!_weaponsHandler.WeaponHeld)
             {
@@ -176,7 +198,9 @@ namespace Entities.Player.Combat
         private void CancelThrowing()
         {
             if (_thrown)
+            {
                 return;
+            }
 
             _playerAnimator.StopThrowing();
             _throwingWeapon.StopThrowing();

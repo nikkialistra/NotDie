@@ -11,7 +11,9 @@ namespace UI
         public Sprite GetDigit(int index)
         {
             if (index < 0 || index > 9)
+            {
                 throw new ArgumentException("Index should be between 0 and 9");
+            }
             
             return _numbers[index];
         }

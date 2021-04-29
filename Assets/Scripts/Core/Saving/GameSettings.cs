@@ -71,10 +71,15 @@ namespace Core.Saving
         public void Apply()
         {
             foreach (var resolution in Screen.resolutions.Where(resolution => resolution.ToString() == Resolution))
+            {
                 Screen.SetResolution(resolution.width, resolution.height, GetDisplayMode());
-            
-            foreach (var language in LocalizationSettings.AvailableLocales.Locales.Where(language => language.ToString() == Language))
+            }
+
+            foreach (var language in LocalizationSettings.AvailableLocales.Locales.Where(language =>
+                language.ToString() == Language))
+            {
                 LocalizationSettings.SelectedLocale = language;
+            }
         }
         
         private FullScreenMode GetDisplayMode()

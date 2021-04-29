@@ -43,7 +43,9 @@ namespace UI.MenuViews
         private void InitializeSliders()
         {
             if (!_menuManager.GameSettings.Loaded)
+            {
                 return;
+            }
             
             _masterVolumeSlider.value = _menuManager.GameSettings.MasterVolume;
             _effectsVolumeSlider.value = _menuManager.GameSettings.EffectsVolume;
@@ -74,12 +76,24 @@ namespace UI.MenuViews
             _menuManager.GameSettings.Save();
         }
 
-        private void OnMasterVolumeChange(ChangeEvent<float> slider) => ShowSliderValueNormalized(_masterVolumeValue, slider.newValue);
+        private void OnMasterVolumeChange(ChangeEvent<float> slider)
+        {
+            ShowSliderValueNormalized(_masterVolumeValue, slider.newValue);
+        }
 
-        private void OnEffectsVolumeChange(ChangeEvent<float> slider) => ShowSliderValueNormalized(_effectsVolumeValue, slider.newValue);
+        private void OnEffectsVolumeChange(ChangeEvent<float> slider)
+        {
+            ShowSliderValueNormalized(_effectsVolumeValue, slider.newValue);
+        }
 
-        private void OnMusicVolumeChange(ChangeEvent<float> slider) => ShowSliderValueNormalized(_musicVolumeValue, slider.newValue);
+        private void OnMusicVolumeChange(ChangeEvent<float> slider)
+        {
+            ShowSliderValueNormalized(_musicVolumeValue, slider.newValue);
+        }
 
-        private static void ShowSliderValueNormalized(Label label, float value) => label.text = Mathf.RoundToInt(value * 20).ToString();
+        private static void ShowSliderValueNormalized(Label label, float value)
+        {
+            label.text = Mathf.RoundToInt(value * 20).ToString();
+        }
     }
 }

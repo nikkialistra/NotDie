@@ -18,9 +18,15 @@ namespace Things.Item
             _item = item;
         }
 
-        public void Dispose() => _pool.Despawn(this);
-        
-        public void OnDespawned() => _pool = null;
+        public void Dispose()
+        {
+            _pool.Despawn(this);
+        }
+
+        public void OnDespawned()
+        {
+            _pool = null;
+        }
 
         public class Factory : PlaceholderFactory<Data.Item, ItemFacade>
         {

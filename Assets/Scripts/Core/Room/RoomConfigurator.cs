@@ -40,11 +40,12 @@ namespace Core.Room
             SetupRoom();
             MakeCollider();
         }
-
-        #if UNITY_EDITOR
-        private void OnValidate() => SetupRoom();
-        #endif
-
+        
+        private void OnValidate()
+        {
+            SetupRoom();
+        }
+        
         private void SetupRoom()
         {
             CenterRoom();
@@ -52,7 +53,10 @@ namespace Core.Room
             PlaceDoors();
         }
 
-        private void CenterRoom() => transform.position = new Vector2(-_width / 2, _height / 2);
+        private void CenterRoom()
+        {
+            transform.position = new Vector2(-_width / 2, _height / 2);
+        }
 
         private void PlaceCorners()
         {

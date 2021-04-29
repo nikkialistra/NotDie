@@ -18,8 +18,10 @@ namespace Entities.Enemies.EnemyWave
         private void FixedUpdate()
         {
             if (_enemyRigidbody == null)
+            {
                 return;
-            
+            }
+
             _rigidBody.velocity = _enemyRigidbody.velocity;
         }
 
@@ -32,9 +34,11 @@ namespace Entities.Enemies.EnemyWave
         public void SetDirection(Vector3 position, Vector3 direction)
         {
             _enemyRigidbody= _enemy.GetComponent<Rigidbody2D>();
-            
-            if (direction == Vector3.zero) 
+
+            if (direction == Vector3.zero)
+            {
                 return;
+            }
 
             transform.position = position + direction;
 

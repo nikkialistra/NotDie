@@ -42,7 +42,9 @@ namespace Entities.Player.Combat
         public void TakeWeapon(WeaponFacade weaponFacade, out WeaponFacade firstDiscardedWeapon, out WeaponFacade secondDiscardedWeapon)
         {
             if (weaponFacade == null)
+            {
                 throw new ArgumentNullException(nameof(weaponFacade));
+            }
 
             firstDiscardedWeapon = null;
             secondDiscardedWeapon = null;
@@ -55,13 +57,17 @@ namespace Entities.Player.Combat
             }
 
             if (!TryTakeInsteadOfHands(weaponFacade))
+            {
                 firstDiscardedWeapon = SwapWeapon(weaponFacade);
+            }
         }
 
         public WeaponFacade DropWeapon()
         {
             if (ActiveWeapon.Weapon.IsTwoHanded)
+            {
                 return DropTwoHandedWeapon();
+            }
             
             return _leftIsActive ? DropLeftWeapon() : DropRightWeapon();
         }
@@ -69,8 +75,10 @@ namespace Entities.Player.Combat
         public void SwapWeapons()
         {
             if (ActiveWeapon.Weapon.IsTwoHanded)
+            {
                 return;
-            
+            }
+
             _leftIsActive = !_leftIsActive;
             
             if (_leftIsActive)
@@ -82,14 +90,18 @@ namespace Entities.Player.Combat
         private void FreeSlotsIfNeeded(ref WeaponFacade firstDiscardedWeapon, ref WeaponFacade secondDiscardedWeapon)
         {
             if (IsBothSlotsFree)
+            {
                 return;
+            }
 
             firstDiscardedWeapon = DropLeftWeapon();
             secondDiscardedWeapon = DropRightWeapon();
 
-            if (firstDiscardedWeapon != null) 
+            if (firstDiscardedWeapon != null)
+            {
                 return;
-            
+            }
+
             firstDiscardedWeapon = secondDiscardedWeapon;
             secondDiscardedWeapon = null;
         }
@@ -123,7 +135,9 @@ namespace Entities.Player.Combat
         {
             var droppedWeapon = _leftWeapon;
             if (droppedWeapon == _hand || droppedWeapon == _crossedSlot)
+            {
                 return null;
+            }
 
             _leftWeapon.DurabilityChanged -= LeftWeaponDurabilityChanged;
             _leftWeapon = _hand;
@@ -131,7 +145,9 @@ namespace Entities.Player.Combat
             LeftWeaponChanged?.Invoke();
 
             if (_rightWeapon == _crossedSlot)
+            {
                 _rightWeapon = _hand;
+            }
 
             return droppedWeapon;
         }
@@ -140,7 +156,9 @@ namespace Entities.Player.Combat
         {
             var droppedWeapon = _rightWeapon;
             if (droppedWeapon == _hand || droppedWeapon == _crossedSlot)
+            {
                 return null;
+            }
 
             _rightWeapon.DurabilityChanged -= RightWeaponDurabilityChanged;
             _rightWeapon = _hand;
@@ -148,7 +166,9 @@ namespace Entities.Player.Combat
             RightWeaponChanged?.Invoke();
 
             if (_leftWeapon == _crossedSlot)
+            {
                 _leftWeapon = _hand;
+            }
 
             return droppedWeapon;
         }
@@ -174,9 +194,11 @@ namespace Entities.Player.Combat
         {
             var discardedWeapon = ActiveWeapon;
             ChangeActiveWeapon(weaponFacade);
-            
-            if (discardedWeapon.Weapon.IsTwoHanded) 
+
+            if (discardedWeapon.Weapon.IsTwoHanded)
+            {
                 SwapTwoHandedWeapon();
+            }
 
             return discardedWeapon;
         }
@@ -242,7 +264,9 @@ namespace Entities.Player.Combat
         private void LeftWeaponDurabilityChanged()
         {
             if (LeftWeapon.Durability <= 0)
+            {
                 DestroyLeftWeapon();
+            }
 
             LeftWeaponChanged?.Invoke();
         }
@@ -250,8 +274,10 @@ namespace Entities.Player.Combat
         private void RightWeaponDurabilityChanged()
         {
             if (RightWeapon.Durability <= 0)
+            {
                 DestroyRightWeapon();
-            
+            }
+
             RightWeaponChanged?.Invoke();
         }
 

@@ -31,7 +31,9 @@ namespace Entities.Player
         public void TakeDamageContinuously(int value, float interval)
         {
             if (_takingDamage != null)
+            {
                 StopCoroutine(_takingDamage);
+            }
             
             _takingDamage = StartCoroutine(TakingDamage(value, interval));
         }
@@ -39,7 +41,9 @@ namespace Entities.Player
         public void StopTakingDamage()
         {
             if (_takingDamage != null)
+            {
                 StopCoroutine(_takingDamage);
+            }
         }
 
         private IEnumerator TakingDamage(int value, float interval)
@@ -54,11 +58,15 @@ namespace Entities.Player
         private void OnTriggerEnter2D(Collider2D other)
         {
             var enemyWaveFacade = other.GetComponentInParent<EnemyWaveFacade>();
-            if (enemyWaveFacade == null) 
+            if (enemyWaveFacade == null)
+            {
                 return;
+            }
 
-            if (!enemyWaveFacade.IsPenetrable)
-                if (TakeOnce(enemyWaveFacade)) return;
+            if (!enemyWaveFacade.IsPenetrable && TakeOnce(enemyWaveFacade))
+            {
+                return;
+            }
 
             TakeWaveDamage(enemyWaveFacade.DamageValue);
         }
@@ -66,7 +74,9 @@ namespace Entities.Player
         private bool TakeOnce(EnemyWaveFacade wave)
         {
             if (_damagedWaves.Contains((wave.Enemy, wave.Id)))
+            {
                 return true;
+            }
 
             _damagedWaves.Add((wave.Enemy, wave.Id));
             return false;
@@ -75,12 +85,19 @@ namespace Entities.Player
         private void TakeWaveDamage(int value)
         {
             if (value <= 0)
+            {
                 throw new ArgumentException("Damage must be more than zero");
+            }
+            
             _hp.TakeDamage(value);
         }
 
-        private void OnLivesChanged(int lives) { }
+        private void OnLivesChanged(int lives)
+        {
+        }
 
-        private void OnGameOver() { }
+        private void OnGameOver()
+        {
+        }
     }
 }

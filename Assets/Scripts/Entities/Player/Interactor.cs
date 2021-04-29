@@ -51,19 +51,25 @@ namespace Entities.Player
         private void OnInteract(InputAction.CallbackContext context)
         {
             var (result, roomObject) = TryFindRoomObject();
-            
+
             if (result)
+            {
                 roomObject.Use();
+            }
             else
-                _playerAttack.ThrowOrAttack(); 
+            {
+                _playerAttack.ThrowOrAttack();
+            } 
         }
 
         private void OnSpecialInteract(InputAction.CallbackContext context)
         {
             var (result, roomObject) = TryFindRoomObject();
-            
+
             if (result)
+            {
                 roomObject.Use();
+            }
         }
 
         private (bool, RoomObject) TryFindRoomObject()
@@ -72,7 +78,10 @@ namespace Entities.Player
             foreach (var roomObject in roomObjects)
             {
                 if (Vector3.Distance(transform.position, roomObject.transform.position) >
-                    _settings.DistanceForTaking) continue;
+                    _settings.DistanceForTaking)
+                {
+                    continue;
+                }
                 
                 return (true, roomObject);
             }

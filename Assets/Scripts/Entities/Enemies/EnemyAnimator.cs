@@ -13,7 +13,10 @@ namespace Entities.Enemies
         private readonly int _attack = Animator.StringToHash("attack");
         private readonly int _stun = Animator.StringToHash("stun");
 
-        private void Awake() => _animator = GetComponent<Animator>();
+        private void Awake()
+        {
+            _animator = GetComponent<Animator>();
+        }
 
         public void UpdateDirection(Vector3 direction)
         {
@@ -26,7 +29,10 @@ namespace Entities.Enemies
                 Flip(true);
         }
 
-        public void Stun() => _animator.SetBool(_run, false);
+        public void Stun()
+        {
+            _animator.SetBool(_run, false);
+        }
 
         private void Flip(bool value)
         {
@@ -37,6 +43,9 @@ namespace Entities.Enemies
             transform.localScale = scale;
         }
 
-        public void Attack() => _animator.SetTrigger(_attack);
+        public void Attack()
+        {
+            _animator.SetTrigger(_attack);
+        }
     }
 }

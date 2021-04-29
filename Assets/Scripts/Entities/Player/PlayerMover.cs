@@ -66,17 +66,25 @@ namespace Entities.Player
         private void Update()
         {
             if (_playerUnderControl)
+            {
                 _moveDirection = _moveAction.ReadValue<Vector2>();
+            }
             else
+            {
                 _moveDirection = Vector2.zero;
+            }
         }
 
         private void FixedUpdate()
         {
-            if (_moveDirection != Vector2.zero) 
+            if (_moveDirection != Vector2.zero)
+            {
                 MovePlayer();
+            }
             else
+            {
                 _playerAnimator.Run(false);
+            }
         }
 
         public void AddVelocity(float strength, AnimationCurve curve, float time)
@@ -87,11 +95,15 @@ namespace Entities.Player
             var impulseDirection = (_attackDirection.position - PositionCenter).normalized;
             var velocity = impulseDirection * strength;
 
-            DOTween.To(() => (Vector3) _rigidbody.velocity, x => _rigidbody.velocity = x, velocity, time).SetEase(curve)
+            DOTween.To(() => (Vector3) _rigidbody.velocity, x => _rigidbody.velocity = x, velocity, time)
+                .SetEase(curve)
                 .OnComplete(ReturnControl);
         }
 
-        public void TakeAwayControl() => _playerUnderControl = false;
+        public void TakeAwayControl()
+        {
+            _playerUnderControl = false;
+        }
 
         public void ReturnControl()
         {

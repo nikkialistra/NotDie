@@ -19,7 +19,10 @@ namespace Entities.Enemies
             set
             {
                 if (value <= 0)
+                {
                     throw new ArgumentOutOfRangeException(nameof(WaveDistance));
+                }
+                
                 _waveDistance = value;
             }
         }
@@ -29,7 +32,10 @@ namespace Entities.Enemies
             set
             {
                 if (value <= 0)
+                {
                     throw new ArgumentOutOfRangeException(nameof(Cooldown));
+                }
+                
                 _cooldown = value;
             }
         }
@@ -47,7 +53,10 @@ namespace Entities.Enemies
         private EnemyMover _enemyMover;
 
         [Inject]
-        public void Construct(EnemyWaveSpawner enemyWaveSpawner) => _enemyWaveSpawner = enemyWaveSpawner;
+        public void Construct(EnemyWaveSpawner enemyWaveSpawner)
+        {
+            _enemyWaveSpawner = enemyWaveSpawner;
+        }
 
         private void Awake()
         {
@@ -59,8 +68,10 @@ namespace Entities.Enemies
         public void TryAttack(PlayerMover player)
         {
             if (Time.time < _nextAttackTime)
+            {
                 return;
-            
+            }
+
             _enemyAnimator.Attack();
 
             var velocity = EnemyWave.Impulse * (player.PositionCenter - _enemy.PositionCenter).normalized;

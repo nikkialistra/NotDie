@@ -37,7 +37,10 @@ namespace Entities.Enemies.Species
         private StateMachine _stateMachine;
 
         [Inject]
-        public void Construct(Settings settings) => _settings = settings;
+        public void Construct(Settings settings)
+        {
+            _settings = settings;
+        }
 
         private void Awake()
         {
@@ -52,9 +55,15 @@ namespace Entities.Enemies.Species
             SetupStateMachine();
         }
 
-        private void Start() => _enemyHealthHandler.Health = _settings.Health;
+        private void Start()
+        {
+            _enemyHealthHandler.Health = _settings.Health;
+        }
 
-        private void FixedUpdate() => _stateMachine.Tick();
+        private void FixedUpdate()
+        {
+            _stateMachine.Tick();
+        }
 
         private void SetupStateMachine()
         {

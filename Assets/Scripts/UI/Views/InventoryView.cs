@@ -9,7 +9,7 @@ namespace UI.Views
     {
         private VisualElement _rootVisualElement;
 
-        private Image[] _items = new Image[5];
+        private readonly Image[] _items = new Image[5];
 
         private void Awake()
         {
@@ -25,7 +25,9 @@ namespace UI.Views
         public void SetItem(int index, Item item)
         {
             if (index < 0 || index > 4)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
             _items[index].sprite = item.InInventory;
         }

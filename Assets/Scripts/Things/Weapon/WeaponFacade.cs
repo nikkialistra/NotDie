@@ -30,7 +30,10 @@ namespace Things.Weapon
 
         private IMemoryPool _pool;
 
-        public void Hitted() => Durability -= _weapon.DurabilityLostOnHit();
+        public void Hitted()
+        {
+            Durability -= _weapon.DurabilityLostOnHit();
+        }
 
         public void OnSpawned(WeaponSpecs weaponSpecs, IMemoryPool pool)
         {
@@ -40,9 +43,15 @@ namespace Things.Weapon
             _durability = weaponSpecs.Durability;
         }
 
-        public void Dispose() => _pool.Despawn(this);
-        
-        public void OnDespawned() => _pool = null;
+        public void Dispose()
+        {
+            _pool.Despawn(this);
+        }
+
+        public void OnDespawned()
+        {
+            _pool = null;
+        }
 
         public class Factory : PlaceholderFactory<WeaponSpecs, WeaponFacade>
         {
