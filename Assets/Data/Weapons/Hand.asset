@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd5560902a145dbbed2689b009aa257, type: 3}
   m_Name: Hand
   m_EditorClassIdentifier: 
+  DescriptionKey: _hand
   PickUp: {fileID: 0}
   Active: {fileID: 8020529028887865597, guid: 30d8a83eb64774244a47aa9fbcb1305a, type: 3}
   NotActive: {fileID: -7322360371056709617, guid: 30d8a83eb64774244a47aa9fbcb1305a, type: 3}

@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7289a7622d14b7da0395d3f153cf425, type: 3}
+  m_Name: RegularRing
+  m_EditorClassIdentifier: 
+  DescriptionKey: _regular_ring
+  PickUp: {fileID: 21300000, guid: 7f8848f8ec25fdc4c9f7a963ac7d114a, type: 3}
+  InInventory: {fileID: 21300000, guid: 7f8848f8ec25fdc4c9f7a963ac7d114a, type: 3}
+  HasModifiers: 1
+  StatTypes: 
+  StatModifierTypes: 
+  StatModifierLevels: []
+  Levels:
+  - StatModifiers:
+    - StatType: 0
+      Value: 5
+      Type: 400
+    - StatType: 1
+      Value: 1.5
+      Type: 400
+    - StatType: 2
+      Value: 3
+      Type: 400
+    - StatType: 3
+      Value: 0.5
+      Type: 400
+  - StatModifiers:
+    - StatType: 0
+      Value: 7
+      Type: 400
+    - StatType: 1
+      Value: 2
+      Type: 400
+    - StatType: 2
+      Value: 4
+      Type: 400
+    - StatType: 3
+      Value: 0.8
+      Type: 400
+  - StatModifiers:
+    - StatType: 0
+      Value: 10
+      Type: 400
+    - StatType: 1
+      Value: 2.5
+      Type: 400
+    - StatType: 2
+      Value: 5
+      Type: 400
+    - StatType: 3
+      Value: 1
+      Type: 400
+  - StatModifiers:
+    - StatType: 0
+      Value: 12
+      Type: 400
+    - StatType: 1
+      Value: 3
+      Type: 400
+    - StatType: 2
+      Value: 7
+      Type: 400
+    - StatType: 3
+      Value: 1.3
+      Type: 400
+  - StatModifiers:
+    - StatType: 0
+      Value: 20
+      Type: 400
+    - StatType: 1
+      Value: 4
+      Type: 400
+    - StatType: 2
+      Value: 10
+      Type: 400
+    - StatType: 3
+      Value: 1.8
+      Type: 400

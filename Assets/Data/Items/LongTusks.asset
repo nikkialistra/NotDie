@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7289a7622d14b7da0395d3f153cf425, type: 3}
-  m_Name: LongTooth
+  m_Name: LongTusks
   m_EditorClassIdentifier: 
+  DescriptionKey: _long_tusks
   PickUp: {fileID: 21300000, guid: dc86731f94303a7449a8e8c3ee7dbc76, type: 3}
   InInventory: {fileID: 21300000, guid: 8a16814a406f4b44090fb51587835206, type: 3}
-  Description: 
-  Note: 
+  HasModifiers: 0
+  Levels: []

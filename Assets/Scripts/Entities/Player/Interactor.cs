@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Entities.Player.Combat;
 using Entities.RoomObjects;
 using UnityEngine;
@@ -50,29 +51,34 @@ namespace Entities.Player
 
         private void OnInteract(InputAction.CallbackContext context)
         {
-            var (result, roomObject) = TryFindRoomObject();
-
-            if (result)
+            if (TryFindRoomObject(out var roomObject))
             {
                 roomObject.Use();
             }
             else
             {
-                _playerAttack.ThrowOrAttack();
+                StartCoroutine(TransferControlToPlayerAttack());
             } 
+        }
+
+        private IEnumerator TransferControlToPlayerAttack()
+        {
+            while (_interactAction.ReadValue<float>() > 0)
+            {
+                _playerAttack.ThrowOrAttack();
+                yield return null;
+            }
         }
 
         private void OnSpecialInteract(InputAction.CallbackContext context)
         {
-            var (result, roomObject) = TryFindRoomObject();
-
-            if (result)
+            if (TryFindRoomObject(out var roomObject))
             {
                 roomObject.Use();
             }
         }
 
-        private (bool, RoomObject) TryFindRoomObject()
+        private bool TryFindRoomObject(out RoomObject foundRoomObject)
         {
             var roomObjects = FindObjectsOfType<RoomObject>();
             foreach (var roomObject in roomObjects)
@@ -82,11 +88,13 @@ namespace Entities.Player
                 {
                     continue;
                 }
-                
-                return (true, roomObject);
+
+                foundRoomObject = roomObject;
+                return true;
             }
 
-            return (false, null);
+            foundRoomObject = null;
+            return false;
         }
     }
 }

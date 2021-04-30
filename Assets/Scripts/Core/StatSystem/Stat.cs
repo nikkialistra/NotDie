@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UniRx;
-using UnityEngine;
 
 namespace Core.StatSystem
 {
@@ -83,23 +82,29 @@ namespace Core.StatSystem
 			{
 				var modifier = _statModifiers[i];
 
-				if (modifier.Type == StatModifierType.Flat)
+				switch (modifier.Type)
 				{
-					finalValue += modifier.Value;
-				}
-				else if (modifier.Type == StatModifierType.PercentAdd)
-				{
-					percentAddSum += modifier.Value;
-
-					if (i + 1 >= _statModifiers.Count || _statModifiers[i + 1].Type != StatModifierType.PercentAdd)
+					case StatModifierType.EarlyFlat:
+						finalValue += modifier.Value;
+						break;
+					case StatModifierType.PercentAdd:
 					{
-						finalValue *= 1 + percentAddSum;
-						percentAddSum = 0;
+						percentAddSum += modifier.Value;
+
+						if (i + 1 >= _statModifiers.Count || _statModifiers[i + 1].Type != StatModifierType.PercentAdd)
+						{
+							finalValue *= 1 + percentAddSum;
+							percentAddSum = 0;
+						}
+
+						break;
 					}
-				}
-				else if (modifier.Type == StatModifierType.PercentMultiply)
-				{
-					finalValue *= 1 + modifier.Value;
+					case StatModifierType.PercentMultiply:
+						finalValue *= 1 + modifier.Value;
+						break;
+					case StatModifierType.LateFlat:
+						finalValue += modifier.Value;
+						break;
 				}
 			}
 

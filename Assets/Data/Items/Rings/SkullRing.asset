@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7289a7622d14b7da0395d3f153cf425, type: 3}
+  m_Name: SkullRing
+  m_EditorClassIdentifier: 
+  DescriptionKey: _skullRing
+  PickUp: {fileID: 0}
+  InInventory: {fileID: 0}
+  HasModifiers: 1
+  StatTypes: 02000000
+  StatModifierTypes: 64000000
+  StatModifierLevels:
+  - Values:
+    - 5
+  - Values:
+    - 8
+  - Values:
+    - 13
+  - Values:
+    - 17
+  - Values:
+    - 25
+  Levels:
+  - StatModifiers:
+    - StatType: 2
+      Value: 5
+      Type: 100
+  - StatModifiers:
+    - StatType: 2
+      Value: 8
+      Type: 100
+  - StatModifiers:
+    - StatType: 2
+      Value: 13
+      Type: 100
+  - StatModifiers:
+    - StatType: 2
+      Value: 17
+      Type: 100
+  - StatModifiers:
+    - StatType: 2
+      Value: 25
+      Type: 100

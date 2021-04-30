@@ -69,11 +69,7 @@ namespace Entities.Player
         private void Start()
         {
             _playerStats.Speed.Value.ObserveEveryValueChanged(x => x.Value)
-                .Subscribe(value =>
-                {
-                    _speed = value;
-                    Debug.Log(_speed);
-                });
+                .Subscribe(value => _speed = value);
         }
 
         private void Update()
