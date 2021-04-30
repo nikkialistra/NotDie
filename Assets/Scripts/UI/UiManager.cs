@@ -24,7 +24,7 @@ namespace UI
             _inventoryPresenter = new InventoryPresenter(inventory, inventoryView);
         }
 
-        private void Start()
+        private void Awake()
         {
             _hpPresenter.SetUp();
             _weaponsPresenter.SetUp();

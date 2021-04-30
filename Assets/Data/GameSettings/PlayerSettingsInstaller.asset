@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: PlayerSettingsInstaller
   m_EditorClassIdentifier: 
   _hp:
-    HealthFullValue: 100
     Lives: 9
+    InitialHealth: 100
   _playerMover:
     YPosition: 0.95
-    Speed: 25
     Damping: 10
   _playerAttack:
     AttackAfterThrowCooldown: 0.3

@@ -1,61 +1,51 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using UniRx;
+using UnityEngine;
 
 namespace Core.StatSystem
 {
 	[Serializable]
 	public class Stat
 	{
-		public float BaseValue;
-
-		public virtual float Value
-		{
-			get
-			{
-				if (_isDirty || _lastBaseValue != BaseValue)
-				{
-					_lastBaseValue = BaseValue;
-					_value = CalculateFinalValue();
-					_isDirty = false;
-				}
-
-				return _value;
-			}
-		}
-
+		public IReadOnlyReactiveProperty<float> Value;
 		public readonly ReadOnlyCollection<StatModifier> StatModifiers;
+		
+		private float BaseValue;
+		private ReactiveProperty<bool> IsDirty = new ReactiveProperty<bool>();
+		
+		private readonly List<StatModifier> _statModifiers;
 
-		protected bool _isDirty = true;
-
-		protected float _lastBaseValue;
-
-		protected float _value;
-
-		protected readonly List<StatModifier> _statModifiers;
-
-		public Stat()
+		public Stat(float baseValue)
 		{
 			_statModifiers = new List<StatModifier>();
 			StatModifiers = _statModifiers.AsReadOnly();
-		}
 
-		public Stat(float baseValue) : this()
-		{
+			Value = IsDirty.ObserveEveryValueChanged(x => x.Value)
+				.Where(x => x == true)
+				.Select(_ =>
+				{
+					IsDirty.Value = false;
+					return CalculateFinalValue();
+				})
+				.ToReactiveProperty();
+
 			BaseValue = baseValue;
+			IsDirty.Value = true;
 		}
 
 		public virtual void AddModifier(StatModifier modifier)
 		{
-			_isDirty = true;
 			_statModifiers.Add(modifier);
+			IsDirty.Value = true;
 		}
 
 		public virtual bool RemoveModifier(StatModifier modifier)
 		{
 			if (_statModifiers.Remove(modifier))
 			{
-				_isDirty = true;
+				IsDirty.Value = true;
 				return true;
 			}
 			return false;
@@ -67,13 +57,13 @@ namespace Core.StatSystem
 
 			if (removedCount > 0)
 			{
-				_isDirty = true;
+				IsDirty.Value = true;
 				return true;
 			}
 			return false;
 		}
 
-		protected virtual int CompareModifierOrder(StatModifier a, StatModifier b)
+		private int CompareModifierOrder(StatModifier a, StatModifier b)
 		{
 			if (a.Order < b.Order)
 				return -1;
@@ -82,7 +72,7 @@ namespace Core.StatSystem
 			return 0;
 		}
 		
-		protected virtual float CalculateFinalValue()
+		private float CalculateFinalValue()
 		{
 			var finalValue = BaseValue;
 			var percentAddSum = 0f;

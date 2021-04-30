@@ -28,8 +28,15 @@ namespace Entities.Player
 
         private void Awake()
         {
-            HealthFull.BaseValue = _settings.BaseHealthFull;
-            Speed.BaseValue = _settings.BaseSpeed;
+            HealthFull = new Stat(_settings.BaseHealthFull);
+            Speed = new Stat(_settings.BaseSpeed);
+        }
+
+        [ContextMenu("AddModifier")]
+        private void AddModifier()
+        {
+            var modifier = new StatModifier(10, StatModifierType.Flat);
+            HealthFull.AddModifier(modifier);
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using Entities.Player.Animation;
 using Entities.Player.Combat;
+using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -9,7 +10,6 @@ using Zenject;
 namespace Entities.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(PlayerStats))]
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerMover : MonoBehaviour
     {
@@ -68,7 +68,12 @@ namespace Entities.Player
 
         private void Start()
         {
-            _speed = _playerStats.Speed.Value;
+            _playerStats.Speed.Value.ObserveEveryValueChanged(x => x.Value)
+                .Subscribe(value =>
+                {
+                    _speed = value;
+                    Debug.Log(_speed);
+                });
         }
 
         private void Update()
@@ -81,6 +86,8 @@ namespace Entities.Player
             {
                 _moveDirection = Vector2.zero;
             }
+
+            
         }
 
         private void FixedUpdate()
