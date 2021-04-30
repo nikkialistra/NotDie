@@ -1359,10 +1359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37731f19ed24abb8ce321044a8be19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthFull:
-    BaseValue: 0
-  Speed:
-    BaseValue: 0
 --- !u!1 &1016144182
 GameObject:
   m_ObjectHideFlags: 0
@@ -2760,16 +2756,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7054862580936388705, guid: 94ff85432863cee48b83860753576ba7, type: 3}
       propertyPath: m_Simulated
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8819680167364378762, guid: 94ff85432863cee48b83860753576ba7, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94ff85432863cee48b83860753576ba7, type: 3}
 --- !u!4 &1346688145117226038 stripped
 Transform:

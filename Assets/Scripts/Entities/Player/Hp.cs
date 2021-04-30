@@ -5,6 +5,7 @@ namespace Entities.Player
     public class Hp
     {
         public event Action<float> HealthChanged;
+        public event Action<float> HealthFullChanged;
 
         public event Action<int> LivesChanged;
 
@@ -14,33 +15,21 @@ namespace Entities.Player
         public class Settings
         {
             public int Lives;
+            public float InitialHealth;
         }
         
-        public float HealthFullValue
+        public float HealthFull
         {
-            get => _healthFullValue;
+            get => _healthFull;
             set
             {
-                if (value <= 0)
+                if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(HealthFullValue));
+                    throw new ArgumentOutOfRangeException(nameof(HealthFull));
                 }
                 
-                _healthFullValue = value;
-            }
-        }
-        
-        public float HealthValue
-        {
-            get => _healthValue;
-            set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(HealthFullValue));
-                }
-                
-                _healthValue = value;
+                _healthFull = value;
+                HealthFullChanged?.Invoke(_healthFull);
             }
         }
 
@@ -50,8 +39,8 @@ namespace Entities.Player
         
         private int _lives;
 
-        private float _healthFullValue;
-        private float _healthValue;
+        private float _healthFull;
+        private float _health;
 
 
         private bool IsAlive => _settings.Lives > 0;
@@ -62,6 +51,13 @@ namespace Entities.Player
             _lives = _settings.Lives;
         }
 
+        public void SetInitialHealth()
+        {
+            _health = _settings.InitialHealth;
+            HealthFullChanged?.Invoke(_health);
+            HealthChanged?.Invoke(_health);
+        }
+
         public void TakeDamage(int value)
         {
             if (value <= 0)
@@ -69,16 +65,16 @@ namespace Entities.Player
                 throw new ArgumentException("Damage must be more than zero");
             }
 
-            if (_healthValue <= 0)
+            if (_health <= 0)
             {
                 throw new InvalidOperationException("Health should not be 0 or less");
             }
             
-            _healthValue -= value;
+            _health -= value;
 
-            if (_healthValue > 0)
+            if (_health > 0)
             {
-                HealthChanged?.Invoke(_healthValue);
+                HealthChanged?.Invoke(_health);
             }
             else
             {
@@ -98,8 +94,8 @@ namespace Entities.Player
 
             if (IsAlive)
             {
-                HealthValue = HealthFullValue;
-                HealthChanged?.Invoke(HealthValue);
+                _health = HealthFull;
+                HealthChanged?.Invoke(_health);
             }
             else
             {

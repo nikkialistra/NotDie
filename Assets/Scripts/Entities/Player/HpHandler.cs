@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Core.Interfaces;
 using Entities.Enemies.EnemyWave;
 using Entities.Enemies.Species;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -36,8 +37,14 @@ namespace Entities.Player
 
         private void Start()
         {
-            _hp.HealthFullValue = _playerStats.HealthFull.Value;
-            _hp.HealthValue = _playerStats.HealthFull.Value;
+            _hp.SetInitialHealth();
+            
+            _playerStats.HealthFull.Value.ObserveEveryValueChanged(x => x.Value)
+                .Subscribe(value =>
+                {
+                    _hp.HealthFull = value;
+                    Debug.Log(_hp.HealthFull);
+                });
         }
 
         public void TakeDamage(int value) => _hp.TakeDamage(value);

@@ -1,5 +1,4 @@
-﻿using System;
-using Core.Saving;
+﻿using Core.Saving;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Zenject;
@@ -41,7 +40,7 @@ namespace UI.Views
         {
             if (_gameSettings.ShowTimer == ShowTimer.False)
             {
-                gameObject.SetActive(false);
+                enabled = false;
             }
         }
 
@@ -68,11 +67,11 @@ namespace UI.Views
         {
             if (_gameSettings.ShowTimer == ShowTimer.False)
             {
-                gameObject.SetActive(false);
+                enabled = false;
             }
             else
             {
-                gameObject.SetActive(true);
+                enabled = true;
             }
         }
 

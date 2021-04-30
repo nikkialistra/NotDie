@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,7 +19,6 @@ namespace UI.Views
 
         [Space]
         [SerializeField] private Sprite _stitch;
-        
 
         private VisualElement _rootVisualElement;
 
@@ -37,7 +37,8 @@ namespace UI.Views
         private Image _healthSecond;
         private Image _healthThird;
 
-        private float _fullHealthValue;
+        private float _fullHealth;
+        private float _lastHealth;
 
         private Coroutine _healthBarCoroutine;
 
@@ -61,32 +62,25 @@ namespace UI.Views
             _healthThird = _rootVisualElement.Q<Image>("health__third");
         }
 
-        public void SetFullHealthValue(float fullValue)
+        public void SetHealthFull(float fullValue)
         {
-            _fullHealthValue = fullValue;
-        }
+            _fullHealth = fullValue;
 
-        public void SetInitialHealth(float value)
-        {
-            _borders.sprite = _border;
-            _fillIndicator.sprite = _fill;
-            _stitchIndicator.sprite = _stitch;
-
-            var fillAmount = value / _fullHealthValue;
-            var targetWidth = fillAmount * 100;
-            
-            _fillIndicator.style.width = targetWidth;
-            _activatedFillIndicator.style.width = targetWidth;
-            _stitchIndicator.style.left = 100;
-
-            UpdateDigits(value);
+            UpdateFillPercent();
         }
 
         public void SetHealth(float value)
         {
-            UpdateDigits(value);
+            if (_fullHealth == 0)
+            {
+                return;
+            }
 
-            if (value != _fullHealthValue)
+            _lastHealth = value;
+            
+            UpdateDigits();
+
+            if (Math.Abs(value - _fullHealth) > 0.99)
             {
                 PlayHealthBarSpritesAnimation(value);
             }
@@ -96,6 +90,35 @@ namespace UI.Views
             }
         }
 
+        public void SetLives(int value)
+        {
+            _lives.text = value.ToString();
+        }
+
+        private void UpdateFillPercent()
+        {
+            var fillAmount = _lastHealth / _fullHealth;
+            var targetWidth = fillAmount * 100;
+
+            _fillIndicator.style.width = targetWidth;
+            _activatedFillIndicator.style.width = targetWidth;
+            _stitchIndicator.style.left = 100;
+        }
+
+        private void SetInitialHealth(float value)
+        {
+            _fullHealth = value;
+            _lastHealth = value;
+            
+            _borders.sprite = _border;
+            _fillIndicator.sprite = _fill;
+            _stitchIndicator.sprite = _stitch;
+
+            UpdateFillPercent();
+
+            UpdateDigits();
+        }
+
         private void PlayHealthBarSpritesAnimation(float value)
         {
             if (_healthBarCoroutine != null)
@@ -103,7 +126,7 @@ namespace UI.Views
                 StopCoroutine(_healthBarCoroutine);
             }
             
-            var fillAmount = value / _fullHealthValue;
+            var fillAmount = value / _fullHealth;
             var targetWidth = fillAmount * 100;
             
             _healthBarCoroutine = StartCoroutine(PlayHealthBarCoroutine(targetWidth));
@@ -166,19 +189,19 @@ namespace UI.Views
             _fillIndicator.sprite = _fill;
         }
 
-        private void UpdateDigits(float value)
+        private void UpdateDigits()
         {
-            if (value >= 100)
+            if (_lastHealth >= 100)
             {
-                SetThreeDigits(value);
+                SetThreeDigits(_lastHealth);
             }
-            else if (value >= 10)
+            else if (_lastHealth >= 10)
             {
-                SetTwoDigits(value);
+                SetTwoDigits(_lastHealth);
             }
             else
             {
-                SetOneDigit(value);
+                SetOneDigit(_lastHealth);
             }
         }
 
@@ -210,11 +233,6 @@ namespace UI.Views
             _healthFirst.style.display = DisplayStyle.None;
             _healthSecond.style.display = DisplayStyle.None;
             _healthThird.style.display = DisplayStyle.Flex;
-        }
-
-        public void SetLives(int value)
-        {
-            _lives.text = value.ToString();
         }
     }
 }
