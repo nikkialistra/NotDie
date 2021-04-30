@@ -33,6 +33,9 @@ namespace Things.Data
             public bool isPenetrable;
         }
 
+
+        public string DescriptionKey;
+        
         [Header("Icons")] 
         public Sprite PickUp;
         public Sprite Active;

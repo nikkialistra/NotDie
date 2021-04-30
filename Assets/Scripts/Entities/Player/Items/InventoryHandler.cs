@@ -1,4 +1,5 @@
 ﻿using System;
+using Things.Data;
 using Things.Item;
 using UnityEngine;
 using Zenject;
@@ -12,6 +13,8 @@ namespace Entities.Player.Items
         {
             public float DistanceForTaking;
         }
+
+        public event Action<ItemFacade> InventoryChange; 
 
         private Settings _settings;
         
@@ -48,6 +51,7 @@ namespace Entities.Player.Items
 
             if (_inventory.TryTakeItem(itemFacade))
             {
+                InventoryChange?.Invoke(itemFacade);
                 itemGameObject.Dispose();
             }
         }

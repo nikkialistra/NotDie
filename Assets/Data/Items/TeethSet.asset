@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7289a7622d14b7da0395d3f153cf425, type: 3}
-  m_Name: Tooth
+  m_Name: TeethSet
   m_EditorClassIdentifier: 
+  DescriptionKey: _teeth_set
   PickUp: {fileID: 21300000, guid: 76deb774e2ca4664ba0ad13b47b47d61, type: 3}
   InInventory: {fileID: 21300000, guid: 3330da471d66a8a4db6dd08301694906, type: 3}
-  Description: 
-  Note: 
+  HasModifiers: 0
+  Levels: []

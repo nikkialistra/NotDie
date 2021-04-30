@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd5560902a145dbbed2689b009aa257, type: 3}
   m_Name: GreatSword
   m_EditorClassIdentifier: 
+  DescriptionKey: _great_sword
   PickUp: {fileID: 21300000, guid: f52cf3969c0e0a641b004a159b95d4a2, type: 3}
   Active: {fileID: 1334014822641648547, guid: b456d14951c53a04fbe34dd2d9f0beec, type: 3}
   NotActive: {fileID: -7950567799997631269, guid: b456d14951c53a04fbe34dd2d9f0beec, type: 3}

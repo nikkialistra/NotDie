@@ -26,6 +26,30 @@ TextureImporter:
   - first:
       213: -7704435256882591993
     second: PoorSlisedRecover_7
+  - first:
+      213: -4605086394535713560
+    second: PoorRecover_0
+  - first:
+      213: -5112110051838488481
+    second: PoorRecover_1
+  - first:
+      213: -5645648499457636001
+    second: PoorRecover_2
+  - first:
+      213: 7556426778321839782
+    second: PoorRecover_3
+  - first:
+      213: 8325294466729981620
+    second: PoorRecover_4
+  - first:
+      213: 2284923893205230780
+    second: PoorRecover_5
+  - first:
+      213: 2576916339149158364
+    second: PoorRecover_6
+  - first:
+      213: -3721838464407447560
+    second: PoorRecover_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -127,7 +151,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PoorSlisedRecover_0
+      name: PoorRecover_0
       rect:
         serializedVersion: 2
         x: 0
@@ -135,20 +159,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.492, y: 0.278}
+      pivot: {x: 0.5, y: 0.278}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5b93f7da8fc9dbb0800000000000000
-      internalID: -4910665723435312291
+      spriteID: 8e4e6bda2527710c0800000000000000
+      internalID: -4605086394535713560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PoorSlisedRecover_1
+      name: PoorRecover_1
       rect:
         serializedVersion: 2
         x: 128
@@ -156,20 +180,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.492, y: 0.278}
+      pivot: {x: 0.5, y: 0.278}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f6ced0608a660bb0800000000000000
-      internalID: -4970168039143192840
+      spriteID: f5096733ef22e09b0800000000000000
+      internalID: -5112110051838488481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PoorSlisedRecover_2
+      name: PoorRecover_2
       rect:
         serializedVersion: 2
         x: 256
@@ -177,20 +201,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.492, y: 0.278}
+      pivot: {x: 0.5, y: 0.278}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bc8531d350eb9c20800000000000000
-      internalID: 3214409409655835831
+      spriteID: f594c170a90a6a1b0800000000000000
+      internalID: -5645648499457636001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PoorSlisedRecover_3
+      name: PoorRecover_3
       rect:
         serializedVersion: 2
         x: 384
@@ -198,20 +222,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.492, y: 0.278}
+      pivot: {x: 0.5, y: 0.278}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ea357812d884fa30800000000000000
-      internalID: 4248170784452066024
+      spriteID: 6a66f158e12ddd860800000000000000
+      internalID: 7556426778321839782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PoorSlisedRecover_4
+      name: PoorRecover_4
       rect:
         serializedVersion: 2
         x: 512
@@ -219,20 +243,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.492, y: 0.278}
+      pivot: {x: 0.5, y: 0.278}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d28e4d8982155370800000000000000
-      internalID: 8310569069372670675
+      spriteID: 4b637fb4533698370800000000000000
+      internalID: 8325294466729981620
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PoorSlisedRecover_5
+      name: PoorRecover_5
       rect:
         serializedVersion: 2
         x: 640
@@ -240,20 +264,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.492, y: 0.278}
+      pivot: {x: 0.5, y: 0.278}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb448bfdd75045d60800000000000000
-      internalID: 7877927686360286398
+      spriteID: cb4ec41cc2ea5bf10800000000000000
+      internalID: 2284923893205230780
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PoorSlisedRecover_6
+      name: PoorRecover_6
       rect:
         serializedVersion: 2
         x: 768
@@ -261,20 +285,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.492, y: 0.278}
+      pivot: {x: 0.5, y: 0.278}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0171cbaf15e72ae10800000000000000
-      internalID: 2207465657929045776
+      spriteID: cd7b2e2e1cb03c320800000000000000
+      internalID: 2576916339149158364
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PoorSlisedRecover_7
+      name: PoorRecover_7
       rect:
         serializedVersion: 2
         x: 896
@@ -282,14 +306,14 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.492, y: 0.278}
+      pivot: {x: 0.5, y: 0.278}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 707848624f8541590800000000000000
-      internalID: -7704435256882591993
+      spriteID: 8f7db91c2af595cc0800000000000000
+      internalID: -3721838464407447560
       vertices: []
       indices: 
       edges: []

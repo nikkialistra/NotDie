@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7289a7622d14b7da0395d3f153cf425, type: 3}
   m_Name: DreamCatcher
   m_EditorClassIdentifier: 
+  DescriptionKey: _dream_catcher
   PickUp: {fileID: 21300000, guid: 99718f575e7f26040961ac35faf1c0b7, type: 3}
   InInventory: {fileID: 21300000, guid: d13b82b3596cfd24ebbf4b377137d3d3, type: 3}
-  Description: 
-  Note: 
+  HasModifiers: 0
+  Levels: []

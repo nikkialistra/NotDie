@@ -40,11 +40,7 @@ namespace Entities.Player
             _hp.SetInitialHealth();
             
             _playerStats.HealthFull.Value.ObserveEveryValueChanged(x => x.Value)
-                .Subscribe(value =>
-                {
-                    _hp.HealthFull = value;
-                    Debug.Log(_hp.HealthFull);
-                });
+                .Subscribe(value => _hp.HealthFull = value);
         }
 
         public void TakeDamage(int value) => _hp.TakeDamage(value);

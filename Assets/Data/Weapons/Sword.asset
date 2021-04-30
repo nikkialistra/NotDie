@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd5560902a145dbbed2689b009aa257, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
+  DescriptionKey: _sword
   PickUp: {fileID: 21300000, guid: ffd96d91433578a47981b69e461df596, type: 3}
   Active: {fileID: -350120252529735542, guid: cd801c78a32564f43b85cd188198fc4c, type: 3}
   NotActive: {fileID: -6044252558254861855, guid: cd801c78a32564f43b85cd188198fc4c, type: 3}
