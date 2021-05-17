@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Core.StatSystem;
 using Entities.Player.Items;
-using Things.Data;
 using Things.Item;
 using UnityEngine;
 using Zenject;
 
 namespace Entities.Player
 {
+    [DisallowMultipleComponent]
     [RequireComponent(typeof(InventoryHandler))]
     public class PlayerStats : MonoBehaviour
     {

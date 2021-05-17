@@ -51,7 +51,8 @@ namespace Infrastructure
         [SerializeField] private TimerView _timerView;
         [SerializeField] private WeaponsView _weaponsView;
         [SerializeField] private InventoryView _inventoryView;
-        
+        [SerializeField] private GameOverView _gameOverView;
+
         [Header("Other")] 
         [SerializeField] private GameSettings _gameSettings;
         [SerializeField] private MenuManager _menuManager;
@@ -203,6 +204,7 @@ namespace Infrastructure
             Container.BindInstance(_timerView);
             Container.BindInstance(_weaponsView);
             Container.BindInstance(_inventoryView);
+            Container.BindInstance(_gameOverView);
 
             Container.BindInstance(_uiManager);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Entities.Player
 {
@@ -43,7 +44,7 @@ namespace Entities.Player
         private float _health;
 
 
-        private bool IsAlive => _settings.Lives > 0;
+        private bool IsAlive => Lives > 0;
         
         public Hp(Settings settings)
         {
@@ -60,6 +61,11 @@ namespace Entities.Player
 
         public void TakeDamage(int value)
         {
+            if (!IsAlive)
+            {
+                return;
+            }
+            
             if (value <= 0)
             {
                 throw new ArgumentException("Damage must be more than zero");
@@ -99,6 +105,8 @@ namespace Entities.Player
             }
             else
             {
+                _health = 0;
+                HealthChanged?.Invoke(_health);
                 GameOver?.Invoke();
             }
         }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerSettingsInstaller
   m_EditorClassIdentifier: 
   _hp:
-    Lives: 9
+    Lives: 1
     InitialHealth: 100
   _playerMover:
     YPosition: 0.95
