@@ -28,11 +28,11 @@ namespace Core.StatSystem
 	public class StatModifier
 	{
 		public StatType StatType;
-		
+		public StatModifierType Type;
+
 		[Space]
 		public float Value;
-		public StatModifierType Type;
-		
+
 		public int Order { get; private set; }
 		public object Source { get; private set; }
 	}

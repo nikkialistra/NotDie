@@ -120,3 +120,14 @@
     color: rgb(255, 255, 255);
     font-size: 14px;
 }
+
+.align_center {
+    justify-content: center;
+    align-items: center;
+}
+
+.red_big_font {
+    font-size: 35px;
+    -unity-font: url('/Assets/Sprites/UI/Fonts/LowPixels.ttf');
+    color: rgba(255, 0, 0, 255);
+}

@@ -20,6 +20,9 @@
                 </ui:Image>
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:VisualElement name="middle" class="align_center">
+            <ui:Label text="Game Over" display-tooltip-when-elided="true" name="gameover" enable-rich-text="false" class="red_big_font" style="display: none;" />
+        </ui:VisualElement>
         <ui:VisualElement name="bottom" class="part_container">
             <ui:VisualElement name="bottom_main" class="main bottom_main">
                 <ui:VisualElement name="left_slot" class="slot">
