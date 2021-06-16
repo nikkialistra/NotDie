@@ -22,15 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: 1f1e1c77dc3182e4d89ec7880f87b050
     m_Address: Russian
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 08178a430e6a24d44b546c6a68ed1fec, type: 2}
   m_SchemaSet:

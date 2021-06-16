@@ -8,7 +8,6 @@ using Zenject;
 
 namespace Entities.Player
 {
-    [DisallowMultipleComponent]
     [RequireComponent(typeof(InventoryHandler))]
     public class PlayerStats : MonoBehaviour
     {

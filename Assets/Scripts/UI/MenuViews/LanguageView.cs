@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
+// using UnityEngine.Localization;
+// using UnityEngine.Localization.Settings;
 using UnityEngine.UIElements;
 
 namespace UI.MenuViews
@@ -11,7 +11,7 @@ namespace UI.MenuViews
     {
         private Label _languageChoice;
 
-        private List<Locale> _languages;
+        // private List<Locale> _languages;
 
         private int _index;
 
@@ -28,89 +28,89 @@ namespace UI.MenuViews
 
         protected override void SetUp()
         {
-            _languages = LocalizationSettings.AvailableLocales.Locales;
+            // _languages = LocalizationSettings.AvailableLocales.Locales;
 
-            _languageChoice = _tree.Q<Label>("language__choice");
-
-            InitializeLanguageIndex();
-            SetLanguageText();
-            
-            _input = _menuManager.Input;
-            _leftAction = _input.actions.FindAction("Left");
-            _rightAction = _input.actions.FindAction("Right");
-            _selectAction = _input.actions.FindAction("Select");
+            // _languageChoice = _tree.Q<Label>("language__choice");
+            //
+            // InitializeLanguageIndex();
+            // SetLanguageText();
+            //
+            // _input = _menuManager.Input;
+            // _leftAction = _input.actions.FindAction("Left");
+            // _rightAction = _input.actions.FindAction("Right");
+            // _selectAction = _input.actions.FindAction("Select");
         }
 
-        protected override void Enable()
-        {
-            _leftAction.started += ChangeLanguageLeft;
-            _rightAction.started += ChangeLanguageRight;
-            _selectAction.started += SetLanguage;
-        }
+        // protected override void Enable()
+        // {
+        //     _leftAction.started += ChangeLanguageLeft;
+        //     _rightAction.started += ChangeLanguageRight;
+        //     _selectAction.started += SetLanguage;
+        // }
+        //
+        // protected override void Disable()
+        // {
+        //     _menuManager.GameSettings.Save();
+        //     
+        //     _leftAction.started -= ChangeLanguageLeft;
+        //     _rightAction.started -= ChangeLanguageRight;
+        //     _selectAction.started -= SetLanguage;
+        // }
 
-        protected override void Disable()
-        {
-            _menuManager.GameSettings.Save();
-            
-            _leftAction.started -= ChangeLanguageLeft;
-            _rightAction.started -= ChangeLanguageRight;
-            _selectAction.started -= SetLanguage;
-        }
-
-        private void InitializeLanguageIndex()
-        {
-            if (!_menuManager.GameSettings.Loaded)
-            {
-                return;
-            }
-            
-            for (var i = 0; i < _languages.Count; i++)
-            {
-                if (_languages[i].ToString() == _menuManager.GameSettings.Language)
-                {
-                    _index = i;
-                }
-            }
-        }
-
-        private void SetLanguage(InputAction.CallbackContext context)
-        {
-            _menuManager.GameSettings.Language = _languages[_index].ToString();
-            
-            LocalizationSettings.SelectedLocale = _languages[_index];
-        }
-
-        private void ChangeLanguageLeft(InputAction.CallbackContext context)
-        {
-            _index = (_index - 1) % _languages.Count;
-
-            if (_index == -1)
-            {
-                _index = _languages.Count - 1;
-            }
-
-            SetLanguageText();
-        }
-
-        private void ChangeLanguageRight(InputAction.CallbackContext context)
-        {
-            _index = (_index + 1) % _languages.Count;
-            
-            SetLanguageText();
-        }
-
-        private void SetLanguageText()
-        {
-            var locale = _languages[_index].Formatter.ToString();
-            
-            _languageChoice.viewDataKey = locale switch
-            {
-                "en-US" => "_english",
-                "ru-RU" => "_russian",
-                _ => "_unknown"
-            };
-            
-            _menuManager.Localize(_languageChoice);
-        }
+        // private void InitializeLanguageIndex()
+        // {
+        //     if (!_menuManager.GameSettings.Loaded)
+        //     {
+        //         return;
+        //     }
+        //     
+        //     for (var i = 0; i < _languages.Count; i++)
+        //     {
+        //         if (_languages[i].ToString() == _menuManager.GameSettings.Language)
+        //         {
+        //             _index = i;
+        //         }
+        //     }
+        // }
+        //
+        // private void SetLanguage(InputAction.CallbackContext context)
+        // {
+        //     _menuManager.GameSettings.Language = _languages[_index].ToString();
+        //     
+        //     LocalizationSettings.SelectedLocale = _languages[_index];
+        // }
+        //
+        // private void ChangeLanguageLeft(InputAction.CallbackContext context)
+        // {
+        //     _index = (_index - 1) % _languages.Count;
+        //
+        //     if (_index == -1)
+        //     {
+        //         _index = _languages.Count - 1;
+        //     }
+        //
+        //     SetLanguageText();
+        // }
+        //
+        // private void ChangeLanguageRight(InputAction.CallbackContext context)
+        // {
+        //     _index = (_index + 1) % _languages.Count;
+        //     
+        //     SetLanguageText();
+        // }
+        //
+        // private void SetLanguageText()
+        // {
+        //     var locale = _languages[_index].Formatter.ToString();
+        //     
+        //     _languageChoice.viewDataKey = locale switch
+        //     {
+        //         "en-US" => "_english",
+        //         "ru-RU" => "_russian",
+        //         _ => "_unknown"
+        //     };
+        //     
+        //     _menuManager.Localize(_languageChoice);
+        // }
     }
 }

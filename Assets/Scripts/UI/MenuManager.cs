@@ -3,8 +3,8 @@ using Core.Saving;
 using UI.MenuViews;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Tables;
+// using UnityEngine.Localization;
+// using UnityEngine.Localization.Tables;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UIElements;
 using Zenject;
@@ -15,7 +15,7 @@ namespace UI
     [RequireComponent(typeof(PlayerInput))]
     public class MenuManager : MonoBehaviour, IMenuView
     {
-        [SerializeField] private LocalizedStringTable _table;
+        // [SerializeField] private LocalizedStringTable _table;
         
         [SerializeField] private bool _loadMainMenu;
         [SerializeField] private bool _loadGameMenu;
@@ -24,7 +24,7 @@ namespace UI
 
         public PlayerInput Input => _input;
         
-        private StringTable _localTable;
+        // private StringTable _localTable;
 
         private MainMenuView _mainMenu;
         private GameMenuView _gameMenu;
@@ -58,15 +58,20 @@ namespace UI
             _returnAction = _input.actions.FindAction("Return");
         }
 
+        private void Start()
+        {
+            LoadMenu();
+        }
+
         private void OnEnable()
         {
-            _table.TableChanged += OnTableChanged;
+            // _table.TableChanged += OnTableChanged;
             _returnAction.started += OnReturn;
         }
 
         private void OnDisable()
         {
-            _table.TableChanged -= OnTableChanged;
+            // _table.TableChanged -= OnTableChanged;
             _returnAction.started -= OnReturn;
         }
 
@@ -80,73 +85,73 @@ namespace UI
 
         public void LocalizeRecursively(VisualElement element)
         {
-            var elementHierarchy = element.hierarchy;
-            var numChildren = elementHierarchy.childCount;
-            for (var i = 0; i < numChildren; i++)
-            {
-                var child = elementHierarchy.ElementAt(i);
-                Localize(child);
-            }
-
-            for (var i = 0; i < numChildren; i++)
-            {
-                var child = elementHierarchy.ElementAt(i);
-                var childHierarchy = child.hierarchy;
-                var numGrandChildren = childHierarchy.childCount;
-                if (numGrandChildren != 0)
-                    LocalizeRecursively(child);
-            }
+            // var elementHierarchy = element.hierarchy;
+            // var numChildren = elementHierarchy.childCount;
+            // for (var i = 0; i < numChildren; i++)
+            // {
+            //     var child = elementHierarchy.ElementAt(i);
+            //     Localize(child);
+            // }
+            //
+            // for (var i = 0; i < numChildren; i++)
+            // {
+            //     var child = elementHierarchy.ElementAt(i);
+            //     var childHierarchy = child.hierarchy;
+            //     var numGrandChildren = childHierarchy.childCount;
+            //     if (numGrandChildren != 0)
+            //         LocalizeRecursively(child);
+            // }
         }
 
         public void Localize(VisualElement element)
         {
-            if (!(element is TextElement))
-            {
-                return;
-            }
-
-            var textElement = (TextElement) element;
-            var key = textElement.viewDataKey;
-
-            if (string.IsNullOrEmpty(key) || key[0] != '_')
-            {
-                return;
-            }
-            
-            key = key.TrimStart('_');
-            var entry = _localTable[key];
-            if (entry != null)
-            {
-                textElement.text = entry.LocalizedValue;
-            }
-            else
-            {
-                Debug.LogWarning($"No {_localTable.LocaleIdentifier.Code} translation for key: '{key}'");
-            }
+            // if (!(element is TextElement))
+            // {
+            //     return;
+            // }
+            //
+            // var textElement = (TextElement) element;
+            // var key = textElement.viewDataKey;
+            //
+            // if (string.IsNullOrEmpty(key) || key[0] != '_')
+            // {
+            //     return;
+            // }
+            //
+            // key = key.TrimStart('_');
+            // var entry = _localTable[key];
+            // if (entry != null)
+            // {
+            //     textElement.text = entry.LocalizedValue;
+            // }
+            // else
+            // {
+            //     Debug.LogWarning($"No {_localTable.LocaleIdentifier.Code} translation for key: '{key}'");
+            // }
         }
 
-        private void OnTableChanged(StringTable table)
-        {
-            var handle = _table.GetTable();
-
-            if (handle.IsDone)
-            {
-                OnLocalTableLoaded(handle);
-            }
-            else
-            {
-                handle.Completed += OnLocalTableLoaded;
-            }
-        }
-
-        private void OnLocalTableLoaded(AsyncOperationHandle<StringTable> handle)
-        {
-            _localTable = handle.Result;
-            LoadMenu();
-            
-            LocalizeRecursively(_rootVisualElement);
-            _rootVisualElement.MarkDirtyRepaint();
-        }
+        // private void OnTableChanged(StringTable table)
+        // {
+        //     var handle = _table.GetTableAsync();
+        //
+        //     if (handle.IsDone)
+        //     {
+        //         OnLocalTableLoaded(handle);
+        //     }
+        //     else
+        //     {
+        //         handle.Completed += OnLocalTableLoaded;
+        //     }
+        // }
+        //
+        // private void OnLocalTableLoaded(AsyncOperationHandle<StringTable> handle)
+        // {
+        //     _localTable = handle.Result;
+        //     LoadMenu();
+        //     
+        //     LocalizeRecursively(_rootVisualElement);
+        //     _rootVisualElement.MarkDirtyRepaint();
+        // }
 
         private void LoadMenu()
         {
@@ -155,6 +160,11 @@ namespace UI
                 return;
             }
 
+            if (GameSettings == null)
+            {
+                GameSettings = GetComponent<GameSettings>();
+            }
+            
             GameSettings.Apply();
             
             if (_loadMainMenu)

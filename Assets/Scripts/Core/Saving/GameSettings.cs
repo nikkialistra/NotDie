@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
+//using UnityEngine.Localization.Settings;
 
 namespace Core.Saving
 {
@@ -75,11 +75,11 @@ namespace Core.Saving
                 Screen.SetResolution(resolution.width, resolution.height, GetDisplayMode());
             }
 
-            foreach (var language in LocalizationSettings.AvailableLocales.Locales.Where(language =>
-                language.ToString() == Language))
-            {
-                LocalizationSettings.SelectedLocale = language;
-            }
+            // foreach (var language in LocalizationSettings.AvailableLocales.Locales.Where(language =>
+            //     language.ToString() == Language))
+            // {
+            //     LocalizationSettings.SelectedLocale = language;
+            // }
         }
         
         private FullScreenMode GetDisplayMode()

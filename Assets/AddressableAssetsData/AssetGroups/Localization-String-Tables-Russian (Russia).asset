@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Localization-String-Tables-Russian (Russia) (ru-RU)
+  m_Name: Localization-String-Tables-Russian (Russia)
   m_EditorClassIdentifier: 
-  m_GroupName: Localization-String-Tables-Russian (Russia) (ru-RU)
+  m_GroupName: Localization-String-Tables-Russian (Russia)
   m_Data:
     m_SerializedData: []
-  m_GUID: 46edcfce3d33df84f8101c742a0b9db5
+  m_GUID: 89d9d72c85615c948a20bef7b779678c
   m_SerializeEntries: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 08178a430e6a24d44b546c6a68ed1fec, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 632b25f99f692c74689490ba3e9f8174, type: 2}
-    - {fileID: 11400000, guid: b7a9ab8407484a748afdbd8490ba1a96, type: 2}
+    - {fileID: 11400000, guid: dcc9981bb2e331a4bbccb5b0bd71ad72, type: 2}
+    - {fileID: 11400000, guid: 4c87a612947456c4cb92f537c254f865, type: 2}
