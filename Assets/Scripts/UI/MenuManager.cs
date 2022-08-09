@@ -127,21 +127,13 @@ namespace UI
 
         private void OnTableChanged(StringTable table)
         {
-            var handle = _table.GetTable();
-
-            if (handle.IsDone)
-            {
-                OnLocalTableLoaded(handle);
-            }
-            else
-            {
-                handle.Completed += OnLocalTableLoaded;
-            }
+            var stringTable = _table.GetTable();
+            OnLocalTableLoaded(stringTable);
         }
 
-        private void OnLocalTableLoaded(AsyncOperationHandle<StringTable> handle)
+        private void OnLocalTableLoaded(StringTable table)
         {
-            _localTable = handle.Result;
+            _localTable = table;
             LoadMenu();
             
             LocalizeRecursively(_rootVisualElement);

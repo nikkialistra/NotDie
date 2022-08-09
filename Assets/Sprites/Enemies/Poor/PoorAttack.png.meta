@@ -54,6 +54,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,8 +64,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -352,6 +353,17 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      PoorAttack_6: 6569097869287571433
+      PoorAttack_1: 3686012727836760701
+      PoorAttack_5: -5947155060575712168
+      PoorAttack_7: 5316932958376364699
+      PoorAttack_8: 8404904718177403732
+      PoorAttack_4: -2767904039083879130
+      PoorAttack_3: -7606261523683603410
+      PoorAttack_9: -8986249136485091339
+      PoorAttack_2: -161610813418560521
+      PoorAttack_0: -7615494664385997344
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

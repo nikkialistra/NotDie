@@ -48,6 +48,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -57,8 +58,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -304,6 +305,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      PoorWalk_7: 8361727405037321644
+      PoorWalk_3: -4837300531796001171
+      PoorWalk_2: 2344487311305472381
+      PoorWalk_4: -695469427768808991
+      PoorWalk_1: 592878340702798899
+      PoorWalk_6: -4865837414750220246
+      PoorWalk_5: -9091411877520661140
+      PoorWalk_0: -4420735203149693400
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
