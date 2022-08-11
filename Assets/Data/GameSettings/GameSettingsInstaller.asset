@@ -13,18 +13,5 @@ MonoBehaviour:
   m_Name: GameSettingsInstaller
   m_EditorClassIdentifier: 
   _cameraFollow:
-    FollowOffset: {x: 2, y: 2.5}
+    FollowOffset: {x: 20, y: 20}
     Speed: 3
-  _timerView:
-    UpdateTime: 0.01
-  _weaponsView:
-    ActiveFrames:
-    - {fileID: 21300000, guid: 7453ce3b370a5fb4ebb8b66c974dffca, type: 3}
-    - {fileID: 21300000, guid: 5974ee00d6af0b643ae28711d2edadf5, type: 3}
-    - {fileID: 21300000, guid: 8a4a54058ab6a104f8b259f30349cb5b, type: 3}
-    - {fileID: 21300000, guid: d5ba3c739e02ee047a16a2d904bc57a4, type: 3}
-    NotActiveFrames:
-    - {fileID: 21300000, guid: c991b08268b886f4380e4630bb0615be, type: 3}
-    - {fileID: 21300000, guid: c81f9671814a0ef48b82ac60023edab1, type: 3}
-    - {fileID: 21300000, guid: e6394c2eaedf75548912072f631181de, type: 3}
-    - {fileID: 21300000, guid: dec772527ab63e04aa21530e4bf53f41, type: 3}
